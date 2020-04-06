@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hi-Offer</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/all.css"><!--FontAwesome-->
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Material Design Bootstrap -->
+     <link rel="stylesheet" href="css/mdb.min.css">
+    <!-- Your custom styles (optional) -->
+     <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background-color: #546991;">
+<div class="header">
+    <nav style="background-color: #546991!important;" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#"><img src="img/logo.png" ></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <div style="margin: auto;" >
+            <ul class="navbar-nav mr-auto ">
+             <div class="form-inline div-item">
+            <li class="nav-item">
+                <a class="nav-link item-nav" style="margin-left:0px;" href="#">PRODUCTOS<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link item-nav" href="#">MARCAS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link item-nav" href="#">COMO FUNCIONA</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link item-nav" href="#">CONTACTANOS</a>
+            </li>
+                </div>
+            <div class=" form-inline div-login">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle item-nav " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">REGISTRATE</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item"  data-toggle="modal" data-target=".modal-usuarios" >Usuario</a>
+                <a class="dropdown-item" href="RegistroEmpresas.html">Empresa</a>
+                <a class="dropdown-item" href="#">Super Administrador</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link item-nav button-log" href="#">MI CUENTA</a>
+            </li>
+             </div>
+            </ul>
+              </div>
+             </div>
+        </nav>
+        <div class="container-1">
+            <div class="textos wow slideInLeft">
+            <h2>¡Obtenga los mejores productos al mejor precio!</h2>
+            <p style="font-size: 15px;">Hi-offer es la mejor opción para sus compras en linea, obtendras las mejores ofertas y la mejor calidad.</p>
+             </div>
+            <img src="img/img prin.png" id="img-prin">
+        </div>
+    </div>
+    <div class="wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#ffffff" fill-opacity="1" d="M0,96L80,101.3C160,107,320,117,480,106.7C640,96,800,64,960,58.7C1120,53,1280,75,1360,85.3L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+          </svg>
+    </div>
+
+    <div class="container-2">
+      <div class="div-elm wow slideInUp ">
+          <a href=""><img class="img-us "  src="img/iconoRegistrate.png"></a>
+          <h4 style="text-align: center;color:#606060 ;">Regístrate</h4>
+          <div class="div-text"><p style="text-align: center;">Al registrarte podrás empezar comprar los productos que tanto necesitas.<p/></div>
+     </div>
+      <div class="div-elm wow slideInUp">
+          <a href=""><img class="img-us" src="img/iconoEnvios.png"></a>
+          <h4 style="text-align: center;color:#606060 ;">Envíos</h4>
+          <div class="div-text"><p style="text-align: center;" >Combina paquetes y ahorra hasta un 80% en el envio.<p/></div>
+     </div>
+      <div class="div-elm wow slideInUp">
+          <a href=""><img class="img-us" src="img/iconoEnvioInmediato.png"></a>
+          <h4 style="text-align: center;color:#606060 ;">Envío Inmediato</h4>
+          <div class="div-text"><p style="text-align: center;" >Prueba el envio PREMIUM para hacer llegar su paquete en 24 horas.</p></div>
+    </div>
+    </div>
+
+    <!--seccion de empresas-->
+    <div class="div-emp"> 
+        <table class="tbl-emp">
+          <tr>
+            <td>
+                <img id="img-emp" src="img/img4.png">
+           </td>
+           <td>
+             <h4  style="font-family: 'Montserrat', sans-serif;" class="titulo-emp">¿Estás listo para hacer llegar tu marca a más personas?</h4>
+             <br>
+             <p>¡La mejor forma  de hacer crecer tu empresa esta aqui!</p>
+             <a type="button" href="RegistroEmpresas.html" onclick="" class="btn btn-light-blue btn-comenzar">COMENZAR</a>
+           </td>
+           </tr> 
+        </table>
+   </div>
+   <div  id="div-info-emp" >
+        <div class="div-info-1 container"style="box-shadow: 0px 0px 10px #666; " >
+          <div class="row">
+            <div class="col-lg-3 col-12 container estilos">
+              <div class="row"><img src="img/icono1-emp.png" class="img-empre wow slideInDown"></div>
+              <p style="margin-top: 40px; margin-bottom: auto; text-align: center;">Crea tu perfil de empresa adquiriendo uno de nuestros planes.</p>
+            </div>
+            <div class="col-lg-3 col-12 estilos"><div class="row"><img style="width: 80px;" src="img/icono2-emp.png" class="img-empre wow slideInDown"></div><p style="margin-top: 40px; margin-bottom: auto; text-align: center;">Mas de 20,000 usuarios a la espera de nuevos productos.</p></div>
+            <div class="col-lg-3 col-12 estilos"><div class="row"><img style="width: 90px;" src="img/icono3-emp.png" class="img-empre wow slideInDown"></div><p style="margin-top: 40px; margin-bottom: auto; text-align: center;">Nosotros construimos las estrategias de marketing para el crecimiento de tu empresa.</p></div>
+          </div>
+        </div >
+   </div>
+
+   <div class="container" id="border">
+     <div class="row">
+        <div style="background-color: #8bd0ed;" class="rectangulo col-lg-2"></div>
+        <div style="background-color: #b8cccb;" class="rectangulo col-lg-2"></div>
+        <div style="background-color: #536f97;" class="rectangulo col-lg-2"></div>
+        <div style="background-color: #aec1e9;" class="rectangulo col-lg-2"></div>
+        <div style="background-color: #918eab;" class="rectangulo col-lg-2"></div>
+        <div style="background-color: #8bd0ed;" class="rectangulo col-lg-2"></div>
+     </div>
+   </div>
+  
+       <!-- Footer -->
+<footer class="page-footer font-small  darken-3" style="background-color: #184F78;">
+  <div class="container-fluid">
+    <!-- Grid row-->
+    <div class="row">
+      <!-- Grid column -->
+      <div class="col-md-12 py-5">
+         <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+    <!-- Grid row -->
+    <div class="row">
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+        <!-- Content -->
+        <h5 class="text-uppercase">Hi-Offer</h5>
+        <p>La plataforma diseñada para tu economía,obten los mejores precios y la mejor calidad en tus productos.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Inicio</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Como funciona</a>
+          </li>
+          <li>
+            <a href="#!">Marcas</a>
+          </li>
+          <li>
+            <a href="#!">Productos</a>
+          </li>
+          <li>
+            <a href="#!">Regístrate</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">soporte técnico</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">soporte_hi-offer@outlook.com</a>
+          </li>
+          <li>
+            <a href="#!">+50497126519</a>
+          </li>
+          <li>
+            <a href="#!">Edificio Astro,Tegucigalpa,Honduras.</a>
+          </li>
+          <li>
+            <a href="#!"></a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+        <div class="mb-5 flex-center" style="margin-top: 50px;">
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic">
+            <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!-- Google +-->
+          <a class="gplus-ic">
+            <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic">
+            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!--Pinterest-->
+          <a class="pin-ic">
+            <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
+          </a>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+  </div>
+  </div>
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://mdbootstrap.com/">Hi-Offer.com</a>
+  </div>
+</footer>
+<!-- Footer -->
+ 
+   <!--Ventana Modal Usuarios-->
+   <!-- Large modal -->
+     
+  <div class="modal fade modal-usuarios" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-usuario-s" >
+      <div class="modal-content" >
+        <div class="container" > 
+            <div class="row">
+              <div class="col-md-6" style="background-color:#E8FAFE; height:auto ;">
+                <!--carrusel-->
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="margin: 120px;">
+                 
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="img/iconoRForm.png" class="d-block w-100" alt="...">
+                      <div class="carousel-caption d-none d-md-block">
+                        
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img src="img/iconoAgregarFoto.png" class="d-block w-100" alt="...">
+                    </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+                <ol class="carousel-indicators">
+                  <li style="background-color: #576F9B;" data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                  <li style="background-color: #576F9B;" data-target="#carouselExampleCaptions" data-slide-to="1" ></li>
+                </ol>     
+              </div>
+    
+              <!--Segunda parte del login-->
+    
+              <div class="col-md-6 modal-usuario" style=" padding-left:30px; padding-bottom: 30px; padding-top: 5px;"> 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                <div style="margin-top: 40px; margin-right: 20px;">
+                <h5 style="color: #6C87A3;">REGISTRATE</h5>
+                <br>
+                <div>
+                  <!--Inicio del formulario-->
+                  <form >
+                  <!--boton nombre de usuario-->
+                  <div class="input-group flex-nowrap " style="margin-bottom: 10px; " >
+                    <div class="input-group-prepend">
+                      <span style="background-color: #FFFFFF;" class="input-group-text" id="addon-wrapping"><i class="fas fa-user fa-color"></i></span>
+                    </div>
+                    <input id="usuario" style="font-size: smaller;" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="addon-wrapping">
+                    
+                </div>
+                <p id="camp-vacio-us" class="campo-vacio">*Este campo no puede estar vacio</p>
+               
+                  <!--boton correo electronico-->
+                  <div class="input-group flex-nowrap" class="form1" style="margin-bottom: 10px;">
+                    <div  class="input-group-prepend">
+                      <span style="background-color: #FFFFFF;" class="input-group-text" id="addon-wrapping"><i class="fas fa-envelope fa-color"></i></span>
+                    </div>
+                    <input id="email" style="font-size: smaller;" type="email" class="form-control" placeholder="Correo electronico" aria-label="Username" aria-describedby="addon-wrapping">
+                  </div>
+                  <p id="camp-vacio-email" class="campo-vacio">*Este campo no puede estar vacio</p>
+                  <p id="correo-incorrecto" class="campo-vacio">*Direccion de correo electronico inválida</p>
+                  
+                  <!--boton password-->
+                  <div class="input-group flex-nowrap" class="form1" style="margin-bottom:10px;">
+                    <div class="input-group-prepend">
+                      <span style="background-color: #FFFFFF;" class="input-group-text" id="addon-wrapping"><i class="fas fa-key fa-color"></i></span>
+                    </div>
+                    <input id="contraseña" style="font-size: smaller;" type="password" class="form-control" placeholder="Contraseña" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p id="camp-vacio-contra" class="campo-vacio">*Este campo no puede estar vacio</p>
+                <p id="contraseña-incorrecta" class="campo-vacio">*La contraseña debe contener 8 dígitos</p>
+                 
+                <!-- verificar contrasena-->
+                <div class="input-group flex-nowrap" class="form1" style="margin-bottom:20px;">
+                  <div class="input-group-prepend">
+                    <span style="background-color: #FFFFFF;" class="input-group-text" id="addon-wrapping"><i class="fas fa-key fa-color"></i></span>
+                  </div>
+                  <input id="contraseña2" style="font-size: smaller;" onkeyup="validarContraseña('contraseña2');" type="password" class="form-control " placeholder="Vuelva a escribir la contraseña" aria-label="Username" aria-describedby="addon-wrapping">
+              </div>
+              <p id="contra-no" class="campo-vacio">*Las contraseñas no coinciden, intentelo nuevamente</p>
+              <p id="camp-vacio-contra2" class="campo-vacio">*Este campo no puede estar vacio</p>
+                  <button id="button-reg" href="" type="button" id="btn-login-us" onclick="AgregarUsuario();" style=" background-color:#546991!important; border-color: #546991; margin-right: auto; margin-left: auto; width: 285px;"  class="btn btn-primary">Registrarse</button>
+                  <br><br> 
+                  <p style=" font-size: smaller; text-align: center" > ¿Ya tienes una cuenta? <a><Strong>Iniciar sesión</Strong></a></p>
+                </form>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>  
+   <!-- ------- -->
+   
+   
+     <!-- jQuery -->
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="js/controladorUsuarios.js"></script>
+  
+    <script>
+     $( document ).ready(function() {
+      new WOW().init();
+   });
+    </script>
+</body>
+</html>
+

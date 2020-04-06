@@ -1,0 +1,93 @@
+/*Selector Universal*/
+*{
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#car-plan{
+    width: 260px; height: 400px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#menu{
+    height: 70px;
+    margin-top: 20px;
+    padding-top: 30px;
+}
+
+.barra{
+    width: 100%;
+    height: 10px;
+    background-color:#CCCCCC;
+    margin-top: -10px;
+}
+#pasos{
+   text-align: center;
+}
+#planes{
+    display: block;
+}
+
+#detalle-empresa{
+    height: 500px;
+    background-color:#ffffff;
+    margin-top: 20px;
+    border-radius: 0.3rem;
+    border-color: 1px solid #8BD0ED;
+    
+}
+.btn-empezar{
+    margin-top: 50px;
+    height: 40px;
+    color: #ffffff;
+    border-radius: 0.4rem;
+    box-shadow: 2px 2px 7px #999; 
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: auto;
+    color: #ffffff!important;
+    background-color: #546991!important;
+}
+
+.btn-empezarPremium{
+    margin-top: 50px;
+    height: 40px;
+    color: #ffffff;
+    border-radius: 0.4rem;
+    box-shadow: 2px 2px 7px #999; 
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: auto;
+    color: #ffffff!important;
+}
+
+#Registro{
+    background-color:#ffffff;
+    height: 630px;
+    width: 80%;
+    margin-bottom: 0px ;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -300px;
+    border-radius: 1rem;
+    box-shadow: 4px 4px 10px #999; 
+    
+}
+
+.div-pie{
+    background-color: #F3F4F5;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    justify-content: space-around;
+    margin: 0px;
+    margin-right: 0px;  
+}
+
+.input-error{
+    border-color: 1px solid red!important;
+}

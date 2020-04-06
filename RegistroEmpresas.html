@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi-Offer</title>
+    <link rel="stylesheet" href="css/Style-Registro-Empresas.css">
+    <link rel="stylesheet" href="css/mdb.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+</head>
+<body style="margin: 0px; background-color: #F3F4F5;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#8BD0ED" fill-opacity="1" d="M0,96L1440,288L1440,0L0,0Z"></path></svg>
+        
+        <div class="container"  id="Registro">
+            <div class="container" style="width: 100%;" id="menu">
+                <div class="row">
+                <div id="paso1" class="col-6 pasos" >
+                    <p id="texto1">1: Selecciona uno de nuestros planes</p>
+                    <div class="barra" id="barra1"></div>
+                </div>
+                <div id="" class="col-6 pasos" >
+                    <p class="paso1" id="texto2">2: Registra tu empresa</p>
+                    <div  class="barra" id="barra2"></div>
+                </div>
+               </div>
+            </div>
+
+            <div id="planes">
+            <div class="row" >
+                <div class="col-lg-4 col-12">
+                      <div class="container" style="margin-top: 100px;">
+                        <div class="card mb-4 shadow-sm"  id="car-plan">
+                            <div class="card-header">
+                              <h4 class="my-0 font-weight-normal">GRATIS</h4>
+                            </div>
+                            <div class="card-body" >
+                              <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mensual</small></h1>
+                              <ul class="list-unstyled mt-3 mb-4">
+                                <li>Publica 20 promociones</li>
+                                <li>Llega al 25% de las personas </li>
+                                <li>Panel de control</li>
+                              </ul>
+                              <a class=" btn-block btn-empezar" onclick="paso2()">EMPEZAR</a>
+                            </div>
+                          </div>
+                     </div>
+                </div>
+
+                <div class="col-lg-4 col-12">
+                    <div class="container" style="margin-top: 100px;">
+                      <div class="card mb-4 shadow-sm"  id="car-plan">
+                          <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">BÁSICO</h4>
+                          </div>
+                          <div class="card-body">
+                            <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mensual</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                              <li>Publica 100 promociones</li>
+                              <li>Llega al 60% de las personas</li>
+                              <li>Panel de control</li>
+                            </ul><a class=" btn-block btn-empezar" onclick="paso2()">EMPEZAR</a>
+                          </div>
+                        </div>
+                   </div>
+              </div>
+
+              <div class="col-lg-3 col-12" >
+                <div class="container" style="margin-top: 100px; margin-right: 20px;">
+                  <div class="card mb-4 shadow-sm"  id="car-plan">
+                      <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">PREMIUM</h4>
+                      </div>
+                      <div class="card-body" >
+                        <h1 class="card-title pricing-card-title">$50 <small class="text-muted">/ mo</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                          <li>Publica 500 promociones</li>
+                          <li>Llega al 100% de las personas</li>
+                          <li>Panel de control</li>
+                          <li>Sugerencias de clientes</li>
+                        </ul>
+                        <a class=" btn-block btn-empezar" onclick="paso2()">EMPEZAR</a>
+                      </div>
+                    </div>
+               </div>
+           
+          </div>
+        </div>
+        </div>
+
+     <!-------------------------------------------------------------------------------------------------------------------------------->  
+        <!-- formulario-->
+        <div id="formulario">
+        <div  class="row"> <!--contenedor-->
+            <div class="container col-7" id="detalle-empresa">
+                <div class="row">
+                 <h6 style=" margin-left: 15px; ">Detalles de la empresa</h6>
+                </div>
+                <div class="row">
+                    <!-- form Nombre de la Empresa -->
+                    <div class="col-md-6 mb-3">
+                        <input type="text"  style="font-size: smaller; " class="form-control" id="NombreDeLaEmpresa" placeholder="Nombre de la empresa" value="" >
+                        <div class="d-none" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+                          Este campo no puede estar vacio.
+                        </div>
+                      </div>
+                      <!-- form Correo Electronico-->
+                    <div class="col-md-6 mb-3">
+                        <input type="email" class="form-control" style="font-size: smaller;" id="correoEmpresa" placeholder="Correo electrónico" value="" required>
+                        <div class="d-none" id="camp-vacio-correo" style="font-size: smaller; color: red;">
+                          Este campo no puede estar vacio.
+                        </div>
+                        <div class="d-none" id="invalid-correo" style="font-size: smaller; color: red;">
+                          La direccion de correo electrónico es invalida.
+                        </div>
+                      </div>
+                    </div>
+                     <!-- form Eslogan-->
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <input type="text" style="font-size: smaller;" class="form-control" id="eslogan" placeholder="Eslogan" value="" required>
+                        <div class=" d-none" style="font-size: smaller; color: red;" id="camp-vacio-eslogan">
+                          Este campo no puede estar vacio.
+                        </div>
+                      </div>
+                </div>
+                  <!-- form Descripcion de la empresa-->
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <textarea type="text" style="font-size: smaller;" class="form-control" id="descripcion" placeholder="Descripcion de la empresa" value=""></textarea>
+                        <div class="d-none" id="camp-vacio-descripcion" style="font-size: smaller; color: red;">
+                          Este campo no puede estar vacio.
+                        </div>
+                      </div>
+                </div>
+                 <!-- form Direccion-->
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <textarea type="text" style="font-size: smaller;" class="form-control" id="direccion" placeholder="Direccion" value=""></textarea>
+                        <div class="d-none" id="camp-vacio-direccion" style="font-size: smaller; color: red;">
+                          Este campo no puede estar vacio.
+                        </div>
+                      </div>
+                </div>
+                
+                 <!-- form Pais-->
+                <div class="row">
+                    <div class="col-4 mb-3">
+                    <select class="form-control" style="font-size: smaller;" class="col-4" id="pais">
+                        <option style="font-size: smaller;">Pais</option>
+                        <option style="font-size: smaller;">Costa Rica</option>
+                        <option style="font-size: smaller;" >EE.UU</option>
+                        <option  style="font-size: smaller;">Panamá</option>
+                      </select>
+                      <div class="d-none"  id="camp-vacio-pais" style="font-size: smaller; color: red;">
+                        Seleccione un pais.
+                      </div>
+                    <!-- formm-latitud -->
+                    </div>
+                      <div class="col-4 mb-4">
+                        <input type="text" class="form-control" style="font-size: smaller;" id="latitud" placeholder="Latitud" value="" required>
+                        <div class="d-none" id="camp-vacio-latitud" style="font-size: smaller; color: red;">
+                          Campo obligatorio.
+                        </div>
+                      </div>
+                       <!-- form-Longitud -->
+                      <div class="col-4 mb-4">
+                        <input type="text" class="form-control" style="font-size: smaller;" id="longitud" placeholder="longitud" value="" required>
+                        <div class="d-none" id="camp-vacio-longitud" style="font-size: smaller; color: red;">
+                          campo obligatorio.
+                        </div>
+                      </div>
+                     
+                </div>
+                <div class="row">
+                  <h6 class="col-12">Redes Sociales</h6>
+                </div>
+        
+                <div class="row">
+                  <!-- forma-Facebook -->
+                  <div class="input-group mb-3 col-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fab fa-facebook-square"></i></span>
+                    </div>
+                    <input type="text" id="facebook" class="form-control" placeholder="Facebook" aria-label="Username" aria-describedby="basic-addon1">
+                    <div class="d-none" id="camp-vacio-facebook" style="font-size: smaller; color: red;">
+                     Campo obligatorio.
+                    </div>
+                  </div>
+
+                   <!-- form-Instagram-->
+                  <div class="input-group mb-3 col-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fab fa-instagram"></i></span>
+                    </div>
+                    <input type="text" id="instagram" class="form-control" placeholder="Instagram" aria-label="Username" aria-describedby="basic-addon1">
+                    <div class="d-none" id="camp-vacio-instagram" style="font-size: smaller; color: red;">
+                     *Obligatorio.
+                    </div>
+                  </div>
+                  <!-- form-Twiter-->
+                  <div class="input-group mb-3 col-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fab fa-twitter"></i></span>
+                    </div>
+                    <input type="text"  id="twiter" class="form-control" placeholder="Twiter" aria-label="Username" aria-describedby="basic-addon1">
+                    <div class="d-none" id="camp-vacio-twiter" style="font-size: smaller; color: red;">
+                     *Obligatorio.
+                   </div>
+                  </div>
+                </div>  
+            </div>
+            <div class="container col-4" id="detalle-empresa">
+               <div class="row">
+                <h6>Detalles del Administrador</h6>
+               </div>
+                <!-- form-nombre-admin-->
+               <div class="row">
+                <div class="col-12 mb-2">
+                  <input type="text" style="font-size: smaller; width: 100%;" class="form-control" id="usuario" placeholder="Nombre de usuario" value="" required>
+                  <div class="d-none" id="camp-vacio-usuario" style="font-size: smaller; color: red;" >
+                    Este campo no puede estar vacio.
+                  </div>
+                </div>
+                </div>
+                <!-- form-correo-admin-->
+                <div class="row">
+                  <div class="col-12 mb-2">
+                    <input type="text" style="font-size: smaller; width: 100%;" class="form-control" id="correoUsuario" placeholder="Correo electrónico" value="" required>
+                    <div class="d-none" id="camp-vacio-correo-us" style="font-size: smaller; color: red;">
+                      Este campo no puede estar vacio.
+                    </div>
+                    <div class="d-none" id="correo-invalido" style="font-size: smaller; color: red;">
+                     La direccion de correo electrónico es invalida.
+                    </div>
+                  </div>
+                  </div>
+                    <!-- form-contrasena-admin-->
+                  <div class="row">
+                    <div class="col-12 mb-2">
+                      <input type="password" style="font-size: smaller; width: 100%;" class="form-control" id="contraseña" placeholder="contraseña" value="" required>
+                      <div class="d-none" id="camp-vacio-contraseña" style="font-size: smaller; color: red;">
+                        Este campo no puede estar vacio.
+                      </div>
+                      <div class="d-none" id="contraseña-tamaño" style="font-size: smaller; color: red;">
+                        La contraseña debe ser mayor a 8 digitos.
+                      </div>
+                    </div>
+                    </div>
+                      <div class="row">
+                        <div class="col-12 mb-2">
+                          <input type="password" style="font-size: smaller; width: 100%;" class="form-control" id="contraseña2" placeholder="Vuelva a escribir la contraseña" value="" required>
+                          <div class="d-none" id="camp-vacio-contraseña2" style="font-size: smaller; color: red;">
+                            Este campo no puede estar vacio.
+                          </div>
+                          <div class="d-none" id="invalid-contraseña2" style="font-size: smaller; color: red;">
+                            Las contraseñas no coinciden.
+                          </div>
+                        </div>
+                        </div>
+                      <div class="row">
+                        <button id="button-reg" href="" onclick="registrarEmpresa()" type="button" id="btn-login-us"  style=" background-color:#546991!important; border-color: #546991; margin-right: auto; margin-left: auto; width:93%"  class="btn btn-primary">Registrarse</button>
+                      </div>
+               </div>
+            </div>
+           
+        </div>
+        </div>
+        </div>
+        <script src="js/validaciones.js"></script>
+    <script src="js/controladorRegistroEmpresas.js"></script>
+    
+</body>
+</html>

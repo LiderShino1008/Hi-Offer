@@ -1,0 +1,25 @@
+.Menu{
+    width: 300px;
+    height: 750px;
+    background-color: rosybrown;
+}
+
+.perfil{
+height: 150px;
+}
+
+.img-perfil{
+    width: 150px;
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+.paneles{
+    height: 200px;
+    box-shadow: 2px 2px 7px #999; 
+    background-color: #ffffff;
+    border-radius: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
