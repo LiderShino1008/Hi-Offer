@@ -295,7 +295,7 @@
                     <input id="usuario" style="font-size: smaller;" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="addon-wrapping">
                     
                 </div>
-                <p id="camp-vacio-us" class="campo-vacio">*Este campo no puede estar vacio</p>
+                <p id="camp-vacio-us" class="campo-vacio">Este campo no puede estar vacio</p>
                
                   <!--boton correo electronico-->
                   <div class="input-group flex-nowrap" class="form1" style="margin-bottom: 10px;">
@@ -304,8 +304,8 @@
                     </div>
                     <input id="email" style="font-size: smaller;" type="email" class="form-control" placeholder="Correo electronico" aria-label="Username" aria-describedby="addon-wrapping">
                   </div>
-                  <p id="camp-vacio-email" class="campo-vacio">*Este campo no puede estar vacio</p>
-                  <p id="correo-incorrecto" class="campo-vacio">*Direccion de correo electronico inválida</p>
+                  <p id="camp-vacio-email" class="campo-vacio">Este campo no puede estar vacio</p>
+                  <p id="correo-incorrecto" class="campo-vacio">Direccion de correo electronico inválida</p>
                   
                   <!--boton password-->
                   <div class="input-group flex-nowrap" class="form1" style="margin-bottom:10px;">
@@ -314,8 +314,8 @@
                     </div>
                     <input id="contraseña" style="font-size: smaller;" type="password" class="form-control" placeholder="Contraseña" aria-label="Username" aria-describedby="addon-wrapping">
                 </div>
-                <p id="camp-vacio-contra" class="campo-vacio">*Este campo no puede estar vacio</p>
-                <p id="contraseña-incorrecta" class="campo-vacio">*La contraseña debe contener 8 dígitos</p>
+                <p id="camp-vacio-contra" class="campo-vacio">Este campo no puede estar vacio</p>
+                <p id="contraseña-incorrecta" class="campo-vacio">La contraseña debe contener 8 dígitos</p>
                  
                 <!-- verificar contrasena-->
                 <div class="input-group flex-nowrap" class="form1" style="margin-bottom:20px;">
@@ -325,7 +325,7 @@
                   <input id="contraseña2" style="font-size: smaller;" onkeyup="validarContraseña('contraseña2');" type="password" class="form-control " placeholder="Vuelva a escribir la contraseña" aria-label="Username" aria-describedby="addon-wrapping">
               </div>
               <p id="contra-no" class="campo-vacio">*Las contraseñas no coinciden, intentelo nuevamente</p>
-              <p id="camp-vacio-contra2" class="campo-vacio">*Este campo no puede estar vacio</p>
+              <p id="camp-vacio-contra2" class="campo-vacio">Este campo no puede estar vacio</p>
                   <button id="button-reg" href="" type="button" id="btn-login-us" onclick="AgregarUsuario();" style=" background-color:#546991!important; border-color: #546991; margin-right: auto; margin-left: auto; width: 285px;"  class="btn btn-primary">Registrarse</button>
                   <br><br> 
                   <p style=" font-size: smaller; text-align: center" > ¿Ya tienes una cuenta? <a><Strong>Iniciar sesión</Strong></a></p>
@@ -342,17 +342,16 @@
    
    
      <!-- jQuery -->
-  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/librerias/jquery.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
+  <script type="text/javascript" src="js/librerias/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/librerias/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script type="text/javascript" src="js/librerias/mdb.min.js"></script>
   <!-- Your custom scripts (optional) -->
-  <script type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="js/controladorUsuarios.js"></script>
+    <script src="js/controladores/controladorUsuarios.js"></script>
   
     <script>
      $( document ).ready(function() {

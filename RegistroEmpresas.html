@@ -15,14 +15,22 @@
         <div class="container"  id="Registro">
             <div class="container" style="width: 100%;" id="menu">
                 <div class="row">
-                <div id="paso1" class="col-6 pasos" >
-                    <p id="texto1">1: Selecciona uno de nuestros planes</p>
+                <div id="paso1" class="col-3 pasos" >
+                    <p id="texto1">1: Selecciona un plan</p>
                     <div class="barra" id="barra1"></div>
                 </div>
-                <div id="" class="col-6 pasos" >
+                <div id="" class="col-3 pasos" >
                     <p class="paso1" id="texto2">2: Registra tu empresa</p>
                     <div  class="barra" id="barra2"></div>
                 </div>
+                <div id="" class="col-3 pasos" >
+                  <p class="paso1" id="texto3">3: Registra un administrador</p>
+                  <div  class="barra" id="barra3"></div>
+              </div>
+              <div id="" class="col-3 pasos" >
+                <p class="paso1" id="texto4">4: Verificacion</p>
+                <div  class="barra" id="barra4"></div>
+            </div>
                </div>
             </div>
 
@@ -41,7 +49,7 @@
                                 <li>Llega al 25% de las personas </li>
                                 <li>Panel de control</li>
                               </ul>
-                              <a class=" btn-block btn-empezar" onclick="paso2()">EMPEZAR</a>
+                              <a class=" btn-block btn-empezar" style="margin-top: 50%;" onclick="paso2()">EMPEZAR</a>
                             </div>
                           </div>
                      </div>
@@ -59,7 +67,7 @@
                               <li>Publica 100 promociones</li>
                               <li>Llega al 60% de las personas</li>
                               <li>Panel de control</li>
-                            </ul><a class=" btn-block btn-empezar" onclick="paso2()">EMPEZAR</a>
+                            </ul><a class=" btn-block btn-empezar" style="margin-top: 50%;" onclick="paso2()">EMPEZAR</a>
                           </div>
                         </div>
                    </div>
@@ -72,14 +80,14 @@
                         <h4 class="my-0 font-weight-normal">PREMIUM</h4>
                       </div>
                       <div class="card-body" >
-                        <h1 class="card-title pricing-card-title">$50 <small class="text-muted">/ mo</small></h1>
+                        <h1 class="card-title pricing-card-title">$50 <small class="text-muted">/ mensual</small></h1>
                         <ul class="list-unstyled mt-3 mb-4">
                           <li>Publica 500 promociones</li>
                           <li>Llega al 100% de las personas</li>
                           <li>Panel de control</li>
-                          <li>Sugerencias de clientes</li>
+                      
                         </ul>
-                        <a class=" btn-block btn-empezar" onclick="paso2()">EMPEZAR</a>
+                        <a class=" btn-block btn-empezar" style="margin-top: 50%;" onclick="paso2()">EMPEZAR</a>
                       </div>
                     </div>
                </div>
@@ -89,7 +97,7 @@
         </div>
 
      <!-------------------------------------------------------------------------------------------------------------------------------->  
-        <!-- formulario-->
+        <!-- formulario Empresa-->
         <div id="formulario">
         <div  class="row"> <!--contenedor-->
             <div class="container col-7" id="detalle-empresa">
@@ -211,64 +219,181 @@
                 </div>  
             </div>
             <div class="container col-4" id="detalle-empresa">
-               <div class="row">
-                <h6>Detalles del Administrador</h6>
-               </div>
-                <!-- form-nombre-admin-->
-               <div class="row">
-                <div class="col-12 mb-2">
-                  <input type="text" style="font-size: smaller; width: 100%;" class="form-control" id="usuario" placeholder="Nombre de usuario" value="" required>
-                  <div class="d-none" id="camp-vacio-usuario" style="font-size: smaller; color: red;" >
-                    Este campo no puede estar vacio.
+                <div class="row " style="margin-top: 20px;">
+                  <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone-alt"></i></span>
+                    </div>
+                    <input type="text"  id="telefono" class="form-control " placeholder="Numero Telefonico" aria-label="Username" aria-describedby="basic-addon1">
+                    <div class="d-none col-12"  id="camp-vacio-telefono" style="font-size: smaller; color: red;">
+                     *Este campo es obligatorio.
+                   </div>
                   </div>
                 </div>
-                </div>
-                <!-- form-correo-admin-->
-                <div class="row">
-                  <div class="col-12 mb-2">
-                    <input type="text" style="font-size: smaller; width: 100%;" class="form-control" id="correoUsuario" placeholder="Correo electrónico" value="" required>
-                    <div class="d-none" id="camp-vacio-correo-us" style="font-size: smaller; color: red;">
-                      Este campo no puede estar vacio.
+                    <div class="row" style=" margin-top: 50px; margin-left:0px">
+                      <div class="imagen col-3 "  ><span ><i class="fas fa-warehouse"></i></span></div>
+                      <h6 class="col-9" style="font-size:14px; margin-top: 30px; color:#546991;">Agrega el logotipo de la empresa    </h6>
+                    
                     </div>
-                    <div class="d-none" id="correo-invalido" style="font-size: smaller; color: red;">
-                     La direccion de correo electrónico es invalida.
-                    </div>
-                  </div>
-                  </div>
-                    <!-- form-contrasena-admin-->
-                  <div class="row">
-                    <div class="col-12 mb-2">
-                      <input type="password" style="font-size: smaller; width: 100%;" class="form-control" id="contraseña" placeholder="contraseña" value="" required>
-                      <div class="d-none" id="camp-vacio-contraseña" style="font-size: smaller; color: red;">
-                        Este campo no puede estar vacio.
-                      </div>
-                      <div class="d-none" id="contraseña-tamaño" style="font-size: smaller; color: red;">
-                        La contraseña debe ser mayor a 8 digitos.
-                      </div>
-                    </div>
-                    </div>
-                      <div class="row">
-                        <div class="col-12 mb-2">
-                          <input type="password" style="font-size: smaller; width: 100%;" class="form-control" id="contraseña2" placeholder="Vuelva a escribir la contraseña" value="" required>
-                          <div class="d-none" id="camp-vacio-contraseña2" style="font-size: smaller; color: red;">
-                            Este campo no puede estar vacio.
-                          </div>
-                          <div class="d-none" id="invalid-contraseña2" style="font-size: smaller; color: red;">
-                            Las contraseñas no coinciden.
-                          </div>
+                    <div class="col-12">
+                      <div class="input-group" style="margin-top:20px">
+                        <div class="custom-file">
+                          <input type="file"  id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                          <label class="custom-file-label" for="inputGroupFile04">Seleccione un Archivo</label>
                         </div>
-                        </div>
-                      <div class="row">
-                        <button id="button-reg" href="" onclick="registrarEmpresa()" type="button" id="btn-login-us"  style=" background-color:#546991!important; border-color: #546991; margin-right: auto; margin-left: auto; width:93%"  class="btn btn-primary">Registrarse</button>
                       </div>
+                    </div>
+                    <div style="margin-top:100px; float: right; color:#546991;" class=""><a class="col-6" style=" height: 50px;" onclick="atrasEmpresa()"><i class="fas fa-angle-left"></i><strong>Atrás</strong></a>
+                      <a class="col-6" onclick="registrarEmpresa()" style=" height: 50px;"><strong>Siguiente</strong> <i class="fas fa-chevron-right"></i></a></div>
+                    
+                    <!--
+                    <div style="margin-top:100px; float: right; color:#546991;" class="">
+                      <a class="col-6" style=" height: 50px;"></a>
+                      <a class="col-6" style=" height: 50px;"><strong>Siguiente</strong> <i class="fas fa-chevron-right"></i></a>
+                    </div> -->
+                   
+                    
+                    </div>
                </div>
             </div>
+           <!-----------------------FORMULARIO ADMINISTRADOR-->
+          
+        <div id="panel-administrador" class="row col-12" style="margin-right: auto;margin-left: auto; padding-top: 50px; "  >
+          <div class="col-4" style="margin-left: auto; margin-right: auto; ">
+          <div id="form-Administrador col-4" style="margin-left: auto; margin-right: auto; ">
+            <div class="row " >
+              <h6 style=" margin-left: auto; margin-right: auto; ">Detalles del administrador</h6>
+             </div>
+            <div class="input-group flex-nowrap botton "  >
+              <div class="input-group-prepend">
+                <span style="background-color: #FFFFFF;" class="input-group-text" id="addon-wrapping"><i class="fas fa-user fa-color"></i></span>
+              </div>
+              <input id="usuario" style="font-size: smaller;" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="addon-wrapping">  
+          </div>
+          <div class=" d-none col-12"  id="camp-vacio-us" style="font-size: smaller; color: red;">
+            Debe llenar este campo, no sea imbecil.
+          </div>
+         
+            <!--boton correo electronico-->
+            <div class="input-group flex-nowrap botton form1"  >
+              <div  class="input-group-prepend">
+                <span style="background-color: #FFFFFF;" class="input-group-text" id="addon-wrapping"><i class="fas fa-envelope fa-color"></i></span>
+              </div>
+              <input id="email-usuario" style="font-size: smaller;" type="email" class="form-control" placeholder="Correo electronico" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <div class="d-none col-12"  id="camp-vacio-correo-us" style="font-size: smaller; color: red;">
+              Este campo es obligatorio.
+            </div>
+            <div class="d-none col-12"  id="correo-invalido-us" style="font-size: smaller; color: red;">
+              Direccion de correo electronico invalida.
+            </div>
+            
+            <!--boton password-->
+            <div class="input-group flex-nowrap" class="form1 botton" style="margin-bottom: 10px;">
+              <div class="input-group-prepend">
+                <span style="background-color: #FFFFFF;" class="input-group-text" id="addon-wrapping"><i class="fas fa-key fa-color"></i></span>
+              </div>
+              <input id="contraseña" style="font-size: smaller;" type="password" class="form-control" placeholder="Contraseña" aria-label="Username" aria-describedby="addon-wrapping">
+          </div>
+          <div class="d-none col-12"  id="camp-vacio-contra-us" style="font-size: smaller; color: red;">
+            Este campo es obligatorio.
+          </div>
+          <div class="d-none col-12"  id="contraseña-incorrecta" style="font-size: smaller; color: red;">
+            La contraseña debe ser mayor a 8 dígitos.
+          </div>
            
+          <!-- verificar contrasena-->
+          <div class="input-group flex-nowrap" class="form1 botton " >
+            <div class="input-group-prepend">
+              <span style="background-color: #FFFFFF;" class="input-group-text" id="addon-wrapping"><i class="fas fa-key fa-color"></i></span>
+            </div>
+            <input id="contraseña2" style="font-size: smaller;"  type="password" class="form-control " placeholder="Vuelva a escribir la contraseña" aria-label="Username" aria-describedby="addon-wrapping">
+        </div>
+        <div class="d-none col-12"  id="contraseña-no-coincide" style="font-size: smaller; color: red;">Las contraseñas no coinciden, intentelo nuevamente.</div>
+        <div class="d-none col-12"  id="camp-vacio-contra2" style="font-size: smaller; color: red;">Las contraseñas no coinciden, intentelo nuevamente.</div>
+            
+            <button id="button-reg" href="" type="button" id="btn-login-us" onclick="validacionCampos();" style=" background-color:#546991!important; border-color: #546991; margin-right: auto; margin-left: auto; width:100%;"  class="btn btn-primary">Registrarse</button>
+            <br><br> 
+           
+          </div>
+            
+          
+        </div>
+                <!--agregar-->
+                <div class="row" >
+                  <div class="col-12" >
+                    <div style="margin-top:50px; float: right; color:#546991;float: right;" class="col-12"><a class="col-6" style=" height: 50px;" onclick="atrasAdmin()"><i class="fas fa-angle-left"></i><strong>Atrás</strong></a>
+                  </div>
+                </div>
+                </div>
+        </div>
+          <div id="verificacion" class="d-none">
+           
+              <section class="dark-grey-text p-5">
+            
+                <div class="row">
+            
+                  <div class="col-md-5 mb-4 mb-md-0">
+            
+                    <div class="view">
+                      <img src="img/prueba1 (4).png" class="img-fluid" alt="smaple image">
+                    </div>
+            
+                  </div>
+                 
+                  <div class="col-md-7 mb-lg-0 mb-4">
+            
+                    <form class="" action="">
+            
+                      <h3 class="font-weight-bold my-3">Código de verificación</h3>
+                      
+                      <p class="text-muted mb-4 pb-2">Hemos enviado un código de verificación a la dirección de correo electrónico del administrador, porfavor ingresa el código para activar tu cuenta.</p>
+             
+                      <div class="input-group">
+                        <input type="" class="form-control" placeholder="" id="code" aria-label="Enter your email address"
+                          aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                        
+                          <a onclick="verificarCodigo()" id="button-addon2" class="btn btn-md btn-primary rounded-right m-0 px-3 py-2 z-depth-0 waves-effect" >VERIFICAR</a>
+                        </div>
+                      </div>
+                      <small class="form-text black-text d-none" id="txt-error" style="color:red"><strong style="color:red">*ingresa el código de verificación.</strong></small>
+                      
+                    </form>
+                    <!-- Form -->
+            
+                  </div>
+                  <!-- Grid column -->
+            
+                </div>
+                <!-- Grid row -->
+                
+              </section>
+              <!--Section: Content-->
+            
+            
+            
+          </div>
         </div>
         </div>
-        </div>
-        <script src="js/validaciones.js"></script>
-    <script src="js/controladorRegistroEmpresas.js"></script>
+
+        
+
+        <script type="text/javascript" src="js/librerias/jquery.min.js"></script>
+      <!-- Bootstrap tooltips -->
+      <script type="text/javascript" src="js/librerias/popper.min.js"></script>
+      <!-- Bootstrap core JavaScript -->
+      <script type="text/javascript" src="js/librerias/bootstrap.min.js"></script>
+      <!-- MDB core JavaScript -->
+      <script type="text/javascript" src="js/librerias/mdb.min.js"></script>
+      <!-- Your custom scripts (optional) -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <!-- Bootstrap core JavaScript -->
+      <script src="js/librerias/jquery.min.js"></script>
+      <script src="js/librerias/bootstrap.bundle.min.js"></script>
+        <script src="js/controladores/validaciones.js"></script>
+    <script src="js/controladores/controladorRegistroEmpresas.js"></script>
+    <script src="js/controladores/validacionUsuario.js"></script>
     
 </body>
 </html>
