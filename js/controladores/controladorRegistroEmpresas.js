@@ -28,7 +28,7 @@ function atrasEmpresa(){
 }
 
 
-function registrarEmpresa1(){
+function registrarEmpresa(){
     console.log("Hello");
     let estado_vacio_NombreEmp=validarCampoVacio('NombreDeLaEmpresa');
     let estado_vacio_correoEmp=validarCampoVacio('correoEmpresa');
@@ -191,7 +191,7 @@ function registrarEmpresa1(){
 }
 
 
-function registrarEmpresa(){
+function registrarEmpresa1(){
     document.getElementById('formulario').style.display="none";
     document.getElementById('panel-administrador').style.display="block";
     document.getElementById('barra2').style.backgroundColor="#CCCCCC";
