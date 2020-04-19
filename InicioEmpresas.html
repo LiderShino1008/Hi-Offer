@@ -13,195 +13,328 @@
      <link rel="stylesheet" href="css/style.css">
      <link href="css/simple-sidebar.css" rel="stylesheet">
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Manrope:wght@200&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="border-right" id="sidebar-wrapper">
-          <div class="perfil"><img src="img/logo2.png" class="img-perfil"></div>
-          <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action item-style">Dashboard</a>
-            <a href="#" class="list-group-item list-group-item-action item-style ">Perfil</a>
-            <a href="#" class="list-group-item list-group-item-action item-style">Productos</a>
-            <a href="#" class="list-group-item list-group-item-action item-style ">Sucursales</a>
-            <a href="#" class="list-group-item list-group-item-action  item-style">Tablas</a>
+         
+        <div class="imagen col-5" id="logo-empresa"  ><span ><i class="fas fa-warehouse"></i></span></div>
+          <label for="logo-empresa" id="nombre_empresa">Nombre de la empresa</label>
+          <div class="list-group list-group-flush"
+          >
+           
+            <a href="#" class="list-group-item list-group-item-action item-sidebar"><i style="margin-right: 10px;" class="fas fa-chart-bar"></i>Dashboard</a>
+            <a href="#" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="fas fa-briefcase"></i>Perfil</a>
+            <a href="#" class="list-group-item list-group-item-action item-sidebar"><i style="margin-right: 10px;" class="fas fa-fax"></i>Productos</a>
+            <a href="#" class="list-group-item list-group-item-action item-sidebar"><i style="margin-right: 10px;" class="fas fa-percent"></i>Promociones</a>
+            <a href="#" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="far fa-building"></i>Sucursales</a>
+            <a href="#" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="far fa-building"></i>Configuración</a>
+            <a href="#" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="far fa-building"></i>Cerrar Sesión</a>
+           
           </div>
         </div>
         <!-- /#sidebar-wrapper -->
-    
-
-
+   
         <!-- Page Content -->
         <div id="page-content-wrapper" style="background-color: #EEEEEE;">
     
           <nav class="navbar navbar-expand-lg navbar-light border-bottom " style="background-color: #ffffff;">
-            <button class="btn btn-primary" id="menu-toggle"><i style="color: seashell; font-size:larger;" class="fas fa-bars"></i></button>
+            <div id="menu-toggle" style=" padding: 15px;  color: #546991; cursor: pointer;"><i style="color: seashell; font-size:x-large;  color: #546991;" class="fas fa-bars"></i></div>
+           
+            <h6 style="font-family: 'Baloo Bhaina 2', cursive; margin-left: auto; margin-top: 10px;" >Administrador</h6>
     
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                
-              </ul>
-            </div>
           </nav>
-    
-          <div class="container-fluid">
-            
-        <div class="row">
-        <!-- /#page-content-wrapper -->
-        <div class="container my-4 py-1">
-          <!-- Section: Block Content -->
-          <section class="">
-            <!--Grid row-->
-            <div class="row">
-              <!--Grid column-->
-              <div class="col-lg-4 col-md-12 mb-4">
-                <!-- Admin card -->
-                <div class="card mt-3">
-                  <div class="">
-                    <i class="far fa-money-bill-alt fa-lg primary-color z-depth-2 p-4 ml-3 mt-n3 rounded text-white"></i>
-                    <div class="float-right text-right p-3">
-                      <p class="text-uppercase text-muted mb-1"><small>Ventas</small></p>
-                      <h4 class="font-weight-bold mb-0">00 000$</h4>
-                    </div>
-                  </div>
-                  <div class="card-body pt-0">
-                    <div class="progress md-progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
-                        aria-valuemax="100"></div>
-                    </div>
-                    <p class="card-text">Tus ventas han aumentado un (0%)</p>
-                  </div>
-        
-                </div>
-                <!-- Admin card -->
-        
-              </div>
-              <!--Grid column-->
-        
-              <!--Grid column-->
-              <div class="col-lg-4 col-md-6 mb-4">
-        
-                <!-- Admin card -->
-                <div class="card mt-3">
-        
-                  <div class="">
-                    <i class="fas fa-chart-line fa-lg teal z-depth-2 p-4 ml-3 mt-n3 rounded text-white"></i>
-                    <div class="float-right text-right p-3">
-                      <p class="text-uppercase text-muted mb-1"><small>Clientes</small></p>
-                      <h4 class="font-weight-bold mb-0">0</h4>
-                    </div>
-                  </div>
-        
-                  <div class="card-body pt-0">
-                    <div class="progress md-progress">
-                      <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
-                        aria-valuemax="100"></div>
-                    </div>
-                    <p class="card-text">Los clientes aumentaron un(0%)</p>
-                  </div>
-        
-                </div>
-                <!-- Admin card -->
-        
-              </div>
-              <!--Grid column-->
-        
-              <!--Grid column-->
-              <div class="col-lg-4 col-md-6 mb-4">
-        
-                <!-- Admin card -->
-                <div class="card mt-3">
-        
-                  <div class="">
-                    <i class="fas fa-chart-pie fa-lg purple z-depth-2 p-4 ml-3 mt-n3 rounded text-white"></i>
-                    <div class="float-right text-right p-3">
-                      <p class="text-uppercase text-muted mb-1"><small>Visitas</small></p>
-                      <h4 class="font-weight-bold mb-0">0</h4>
-                    </div>
-                  </div>
-        
-                  <div class="card-body pt-0">
-                    <div class="progress md-progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 31%" aria-valuenow="0" aria-valuemin="0"
-                        aria-valuemax="100"></div>
-                    </div>
-                    <p class="card-text">Las visitas al perfil han aumentado en un (0%)</p>
-                  </div>
-        
-                </div>
-                <!-- Admin card -->
-        
-              </div>
-              <!--Grid column-->
-        
-            </div>
-            <!--Grid row-->
-        
-          </section>
-          <!--Section: Content-->
-        
-        
-        </div>
-        
-         </div>
 
-         <div class="row">
-          <div class="container my-2">
+          <!--INICIO DE CONTENEDOR  PRINCIPAL-->
+         <div class="container-fluid">
 
-            <!--Section: Content-->
-            <section>
-          
-              <div class="card">
-                <div class="card-body px-0 pb-0">
-          
-                  <h5 class="text-center font-weight-bold mb-4">Estadisticas</h5>
-          
-                  <hr>
-          
-                  <!--Grid row-->
-                  <div class="row mt-3 pt-3">
-          
-                    <!--Grid column-->
-                    <div class="col-md-6 mb-4 mb-md-0 mx-auto">
-          
-                      <canvas id="doughnutChart"></canvas>
-          
-                    </div>
-                    <!--Grid column-->
-          
-                    <!--Grid column-->
-                    <div class="col-12 pt-4 mt-2 mb-4 mb-md-0 mx-auto">
-          
-                      <div class="list-group">
-                        <a href="#!" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Ventas
-                          <span class="text-danger"><i class="fas fa-chevron-down"></i> 12%</span>
-                        </a>
-                        <a href="#!" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">clientes
-                          <span class="text-success"><i class="fas fa-chevron-up"></i> 4%</span>
-                        </a>
-                        <a href="#!" class="list-group-item list-group-item-action border-bottom-0 border-left-0 border-right-0 rounded-bottom-left rounded-bottom-right d-flex justify-content-between align-items-center">visitas
-                          <span class="text-warning"><i class="fas fa-chevron-left"></i> 0%</span>
-                        </a>
+
+           <!---Dashboard-->
+           <div id="Dashboard" class="container-fluid" >
+            <div class="container-fluid" style="background-color:#536F97; height: 150px; width: 3000px; margin-left: -100px;"></div>
+              <!---TARJETAS-->
+            <div class="row  " >
+              <div class="container-fluid  py-1" style="width: 100%; margin-top: -100px;">
+                <section class="">
+                  <div class="row">
+                    <div class="col-lg-4 col-md-12 mb-4" m>
+                      <!-- CARD VENTAS-->
+                      <div class="card mt-3">
+                        <div class="">
+                          <i class="far fa-money-bill-alt fa-lg  z-depth-2 p-4 ml-3 mt-n3 rounded text-white" style="background-color:#8BD0ED;"></i>
+                          <div class="float-right text-right p-3">
+                            <p class="text-uppercase text-muted mb-1"><small>Ventas</small></p>
+                            <h4 class="font-weight-bold mb-0">00 000$</h4>
+                          </div>
+                        </div>
+                        <div class="card-body pt-0">
+                          <div class="progress md-progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                              aria-valuemax="100"></div>
+                          </div>
+                          <p class="card-text">Tus ventas han aumentado un (0%)</p>
+                        </div>
                       </div>
-          
                     </div>
+                    <!-- TERMINACION DE CAR VENTAS -->
+                    <!--Aqui termina una columna en ka fila-->
+              
+                    <!--inicia la segunda columna-->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                      <!-- CARD CLIENTES -->
+                      <div class="card mt-3">
+              
+                        <div class="">
+                          <i class="fas fa-chart-line fa-lg  z-depth-2 p-4 ml-3 mt-n3 rounded text-white" style="background-color:#8BD0ED;"></i>
+                          <div class="float-right text-right p-3">
+                            <p class="text-uppercase text-muted mb-1"><small>Clientes</small></p>
+                            <h4 class="font-weight-bold mb-0">0</h4>
+                          </div>
+                        </div>
+              
+                        <div class="card-body pt-0">
+                          <div class="progress md-progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                              aria-valuemax="100"></div>
+                          </div>
+                          <p class="card-text">Los clientes aumentaron un(0%)</p>
+                        </div>
+                      </div>
+                    </div>
+                    <!--TERMINA CARD CLIENTES-->
+              
                     <!--Grid column-->
-          
-                  </div>
-                  <!--Grid row-->
-          
-                </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                      <!-- CARD VISITAS -->
+                      <div class="card mt-3">
+                        <div class="">
+                          <i class="fas fa-chart-pie fa-lg  z-depth-2 p-4 ml-3 mt-n3 rounded text-white" style="background-color:#8BD0ED;"></i>
+                          <div class="float-right text-right p-3">
+                            <p class="text-uppercase text-muted mb-1"><small>Visitas</small></p>
+                            <h4 class="font-weight-bold mb-0">0</h4>
+                          </div>
+                        </div>
+                        <div class="card-body pt-0">
+                          <div class="progress md-progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 31%" aria-valuenow="0" aria-valuemin="0"
+                              aria-valuemax="100"></div>
+                          </div>
+                          <p class="card-text">Las visitas al perfil han aumentado en un (0%)</p>
+                        </div>
+              
+                      </div>
+                      <!-- Admin card -->
+                    </div>
+                    <!--FINALZA LA COLUMNA-->
+                    
+                  </div> 
+                </section>  
               </div>
+               </div>
+                  <!--SFIN DE LAS TRES TARJETAS-->
+
+                <!-- fila de estadisticas y resumen de inventario -->
+                <div class="row"> 
+
+                    <!-- Inicio de la grafica productos -->
+                    <div class="container my-0 col-12 col-lg-4  ">
           
-            </section>
-            <!--Section: Content-->
-          
-          </div>
-      </div>
+                      <!--Section: Content-->
+                      <section class="col-xl col-12 ">
+                    
+                        <div class="card">
+                          <div class="card-body px-0 pb-0">
+                            <h6 class="text-center  font-weight-bold mb-4">Productos</h6>
+                            <hr>
+                            <div class="row mt-1 pt-3">
+                              <div class="col-md-12 mb-4 mb-md-0 mx-auto px-5 py-1">
+                                <canvas id="doughnutChart"></canvas>
+                              </div>
+                              <!--Grid column-->
+                    
+                              <!--Grid column-->
+                              <div class="col-12 pt-4 mt-2 mb-4 mb-md-0 mx-auto">
+                    
+                                <div class="list-group">
+                                  <a href="#!" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Vendidos
+                                    <span class="text-danger"> 12%</span>
+                                  </a>
+                                  <a href="#!" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Añadidos al carrito
+                                    <span class="text-success">4%</span>
+                                  </a>
+                                </div>
+                    
+                              </div>
+                              <!--Grid column-->
+                    
+                            </div>
+                            <!--Grid row-->
+                          </div>
+                        </div>
+                    
+                      </section>
+                      <!--Section: Content--> 
+                </div>  <!--Fin de la grafica productos-->
+                     
+
+                <div class="container my-1 py-0 col-12 col-lg-8 col-12  " style="margin-right: auto;">
+                  <!--Section: Block Content-->
+                  <section>
+                    
+                    <div class="card col-12">
+                      
+                      <h6 class="text-center  font-weight-bold mt-3 mb-1">Ventas</h6>
+                            <hr>
+                      <div class="card-body mr-md-1 col-12">
+                        <div class="row">
+                        <!--Grid row-->
+                        <div class="row mb-3 col-9">
+ 
+                          <div class="col-md-12 mb-4">
+                            <canvas id="barChart" height="100"></canvas>
+                          </div>
+                        </div>
+                        
+
+                        <div class="col-3" style="margin-bottom: 9px; margin-top: -20px;"  >
+                          <a href="#!" style="font-size: 13px; padding: 7px; text-align: center; float: inline-start;" class=" d-flex justify-content-between align-items-center">Esta Semana
+  
+                          </a>
+                          <a href="#!" style="font-size: 13px; padding: 7px;" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Domingo
+                            <span class=""> 12%</span>
+                          </a>
+                          <a href="#!"  style="font-size: 13px; padding: 7px;" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Lunes
+                            <span class=""> 12%</span>
+                          </a>
+                          <a href="#!"  style="font-size: 13px; padding: 7px;" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Martes
+                            <span class=""> 12%</span>
+                          </a>
+                          <a href="#!"  style="font-size: 13px;padding: 7px;" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Miercoles
+                            <span class=""> 12%</span>
+                          </a>
+                          <a href="#!"  style="font-size: 13px;padding: 7px;" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Jueves
+                            <span class=""> 12%</span>
+                          </a>
+                          <a href="#!"  style="font-size: 13px;padding: 7px;" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Viernes
+                            <span class=""> 12%</span>
+                          </a>
+                          <a href="#!"  style="font-size: 13px;padding: 7px;" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Sábado
+                            <span class=""> 12%</span>
+                          </a>
+                        </div>
+                        <!--Grid row-->
+                      </div>
+                      </div>
+                    </div> <!--fin de la tarjeta-->
+                  </section>
+                  <!--Section: Block Content-->  
+                </div>
+
+                
+
+                </div>
+
+              
+
+
+                  <div class="row container-fluid" >
+                    <div class="col-3 my-3 " style="margin-left: 15px;" >
+                      <div class="card col-12 ">
+                        <h6 class="text-center  font-weight-bold mt-3 mb-1">Resumen de inventario</h6>
+                              <hr>
+                        <div class="card-body mr-md-1" >
+    
+                          <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Productos registrados
+                            <span class="badge badge-info badge-pill">26</span>
+                          </a>
+                          <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Productos en promocion
+                            <span class="badge badge-warning badge-pill">5</span>
+                          </a>
+                          <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">productos con existencia baja
+                            <span class="badge badge-success badge-pill">10</span>
+                          </a>
+                        </div>
+                      </div> 
+                    </div>
+
+                    <div class=" col-lg-8 col-12">
+                      <div class="container my-3 "  >
+                        <!-- Section: Block Content -->
+                        <section>
+                          <div class="card" data-spy="scroll">
+                            <div class="card-body">
+                              <h5 class="text-center font-weight-bold mb-2 " style="font-size: 16px; margin-top: 2px;">Nuevos comentarios</h5>
+                              <hr>
+                              <!--Grid row-->
+                              <div class="row">
+                                <!--Grid column-->
+                                <div class="col-12  mb-2 mx-auto">
+                                  <div class="media">
+                                    <img class="d-flex mr-3" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg" alt="Generic placeholder image">
+                                    <div class="media-body">
+                                      <p  style="font-size: 13px;" class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil nostrum voluptates eius recusandae dicta ab ad voluptate doloremque modi dignissimos voluptatibus sit maxime expedita eligendi fugit quisquam non, explicabo tenetur!.</p>
+                                    </div>
+                                  </div>
+                                  <hr>
+                                  <div class="media">
+                                    <img class="d-flex mr-3" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg" alt="Generic placeholder image">
+                                    <div class="media-body">
+                                      <p  style="font-size: 13px;" class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil nostrum voluptates eius recusandae dicta ab ad voluptate doloremque modi dignissimos voluptatibus sit maxime expedita eligendi fugit quisquam non, explicabo tenetur!.</p>
+                                    </div>
+                                  </div>
+                                  <hr>
+                                  <div class="media">
+                                    <img class="d-flex mr-3" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg" alt="Generic placeholder image">
+                                    <div class="media-body">
+                                      <p  style="font-size: 13px;" class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil nostrum voluptates eius recusandae dicta ab ad voluptate doloremque modi dignissimos voluptatibus sit maxime expedita eligendi fugit quisquam non, explicabo tenetur!.</p>
+                                    </div>
+                                  </div>
+
+                                </div>
+
+                              </div>
+                              <!--Grid row-->
+
+                              <p class="text-center mt-4 mb-1"><a href="#!">Ver todos</a></p>
+                      
+                            </div>
+                          </div>
+                      
+                        </section>
+                        <!-- Section: Block Content -->
+                      
+                      </div>
+                    </div>
+
+                    <!---COMENTARIOS-->
+
+                    
+                  </div>
+
+           </div> <!--fin dashboard-->
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           </div> <!--fin del contenedor principal-->
+
+       
       <!-- /#wrapper -->
       <script type="text/javascript" src="js/librerias/jquery.min.js"></script>
       <!-- Bootstrap tooltips -->
