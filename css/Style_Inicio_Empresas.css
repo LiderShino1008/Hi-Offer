@@ -1,3 +1,8 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
 .Menu{
     width: 300px;
     height: 750px;
@@ -57,9 +62,17 @@ height: 150px;
     font-family: 'Baloo Bhaina 2', cursive;
     border: #ffffff;
     font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .item-sidebar:hover{
+    color:#546991;
+    background-color: #ffffff;
+    font-weight: bold;
+}
+
+.seleccionar{
     color:#546991;
     background-color: #ffffff;
     font-weight: bold;
@@ -69,3 +82,96 @@ height: 150px;
     font-family: 'Manrope', sans-serif;
     font-family: 'Baloo Bhaina 2', cursive;
 }
+
+.portada{
+    background-color:#B4B4B4;
+    height: 300px;
+    
+}
+
+.foto-perfil{
+    background-color: #546991; height: 160px; margin: auto;
+    margin-top: -70px;
+    margin-right: auto;
+    border: 3px solid #ffffff;
+    
+}
+
+.info-emp{
+    margin-top: 15px;
+    margin-left: -50px;
+   
+    
+}
+
+.nombre-emp{
+    color:  #546991;
+    font-weight: bold;
+    
+   
+    
+}
+
+.eslogan-emp{
+    margin-left: -5px; margin-top: -5px;
+    font-size: 14px;
+    color: #535353;
+    
+
+    
+}
+
+.list-group-item{
+    background-color: #ffffff;
+    border: #ffffff;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+   /* font-family: 'Libre Franklin', sans-serif;*/
+   font-family: 'Lexend Giga', sans-serif;
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+.descripcion{
+    margin-left: 50px;
+    text-align: justify;
+    font-family: 'Lexend Giga', sans-serif;
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 15px;
+    
+}
+.linea{
+    background-color:#546991 ;
+    height: 200px;
+    width: 2px;
+}
+
+#separador{
+    background-color:#E8FAFE;
+    height: 60px;
+    margin-top: -5px;
+    padding-top: 10px;
+}
+
+#btn-tiendas{
+    text-align: center; background-color:#546991; color:#EEEEEE;
+    padding: 10px;
+    font-size: 15px;
+    border: 0px;
+    box-shadow: 2px 2px 10px #666;   
+    margin-top: 10px;
+   
+}
+
+.map-container{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
+    }
+    .map-container iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+    }

@@ -15,6 +15,7 @@
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
      <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet">
      <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Manrope:wght@200&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Lexend+Giga&family=Libre+Franklin:wght@100;200&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="d-flex" id="wrapper">
@@ -26,14 +27,14 @@
           <div class="list-group list-group-flush"
           >
            
-            <a href="#" class="list-group-item list-group-item-action item-sidebar"><i style="margin-right: 10px;" class="fas fa-chart-bar"></i>Dashboard</a>
-            <a href="#" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="fas fa-briefcase"></i>Perfil</a>
+            <a href="#" onclick="dashboard()" id="item-dashboard" class="list-group-item list-group-item-action item-sidebar"><i style="margin-right: 10px;" class="fas fa-chart-bar"></i>Dashboard</a>
+            <a href="#" onclick="perfil()" id="item-perfil" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="fas fa-briefcase"></i>Perfil</a>
             <a href="#" class="list-group-item list-group-item-action item-sidebar"><i style="margin-right: 10px;" class="fas fa-fax"></i>Productos</a>
             <a href="#" class="list-group-item list-group-item-action item-sidebar"><i style="margin-right: 10px;" class="fas fa-percent"></i>Promociones</a>
             <a href="#" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="far fa-building"></i>Sucursales</a>
-            <a href="#" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="far fa-building"></i>Configuración</a>
-            <a href="#" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="far fa-building"></i>Cerrar Sesión</a>
-           
+            <a href="#" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="fas fa-cog"></i>Configuración</a>
+            <a href="#" class="list-group-item list-group-item-action item-sidebar "><i style="margin-right: 10px;"  class="far fab fa-pushed"></i>Cerrar Sesión</a>
+            
           </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -41,19 +42,20 @@
         <!-- Page Content -->
         <div id="page-content-wrapper" style="background-color: #EEEEEE;">
     
-          <nav class="navbar navbar-expand-lg navbar-light border-bottom " style="background-color: #ffffff;">
+          <nav class="navbar navbar-expand-lg navbar-light border-bottom " style="background-color: #ffffff; ">
             <div id="menu-toggle" style=" padding: 15px;  color: #546991; cursor: pointer;"><i style="color: seashell; font-size:x-large;  color: #546991;" class="fas fa-bars"></i></div>
            
             <h6 style="font-family: 'Baloo Bhaina 2', cursive; margin-left: auto; margin-top: 10px;" >Administrador</h6>
     
           </nav>
+          
 
           <!--INICIO DE CONTENEDOR  PRINCIPAL-->
-         <div class="container-fluid">
+         <div class="container-fluid" style="margin:0; padding: 0px">
 
 
            <!---Dashboard-->
-           <div id="Dashboard" class="container-fluid" >
+           <div id="dashboard" class="container-fluid d-none" >
             <div class="container-fluid" style="background-color:#536F97; height: 150px; width: 3000px; margin-left: -100px;"></div>
               <!---TARJETAS-->
             <div class="row  " >
@@ -241,7 +243,7 @@
 
 
                   <div class="row container-fluid" >
-                    <div class="col-3 my-3 " style="margin-left: 15px;" >
+                    <div class="col-3 my-3 "  >
                       <div class="card col-12 ">
                         <h6 class="text-center  font-weight-bold mt-3 mb-1">Resumen de inventario</h6>
                               <hr>
@@ -296,7 +298,6 @@
                                 </div>
 
                               </div>
-                              <!--Grid row-->
 
                               <p class="text-center mt-4 mb-1"><a href="#!">Ver todos</a></p>
                       
@@ -305,7 +306,6 @@
                       
                         </section>
                         <!-- Section: Block Content -->
-                      
                       </div>
                     </div>
 
@@ -313,26 +313,109 @@
 
                     
                   </div>
-
+                    
            </div> <!--fin dashboard-->
-           
 
+            <div class="perfil-empresarial">
+            <div id="perfil-empresarial" style="background-color: #ffffff;" class="">
+              <div class="container-fluid portada"></div>
+              <!-- #BODY -->
+                <div class="container-fluid">
+                  <div class="row pb-3">
+                    
+                    <div class="col-12 col-lg-6">
+                      <div class="row"><!-- #foto de perfil y nombre de la empresa -->
+                        <div class="col-3 foto-perfil" ></div>
+                        <div class="col-8 info-emp" ><h6 class="nombre-emp">NOMBRE DE LA EMPRESA</h6>
+                        <p class="eslogan-emp" >Eslogan de la empresa.</p></div>
+                      </div>
+                      <div class="row" style="margin-top: 20px;">
+                        <div  class="col-12 col-md-7 descripcion">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, officiis beatae corrupti est quisquam nostrum ex eius culpa vel, rem rerum incidunt assumenda iure quasi nisi labore dolor magnam voluptates.</div>
+                        <div class="linea"></div>
+                        <ul class="list-group col-12 col-md-4">
+                          <li class="list-group-item"><i class="fas fa-envelope mr-2"></i>empresa@email.org</li>
+                          <li class="list-group-item">numero de telefono</li>
+                          <li class="list-group-item"><i class="fas fa-map-marker-alt mr-2"></i> Direccion</li>
+                          <li class="list-group-item">Instagram</li>
+                          <li class="list-group-item">Facebook</li>
+                          <li class="list-group-item">Twitter</li>
 
+                        </ul>
+                      </div>
 
+                    </div> <!--fin del info de la empresa-->
+                    <div class="row col-12 col-lg-5" style="margin-left: auto; margin-right: auto;"><!-- INICIO DE COMENTARIOS-->
+                      <div class="card col-12 " style="background-color: #ffffff; margin-top: 15px; padding: 0px;">
+                       <div style="background-color:#546991; color: #ffffff;  " class="container-fluid"><h5 style="text-align: center; font-size: 17px;" class="mt-2">Comentarios</h5></div>
+                        
+                        <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-3 pl-3 pt-2">
+                          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1">
+                          <div class="chat-body white p-2 ml-2 z-depth-1">
+                            <div class="header">
+                              <strong class="primary-font">Usuario 1</strong>
+                              <small class="pull-right text-muted"><i class="far fa-clock"></i> hace 12 minutos</small>
+                            </div>
+                            <hr class="w-100" style="margin-top: -1px;">
+                            <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                              labore et dolore magna aliqua.
+                            </p>
+                          </div>
+                        </li>
+                        <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-3 pl-3 pt-2">
+                          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1">
+                          <div class="chat-body white p-2 ml-2 z-depth-1">
+                            <div class="header">
+                              <strong class="primary-font">Usuario 2</strong>
+                              <small class="pull-right text-muted"><i class="far fa-clock"></i> hace 12 minutos</small>
+                            </div>
+                            <hr class="w-100" style="margin-top: -1px;">
+                            <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                              labore et dolore magna aliqua.
+                            </p>
+                          </div>
+                        </li>
+                      <div class="row pr-5 pl-5 c"><a style="margin-left: auto;" >ver mas</a></div> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
 
+            <div class="container-fluid" id="separador">
+              <h6 class="letra" style="margin-top:20px; color: #535353;"> <i class="fas fa-street-view mr-3 ml-5"></i>Ubica nuestras tiendas</h6>
+            </div>
 
+            <div  container-fluid" style="background-color: #ffffff;">
+              <div class="row">
+              <!--Google map-->
+              <div class="col-md-3 col-12" style="text-align: center; ">
+                  <h6 style="text-align: center; margin-top: 30px; color: #546991;" class="mt-10" >TIENDA PRINCIPAL</h6>
+                  <button id="btn-tiendas"> ver otras tiendas</button>
+              </div>
+         <!--Google map-->
+                <div id="map-container-google-1" class="z-depth-1-half col-md-7 col-12 map-container" style="height: 300px;"><iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                  style="border:0" allowfullscreen></iframe>
+              </div>
 
+            </div>
 
+            </div>
+            <div class="container-fluid" id="separador">
+              <h6 class="letra" style="margin-top:20px; color: #535353;"> <i class="fas fa-street-view mr-3 ml-5"></i>Dale un vistazo a nuestros productos</h6>
+            </div>
+            
+             
+                
+              <div class="row" id="productos"></div>
 
-
-
-
-
-
-
-
+          
+            </div>
 
            </div> <!--fin del contenedor principal-->
+           
+      
 
        
       <!-- /#wrapper -->
@@ -349,6 +432,7 @@
       <script src="js/librerias/jquery.min.js"></script>
       <script src="js/librerias/bootstrap.bundle.min.js"></script>
       <script src="js/controladores/controlador_inicio_Empresas.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=generarMapa"></script>
     
       <!-- Menu Toggle Script -->
       <script>
