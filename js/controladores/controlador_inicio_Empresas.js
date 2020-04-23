@@ -1,3 +1,21 @@
+
+function validacionCampos(){
+  let  respuesta= validacionUsuario();
+}
+
+function generarGrafico(){
+  console.log("entre");
+  document.getElementById('grafico').classList.remove('d-none');
+  document.getElementById('grafico').classList.add('d-block');
+  console.log("sali");
+}
+
+function mostrarformulario(){
+  document.getElementById('form-admin').classList.remove('d-none');
+  document.getElementById('form-admin').classList.add('d-block');
+
+}
+
 // Doughnut
 var ctxD = document.getElementById("doughnutChart").getContext('2d');
 var myLineChart = new Chart(ctxD, {
@@ -21,6 +39,32 @@ var myLineChart = new Chart(ctxD, {
     }
   }
 });
+
+
+var ctxD = document.getElementById("porcentaje-descuento").getContext('2d');
+var myLineChart = new Chart(ctxD, {
+  type: 'doughnut',
+  data: {
+    labels: ["Precio total", "descuento"],
+    datasets: [{
+      data: [100, 50],
+      backgroundColor: ["#C1BFC2", "#57CDFF"],
+      hoverBackgroundColor: ["#C1BFC2", "#57CDFF"]
+    }]
+  },
+  options: {
+    responsive: true,
+    legend: {
+      position: 'right',
+      align: 'center',
+      labels: {
+        padding: 20
+      }
+    }
+  }
+});
+
+// Minimalist charts
 
 //bar
 var ctxB = document.getElementById("barChart").getContext('2d');
@@ -61,30 +105,186 @@ var myBarChart = new Chart(ctxB, {
   }
 });
 
+
+(function ($){
+  $.fn.counter = function() {
+    const $this = $(this),
+    numberFrom = parseInt($this.attr('data-from')),
+    numberTo = parseInt($this.attr('data-to')),
+    delta = numberTo - numberFrom,
+    deltaPositive = delta > 0 ? 1 : 0,
+    time = parseInt($this.attr('data-time')),
+    changeTime = 10;
+    
+    let currentNumber = numberFrom,
+    value = delta*changeTime/time;
+    var interval1;
+    const changeNumber = () => {
+      currentNumber += value;
+      //checks if currentNumber reached numberTo
+      (deltaPositive && currentNumber >= numberTo) || (!deltaPositive &&currentNumber<= numberTo) ? currentNumber=numberTo : currentNumber;
+      this.text(parseInt(currentNumber));
+      currentNumber == numberTo ? clearInterval(interval1) : currentNumber;  
+    }
+
+    interval1 = setInterval(changeNumber,changeTime);
+  }
+}(jQuery));
+
+$('#item-productos').onclick(function(){
+
+  $('.count-up').counter();
+  $('.count1').counter();
+  $('.count2').counter();
+  $('.count3').counter();
+  
+  new WOW().init();
+  
+  setTimeout(function () {
+    $('.count5').counter();
+  }, 3000);
+});
+
+
+//line
+
 function iniciar() {
-  document.getElementById('dashboard').classList.remove('d-none');
   document.getElementById('item-dashboard').classList.add('seleccionar');
+  document.getElementById('dashboard').classList.remove('d-none');
   document.getElementById('item-perfil').classList.remove('seleccionar');
   document.getElementById('perfil-empresarial').classList.add('d-none');
+  document.getElementById('contenido').classList.add('d-none');
+  document.getElementById('productos').classList.add('d-none');
+  document.getElementById('productos').classList.remove('d-block');
+  document.getElementById('productos').classList.add('d-none');
+  document.getElementById('item-promociones').classList.remove('seleccionar');
+  document.getElementById('promociones').classList.remove('d-block');
+  document.getElementById('promociones').classList.add('d-none');
+  document.getElementById('item-sucursales').classList.remove('seleccionar');
 }iniciar();
 
 //Controlador 
 function dashboard(){
   document.getElementById('dashboard').classList.remove('d-none');
   document.getElementById('item-dashboard').classList.add('seleccionar');
+  document.getElementById('item-sucursales').classList.remove('seleccionar');
   document.getElementById('item-perfil').classList.remove('seleccionar');
-  document.getElementById('perfil-empresarial').classList.add('d-none')
+  document.getElementById('perfil-empresarial').classList.add('d-none');
+  document.getElementById('contenido').classList.add('d-none');
+  document.getElementById('productos').classList.add('d-none');
+  document.getElementById('productos').classList.remove('d-block');
+  document.getElementById('productos').classList.add('d-none');
+  document.getElementById('item-promociones').classList.remove('seleccionar');
+  document.getElementById('promociones').classList.remove('d-block');
+  document.getElementById('promociones').classList.add('d-none');
+  document.getElementById('item-sucursales').classList.remove('seleccionar');
+  document.getElementById('item-productos').classList.remove('seleccionar');
+  document.getElementById('sucursales').classList.remove('d-block');
+  document.getElementById('sucursales').classList.add('d-none');
+}
+function productos(){
+  document.getElementById('dashboard').classList.add('d-none');
+  document.getElementById('perfil-empresarial').classList.add('d-none');
+  document.getElementById('productos').classList.remove('d-none');
+  document.getElementById('productos').classList.add('d-block');
+  document.getElementById('productos').style.display="block";
+  document.getElementById('contenido').classList.add('d-none');
+  document.getElementById('item-promociones').classList.remove('seleccionar');
+  document.getElementById('promociones').classList.remove('d-block');
+  document.getElementById('promociones').classList.add('d-none');
+  document.getElementById('item-productos').classList.add('seleccionar');
+  document.getElementById('item-dashboard').classList.remove('seleccionar');
+  document.getElementById('item-perfil').classList.remove('seleccionar');
+  document.getElementById('item-sucursales').classList.remove('seleccionar');
+  document.getElementById('sucursales').classList.remove('d-block');
+  document.getElementById('sucursales').classList.add('d-none');
+  document.getElementById('item-dashboard').classList.add('item-sidebar');
+
 }
 
 function perfil(){
   document.getElementById('dashboard').classList.add('d-none');
   document.getElementById('item-dashboard').classList.remove('seleccionar');
+  document.getElementById('item-dashboard').classList.add('item-sidebar');
+  document.getElementById('item-promociones').classList.remove('seleccionar');
   document.getElementById('item-perfil').classList.add('seleccionar');
   document.getElementById('perfil-empresarial').classList.remove('d-none');
+  document.getElementById('contenido').classList.remove('d-none');
+  document.getElementById('productos').classList.remove('d-block');
+  document.getElementById('productos').classList.add('d-none');
+  document.getElementById('promociones').classList.remove('d-block');
+  document.getElementById('promociones').classList.add('d-none');
+  document.getElementById('sucursales').classList.remove('d-block');
+  document.getElementById('sucursales').classList.add('d-none');
+  document.getElementById('item-sucursales').classList.remove('seleccionar');
+  document.getElementById('item-productos').classList.remove('seleccionar');
 }
 
+function promociones(){
+  document.getElementById('dashboard').classList.add('d-none');
+  document.getElementById('item-dashboard').classList.remove('seleccionar');
+  document.getElementById('item-promociones').classList.add('seleccionar');
+  document.getElementById('item-perfil').classList.remove('seleccionar');
+  document.getElementById('item-sucursales').classList.remove('seleccionar');
+  document.getElementById('perfil-empresarial').classList.remove('d-block');
+  document.getElementById('perfil-empresarial').classList.add('d-none');
+  document.getElementById('contenido').classList.add('d-none');
+  document.getElementById('productos').classList.remove('d-block');
+  document.getElementById('productos').classList.add('d-none');
+  document.getElementById('promociones').classList.remove('d-none');
+  document.getElementById('promociones').classList.add('d-block');
+  document.getElementById('item-productos').classList.remove('seleccionar');
+  document.getElementById('sucursales').classList.remove('d-block');
+  document.getElementById('sucursales').classList.add('d-none');
+
+}
+
+
+
+function mostrarFormDescuento(){
+  document.getElementById('form-descuento').classList.remove('d-none');
+  document.getElementById('form-descuento').classList.add('d-block');
+  document.getElementById('form-descuento').classList.add('d-block');
+  document.getElementById('grafico').classList.add('d-none');
+ 
+  
+  
+  new WOW().init();
+}
+ function  mostrarFormSucursal(){
+  document.getElementById('form-sucursal').classList.remove('d-none');
+  document.getElementById('form-sucursal').classList.add('d-block');
+ 
+  new WOW().init();
+}
+
+function sucursales(){
+  console.log("entre");
+  document.getElementById('sucursales').classList.remove('d-none');
+  document.getElementById('sucursales').classList.add('d-block');
+  document.getElementById('item-sucursales').classList.add('seleccionar');
+  document.getElementById('item-dashboard').classList.remove('seleccionar');
+  document.getElementById('item-perfil').classList.remove('seleccionar');
+  document.getElementById('item-promociones').classList.remove('seleccionar');
+  document.getElementById('item-productos').classList.remove('seleccionar');
+  document.getElementById('productos').classList.remove('d-block');
+  document.getElementById('productos').classList.add('d-none');
+  document.getElementById('promociones').classList.remove('d-block');
+  document.getElementById('promociones').classList.add('d-none');
+  document.getElementById('perfil-empresarial').classList.remove('d-block');
+  document.getElementById('perfil-empresarial').classList.add('d-none');
+  document.getElementById('dashboard').classList.remove('d-block');
+  document.getElementById('dashboard').classList.add('d-none');
+  document.getElementById('contenido').classList.remove('d-block');
+  document.getElementById('contenido').classList.add('d-none');
+}
+
+
+
+
 /* FUNCION PARA GENERAR MAPA*/
-function generarMapa(){
+
+function generarMapa(){ 
   let latitud;
   let longitud;
   var coord={latitud, longitud}
@@ -93,5 +293,14 @@ function generarMapa(){
     center:coord
 
   }) //donde vamos a ubicar el mapa
+  
 
 }
+
+
+
+
+
+
+
+
