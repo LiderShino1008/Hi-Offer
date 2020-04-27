@@ -1,14 +1,9 @@
+/************************************FUNCIONES PARA ANIMACION***************** */
 
 
+$('.collapse').collapse()
+/****************************************************************************** */
 
-function generar_categorias(){
-    document.getElementById('categoriasMenu').innerHTML="";
-    for(let i=0; i<categorias.length; i++){
-        document.getElementById('categoriasMenu').innerHTML+=`<a class="dropdown-item" onclick="verCategoria(${i})" href="#">${categorias[i].nombreCategoria}</a>       `
-    }
-}
-
-generar_categorias();
 
 function generar_inicio(){
     document.getElementById('inicio').innerHTML="";
@@ -54,7 +49,7 @@ function generar_inicio(){
                     </span>
                   </h5>
                   <span class="float-right">
-                    <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                    <a class="" data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
                       <i class="fas fa-shopping-cart ml-3"></i>
                     </a>
                   </span>
@@ -70,84 +65,21 @@ function generar_inicio(){
 }
 generar_inicio();
 
-function verCategoria(index){
- document.getElementById('div-mostrarProductos').style.display="block";
- document.getElementById('carousel-example-2').style.display="none";
- document.getElementById('inicio-cat').style.display="none";
- document.getElementById('div-perfil').style.display="none";
- document.getElementById('ver-un-producto').style.display="none";
 
 
- document.getElementById('ver-producto').innerHTML="";
-     document.getElementById('ver-producto').innerHTML+=`<div class="row filas wow slideInLeft" id="">
-     <h3 class="col-md-11 category-name" style="margin-top: 50px">${categorias[index].nombreCategoria}</h3>
-     </div><div id="productos"  class="row fila-p wow slideInLeft"></div>`;
-
-     for(let j=0; j<categorias[index].productosEnPromocion.length;j++){
-         document.getElementById('productos').innerHTML+=` 
-         <div class="col-lg-2 col-md-6 mb-1" onclick="verProducto(${index},${j})">
-           <div class="card card-ecommerce">
-             <div class="view overlay">
-               <img src="${categorias[index].productosEnPromocion[j].imagenes[0]}" class="img-fluid"alt="">
-               <a><div class="mask rgba-white-slight"></div></a>
-             </div>
-             <div class="card-body">
-               <h5 class="card-title mb-1">
-                 <strong><a href="" class="dark-grey-text">${categorias[index].productosEnPromocion[j].nombreProducto}</a>
-                 </strong>
-               </h5>
-               <span class="badge badge-danger mb-2">Promoción</span>
-               <!-- Rating -->
-               <ul class="rating text-left form-inline">
-                 <i class="fas fa-star blue-text "></i>
-                 <i class="fas fa-star blue-text"></i>
-                 <i class="fas fa-star blue-text"></i>
-                 <i class="fas fa-star blue-text"></i>
-                 <i class="fas fa-star blue-text"></i>
-               </ul>
-               <!-- Card footer -->
-               <div class="card-footer pb-0">
-             <div class="row mb-0">
-               <h5 class="mb-0 pb-0 mt-1 font-weight-bold">
-                 <span class="red-text">
-                   <strong style="font-size:20px">$${categorias[index].productosEnPromocion[j].preciopromocion}</strong>
-                 </span>
-                 <span class="grey-text">
-                   <small>
-                     <s style="font-size:15px">$${categorias[index].productosEnPromocion[j].preciopromocion}</s>
-                   </small>
-                 </span>
-               </h5>
-               <span class="float-right">
-                 <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
-                   <i class="fas fa-shopping-cart ml-3"></i>
-                 </a>
-               </span>
-             </div>
-           </div>
-             <!-- Card content -->
-           </div>
-         </div>`;
-     }
- 
- }
 
 
- function verPerfil(){
-    document.getElementById('carousel-example-2').style.display="none";
-    document.getElementById('inicio-cat').style.display="none";
-    document.getElementById('div-perfil').style.display="block";
-    document.getElementById('div-mostrarProductos').style.display="none";
-    document.getElementById('ver-un-producto').style.display="none";
-
- }
 
 
+
+/*
  function verProducto(categoria,producto){
+  document.getElementById('empresas-favoritas').style.display="none";
   document.getElementById('carousel-example-2').style.display="none";
   document.getElementById('inicio-cat').style.display="none";
   document.getElementById('div-perfil').style.display="none";
   document.getElementById('div-mostrarProductos').style.display="none";
+  document.getElementById('promociones-guardadas').style.display="none";
   document.getElementById('ver-un-producto').style.display="block";
   document.getElementById('ver-un-producto').innerHTML="";
     document.getElementById('ver-un-producto').innerHTML+=`<div class="container my-5 py-5 z-depth-1"  style="background-color:#ffffff">
@@ -272,6 +204,6 @@ function verCategoria(index){
   
 
   
- }
+ }*/
 
  

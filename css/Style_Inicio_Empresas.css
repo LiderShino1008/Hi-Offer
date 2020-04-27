@@ -16,7 +16,8 @@
     }
     }
 
-   
+ 
+      
 @media (max-width: 990px) {
     #inventario {
     display: block!important;
@@ -32,6 +33,46 @@
         margin-left: 0px!important;
         }
         }   
+
+
+    .editar{
+        margin-top: -200px;
+        padding: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
+        font-size: 13px;
+        color: #EEEEEE;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0.2rem;
+       
+    } 
+    
+    .guardar{
+        margin-top: -200px;
+        padding: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
+        font-size: 13px;
+        color: #EEEEEE;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0.2rem;
+        display: none;
+       
+    }   
+
+    .actualizar{
+        margin-top: 10px;
+        padding: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
+        font-size: 12px;
+        color: #EEEEEE;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0.2rem;
+        display: none;
+       
+    }    
+
 
 .Menu{
     width: 300px;
@@ -320,7 +361,7 @@ height: 150px;
         margin-top: 2px;
     }
 
-    #producto-img{
+    .producto-img{
         position: absolute;
         top: 0;
         left: 0;

@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <!-- Material Design Bootstrap -->
      <link rel="stylesheet" href="css/mdb.min.css">
-    <!-- Your custom styles (optional) -->
-     <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body style="background-color: #546991;">
 <div class="header">
@@ -52,7 +51,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link item-nav button-log" href="#">MI CUENTA</a>
+                <a class="nav-link item-nav button-log" onclick="window.location='MiCuenta.html'" href="#">MI CUENTA</a>
             </li>
              </div>
             </ul>
@@ -247,17 +246,17 @@
             <div class="row">
               <div class="col-md-6" style="background-color:#E8FAFE; height:auto ;">
                 <!--carrusel-->
-                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="margin: 120px;">
+                <div id="carouselExampleCaptions" class="carousel slide col-12" data-ride="carousel" style="margin-top: 130px;">
                  
-                  <div class="carousel-inner">
+                  <div class="carousel-inner" >
                     <div class="carousel-item active">
-                      <img src="img/iconoRForm.png" class="d-block w-100" alt="...">
+                      <img src="img/carrucelUsuario1.png" class="d-block w-100" style="height: 200px; width: 130px;" alt="...">
                       <div class="carousel-caption d-none d-md-block">
                         
                       </div>
                     </div>
                     <div class="carousel-item">
-                      <img src="img/iconoAgregarFoto.png" class="d-block w-100" alt="...">
+                      <img src="img/carrucelUsuario1.png" class="d-block w-100" alt="..." style="height: 200px; width: 130px;" >
                     </div>
                   </div>
                   <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
@@ -274,10 +273,31 @@
                   <li style="background-color: #576F9B;" data-target="#carouselExampleCaptions" data-slide-to="1" ></li>
                 </ol>     
               </div>
-    
+
+
+
+
+              <!---->
+              <div class="col-md-6 col-12 container-fluid d-none" id="div-verificacion" style="padding: 30px; margin-bottom: 150px;">
+                <h5 style="color: #6C87A3;">VERIFICACIÓN</h5>
+
+                <p class="text-muted mb-4 pb-2" style="font-size: 13px; margin-top: 50px;">Hemos enviado un código de verificación a tu dirección de correo electrónico , porfavor ingresa el código para activar tu cuenta.</p>
+             
+                      <div class="input-group">
+                        <input type="" class="form-control" placeholder="" id="code" aria-label="Enter your email address"
+                          aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                        
+                          <a onclick="verificarCodigo()" id="button-addon2" class="btn btn-md btn-primary rounded-right m-0 px-3 py-2 z-depth-0 waves-effect" style="background-color: #546991!important;" >VERIFICAR</a>
+                        </div>
+                      </div>
+                      <small class="form-text black-text d-none" id="txt-error" style="color:red"><strong style="color:red">*ingresa el código de verificación.</strong></small>
+                      
+                
+              </div>
               <!--Segunda parte del login-->
     
-              <div class="col-md-6 modal-usuario" style=" padding-left:30px; padding-bottom: 30px; padding-top: 5px;"> 
+              <div class="col-md-6  modal-usuario"  id="form-registro" style=" padding-left:30px; padding-bottom: 30px; padding-top: 5px;"> 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>

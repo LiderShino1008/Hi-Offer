@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Hi-Offer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/mdb.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+		<link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar" style="background-color: #546991!important;">
+				<div class="p-4 pt-5">
+		  		<a href="#" class="img logo  mb-5" style="color: #eeeeee!important;"  ><i style="color: #eeeeee; font-size: 60px; text-align: center; margin-bottom:0px!important; " class="fas  logo fa-users-cog"></i>Administración</a>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <a onclick="verDash()" style="cursor: pointer;" >Dashboard</a>
+	          </li>
+	          <li>
+	              <a  onclick="verPlanes()">Planes</a>
+	          </li>
+	          <li>
+              <a onclick="verEmpresas()">Empresas</a>
+          </li>
+	          <li>
+              <a onclick="verCategorias()">Categorías</a>
+            </li>
+            <li>
+              <a onclick="verBanners()">Banners</a>
+	          </li>
+	          
+	        </ul>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn " style="background-color: #546991; color: #eeeeee;">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Administrador</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <section id="dash">
+        <h2 class="mb-4">Dashboard</h2>
+        
+          <div class="container-fluid">
+            <div class="row">
+              <div class=" card z-depth-1 col-3 container-fluid" style="height: 150px;">
+                 <div class="row" >
+                    <div class="col-6" style="background-color:#7DA8CA;height: 150px; text-align: center; padding: 30px;">
+                      <i style="color: #eeeeee; font-size: 60px; " class="far fa-building"></i>
+                    </div>
+                    <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+                        <h1>25</h1>
+                        <p style="font-size: 12px;">Empresas Registradas</p>
+                    </div>
+                 </div>
+              </div>
+              <div class=" card z-depth-1 col-3 container-fluid" style="height: 150px;">
+                <div class="row" >
+                   <div class="col-6" style="background-color:#54C1D6;height: 150px; text-align: center; padding: 30px;">
+                     <i style="color: #eeeeee; font-size: 60px; " class="fa fa-user-friends"></i>
+                   </div>
+                   <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+                       <h1>50</h1>
+                       <p style="font-size: 12px;">Usuarios Registrados</p>
+                   </div>
+                </div>
+             </div>
+             <div class=" card z-depth-1 col-3 container-fluid" style="height: 150px;">
+              <div class="row" >
+                 <div class="col-6" style="background-color:#8BD0ED;height: 150px; text-align: center; padding: 30px;">
+                   <i style="color: #eeeeee; font-size: 60px; " class="far fa-window-restore"></i>
+                 </div>
+                 <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+                     <h1>25</h1>
+                     <p style="font-size: 12px;">Nuevas visitas</p>
+                 </div>
+              </div>
+           </div>
+            </div>
+
+
+            <div class="row my-5">
+              <div class=" card z-depth-1 col-3 container-fluid" style="height: 150px;">
+                 <div class="row" >
+                    <div class="col-6" style="background-color:#B8CCCB;height: 150px; text-align: center; padding: 30px;">
+                      <i style="color: #eeeeee; font-size: 60px; " class="fa fa-money-check"></i>
+                    </div><i class="fas "></i>
+                    <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+                        <h1>25</h1>
+                        <p style="font-size: 12px;">Ganancias</p>
+                    </div>
+                 </div>
+              </div>
+              <div class=" card z-depth-1 col-3 container-fluid" style="height: 150px;">
+                <div class="row" >
+                   <div class="col-6" style="background-color:#99D5DD;height: 150px; text-align: center; padding: 30px;">
+                     <i style="color: #eeeeee; font-size: 60px; " class="fa fa-table"></i>
+                   </div>
+                   <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+                       <h1>50</h1>
+                       <p style="font-size: 12px;">Categorias registradas</p>
+                   </div>
+                </div>
+             </div>
+             <div class=" card z-depth-1 col-3 container-fluid" style="height: 150px;">
+              <div class="row" >
+                 <div class="col-6" style="background-color:#AEC1E9;height: 150px; text-align: center; padding: 30px;">
+                   <i style="color: #eeeeee; font-size: 60px; " class="fa fa-sticky-note"></i>
+                 </div>
+                 <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+                     <h1>25</h1>
+                     <p style="font-size: 12px;">Planes Registrados</p>
+                 </div>
+              </div>
+           </div>
+            </div>
+          </div>
+        </section>
+
+
+
+        <section id="planes">
+          <div class="container-fluid  row"> <h2 class="mb-4 col-10">Planes</h2><button data-toggle="modal" data-target="#modal-plan" class="col-1  btn btn-primary px-2" style="background-color: #546991!important; padding:2px!important; margin-left: auto;">Nuevo</button> </div>
+         
+          <p>¡Agrega un nuevo plan!</p>
+
+
+          <!---------------Categorias----------------->
+          <div class="container py-1 my-1">
+            <section class="p-md-3 mx-md-5 text-center text-lg-left">
+              <div class="row">
+                <div class="col-lg-4 mb-4 p-2">
+                  <div class="card text-center">
+                    <div class="card-header white">
+                      <i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
+                      aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer;"  ></i>
+                      <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px ;" id="hola">
+                        <a class="dropdown-item" href="#">Editar</a>
+                        <a class="dropdown-item" href="#">Eliminar</a>
+                      </div>
+                    </div>
+                    <div class="card-header white">
+                      <h4 class="h4 my-2" style="color: #546991;">Basic</h4>
+                    </div>
+                    <div>
+                      <h1 class="card-title  pricing-card-title" style="margin-top: 30px;">$50 <small class="text-muted">/ mensual</small></h1>
+                    </div>
+                    <div class="card-body">
+                      <p class="card-text "><h5 style="font-size: 14px; font-weight: bold; color: #546991;">Podras registrar tantos productos</h5>
+                          Descripcion
+                          sed do eiusmod tempor incididunt ut labore et dolore magna
+                          aliqua.
+                      </p>
+                      <p># dias de prueba gratuita</p>
+
+                    </div>
+                    <div class="card-footer white">
+                        <a class="btn btn-outline-indigo btn-md" href="#" role="button">Choose Plan</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 mb-4 p-2" >
+                  <div class="card text-center" style="background-color: #546991;">
+                    <div class="card-header white">
+                      <i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
+                      aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer;"  ></i>
+                      <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px ;" id="hola">
+                        <a class="dropdown-item" href="#">Editar</a>
+                        <a class="dropdown-item" href="#">Eliminar</a>
+                      </div>
+                    </div>
+                    <div class="card-header ">
+                      <h4 class="h4 white-text my-2">Enfasis</h4>
+                    </div>
+                    <div class="white">
+                      <h1 class="card-title  pricing-card-title" style="margin-top: 30px;">$50 <small class="">/ mensual</small></h1>
+                    </div>
+                    <div class="card-body white">
+                      <p class="card-text "><h5 style="font-size: 14px; font-weight: bold; color: #546991;">Podras registrar tantos productos</h5>
+                          Descripcion
+                          sed do eiusmod tempor incididunt ut labore et dolore magna
+                          aliqua.
+                      </p>
+                      <p># dias de prueba gratuita</p>
+
+                    </div>
+                    <div class="card-footer white">
+                        <a class="btn btn-md" style="background-color: #51668C!important; color: white;" href="#" role="button">Comenzar</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        </section>
+
+        <section id="empresas">
+          <h2 class="mb-4">Empresas</h2>
+        </section>
+
+
+        <section id="Banners">
+          <h2 class="mb-4">Banners</h2>
+        </section>
+
+
+        <section id="categorias">
+          <h2 class="mb-4">Categorías</h2>
+          <div class="list-group col-10 mx-auto">
+            <a  class="list-group-item  list-group-item-action " style="background-color: #546991; color: white;">
+              Nombre de la categoría
+            </a>
+            <span  class="list-group-item list-group-item-action">categoría 1<span><i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
+              aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer;"  ></i>
+              <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px ;" id="hola">
+                <a class="dropdown-item" href="#">Editar</a>
+                <a class="dropdown-item" href="#">Eliminar</a>
+              </div></span></span>
+              <span  class="list-group-item list-group-item-action">categoría 1<span><i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
+                aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer;"  ></i>
+                <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px ;" id="hola">
+                  <a class="dropdown-item" href="#">Editar</a>
+                  <a class="dropdown-item" href="#">Eliminar</a>
+                </div></span></span>
+          
+          </div>
+        </section>
+        
+          
+      </div>
+		</div>
+
+
+
+
+
+
+    <!-------------modales------------->
+    <!-- Modal -->
+<div class="modal fade" id="modal-plan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+aria-hidden="true">
+
+<!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+
+
+  <div class="modal-content">
+    <div class="modal-header" style="background-color: #546991; color: #ffffff;">
+      <h5 class="modal-title" id="exampleModalLongTitle" style="margin-left: 200px; margin-right: auto; font-size: 15px;"></h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 col-12">
+             <div class="col-md-12">
+               <div class="md-form mb-0">
+                 <input type="text" id="nombre-plan" class="form-control ">
+                 <label for="nombre-plan" class="" >Nombre del Plan</label>
+               </div>
+               <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+                 Este campo no puede estar vacio.
+               </div>
+             </div>
+ 
+              <div class="row col-lg-12 col-12">
+               <div class="col-md-6">
+                 <div class="md-form mb-0">
+                   <input type="number" id="nombre-plan" class="form-control ">
+                   <label for="nombre-plan" class="" >Precio</label>
+                 </div>
+                 <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+                   Este campo no puede estar vacio.
+                 </div>
+               </div>
+   
+               <div class="col-md-6">
+                 <div class="md-form mb-0">
+                   <input type="number" id="nombre-plan" class="form-control ">
+                   <label for="nombre-plan" class="" >Limite de productos</label>
+                 </div>
+                 <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+                   Este campo no puede estar vacio.
+                 </div>
+               </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+             <div class="col-md-12">
+               <div class="md-form mb-0">
+                 <textarea type="text" id="nombre-plan" class="form-control "></textarea>
+                
+                 <label for="nombre-plan" class="" >Descripción</label>
+               </div>
+               <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+                 Este campo no puede estar vacio.
+               </div>
+             </div>
+             
+            </div>
+
+            <div class="col-12">
+              <div class="col-md-12">
+                <div class="md-form mb-0">
+                  <p>Plazo</p>
+                  <select class="md-form form-control mb-0" style="" class="col-4" id="pais">
+                    <option style="font-size: smaller;">Mensual</option>
+                    <option style="font-size: smaller;">Anual</option>
+                  </select>
+                </div>
+                <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+                  Debe seleccionar el plazo de tiempo.
+                </div>
+              </div>
+              
+             </div>
+             <div class="col-12">
+              <div class="col-md-12">
+                <div class="md-form mb-0">
+                  <p>Tiempo de prueba gratuita</p>
+                  <select class="md-form form-control mb-0" style="" class="col-4" id="pais">
+                    <option style="font-size: smaller;">3 días</option>
+                    <option style="font-size: smaller;">6 días</option>
+                    <option style="font-size: smaller;">ilimitado</option>
+                  </select>
+                </div>
+                <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+                  Debe seleccionar el plazo de tiempo.
+                </div>
+              </div>
+              
+             </div>
+             <div class="col-12">
+              <div class="col-md-12">
+                <div class="md-form mb-0">
+                  <p>Diseño</p>
+                  <select class="md-form form-control mb-0" style="" class="col-4" id="pais">
+                    <option style="font-size: smaller;">Básico</option>
+                    <option style="font-size: smaller;">Énfasis</option>
+                  </select>
+                </div>
+                <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+                  Debe seleccionar el plazo de tiempo.
+                </div>
+              </div>
+              
+             </div>
+          </div>
+        </div>
+
+       </form>
+    </div>
+    <div class="modal-footer">
+      <div class="col-12">
+        <button type="button" style="background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    <script src="js/librerias/jquery.min.js"></script>
+    <script src="js/librerias/popper.js"></script>
+    <script src="js/librerias/bootstrap.min.js"></script>
+    <script src="js/librerias/main.js"></script>
+    <script type="text/javascript" src="js/librerias/mdb.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+   <script src="js/librerias/bootstrap.bundle.min.js"></script>
+    <script src="js/controladores/controladorAdministrador.js"></script>
+  </body>
+</html>

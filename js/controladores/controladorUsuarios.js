@@ -87,8 +87,38 @@ function AgregarUsuario(){
           
      if((EstadoVacioUsuario==false)&&(EstadoVacioEmail==false)&&(EstadoVacioPass==false)&&(validarCorreo==true)&&(validarPassIg==true)&&(validarPass==true)){
         //Agregar usuario
-       
-        let user={
+        document.getElementById('div-verificacion').classList.remove('d-none');
+        document.getElementById('div-verificacion').classList.add('d-block');
+        document.getElementById('form-registro').classList.add('d-none');
+
+        
+     }
+}
+
+
+ function verificarCodigo(){
+
+    let user={
+        NombreDeUsuario:document.getElementById('usuario').value,
+        correo:document.getElementById('email').value,
+        contraseña:document.getElementById('contraseña').value,
+        foto_de_perfil:"imagen.jpg",
+        promociones_favoritas:[],
+        empresas_favoritas:[],
+        carrito:[],
+    };
+
+    usuarios.push(user);
+    console.log('Exito');
+    location.hash='InicioUsuarios.html';
+    window.location="InicioUsuarios.html";
+}
+
+
+
+/*
+si el codigo de verificacion esta bueno
+let user={
             NombreDeUsuario:document.getElementById('usuario').value,
             correo:document.getElementById('email').value,
             contraseña:document.getElementById('contraseña').value,
@@ -102,9 +132,7 @@ function AgregarUsuario(){
         console.log('Exito');
         location.hash='InicioUsuarios.html';
         window.location="InicioUsuarios.html";
-     }
-}
-
+*/
 
 
 

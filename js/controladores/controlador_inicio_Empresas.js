@@ -1,8 +1,34 @@
+/***********************************FUNCIONES INICIALES************************************************ */
 
+function iniciar() {
+  document.getElementById('item-dashboard').classList.add('seleccionar');
+  document.getElementById('dashboard').classList.remove('d-none');
+  document.getElementById('item-perfil').classList.remove('seleccionar');
+  document.getElementById('perfil-empresarial').classList.add('d-none');
+  document.getElementById('contenido').classList.add('d-none');
+  document.getElementById('productos').classList.add('d-none');
+  document.getElementById('productos').classList.remove('d-block');
+  document.getElementById('productos').classList.add('d-none');
+  document.getElementById('item-promociones').classList.remove('seleccionar');
+  document.getElementById('promociones').classList.remove('d-block');
+  document.getElementById('promociones').classList.add('d-none');
+  document.getElementById('item-sucursales').classList.remove('seleccionar');
+}iniciar();
+
+
+/* *******************************FUNCIONES DE VALIDACION******************************************* */ 
+//FUNCION PARA VALIDAR CAMPOS VACIOS DEL ADMINISTRADOR
 function validacionCampos(){
   let  respuesta= validacionUsuario();
 }
 
+
+
+
+
+
+
+/***********************FUNCIONES DE GRAFICOS Y FUNCIONES DE ANIMACION****************************** */
 function generarGrafico(){
   console.log("entre");
   document.getElementById('grafico').classList.remove('d-none');
@@ -13,6 +39,37 @@ function generarGrafico(){
 function mostrarformulario(){
   document.getElementById('form-admin').classList.remove('d-none');
   document.getElementById('form-admin').classList.add('d-block');
+
+}
+
+function editarPerfil(){
+  console.log("entre");
+  document.getElementById('editar').style.display="none";
+  document.getElementById('guardar').style.display="block";
+  document.getElementById('editar-portada').style.display="block";
+  document.getElementById('editar-perfil').style.display="block";
+  document.getElementById('editar-informacion').style.display="block";
+}
+
+function generarMapa(){
+  document.getElementById('map-container-google-1').classList.remove('d-none');
+  document.getElementById('map-container-google-1').classList.add('d-block');
+
+}
+
+
+/* FUNCION PARA GENERAR MAPA*/
+
+function generarMapa1(){ 
+  let latitud;
+  let longitud;
+  var coord={latitud, longitud}
+  var map=new google.map.Map(documen.getElementById(''),{
+    zoom: 10,
+    center:coord
+
+  }) //donde vamos a ubicar el mapa
+  
 
 }
 
@@ -148,20 +205,7 @@ $('#item-productos').onclick(function(){
 
 //line
 
-function iniciar() {
-  document.getElementById('item-dashboard').classList.add('seleccionar');
-  document.getElementById('dashboard').classList.remove('d-none');
-  document.getElementById('item-perfil').classList.remove('seleccionar');
-  document.getElementById('perfil-empresarial').classList.add('d-none');
-  document.getElementById('contenido').classList.add('d-none');
-  document.getElementById('productos').classList.add('d-none');
-  document.getElementById('productos').classList.remove('d-block');
-  document.getElementById('productos').classList.add('d-none');
-  document.getElementById('item-promociones').classList.remove('seleccionar');
-  document.getElementById('promociones').classList.remove('d-block');
-  document.getElementById('promociones').classList.add('d-none');
-  document.getElementById('item-sucursales').classList.remove('seleccionar');
-}iniciar();
+
 
 //Controlador 
 function dashboard(){
@@ -282,20 +326,6 @@ function sucursales(){
 
 
 
-/* FUNCION PARA GENERAR MAPA*/
-
-function generarMapa(){ 
-  let latitud;
-  let longitud;
-  var coord={latitud, longitud}
-  var map=new google.map.Map(documen.getElementById(''),{
-    zoom: 10,
-    center:coord
-
-  }) //donde vamos a ubicar el mapa
-  
-
-}
 
 
 
