@@ -143,7 +143,7 @@
 
 
         <section id="planes">
-          <div class="container-fluid  row"> <h2  class="mb-4 col-lg-10 col-7 col-md-8">Planes</h2><button data-toggle="modal" data-target="#modal-plan" onclick="cambiarboton()" class="col-lg-1 col-md-4  col-3 btn btn-primary px-2" style="background-color: #546991!important; padding:2px!important; margin-left: auto;">Nuevo</button> </div>
+          <div class="container-fluid  row"> <h2  class="mb-4 col-lg-10 col-7 col-md-8">Planes</h2><button data-toggle="modal" data-target="#modal-plan" onclick="resetModalP()" class="col-lg-1 col-md-4  col-3 btn btn-primary px-2" style="background-color: #546991!important; padding:2px!important; margin-left: auto;">Nuevo</button> </div>
          
           <p>¡Agrega un nuevo plan!</p>
 
@@ -165,31 +165,11 @@
         </section>
 
 
-        <section id="Banners">
-          <div class="container-fluid  row"> <h2  class="mb-4 col-lg-10 col-7 col-md-8">Banners</h2><button data-toggle="modal" data-target=".bd-example-modal-xl"  class="col-lg-1 col-md-4  col-3 btn btn-primary px-2" style="background-color: #546991!important; padding:2px!important; margin-left: auto;">Nuevo</button> </div>
+        <section id="Banners" >
+          <div class="container-fluid  row"> <h2 class="mb-4 col-lg-10 col-7 col-md-8">Banners</h2><button  onclick="resetModalBanner()"  data-toggle="modal" data-target=".bd-example-modal-xl"  class="col-lg-1 col-md-4  col-3 btn btn-primary px-2" style="background-color: #546991!important; padding:2px!important; margin-left: auto;">Nuevo</button> </div>
           <p>En esta sección podras agregar anuncios y nuevas actualizaciones sobre la plataforma y promociones ¡Agrega un nuevo Banner!</p>
-          <section id="Banners">
-      
-
-            <div class="card">
-              <div class="card-header white">
-                <i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
-                aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer; font-weight: bold;"  ></i>
-                <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px; " id="hola">
-                  <a class="dropdown-item" >Editar</a>
-                  <a class="dropdown-item" onclick="" >Eliminar</a>
-                </div>
-              </div>
-              <div class="card-body white">
-                <div class="view overlay zoom">
-                  <img src="img/PORTADA1.jpg" class="img-fluid " alt="zoom">
-              
-               </div>
-              </div>
-            </div>
-
-          
-
+          <section id="cont-banners">
+                
           </section>
         </section>
 
@@ -208,6 +188,48 @@
           
           </div>
         </section>
+
+          <!-- Modal -->
+    <div class="modal fade" id="modal-categorias" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    
+    <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #546991; color: #ffffff;">
+          <h6>Categorías</h6>
+          <h5 class="modal-title" id="exampleModalLongTitle" style="margin-left: 200px; margin-right: auto; font-size: 15px;"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12 col-12 mb-15" style="margin-bottom: 20px;">
+                 <div class="col-md-12">
+                   <div class="md-form mb-0">
+                     <input type="text" id="nombre-categoria" class="form-control ">
+                     <label for="nombre-plan" class="" >Nombre de la categoría</label>
+                   </div>
+                   <div class="invalid-feedback" id="camp-vacio-categoria" style="font-size:12px">
+                    Seleccione el tiempo de prueba.
+                  </div>
+                 </div>                    
+              </div>
+            </div>
+    
+           </form>
+        </div>
+        <div class="col-12">
+          <button type="button" id="btn-guardar2" onclick="agregarCategoria()" style="background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary">Guardar</button>
+          <button type="button" id="btn-guardar-cambios2" onclick="editarCategoria()" style="background-color: #546991!important; float: right; font-size: 13px; display: none;" class="btn btn-primary " >Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+    </div>
+
         
           
       </div>
@@ -367,7 +389,7 @@ aria-hidden="true">
 
 
 
-<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+<div class="modal fade bd-example-modal-xl"  id="modal-banners" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
@@ -399,18 +421,19 @@ aria-hidden="true">
           
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" id="footer">
         <div class="col-12">
-          <div class="progress md-progress">
-            <div id="barra">
-            <span id="progreso" style="color: #ffffff;"></span></div>
+          <div class="progress md-progress" style="height: 20px!important;">
+            <div id="barra" style="text-align: center;">
+            <span id="progreso" style="color: #ffffff; font-size: 13px; margin-top: -5px;"></span></div>
            
           </div>
-          <button type="submit" id="btn-guardar3" onclick="subir_imagen();" style="border:0px ; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary ">Guardar</button>
+          <button type="submit" id="btn-guardar3" onclick="subir_imagen(0);" style="border:0px ; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary ">Guardar</button>
+          <button type="button"  id="btn-guardar-cambios3"  onclick="subir_imagen(1);" style=" border:0px; display: none; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary">Guardar cambios</button>
+       
           <button type="button" id="btn-cancelar" onclick=" agregarPlan()" style="border:0px;background-color: #B8CCCB!important; float: right; font-size: 13px;" class="btn btn-primary ">Cancelar</button>
           
-          <button type="button"  id="btn-guardar-cambios3"  onclick="actualizar()" style=" display: none; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary">Guardar cambios</button>
-        </div>
+           </div>
     </div>
   </div>
 </div>
@@ -419,7 +442,7 @@ aria-hidden="true">
 
 
     <!-- Modal -->
-    <div class="modal fade" id="modal-categorias" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade" id="modal-k" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     
     <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->

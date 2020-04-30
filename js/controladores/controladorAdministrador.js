@@ -1,11 +1,15 @@
 /***************VARIABLES*********** */
 let urlPlanes='../../Hi-Offer/backend/api/planes.php';
 let urlCategorias='../../Hi-Offer/backend/api/categorias.php';
+let urlImagenes='../../Hi-Offer/backend/api/img_inicio.php';
 var planes=[];
 var categorias=[];
+var banners=[];
 var planSeleccionado;
 var catSeleccionada;
 var form=document.getElementById("form-subir");
+var img_guardar;
+var imgSelec;
 
 document.addEventListener("DOMContentLoaded",()=>{
   let form=document.getElementById("form-subir");
@@ -25,10 +29,29 @@ $(document).ready(() => {
 });
 
 //
-function cambiarboton(){
+function resetModalP(){
   document.getElementById('btn-guardar').style.display="block";
   document.getElementById('btn-guardar-cambios').style.display="none";
+  removeInvalid();
   vaciarCamposModalPlanes();
+}
+
+
+function removeInvalid(){
+  document.getElementById("camp-vacio-nombre").style.display="none";
+  document.getElementById("nombre-plan").classList.remove('invalid');
+  document.getElementById("camp-vacio-precio").style.display="none";
+  document.getElementById("precio-plan").classList.remove('invalid');
+  document.getElementById("camp-vacio-limite").style.display="none";
+  document.getElementById("limite-productos").classList.remove('invalid');
+  document.getElementById("camp-vacio-descripcion").style.display="none";
+  document.getElementById("descripcion-plan").classList.remove('invalid');
+  document.getElementById("camp-vacio-plazo").style.display="none";
+  document.getElementById("plazo").classList.remove('invalid');
+  document.getElementById("camp-vacio-tiempo").style.display="none";
+  document.getElementById("tiempoPrueba").classList.remove('invalid');
+  document.getElementById("camp-vacio-diseno").style.display="none";
+  document.getElementById("diseno").classList.remove('invalid');
 }
 
 function iniciar(){
@@ -195,13 +218,13 @@ function agregarPlan(){
 
 
   function vaciarCamposModalPlanes(){
-    document.getElementById("nombre-plan").value="",
-    document.getElementById("precio-plan").value="",
-    document.getElementById("limite-productos").value="",
-    document.getElementById("descripcion-plan").value="",
-    document.getElementById("plazo").value="",
-    document.getElementById("tiempoPrueba").value="",
-    document.getElementById("diseno").value=""
+    document.getElementById("nombre-plan").value="";
+    document.getElementById("precio-plan").value="";
+    document.getElementById("limite-productos").value="";
+    document.getElementById("descripcion-plan").value="";
+    document.getElementById("plazo").value="seleccione";
+    document.getElementById("tiempoPrueba").value="seleccione";
+    document.getElementById("diseno").value="seleccione";
   }
 
 
@@ -482,6 +505,20 @@ function editarCategoria(){
   }
 }
 
+function EliminarCategoria(index){
+  catSeleccionada=index;
+  axios({
+    method:'DELETE',
+    url:urlCategorias+`?id=${index}`,
+    responseType:'json',
+    
+}).then(res=>{
+  obtenerCategorias();
+}).catch(error=>{console.error(error);
+});
+}
+
+
 
 function abrirModal(){
   $("#modal-banners").modal();
@@ -494,6 +531,7 @@ function validarImg(){
   var archivoRuta=archivoInput.value;
   console.log(archivoInput.files[0].name);
   var exPermitidas=/(.PNG|.JPG)$/i;
+  
 
   if(!exPermitidas.exec(archivoRuta)){
     document.getElementById('img-invalid').style.display="block";
@@ -503,24 +541,42 @@ function validarImg(){
       if(archivoInput.files && archivoInput.files[0]){
         var visor=new FileReader();
         visor.onload=function(e){
-          document.getElementById('visor-img').innerHTML+=
+          document.getElementById('visor-img').innerHTML=
           '<img src="'+e.target.result+'" class="img-fluid " alt="zoom">'
           return true;
         }
         visor.readAsDataURL(archivoInput.files[0]);
         document.getElementById('img-invalid').style.display="none";
+        document.getElementById("footer").style.display="block";
+        img_guardar= archivoInput.files[0].name;
       }
   }
 }
 
 
 
+function resetModalBanner(){
+  console.log("entre");
+   var archivoInput=document.getElementById('archivoInput');
+   var clone=archivoInput.cloneNode();
+   clone.value="";
+   archivoInput.parentNode.replaceChild(clone, archivoInput);
+   document.getElementById('img-invalid').style.display="none";
+   console.log("sali");
+   document.getElementById('visor-img').innerHTML=
+  '<img src="img/img.jpg" class="img-fluid " alt="zoom">'
+  document.getElementById("footer").style.display="none";
+  document.getElementById('barra').style.width="0%";
+  document.getElementById("btn-guardar-cambios3").style.display="none";
+  document.getElementById("btn-guardar3").style.display="block";
+  
+}
 
 //document.getElementsByClassName('progress-bar').cssText = 'width:50% !important';
 
 
 
-function subir_imagen(){
+function subir_imagen(accion){
   
 document.getElementById('barra').style.width="0%";
 document.getElementById('barra').style.backgroundColor="white";
@@ -543,16 +599,155 @@ peticion.upload.addEventListener("progress",(event)=>{
   peticion.addEventListener("load",()=>{
     /* cuando termine*/
     document.getElementById('progreso').innerHTML="Proceso completado";
+    document.getElementById('archivoInput').value="";
+    if(accion==0){
+      guardarImagen();
+    }else{
+      editarBanner();
+    }
+    
   })
 
 
   //enviar datos
   peticion.open('post','../../Hi-Offer/backend/GestionArchivos/subir_imagen.php');
   peticion.send(new FormData(form));
+
   // cancelar
   document.getElementById('btn-cancelar').addEventListener("click",()=>{
     peticion.abort();
   })
 
 
+
 }
+
+/*
+function subir_imagen(){
+  
+  var FormData=new FormData();
+  var imagefile=document.getElementById('archivoInput');
+  FormData.append("image",imagefile.files[0]);
+  axios.post("form-subir",FormData,{
+    headers:{
+      'Content-Type':'multipart/form-Data'
+    }
+  });
+  
+  
+  }*/
+
+
+function guardarImagen(){
+  console.log(img_guardar);
+  let rut='backend/archivos-subidos/'+img_guardar;
+  console.log(rut);
+  let imagen={
+    ruta: img_guardar
+   }
+
+   axios({
+    method:'POST',
+    url:urlImagenes,
+    responseType:'json',
+    data:imagen
+  }).then(res=>{
+    console.log("exito");
+    obtenerBanners();
+  
+    //obtenerCategorias();
+  }).catch(error=>{console.error(error);
+  });   
+}
+
+
+
+function obtenerBanners(){
+  axios({
+    method:'GET',
+    url:urlImagenes,
+    responseType:'json',
+}).then(res=>{
+    this.banners=res.data;  
+   // console.log(banners);
+    generarBanners();
+}).catch(error=>{console.error(error);
+});  
+} obtenerBanners();
+
+function  generarBanners(){
+  document.getElementById("cont-banners").innerHTML="";
+  for(let i=0; i<banners.length;i++){
+    document.getElementById('cont-banners').innerHTML+=`  <div class="card" style="margin-bottom: 50px;">
+    <div class="card-header white">
+      <i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
+      aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer; font-weight: bold;"  ></i>
+      <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px; " id="hola">
+        <a class="dropdown-item" data-toggle="modal" data-target=".bd-example-modal-xl" onclick="obtenerUnBanner(${i})" >Editar</a>
+        <a class="dropdown-item" onclick="eliminarUnBanner(${i})" >Eliminar</a>
+      </div>
+    </div>
+    <div class="card-body white">
+      <div class="view overlay zoom">
+        <img src="${banners[i].ruta}" class="img-fluid " alt="zoom">
+    
+     </div>
+    </div>
+  </div>`
+  }
+}
+
+
+function obtenerUnBanner(index){
+  imgSelec=index;
+  axios({
+    method:'GET',
+    url:urlImagenes+`?id=${index}`,
+    responseType:'json',
+}).then(res=>{
+  document.getElementById('visor-img').innerHTML=
+  `<img src="${res.data.ruta}" class="img-fluid " alt="zoom">`
+  // cambiarbtn();
+  document.getElementById("btn-guardar-cambios3").style.display="block";
+  document.getElementById("btn-guardar3").style.display="none";
+}).catch(error=>{console.error(error);
+}); 
+}
+
+
+
+function editarBanner(){
+  
+  let imagen={
+    ruta: img_guardar
+   }
+     axios({
+      method:'PUT',
+      url:urlImagenes+`?id=${imgSelec}`,
+      responseType:'json',
+      data:imagen
+    }).then(res=>{
+      obtenerBanners();
+      document.getElementById("btn-guardar-cambios3").style.display="none";
+      document.getElementById("btn-guardar3").style.display="block";
+    }).catch(error=>{console.error(error);
+    }); 
+  
+}
+
+
+function  eliminarUnBanner(index){
+  axios({
+    method:'DELETE',
+    url:urlImagenes+`?id=${index}`,
+    responseType:'json',
+    
+}).then(res=>{
+  obtenerBanners();
+  document.getElementById("btn-guardar-cambios3").style.display="none";
+  document.getElementById("btn-guardar3").style.display="block";
+}).catch(error=>{console.error(error);
+});
+}
+
+

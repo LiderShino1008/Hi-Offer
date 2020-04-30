@@ -1,0 +1,13 @@
+{
+    "name": "gabriela/hi-offer",
+    "description": "Plataforma de gestion y publicacion de promociones",
+    "authors": [
+        {
+            "name": "Gabriela Cabrera",
+            "email": "gabrielaca2019@gmail.com"
+        }
+    ],
+    "require": {
+        "kreait/firebase-php": "5.0"
+    }
+}

@@ -1,1 +1,1 @@
-[{"nombre_categoria":"Tecnologia","promociones":[]},{"nombre_categoria":"Salud","promociones":[]},{"nombre_categoria":"Mascotas","promociones":[]},{"nombre_categoria":"Sevicios","promociones":[]}]
+{"0":{"nombre_categoria":"Salud","promociones":[]},"1":{"nombre_categoria":"Mascotas","promociones":[]},"2":{"nombre_categoria":"Sevicios","promociones":[]},"undefined":{"nombre_categoria":"","promociones":[]}}
