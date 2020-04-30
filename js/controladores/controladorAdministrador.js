@@ -3,7 +3,7 @@ let urlPlanes='../../Hi-Offer/backend/api/planes.php';
 let urlCategorias='../../Hi-Offer/backend/api/categorias.php';
 let urlImagenes='../../Hi-Offer/backend/api/img_inicio.php';
 var planes=[];
-var categorias=[];
+var categ=[];
 var banners=[];
 var planSeleccionado;
 var catSeleccionada;
@@ -236,7 +236,6 @@ function agregarPlan(){
       
   }).then(res=>{
       this.planes=res.data;
-      
       generarPlanes();
   }).catch(error=>{console.error(error);
   });  
@@ -438,22 +437,23 @@ function obtenerCategorias(){
     url:urlCategorias,
     responseType:'json',
 }).then(res=>{
-    this.categorias=res.data;  
+    this.categ=res.data;  
     generarCategorias();
 }).catch(error=>{console.error(error);
 });  
 } obtenerCategorias();
 
-
 function generarCategorias(){
-  document.getElementById('list-cat').innerHTML="";
-  for(let i=0; i<categorias.length;i++){
-    document.getElementById('list-cat').innerHTML+=`
-    <span  class="list-group-item list-group-item-action">${categorias[i].nombre_categoria}<span><i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
+  console.log("estas son las categorias",categ.length);
+  document.getElementById('list').innerHTML="";
+  for(let j=0; j<categ.length;j++){
+    
+    document.getElementById('list').innerHTML+=`
+    <span class="list-group-item list-group-item-action">${categ[j].nombre_categoria}<span><i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
               aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer;"  ></i>
               <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px ;" id="hola">
-                <a class="dropdown-item" data-toggle="modal" data-target="#modal-categorias" onclick="obtenerUnaCategoria(${i})" >Editar</a>
-                <a class="dropdown-item" onclick="EliminarCategoria(${i})" >Eliminar</a>
+                <a class="dropdown-item" data-toggle="modal" data-target="#modal-categorias" onclick="obtenerUnaCategoria(${j})" >Editar</a>
+                <a class="dropdown-item" onclick="EliminarCategoria(${j})" >Eliminar</a>
               </div></span></span>`
   }
 }

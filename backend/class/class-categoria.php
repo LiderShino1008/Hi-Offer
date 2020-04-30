@@ -25,7 +25,6 @@
          $archivo=fopen("../data/categorias.json","w");
          fwrite($archivo,json_encode($categorias)); 
          fclose($archivo);
-
          
     }
 
