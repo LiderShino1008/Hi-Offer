@@ -2,9 +2,11 @@
 let urlPlanes='../../Hi-Offer/backend/api/planes.php';
 let urlCategorias='../../Hi-Offer/backend/api/categorias.php';
 let urlImagenes='../../Hi-Offer/backend/api/img_inicio.php';
+let urlPlataforma='../../Hi-Offer/backend/api/plataforma.php';
 var planes=[];
 var categ=[];
 var banners=[];
+var informacion=[];
 var planSeleccionado;
 var catSeleccionada;
 var form=document.getElementById("form-subir");
@@ -105,6 +107,108 @@ function verDash(){
   document.getElementById('categorias').style.display="none";
 
 }
+
+
+
+function obtenerInformacionGeneral(){
+  axios({
+      method:'GET',
+      url:urlPlataforma,
+      responseType:'json',
+  }).then(res=>{
+      this.informacion=res.data;  
+      generarDashboard();
+  }).catch(error=>{console.error(error);
+  });
+}obtenerInformacionGeneral();
+
+
+
+
+
+function generarDashboard(){
+  document.getElementById("Dashboard").innerHTML="";
+  document.getElementById("Dashboard").innerHTML+=`
+  <h2 class="mb-4">Dashboard</h2>
+  <div class="container-fluid ">
+    <div class="row">
+      <div class=" card z-depth-1 col-lg-3 col-md-5 col-12 container-fluid" style="height: 150px; margin-top: 50px;">
+         <div class="row" >
+            <div class="col-6" style="background-color:#7DA8CA;height: 150px; text-align: center; padding: 30px;">
+              <i style="color: #eeeeee; font-size: 60px; " class="far fa-building"></i>
+            </div>
+            <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+                <h1>${informacion[0].empresas}</h1>
+                <p style="font-size: 12px;">Empresas Registradas</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-1"></div>
+      <div class=" card z-depth-1 col-lg-3 col-md-5 col-12 container-fluid" style="height: 150px; margin-top: 50px;">
+        <div class="row" >
+           <div class="col-6" style="background-color:#54C1D6;height: 150px; text-align: center; padding: 30px;">
+             <i style="color: #eeeeee; font-size: 60px; " class="fa fa-user-friends"></i>
+           </div>
+           <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+               <h1>${informacion[0].usuarios}</h1>
+               <p style="font-size: 12px;">Usuarios Registrados</p>
+           </div>
+        </div>
+     </div>
+     <div class="col-1"></div>
+     <div class=" card z-depth-1 col-lg-3 col-md-5 col-12  container-fluid" style="height: 150px; margin-top: 50px;">
+      <div class="row" >
+         <div class="col-6" style="background-color:#8BD0ED;height: 150px; text-align: center; padding: 30px;">
+           <i style="color: #eeeeee; font-size: 60px; " class="far fa-window-restore"></i>
+         </div>
+         <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+             <h1>${informacion[0].visitas}</h1>
+             <p style="font-size: 12px;">Nuevas visitas</p>
+         </div>
+      </div>
+   </div>
+   <div class="col-1"></div>      
+      <div class=" card z-depth-1 col-lg-3 col-md-5 col-12 container-fluid " style="height: 150px; margin-top: 50px;">
+         <div class="row" >
+            <div class="col-6" style="background-color:#B8CCCB;height: 150px; text-align: center; padding: 30px;">
+              <i style="color: #eeeeee; font-size: 60px; " class="fa fa-money-check"></i>
+            </div><i class="fas "></i>
+            <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+                <h1> L. ${informacion[0].ganancias}</h1>
+                <p style="font-size: 12px;">Ganancias</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-1"></div>
+      <div class=" card z-depth-1 col-lg-3 col-md-5 col-12 container-fluid" style="height: 150px; margin-top: 50px;">
+        <div class="row" >
+           <div class="col-6" style="background-color:#99D5DD;height: 150px; text-align: center; padding: 30px;">
+             <i style="color: #eeeeee; font-size: 60px; " class="fa fa-table"></i>
+           </div>
+           <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+               <h1>${informacion[0].categorias}</h1>
+               <p style="font-size: 12px;">Categorias registradas</p>
+           </div>
+        </div>
+     </div>
+     <div class="col-1"></div>
+     <div class=" card z-depth-1 col-lg-3 col-md-5 col-12 container-fluid" style="height: 150px; margin-top: 50px;">
+      <div class="row" >
+         <div class="col-6" style="background-color:#AEC1E9;height: 150px; text-align: center; padding: 30px;">
+           <i style="color: #eeeeee; font-size: 60px; " class="fa fa-sticky-note"></i>
+         </div>
+         <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
+             <h1>${informacion[0].planes}</h1>
+             <p style="font-size: 12px;">Planes Registrados</p>
+         </div>
+      </div>
+   </div>
+   <div class="col-1"></div>
+    </div>
+  </div>`
+}
+
+
 
 
 /*funcion para validar los datos de un plan*/
@@ -209,6 +313,9 @@ function agregarPlan(){
     vaciarCamposModalPlanes();
     $('#modal-plan').modal('hide');
      obtenerPlanes();
+     obtenerInformacionGeneral();
+     actualizarPlataforma();
+    obtenerInformacionGeneral();
   }).catch(error=>{console.error(error);
   });   
   }
@@ -355,6 +462,8 @@ function agregarPlan(){
       vaciarCamposModalPlanes();
       $('#modal-plan').modal('hide');
        obtenerPlanes();
+       actualizarPlataforma();
+      obtenerInformacionGeneral(); 
     }).catch(error=>{console.error(error);
     });   
    }
@@ -375,6 +484,9 @@ function agregarPlan(){
       
   }).then(res=>{
     obtenerPlanes();
+    obtenerInformacionGeneral();
+     actualizarPlataforma();
+    obtenerInformacionGeneral();
   }).catch(error=>{console.error(error);
   });
   }
@@ -416,7 +528,8 @@ function agregarCategoria(){
     resetModalCategorias()
     $('#modal-categorias').modal('hide');
     obtenerCategorias();
-     //obtenerPlanes();
+    actualizarPlataforma();
+    obtenerInformacionGeneral();
   }).catch(error=>{console.error(error);
   });   
   }
@@ -499,7 +612,9 @@ function editarCategoria(){
       $('#modal-categorias').modal('hide');
       obtenerCategorias();
       document.getElementById('btn-guardar2').style.display="block";
-  document.getElementById('btn-guardar-cambios2').style.display="none"
+      document.getElementById('btn-guardar-cambios2').style.display="none";
+      actualizarPlataforma();
+    obtenerInformacionGeneral();
     }).catch(error=>{console.error(error);
     }); 
   }
@@ -514,6 +629,9 @@ function EliminarCategoria(index){
     
 }).then(res=>{
   obtenerCategorias();
+  obtenerInformacionGeneral();
+  actualizarPlataforma();
+ obtenerInformacionGeneral();
 }).catch(error=>{console.error(error);
 });
 }

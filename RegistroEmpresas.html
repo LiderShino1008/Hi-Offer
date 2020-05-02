@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hi-Offer</title>
     <link rel="stylesheet" href="css/Style-Registro-Empresas.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
     <link rel="stylesheet" href="css/mdb.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -12,95 +15,49 @@
 <body style="margin: 0px; background-color: #F3F4F5;">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#546991" fill-opacity="1" d="M0,96L1440,288L1440,0L0,0Z"></path></svg>
         
-        <div class="container"  id="Registro">
-            <div class="container" style="width: 100%;" id="menu">
-                <div class="row">
+        <div class="container-fluid"  id="Registro" style="padding-top: 10px;">
+            <div class="container-fluid" id="pasoss" style="width: 100%; margin-top: 10px" id="menu">
+                <div class="row" style="">
                 <div id="paso1" class="col-3 pasos" >
                     <p id="texto1">1: Selecciona un plan</p>
                     <div class="barra" id="barra1"></div>
                 </div>
-                <div id="" class="col-3 pasos" >
+                <div id="paso2" class="col-3 pasos" >
                     <p class="paso1" id="texto2">2: Registra tu empresa</p>
                     <div  class="barra" id="barra2"></div>
                 </div>
-                <div id="" class="col-3 pasos" >
+                <div id="paso3" class="col-3 pasos" >
                   <p class="paso1" id="texto3">3: Registra un administrador</p>
                   <div  class="barra" id="barra3"></div>
               </div>
-              <div id="" class="col-3 pasos" >
+              <div id="paso4" class="col-3 pasos" >
                 <p class="paso1" id="texto4">4: Verificacion</p>
                 <div  class="barra" id="barra4"></div>
             </div>
                </div>
             </div>
 
-            <div id="planes">
-            <div class="row" >
-                <div class="col-lg-4 col-12">
-                      <div class="container" style="margin-top: 100px;">
-                        <div class="card mb-4 shadow-sm"  id="car-plan">
-                            <div class="card-header">
-                              <h4 class="my-0 font-weight-normal">GRATIS</h4>
-                            </div>
-                            <div class="card-body" >
-                              <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mensual</small></h1>
-                              <ul class="list-unstyled mt-3 mb-4">
-                                <li>Publica 20 promociones</li>
-                                <li>Llega al 25% de las personas </li>
-                                <li>Panel de control</li>
-                              </ul>
-                              <a class=" btn-block btn-empezar" style="margin-top: 50%;" onclick="paso2()">EMPEZAR</a>
-                            </div>
-                          </div>
-                     </div>
-                </div>
-
-                <div class="col-lg-4 col-12">
-                    <div class="container" style="margin-top: 100px;">
-                      <div class="card mb-4 shadow-sm"  id="car-plan">
-                          <div class="card-header">
-                            <h4 class="my-0 font-weight-normal">BÁSICO</h4>
-                          </div>
-                          <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mensual</small></h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                              <li>Publica 100 promociones</li>
-                              <li>Llega al 60% de las personas</li>
-                              <li>Panel de control</li>
-                            </ul><a class=" btn-block btn-empezar" style="margin-top: 50%;" onclick="paso2()">EMPEZAR</a>
-                          </div>
-                        </div>
-                   </div>
-              </div>
-
-              <div class="col-lg-3 col-12" >
-                <div class="container" style="margin-top: 100px; margin-right: 20px;">
-                  <div class="card mb-4 shadow-sm"  id="car-plan">
-                      <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">PREMIUM</h4>
-                      </div>
-                      <div class="card-body" >
-                        <h1 class="card-title pricing-card-title">$50 <small class="text-muted">/ mensual</small></h1>
-                        <ul class="list-unstyled mt-3 mb-4">
-                          <li>Publica 500 promociones</li>
-                          <li>Llega al 100% de las personas</li>
-                          <li>Panel de control</li>
-                      
-                        </ul>
-                        <a class=" btn-block btn-empezar" style="margin-top: 50%;" onclick="paso2()">EMPEZAR</a>
-                      </div>
-                    </div>
-               </div>
+            <div id="planes" style="padding-top: 20px;">
+              <div id="" class="col-3=12 pasos individual"  style="display: none;  " >
+                <p id="texto1" style="">1: Selecciona un plan</p>
+                <div class="barra" id="" style="background-color: #546991; "></div>
+            </div>
+            <div class="row" id="cont-planes" style="margin-top: 50px;" >
+             <div class="row">
            
-          </div>
-        </div>
-        </div>
+             </div>
+             </div>
+            </div>
 
      <!-------------------------------------------------------------------------------------------------------------------------------->  
         <!-- formulario Empresa-->
         <div id="formulario">
+          <div id="" class="col-12  pasos individual"  style="display: none;  " >
+            <p id="texto1" style="">2: Registra tu empresa</p>
+            <div class="barra" id="" style="background-color: #546991; "></div>
+        </div>
         <div  class="row"> <!--contenedor-->
-            <div class="container col-7" id="detalle-empresa">
+            <div class="container col-xl-7 col-10" id="detalle-empresa">
                 <div class="row">
                  <h6 style=" margin-left: 15px; ">Detalles de la empresa</h6>
                 </div>
@@ -218,7 +175,7 @@
                   </div>
                 </div>  
             </div>
-            <div class="container col-4" id="detalle-empresa">
+            <div class="container col-xl-4 col-10" id="detalle-empresa">
                 <div class="row " style="margin-top: 20px;">
                   <div class="input-group mb-3 col-12">
                     <div class="input-group-prepend">
@@ -391,6 +348,7 @@
       <!-- Bootstrap core JavaScript -->
       <script src="js/librerias/jquery.min.js"></script>
       <script src="js/librerias/bootstrap.bundle.min.js"></script>
+      <script src="js/librerias/axios.min.js"></script>
         <script src="js/controladores/validaciones.js"></script>
     <script src="js/controladores/controladorRegistroEmpresas.js"></script>
     <script src="js/controladores/validacionUsuario.js"></script>

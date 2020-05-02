@@ -1,4 +1,5 @@
-
+var indexPlan;
+var planes1=[];
 
 function paso1(){
     document.getElementById('barra1').style.backgroundColor="#546991";
@@ -12,7 +13,8 @@ function paso1(){
     
 } paso1();
 
-function paso2(){
+function paso2(index){
+    indexPlan=index;
     document.getElementById('planes').style.display="none";
     document.getElementById('formulario').style.display="block";
     document.getElementById('panel-administrador').style.display="none";
@@ -26,6 +28,76 @@ function atrasEmpresa(){
     document.getElementById('planes').style.display="block";
     document.getElementById('formulario').style.display="none";
 }
+
+
+
+function obtenerPlanes(){
+    axios({
+      method:'GET',
+      url:'../../Hi-Offer/backend/api/planes.php',
+      responseType:'json',
+      
+  }).then(res=>{
+      this.planes1=res.data;
+      generarPlanes1();
+  }).catch(error=>{console.error(error);
+  });  
+  } obtenerPlanes();
+
+
+  function generarPlanes1(){
+    document.getElementById('cont-planes').innerHTML="";
+    for (let i=0; i<planes1.length; i++){
+        console.log("gaby");
+      if(planes1[i].diseno=="Básico"){
+
+        document.getElementById('cont-planes').innerHTML+=` <div class="col-md-5 col-xl-3  col-lg-3 col-8 col-xl-3   mx-auto mb-4 p-2">
+        <div class="card text-center">
+          <div class="card-header white" style="padding: 2px ;">
+            <h4 class="h4 my-2" style="color: #546991; ">${planes1[i].nombre}</h4>
+          </div>
+          <div>
+            <h1 class="card-title  pricing-card-title" style="margin-top: 30px; font-size:30px!important;">L ${planes1[i].precio} <small class="text-muted">/ ${planes1[i].plazo}</small></h1>
+          </div>
+          <div class="card-body">
+            <p class="card-text "><h5 style="font-size: 14px; font-weight: bold; color: #546991;">Podras registrar ${planes1[i].limitePromociones} promociones</h5>
+            ${planes1[i].descripcion}
+            </p>
+            <p> ${planes1[i].tiempoPruebaGratuita} días de prueba gratuita</p>
+
+          </div>
+          <div class="card-footer white">
+              <a  onclick="paso2(${i})"  class="btn btn-outline-indigo btn-md" href="#" role="button">Comenzar</a>
+          </div>
+        </div>
+      </div>`
+      }else{
+        document.getElementById('cont-planes').innerHTML+=`
+        
+        <div class="col-md-5 col-xl-3  col-lg-3 col-8 mx-auto mb-4 p-2" >
+        <div class="card text-center" style="background-color: #546991; border:0">
+          <div class="card-header " style="padding: 2px ;">
+            <h4 class="h4 white-text my-2">${planes1[i].nombre}</h4>
+          </div>
+          <div class="white">
+            <h1 class="card-title  pricing-card-title" style="margin-top: 30px;  font-size:30px!important;">L ${planes1[i].precio} <small class="">/ ${planes1[i].plazo}</small></h1>
+          </div>
+          <div class="card-body white">
+            <p class="card-text "><h5 style="font-size: 14px; font-weight: bold; color: #546991;">Podras registrar ${planes1[i].limitePromociones} promociones</h5>
+            ${planes1[i].descripcion}
+            </p>
+            <p>${planes1[i].tiempoPruebaGratuita} días de prueba gratuita</p>
+
+          </div>
+          <div class="card-footer white">
+              <a class="btn btn-md" onclick="paso2(${i})" style="background-color: #51668C!important; color: white;" href="#" role="button">Comenzar</a>
+          </div>
+        </div>
+      </div>`
+      }
+    }
+  }
+
 
 
 function registrarEmpresa(){

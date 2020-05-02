@@ -75,7 +75,253 @@
 .botton{
     margin-bottom: 10px;
 }
+
+@media (max-width: 1300px) {
+    
 #Registro{
+    background-color:#ffffff;
+    height: 630px;
+    width: 90%!important;
+
+    margin-bottom: 0px ;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -230px!important;
+    border-radius: 1rem;
+    box-shadow: 4px 4px 10px #999; 
+    
+}
+}
+
+@media (max-width: 1215px) {
+    
+    #Registro{
+        background-color:#ffffff;
+        height: 630px;
+        width: 90%!important;
+        margin-bottom: 0px ;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -220px!important;
+        border-radius: 1rem;
+        box-shadow: 4px 4px 10px #999; 
+        
+    }
+
+    #cont-planes{
+        margin-top: 15px!important;
+    }
+
+    }
+
+    @media (max-width: 1048px) {
+    
+        #Registro{
+            background-color:#ffffff;
+            height: 630px;
+            width: 95%!important;
+            margin-bottom: 0px ;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: -170px!important;
+            border-radius: 1rem;
+            box-shadow: 4px 4px 10px #999; 
+            
+        }
+    
+        #cont-planes{
+            margin-top: 15px!important;
+        }
+    
+        }
+
+        @media (max-width: 992px) {
+    
+            #Registro{
+                background-color:#ffffff;
+                height: 630px;
+                width: 98%!important;
+                margin-bottom: 0px ;
+                position: relative;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: -170px!important;
+                border-radius: 1rem;
+                box-shadow: 4px 4px 10px #999; 
+                
+            }
+        
+            #cont-planes{
+                margin-top: 15px!important;
+            }
+        
+            }
+
+
+            @media (max-width: 948px) {
+    
+                #Registro{
+                    background-color:#ffffff;
+                    height: 1030px!important;
+                    width: 85%!important;
+                    margin-bottom: 0px ;
+                    position: relative;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: -150px!important;
+                    border-radius: 1rem;
+                    box-shadow: 4px 4px 10px #999; 
+                    
+                }
+            
+                #cont-planes{
+                    margin-top: 50px!important;
+                }
+            
+                #pasoss{
+                    display: none;
+                }
+
+                .individual{
+                    display: block!important;
+                }
+                }
+
+
+                
+            @media (max-width: 760px) {
+    
+                #Registro{
+                    background-color:#ffffff;
+                    height: 1400px!important;
+                    width: 85%!important;
+                    margin-bottom: 0px ;
+                    position: relative;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: -120px!important;
+                    border-radius: 1rem;
+                    box-shadow: 4px 4px 10px #999; 
+                    
+                }
+            
+                #cont-planes{
+                    margin-top: 30px!important;
+                }
+            
+                #pasoss{
+                    display: none;
+                }
+
+                .individual{
+                    display: block!important;
+                }
+                }
+
+
+                      
+            @media (max-width: 680px) {
+    
+                #Registro{
+                    background-color:#ffffff;
+                    height: 1600px!important;
+                    width: 85%!important;
+                    margin-bottom: 0px ;
+                    position: relative;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: -100px!important;
+                    border-radius: 1rem;
+                    box-shadow: 4px 4px 10px #999; 
+                    
+                }
+            
+                #cont-planes{
+                    margin-top: 30px!important;
+                }
+            
+                #pasoss{
+                    display: none;
+                }
+
+                .individual{
+                    display: block!important;
+                }
+                }
+
+
+
+
+                @media (max-width: 530px) {
+    
+                    #Registro{
+                        background-color:#ffffff;
+                        height: 1750px!important;
+                        width: 90%!important;
+                        margin-bottom: 0px ;
+                        position: relative;
+                        margin-left: auto;
+                        margin-right: auto;
+                        margin-top: -80px!important;
+                        border-radius: 1rem;
+                        box-shadow: 4px 4px 10px #999; 
+                        
+                    }
+                
+                    #cont-planes{
+                        margin-top: 30px!important;
+                    }
+                
+                    #pasoss{
+                        display: none;
+                    }
+    
+                    .individual{
+                        display: block!important;
+                    }
+                    }
+
+
+                    
+                @media (max-width: 470px) {
+    
+                    #Registro{
+                        background-color:#ffffff;
+                        height: 1800px!important;
+                        width: 90%!important;
+                        margin-bottom: 0px ;
+                        position: relative;
+                        margin-left: auto;
+                        margin-right: auto;
+                        margin-top: -50px!important;
+                        border-radius: 1rem;
+                        box-shadow: 4px 4px 10px #999; 
+                        
+                    }
+                
+                    #cont-planes{
+                        margin-top: 30px!important;
+                    }
+                
+                    #pasoss{
+                        display: none;
+                    }
+    
+                    .individual{
+                        display: block!important;
+                    }
+                    }
+    
+    
+
+
+     
+
+#Registro{
+    
     background-color:#ffffff;
     height: 630px;
     width: 80%;
