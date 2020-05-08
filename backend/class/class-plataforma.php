@@ -78,7 +78,6 @@
          $archivo=fopen("../data/plataforma.json","w");
          fwrite($archivo,json_encode($plataforma)); 
          fclose($archivo);
-
     }
 
     public static  function CantidadCategorias(){
@@ -108,10 +107,32 @@
     }
     
     public static  function ObtenerInformacion(){
+        Plataforma::CantidadEmpresas();
+        Plataforma::CantidadUsuarios();
+        Plataforma::CantidadCategorias();
+        Plataforma::CantidadPlanes();
         $contenido_archivo=file_get_contents("../data/plataforma.json");
         echo $contenido_archivo;
     }
 
+    public static function actualizarMes($mes)
+    {
+        $contenido_archivo=file_get_contents("../data/plataforma.json");
+        $plataforma=json_decode($contenido_archivo,true);
+        $plataforma[0]["mes_actual"]=$mes;
+         $archivo=fopen("../data/plataforma.json","w");
+         fwrite($archivo,json_encode($plataforma)); 
+         fclose($archivo);
+    }
+
+   /* public static function guardarEmpresaActual($empresa){
+        $contenido_archivo1=file_get_contents("../data/plataforma.json");
+        $plataforma=json_decode($contenido_archivo1,true);
+        $plataforma[0]["empresaActual"]=$empresa;
+        $archivo=fopen("../data/plataforma.json","w");
+        fwrite($archivo,json_encode($plataforma)); 
+        fclose($archivo);
+    } */
 
 
         

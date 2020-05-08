@@ -1,7 +1,7 @@
 
 
 function validacionUsuario(){
-    console.log("entre")
+    
         let camp_vacio_usuario=validarCampoVacio('usuario');
         let camp_vacio_correo=validarCampoVacio('email-usuario');
        
@@ -11,7 +11,7 @@ function validacionUsuario(){
         let validar_correo_=validarEmail(document.getElementById('email-usuario'));
         let validar_contrasena=validarContraseña('contraseña');
         let validar_igualdad=validarContraseñasIguales(document.getElementById('contraseña').value,document.getElementById('contraseña2').value);
-        
+        console.log(document.getElementById('contraseña').value,document.getElementById('contraseña2').value);
        
         if(camp_vacio_usuario==true){
             document.getElementById('usuario').classList.add('is-invalid');
@@ -54,7 +54,7 @@ function validacionUsuario(){
             }
             
         }
-
+        console.log(validar_igualdad);
         if(camp_vacio_contrasena2==true){
             document.getElementById('contraseña2').classList.add('is-invalid');
             document.getElementById('camp-vacio-contra2').classList.add('d-block');
@@ -62,14 +62,18 @@ function validacionUsuario(){
             if(validar_igualdad==false){
                 document.getElementById('contraseña2').classList.add('is-invalid');
                 document.getElementById('camp-vacio-contra2').classList.remove('d-block');
+                document.getElementById('contraseña-no-coincide').classList.remove('d-none');
                 document.getElementById('contraseña-no-coincide').classList.add('d-block');
             }
             document.getElementById('contraseña2').classList.remove('is-invalid');
             document.getElementById('camp-vacio-contra2').classList.remove('d-block');
             document.getElementById('contraseña-no-coincide').classList.remove('d-block');
+            document.getElementById('contraseña-no-coincide').classList.add('d-none');
         }
         if((camp_vacio_usuario==false)&&(camp_vacio_contrasena2==false)&&(camp_vacio_correo==false)&&(camp_vacio_contrasena==false)&&(validar_correo_)&&(validar_contrasena)&&(validar_igualdad)){
             return true;
+        }else{
+            return false;
         }
 
 

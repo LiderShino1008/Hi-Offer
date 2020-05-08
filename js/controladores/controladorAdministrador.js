@@ -13,11 +13,58 @@ var form=document.getElementById("form-subir");
 var img_guardar;
 var imgSelec;
 
+
+
+(function ($){
+  $.fn.counter = function() {
+    const $this = $(this),
+    numberFrom = parseInt($this.attr('data-from')),
+    numberTo = parseInt($this.attr('data-to')),
+    delta = numberTo - numberFrom,
+    deltaPositive = delta > 0 ? 1 : 0,
+    time = parseInt($this.attr('data-time')),
+    changeTime = 10;
+    
+    let currentNumber = numberFrom,
+    value = delta*changeTime/time;
+    var interval1;
+    const changeNumber = () => {
+      currentNumber += value;
+      //checks if currentNumber reached numberTo
+      (deltaPositive && currentNumber >= numberTo) || (!deltaPositive &&currentNumber<= numberTo) ? currentNumber=numberTo : currentNumber;
+      this.text(parseInt(currentNumber));
+      currentNumber == numberTo ? clearInterval(interval1) : currentNumber;  
+    }
+
+    interval1 = setInterval(changeNumber,changeTime);
+  }
+}(jQuery));
+
+$(document).ready(() => {
+
+  $('.count-up').counter();
+  $('.count1').counter();
+  $('.count2').counter();
+  $('.count3').counter();
+  $('.count4').counter();
+
+  
+  new WOW().init();
+  
+});
+
+
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded",()=>{
   let form=document.getElementById("form-subir");
   form.addEventListener("submit",function(event){
     event.preventDefault();
-    console.log("hello");
+    
     subir_imagen(this);
   });
 });
@@ -116,7 +163,8 @@ function obtenerInformacionGeneral(){
       url:urlPlataforma,
       responseType:'json',
   }).then(res=>{
-      this.informacion=res.data;  
+      this.informacion=res.data; 
+      console.log("info",informacion) 
       generarDashboard();
   }).catch(error=>{console.error(error);
   });
@@ -138,7 +186,7 @@ function generarDashboard(){
               <i style="color: #eeeeee; font-size: 60px; " class="far fa-building"></i>
             </div>
             <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
-                <h1>${informacion[0].empresas}</h1>
+                <h1 class="count-up" data-from="0" data-to="${informacion[0].empresas}" data-time="2000">${informacion[0].empresas}</h1>
                 <p style="font-size: 12px;">Empresas Registradas</p>
             </div>
          </div>
@@ -150,7 +198,7 @@ function generarDashboard(){
              <i style="color: #eeeeee; font-size: 60px; " class="fa fa-user-friends"></i>
            </div>
            <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
-               <h1>${informacion[0].usuarios}</h1>
+               <h1 class="count1" data-from="0" data-to="${informacion[0].usuarios}" data-time="2000">${informacion[0].usuarios}</h1>
                <p style="font-size: 12px;">Usuarios Registrados</p>
            </div>
         </div>
@@ -162,7 +210,7 @@ function generarDashboard(){
            <i style="color: #eeeeee; font-size: 60px; " class="far fa-window-restore"></i>
          </div>
          <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
-             <h1>${informacion[0].visitas}</h1>
+             <h1 class="count2" data-from="0" data-to="${informacion[0].visitas}" data-time="2000">${informacion[0].visitas}</h1>
              <p style="font-size: 12px;">Nuevas visitas</p>
          </div>
       </div>
@@ -174,7 +222,7 @@ function generarDashboard(){
               <i style="color: #eeeeee; font-size: 60px; " class="fa fa-money-check"></i>
             </div><i class="fas "></i>
             <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
-                <h1> L. ${informacion[0].ganancias}</h1>
+                <h1 > L. ${informacion[0].ganancias}</h1>
                 <p style="font-size: 12px;">Ganancias</p>
             </div>
          </div>
@@ -186,7 +234,7 @@ function generarDashboard(){
              <i style="color: #eeeeee; font-size: 60px; " class="fa fa-table"></i>
            </div>
            <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
-               <h1>${informacion[0].categorias}</h1>
+               <h1 class="count4" data-from="0" data-to="${informacion[0].categorias}" data-time="2000">${informacion[0].categorias}</h1>
                <p style="font-size: 12px;">Categorias registradas</p>
            </div>
         </div>
@@ -198,7 +246,7 @@ function generarDashboard(){
            <i style="color: #eeeeee; font-size: 60px; " class="fa fa-sticky-note"></i>
          </div>
          <div class="col-6" style="background-color:#eeeeee; text-align: center; padding: 10px;">
-             <h1>${informacion[0].planes}</h1>
+             <h1 class="count3" data-from="0" data-to="${informacion[0].planes}" data-time="2000">${informacion[0].planes}</h1>
              <p style="font-size: 12px;">Planes Registrados</p>
          </div>
       </div>

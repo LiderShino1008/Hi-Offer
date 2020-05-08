@@ -13,33 +13,35 @@
                 if($_POST['accion']==0){
                     Empresa::guardarLogotipo($_GET['id'],$_POST['logotipo']);
                 }else{
+                  if($_POST['accion']==1){
                     Empresa::guardarBanner($_GET['id'],$_POST['Banner']);   
+                  }
                 }
 
             }else{
-                $empresa=new Empresa($_POST["nombre_empresa"],
-                $_POST["correoElectronico"],
-                $_POST["eslogan"],
-                $_POST["descripcion"],
-                $_POST["direccion"],
-                $_POST["pais"],
-                $_POST["latitud"],
-                $_POST["longitud"],
-                $_POST["facebook"],
-                $_POST["instagram"],
-                $_POST["twitter"],
-                $_POST["numeroTelefono"],
-                $_POST["administradores"],
-                $_POST["estado"],
-                $_POST["comentarios"],
-                $_POST["logotipo"],
-                $_POST["Banner"],
-                $_POST["sucursales"],
-                $_POST["productos"],
-                $_POST["promociones"],
-                $_POST["plan"],
-            );
-                $empresa->guardarEmpresa();
+                if(isset($_POST['accion'])){
+                    if($_POST['accion']==2){
+                        Empresa::guardarIndexPlan($_POST['indexPlan']);
+                    }
+                }else{
+                    $empresa=new Empresa($_POST["nombre_empresa"],
+                    $_POST["correoElectronico"],
+                    $_POST["eslogan"],
+                    $_POST["descripcion"],
+                    $_POST["direccion"],
+                    $_POST["pais"],
+                    $_POST["latitud"],
+                    $_POST["longitud"],
+                    $_POST["facebook"],
+                    $_POST["instagram"],
+                    $_POST["twitter"],
+                    $_POST["numeroTelefono"] );
+                    $empresa->guardarEmpresa($_POST["diaReg"],$_POST["mes"]);
+                }
+               
+                   
+           
+               
                 $resultado["mensaje"] ="Guardar empresa,informacion:". json_encode($_POST);
                 echo json_encode($resultado);
 
@@ -47,20 +49,61 @@
         break;
         case 'GET':
             //obtener un plan
-            if(isset($_GET['id'])){
-                Empresa::obtenerUnaEmpresa($_GET['id']); 
+           // 
+            if(isset($_GET['accion'])){
+                switch(($_GET['accion'])){
+                 case 0: //obtener un indice
+                    Empresa::ObtenerIndice();
+                 break;
+                }
             }else{
-                Empresa::ObtenerEmpresas(); 
+                if(isset($_GET['id'])){
+                    //Empresa::generarTotalVentas($_GET['id']);
+                    Empresa::obtenerUnaEmpresa($_GET['id']); 
+                }else{
+                    Empresa::ObtenerEmpresas(); 
+                }
             }
+
+           
+
+          
+
+            
         break;
         case 'PUT':
             $_PUT =json_decode(file_get_contents('php://input'),true);
             if(isset($_PUT['accion'])){
-                if($_PUT['accion']==0){
+                
+                switch($_PUT['accion']){
+                  case 0:
                     Empresa::actualizarLogotipo($_GET['id'],$_PUT['logotipo']);
-                }else{
-                    Empresa::guardarBanner($_GET['id'],$_PUT['Banner']);   
+                  break;
+                  case 1:
+                    Empresa::actualizarBanner($_GET['id'],$_PUT['Banner']); 
+                  break; 
+                  case 2:
+                    Empresa::actualizarEntrada($_GET['id'],$_PUT['entrada']);
+                  break;
+                  case 3: 
+                    Empresa::incrementarVentas($_GET['id'],$_PUT['cantidad']);
+                  break;
+                  case 4: //actualizar informacion
+                    Empresa::generarTotalVentas($_GET['id']);
+                  
+                  break;
+                  case 5:
+                  Empresa::incrementarSeguidores($_GET['id']);
+                  break;
+
+                  case 6;
+                  Empresa::incrementarVisitas($_GET['id']);
+                  break;
+
+                  
+                  
                 }
+
             }else{ //sino, lo que se actualizara es la informacion
                 $empresa=new Empresa($_PUT["nombre_empresa"],
                 $_PUT["correoElectronico"],
@@ -80,7 +123,7 @@
 
         break;
         case 'DELETE':
-            /*eliminar un una empresa*/
+        
             Empresa::eliminarEmpresa($_GET['id']); 
         break;
     } 

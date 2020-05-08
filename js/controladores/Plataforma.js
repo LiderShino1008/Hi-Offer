@@ -10,4 +10,5 @@ function actualizarPlataforma(){
       }).catch(error=>{console.error(error);
       });   
      
-}
+}//
+

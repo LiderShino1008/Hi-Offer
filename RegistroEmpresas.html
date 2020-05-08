@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hi-Offer</title>
     <link rel="stylesheet" href="css/Style-Registro-Empresas.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		
+    <link rel="stylesheet" href="css/style.css">	
     <link rel="stylesheet" href="css/mdb.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
 </head>
 <body style="margin: 0px; background-color: #F3F4F5;">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#546991" fill-opacity="1" d="M0,96L1440,288L1440,0L0,0Z"></path></svg>
         
-        <div class="container-fluid"  id="Registro" style="padding-top: 10px;">
-            <div class="container-fluid" id="pasoss" style="width: 100%; margin-top: 10px" id="menu">
+        <div class="container"  id="Registro" style="padding-top: 10px; padding-bottom: 50px; background-color:white;box-shadow: 4px 4px 10px #999;   position: relative;  border-radius: 1rem;margin-top: -270px">
+            <div class="container-fluid" id="pasoss" style="width: 100%; margin-top: 10px" >
                 <div class="row" style="">
                 <div id="paso1" class="col-3 pasos" >
                     <p id="texto1">1: Selecciona un plan</p>
@@ -31,7 +30,7 @@
                   <div  class="barra" id="barra3"></div>
               </div>
               <div id="paso4" class="col-3 pasos" >
-                <p class="paso1" id="texto4">4: Verificacion</p>
+                <p class="paso1" id="texto4">4: verificación de Registro</p>
                 <div  class="barra" id="barra4"></div>
             </div>
                </div>
@@ -39,7 +38,7 @@
 
             <div id="planes" style="padding-top: 20px;">
               <div id="" class="col-3=12 pasos individual"  style="display: none;  " >
-                <p id="texto1" style="">1: Selecciona un plan</p>
+                <p id="" style="">1: Selecciona un plan</p>
                 <div class="barra" id="" style="background-color: #546991; "></div>
             </div>
             <div class="row" id="cont-planes" style="margin-top: 50px;" >
@@ -50,15 +49,18 @@
             </div>
 
      <!-------------------------------------------------------------------------------------------------------------------------------->  
-        <!-- formulario Empresa-->
-        <div id="formulario">
+       
+     <!-- formulario Empresa-->
+        <div id="formulario" style="padding-bottom: 50px;">
           <div id="" class="col-12  pasos individual"  style="display: none;  " >
-            <p id="texto1" style="">2: Registra tu empresa</p>
+            <p id="" >2: Registra tu empresa</p>
             <div class="barra" id="" style="background-color: #546991; "></div>
         </div>
-        <div  class="row"> <!--contenedor-->
-            <div class="container col-xl-7 col-10" id="detalle-empresa">
+        <div class="container"> <p style="margin-top: 30px;"> ¡Vamos a registrar tu empresa! Debes ingresar los datos correctamente para crear el que necesitas.</p></div>
+        <div  class="row" style="margin-bottom: 50px;"> <!--contenedor-->
+            <div class="container col-xl-7 col-10 " id="detalle-empresa">
                 <div class="row">
+                  
                  <h6 style=" margin-left: 15px; ">Detalles de la empresa</h6>
                 </div>
                 <div class="row">
@@ -110,11 +112,15 @@
                 
                  <!-- form Pais-->
                 <div class="row">
-                    <div class="col-4 mb-3">
-                    <select class="form-control" style="font-size: smaller;" class="col-4" id="pais">
+                    <div class="col-md-4 col-12 mb-3">
+                    <select class="form-control" style="font-size: 14px" class="col-4" id="pais">
                         <option style="font-size: smaller;">Pais</option>
-                        <option style="font-size: smaller;">Costa Rica</option>
-                        <option style="font-size: smaller;" >EE.UU</option>
+                        <option style="font-size: smaller;">Belice</option>
+                        <option style="font-size: smaller;" >Costa Rica</option>
+                        <option  style="font-size: smaller;">El Salvador</option>
+                        <option  style="font-size: smaller;">Guatemala</option>
+                        <option  style="font-size: smaller;">Honduras</option>
+                        <option  style="font-size: smaller;">Nicaragua</option>
                         <option  style="font-size: smaller;">Panamá</option>
                       </select>
                       <div class="d-none"  id="camp-vacio-pais" style="font-size: smaller; color: red;">
@@ -122,102 +128,96 @@
                       </div>
                     <!-- formm-latitud -->
                     </div>
-                      <div class="col-4 mb-4">
+                      
+                      <div class="col-md-4 col-12 mb-4">
                         <input type="text" class="form-control" style="font-size: smaller;" id="latitud" placeholder="Latitud" value="" required>
                         <div class="d-none" id="camp-vacio-latitud" style="font-size: smaller; color: red;">
                           Campo obligatorio.
                         </div>
+                        <div class="d-none" id="latitud-invalida" style="font-size: smaller; color: red;">
+                          verifique que ambas coordenadas sean válidas.
+                        </div>
                       </div>
                        <!-- form-Longitud -->
-                      <div class="col-4 mb-4">
+                      <div class="col-md-4 col-12 mb-4">
                         <input type="text" class="form-control" style="font-size: smaller;" id="longitud" placeholder="longitud" value="" required>
                         <div class="d-none" id="camp-vacio-longitud" style="font-size: smaller; color: red;">
                           campo obligatorio.
                         </div>
-                      </div>
-                     
-                </div>
-                <div class="row">
-                  <h6 class="col-12">Redes Sociales</h6>
-                </div>
-        
-                <div class="row">
-                  <!-- forma-Facebook -->
-                  <div class="input-group mb-3 col-4">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fab fa-facebook-square"></i></span>
-                    </div>
-                    <input type="text" id="facebook" class="form-control" placeholder="Facebook" aria-label="Username" aria-describedby="basic-addon1">
-                    <div class="d-none" id="camp-vacio-facebook" style="font-size: smaller; color: red;">
-                     Campo obligatorio.
-                    </div>
-                  </div>
-
-                   <!-- form-Instagram-->
-                  <div class="input-group mb-3 col-4">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fab fa-instagram"></i></span>
-                    </div>
-                    <input type="text" id="instagram" class="form-control" placeholder="Instagram" aria-label="Username" aria-describedby="basic-addon1">
-                    <div class="d-none" id="camp-vacio-instagram" style="font-size: smaller; color: red;">
-                     *Obligatorio.
-                    </div>
-                  </div>
-                  <!-- form-Twiter-->
-                  <div class="input-group mb-3 col-4">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fab fa-twitter"></i></span>
-                    </div>
-                    <input type="text"  id="twiter" class="form-control" placeholder="Twiter" aria-label="Username" aria-describedby="basic-addon1">
-                    <div class="d-none" id="camp-vacio-twiter" style="font-size: smaller; color: red;">
-                     *Obligatorio.
-                   </div>
-                  </div>
-                </div>  
-            </div>
-            <div class="container col-xl-4 col-10" id="detalle-empresa">
-                <div class="row " style="margin-top: 20px;">
-                  <div class="input-group mb-3 col-12">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone-alt"></i></span>
-                    </div>
-                    <input type="text"  id="telefono" class="form-control " placeholder="Numero Telefonico" aria-label="Username" aria-describedby="basic-addon1">
-                    <div class="d-none col-12"  id="camp-vacio-telefono" style="font-size: smaller; color: red;">
-                     *Este campo es obligatorio.
-                   </div>
-                  </div>
-                </div>
-                    <div class="row" style=" margin-top: 50px; margin-left:0px">
-                      <div class="imagen col-3 "  ><span ><i class="fas fa-warehouse"></i></span></div>
-                      <h6 class="col-9" style="font-size:14px; margin-top: 30px; color:#546991;">Agrega el logotipo de la empresa    </h6>
-                    
-                    </div>
-                    <div class="col-12">
-                      <div class="input-group" style="margin-top:20px">
-                        <div class="custom-file">
-                          <input type="file"  id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                          <label class="custom-file-label" for="inputGroupFile04">Seleccione un Archivo</label>
+                        <div class="d-none" id="longitud-invalida" style="font-size: smaller; color: red;">
+                          verifique que ambas coordenadas sean válidas.
                         </div>
                       </div>
-                    </div>
-                    <div style="margin-top:100px; float: right; color:#546991;" class=""><a class="col-6" style=" height: 50px;" onclick="atrasEmpresa()"><i class="fas fa-angle-left"></i><strong>Atrás</strong></a>
-                      <a class="col-6" onclick="registrarEmpresa()" style=" height: 50px;"><strong>Siguiente</strong> <i class="fas fa-chevron-right"></i></a></div>
-                    
-                    <!--
-                    <div style="margin-top:100px; float: right; color:#546991;" class="">
-                      <a class="col-6" style=" height: 50px;"></a>
-                      <a class="col-6" style=" height: 50px;"><strong>Siguiente</strong> <i class="fas fa-chevron-right"></i></a>
-                    </div> -->
-                   
-                    
-                    </div>
+                      
+                </div>
+                
+               
+            </div>
+            
+            <div class="container col-xl-4 col-10" id="detalle-empresa">
+            <div class="row">
+              <h6 class="col-12">Redes Sociales (opcional)</h6>
+            </div>
+    
+            <div class="row">
+              <!-- forma-Facebook -->
+              <div class="input-group mb-3 col-12">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fab fa-facebook-square"></i></span>
+                </div>
+                <input type="text" id="facebook" class="form-control" placeholder="Facebook" aria-label="Username" aria-describedby="basic-addon1">
+                <div class="d-none" id="camp-vacio-facebook" style="font-size: smaller; color: red;">
+                 Campo obligatorio.
+                </div>
+              </div>
+
+               <!-- form-Instagram-->
+              <div class="input-group mb-3 col-12">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fab fa-instagram"></i></span>
+                </div>
+                <input type="text" id="instagram" class="form-control" placeholder="Instagram" aria-label="Username" aria-describedby="basic-addon1">
+                <div class="d-none" id="camp-vacio-instagram" style="font-size: smaller; color: red;">
+                 *Obligatorio.
+                </div>
+              </div>
+              <!-- form-Twiter-->
+              <div class="input-group mb-3 col-12">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fab fa-twitter"></i></span>
+                </div>
+                <input type="text"  id="twiter" class="form-control" placeholder="Twiter" aria-label="Username" aria-describedby="basic-addon1">
+                <div class="d-none" id="camp-vacio-twiter" style="font-size: smaller; color: red;">
+                 *Obligatorio.
                </div>
+              </div>
+            </div>  
+            <div class="row " style="margin-top: 20px;">
+              <div class="input-group mb-3 col-12">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone-alt"></i></span>
+                </div>
+                <input type="text"  id="telefono" class="form-control " placeholder="Numero Telefonico" aria-label="Username" aria-describedby="basic-addon1">
+                <div class="d-none col-12"  id="camp-vacio-telefono" style="font-size: smaller; color: red;">
+                 *Este campo es obligatorio.
+               </div>
+              </div>
+            </div>
+          </div>
+            </div>
+            <div style="margin-top:30px; float: right; ; color:#546991; " class=""><a class="col-6" style=" " onclick="atrasEmpresa()"><i class="fas fa-angle-left"></i><strong>Atrás</strong></a>
+              <a class="col-6" onclick=" registrarEmpresa()" style=" "><strong>Siguiente</strong> <i class="fas fa-chevron-right"></i></a></div>
+            
             </div>
            <!-----------------------FORMULARIO ADMINISTRADOR-->
           
-        <div id="panel-administrador" class="row col-12" style="margin-right: auto;margin-left: auto; padding-top: 50px; "  >
-          <div class="col-4" style="margin-left: auto; margin-right: auto; ">
-          <div id="form-Administrador col-4" style="margin-left: auto; margin-right: auto; ">
+        <div id="panel-administrador" class="row col-12" style=""  >
+          <div  class="col-12 pasos individual" style="display:none; margin-top: 5px;">
+            <p class="paso1" style="color:#536F97 ;" >3: Registra un administrador</p>
+            <div  class="barra" id="" style="background-color:#536F97 ;"></div>
+        </div>
+          <div class="col-lg-6 col-md-8 col-12" style="margin-left: auto; margin-right: auto; ">
+          <div id="form-Administrador col-4" style=" margin-right: auto;margin-left: auto; padding-top: 80px;  ">
             <div class="row " >
               <h6 style=" margin-left: auto; margin-right: auto; ">Detalles del administrador</h6>
              </div>
@@ -228,9 +228,9 @@
               <input id="usuario" style="font-size: smaller;" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="addon-wrapping">  
           </div>
           <div class=" d-none col-12"  id="camp-vacio-us" style="font-size: smaller; color: red;">
-            Debe llenar este campo, no sea imbecil.
+            Este campo es obligatorio.
           </div>
-         
+          
             <!--boton correo electronico-->
             <div class="input-group flex-nowrap botton form1"  >
               <div  class="input-group-prepend">
@@ -268,53 +268,59 @@
         </div>
         <div class="d-none col-12"  id="contraseña-no-coincide" style="font-size: smaller; color: red;">Las contraseñas no coinciden, intentelo nuevamente.</div>
         <div class="d-none col-12"  id="camp-vacio-contra2" style="font-size: smaller; color: red;">Las contraseñas no coinciden, intentelo nuevamente.</div>
+            <br>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkbox">
+              <label class="custom-control-label" for="checkbox">Confirmo ser administrador oficial de esta empresa.</label>
+            </div>
+            <br> 
+            <button id="button-reg" href="" type="button" id="btn-login-us" onclick="validacionCampos();" style=" background-color:#546991!important; border-color: #546991; margin-right: auto; margin-left: auto; width:100%; margin-bottom: 60px;"  class="btn btn-primary">Registrarse</button>
+            <br>
             
-            <button id="button-reg" href="" type="button" id="btn-login-us" onclick="validacionCampos();" style=" background-color:#546991!important; border-color: #546991; margin-right: auto; margin-left: auto; width:100%;"  class="btn btn-primary">Registrarse</button>
-            <br><br> 
-           
           </div>
-            
-          
+          <!--agregar-->
+          </div>
+          <div class="row" >
+            <div class="col-12" >
+              <div style="margin-top:50px; float: right; color:#546991;float: right;" class="col-12"><a class="col-6" style=" height: 50px;" onclick="atrasAdmin()"><i class="fas fa-angle-left"></i><strong>Atrás</strong></a>
+            </div>
+          </div>  
+          </div>   
         </div>
-                <!--agregar-->
-                <div class="row" >
-                  <div class="col-12" >
-                    <div style="margin-top:50px; float: right; color:#546991;float: right;" class="col-12"><a class="col-6" style=" height: 50px;" onclick="atrasAdmin()"><i class="fas fa-angle-left"></i><strong>Atrás</strong></a>
-                  </div>
-                </div>
-                </div>
-        </div>
-          <div id="verificacion" class="d-none">
-           
-              <section class="dark-grey-text p-5">
-            
+               
+                <!-- Default unchecked -->
+              
+
+      
+          <div id="verificacion" class="" style="margin-bottom:5px;">
+            <div id="" class="col-3 pasos individual"  style="display:none">
+              <p class="paso1" id="texto4">4: verificación de Registro</p>
+              <div  class="barra" id=""></div>
+          </div>
+              <section class="dark-grey-text p-4">
                 <div class="row">
-            
                   <div class="col-md-5 mb-4 mb-md-0">
-            
                     <div class="view">
-                      <img src="img/prueba1 (4).png" class="img-fluid" alt="smaple image">
+                      <img src="img/prueba1 (3).png" class="img-fluid" alt="smaple image">
                     </div>
-            
                   </div>
-                 
                   <div class="col-md-7 mb-lg-0 mb-4">
-            
                     <form class="" action="">
-            
                       <h3 class="font-weight-bold my-3">Código de verificación</h3>
-                      
                       <p class="text-muted mb-4 pb-2">Hemos enviado un código de verificación a la dirección de correo electrónico del administrador, porfavor ingresa el código para activar tu cuenta.</p>
-             
                       <div class="input-group">
                         <input type="" class="form-control" placeholder="" id="code" aria-label="Enter your email address"
                           aria-describedby="button-addon2">
                         <div class="input-group-append">
-                        
-                          <a onclick="verificarCodigo()" id="button-addon2" class="btn btn-md btn-primary rounded-right m-0 px-3 py-2 z-depth-0 waves-effect" >VERIFICAR</a>
+                          <a onclick="verificarCodigo()" id="button-addon2" style="background-color: #51668C!important; border: 0;" class="btn btn-md btn-primary rounded-right m-0 px-3 py-2 z-depth-0 waves-effect" >VERIFICAR</a>
                         </div>
                       </div>
+                      <br>
+                        <br>
+                        <p style="font-size: 13px;" class="text-muted mb-4 pb-2">Si el mensaje no ha sido recibido es posible que hayas ingresado un dirección de correo electrónico inválida.<a style="font-weight: bold; color: #546991;" onclick="enviarCodigo()">Volver a enviar código</a></p>
                       <small class="form-text black-text d-none" id="txt-error" style="color:red"><strong style="color:red">*ingresa el código de verificación.</strong></small>
+                      <small class="form-text black-text d-none" id="code-invalid" style="color:red"><strong style="color:red">*El código de verificación es inválido.</strong></small>
+                      <small class="form-text black-text d-none" id="code-expired" style="color:red"><strong style="color:red">*El código de verificación a expirado.</strong></small>
                       
                     </form>
                     <!-- Form -->
@@ -328,13 +334,101 @@
               </section>
               <!--Section: Content-->
             
-            
+              <div class="row" >
+                <div class="col-12" >
+                  <div style="margin-top:40px; float: right; color:#546991;float: right;" class="col-12"><a class="col-6" style=" height: 50px;" onclick="atrasVerific()"><i class="fas fa-angle-left"></i><strong>Atrás</strong></a>
+                </div>
+              </div>
+              </div>
             
           </div>
+
+
+
+
+
+          <div id="estado" class="" style="margin-bottom:10px; ">
+            <section class="dark-grey-text p-5">
+              <div class="row">
+                <div class="col-12 py-10"  style="padding-top: 150px; margin-bottom:150px"> 
+                  <div class="col-md-7 mb-lg-0 mb-4" id="mensaje-error">
+                  </div>
+                  <div class="d-flex justify-content-center" id="spinner">
+                  <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem; color: #536F97!important;" >
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="row" >
+              <div class="col-12" >
+                <div style="margin-top:40px; float: right; color:#546991;float: right;" class="col-12"><a class="col-6" style=" height: 50px;" onclick="atrasVerific()"><i class="fas fa-angle-left"></i><strong>Atrás</strong></a>
+              </div>
+            </div>
+            </div>
+          
+        </div>
+
+        <div id="error" class="" style="margin-bottom:10px; ">
+          <section class="dark-grey-text p-5">
+            <div class="row">
+              <div class="col-12 py-10"  style="padding-top: 150px; margin-bottom:150px"> 
+                <div class="col-md-7 mb-lg-0 mb-4" id="mensaje-error">
+                </div>
+                <div class="d-flex justify-content-center" id="spinner">
+                  <div style="">
+                    <h4>Algo salio mal <i class="far fa-frown"></i></h4> 
+                    <p>El servidor no respondió, revisa tu conexión y vuelve a intentarlo</p>
+                  </div>
+                </div>
+              </div>
+        
+            </div>
+            <!-- Grid row -->
+            
+          </section>
+          <!--Section: Content-->
+        
+          <div class="row" >
+            <div class="col-12" >
+              <div style="margin-top:40px; float: right; color:#546991;float: right;" class="col-12"><a class="col-6" style=" height: 50px;" onclick="atrasVerific()"><i class="fas fa-angle-left"></i><strong>Atrás</strong></a>
+            </div>
+          </div>
+          </div>
+        
+      </div>
         </div>
         </div>
 
         
+<!--------  modal de bienvenida----------->
+<!-- Central Modal Small -->
+<div class="modal fade" id="modalInicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+
+<!-- Change class .modal-sm to change the size of the modal -->
+<div class="modal-dialog modal-lg" role="document">
+
+
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      ...
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+    </div>
+  </div>
+</div>
+</div>
 
        <script type="text/javascript" src="js/librerias/jquery.min.js"></script>
       <!-- Bootstrap tooltips -->
@@ -343,12 +437,14 @@
       <script type="text/javascript" src="js/librerias/bootstrap.min.js"></script>
       <!-- MDB core JavaScript -->
       <script type="text/javascript" src="js/librerias/mdb.min.js"></script>
+      <script type="text/javascript" src="resource/moment-with-locales.js"></script>
       <!-- Your custom scripts (optional) -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <!-- Bootstrap core JavaScript -->
       <script src="js/librerias/jquery.min.js"></script>
       <script src="js/librerias/bootstrap.bundle.min.js"></script>
       <script src="js/librerias/axios.min.js"></script>
+      <script src="js/controladores/estado_empresa.js"></script>
         <script src="js/controladores/validaciones.js"></script>
     <script src="js/controladores/controladorRegistroEmpresas.js"></script>
     <script src="js/controladores/validacionUsuario.js"></script>

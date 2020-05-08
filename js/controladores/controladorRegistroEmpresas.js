@@ -1,5 +1,28 @@
 var indexPlan;
 var planes1=[];
+var urlEmp='../../Hi-Offer/backend/api/empresas.php';
+var urlAdmin='../../Hi-Offer/backend/api/administradores.php';
+var empresa;
+var administrador;
+var indexEmp;
+var horaEnvio;
+
+var d = new Date();
+var month = new Array();
+month[0] = "January";
+month[1] = "February";
+month[2] = "March";
+month[3] = "April";
+month[4] = "May";
+month[5] = "June";
+month[6] = "July";
+month[7] = "August";
+month[8] = "September";
+month[9] = "October";
+month[10] = "November";
+month[11] = "December";
+var n = month[d.getMonth()];
+
 
 function paso1(){
     document.getElementById('barra1').style.backgroundColor="#546991";
@@ -10,7 +33,10 @@ function paso1(){
     document.getElementById('planes').style.display="block";
     document.getElementById('formulario').style.display="none";
     document.getElementById('panel-administrador').style.display="none";
-    
+    document.getElementById('verificacion').style.display="none";
+    document.getElementById('estado').style.display="none";
+    document.getElementById('error').style.display="none";
+
 } paso1();
 
 function paso2(index){
@@ -27,6 +53,11 @@ function paso2(index){
 function atrasEmpresa(){
     document.getElementById('planes').style.display="block";
     document.getElementById('formulario').style.display="none";
+    document.getElementById('barra1').style.backgroundColor="#546991";
+    document.getElementById('barra2').style.backgroundColor="#CCCCCC";
+    document.getElementById('texto2').style.color="#CCCCCC";
+    document.getElementById('texto1').style.color="#546991";
+
 }
 
 
@@ -100,7 +131,7 @@ function obtenerPlanes(){
 
 
 
-function registrarEmpresa(){
+function validarEmpresa(){
     console.log("Hello");
     let estado_vacio_NombreEmp=validarCampoVacio('NombreDeLaEmpresa');
     let estado_vacio_correoEmp=validarCampoVacio('correoEmpresa');
@@ -110,16 +141,15 @@ function registrarEmpresa(){
     let estado_vacio_paisEmp= validarCampoVacioSelect('pais','Pais');
     let estado_vacio_latitudEmp=validarCampoVacio('latitud');
     let estado_vacio_longitudEmp=validarCampoVacio('longitud');
-    let estado_vacio_facebookEmp=validarCampoVacio('facebook');
+   /* let estado_vacio_facebookEmp=validarCampoVacio('facebook');
     let estado_vacio_instagramEmp=validarCampoVacio('instagram');
-    let estado_vacio_twiterEmp=validarCampoVacio('twiter');
+    let estado_vacio_twiterEmp=validarCampoVacio('twiter'); */
     let estado_vacio_telefono=validarCampoVacio('telefono');
-    
+  
+    let validar_cordenadas=isValidCoordinates(document.getElementById("latitud").value, document.getElementById("longitud").value)
 
     let correo_valido_emp=validarEmail(document.getElementById('correoEmpresa'));
    
-
-
     //control de nombre empresa
     if(estado_vacio_NombreEmp){
         document.getElementById('camp-vacio-nombreEmpresa').classList.add('d-block');
@@ -203,20 +233,33 @@ function registrarEmpresa(){
         document.getElementById('camp-vacio-latitud').classList.add('d-block');
         document.getElementById('latitud').classList.add('is-invalid');
     }else{
-        document.getElementById('camp-vacio-latitud').classList.remove('d-block');
-        document.getElementById('latitud').classList.remove('is-invalid');
-       
+        if(validar_cordenadas==false){
+            document.getElementById('camp-vacio-latitud').classList.remove('d-block');
+            document.getElementById('latitud').classList.add('is-invalid');
+            document.getElementById('latitud-invalida').classList.add('d-block');
+        }else{
+            document.getElementById('camp-vacio-latitud').classList.remove('d-block');
+            document.getElementById('latitud').classList.remove('is-invalid'); 
+            document.getElementById('latitud-invalida').classList.remove('d-block');
+        }
+          
     }
     
     if(estado_vacio_longitudEmp){
         document.getElementById('camp-vacio-longitud').classList.add('d-block');
         document.getElementById('longitud').classList.add('is-invalid');
     }else{
+        if(!validar_cordenadas){
         document.getElementById('camp-vacio-longitud').classList.remove('d-block');
-       
+        document.getElementById('longitud').classList.add('is-invalid');
+        document.getElementById('longitud-invalida').classList.add('d-block');
+        }
+        document.getElementById('camp-vacio-longitud').classList.remove('d-block');
+        document.getElementById('longitud').classList.remove('is-invalid');
+        document.getElementById('longitud-invalida').classList.remove('d-block');
     }
 
-    if(estado_vacio_facebookEmp){
+  /*  if(estado_vacio_facebookEmp){
         document.getElementById('facebook').classList.add('is-invalid');
     }else{
         document.getElementById('facebook').style.borderColor="#ced4da";
@@ -240,13 +283,13 @@ function registrarEmpresa(){
     }else{
         document.getElementById('twiter').classList.remove('is-invalid');
        
-    }
+    }*/
     //validacion de Admin
     
    
-
-    if((estado_vacio_NombreEmp==false)&&(estado_vacio_correoEmp==false)&&(estado_vacio_esloganEmp==false)&&(estado_vacio_descripcionEmp==false)&&(estado_vacio_direccionEmp==false)&&(estado_vacio_paisEmp==false)&&(estado_vacio_latitudEmp==false)&&(estado_vacio_longitudEmp==false)&&(estado_vacio_facebookEmp==false)&&(estado_vacio_instagramEmp==false)&&(estado_vacio_twiterEmp==false)&&(correo_valido_emp)){
-        console.log("exito");
+    console.log(validar_cordenadas);
+    if((validar_cordenadas)&&(estado_vacio_NombreEmp==false)&&(estado_vacio_correoEmp==false)&&(estado_vacio_esloganEmp==false)&&(estado_vacio_descripcionEmp==false)&&(estado_vacio_direccionEmp==false)&&(estado_vacio_paisEmp==false)&&(estado_vacio_latitudEmp==false)&&(estado_vacio_longitudEmp==false)&&(correo_valido_emp)){
+      
        // window.location="InicioEmpresas.html";
        document.getElementById('formulario').style.display="none";
        document.getElementById('panel-administrador').style.display="block";
@@ -257,13 +300,16 @@ function registrarEmpresa(){
        document.getElementById('texto3').style.color="#546991";
        document.getElementById('texto4').style.color="#CCCCCC";
        document.getElementById('barra3').style.backgroundColor="#546991";
+       return true;
+    }else{
+        return false;
     }
     
 
 }
 
 
-function registrarEmpresa1(){
+function registrarEmpres(){
     document.getElementById('formulario').style.display="none";
     document.getElementById('panel-administrador').style.display="block";
     document.getElementById('barra2').style.backgroundColor="#CCCCCC";
@@ -277,17 +323,56 @@ function registrarEmpresa1(){
 
 
 
+function isValidCoordinates1(coordinates){
+    if (!coordinates.match(/^[-]?\d+[\.]?\d*, [-]?\d+[\.]?\d*$/)) {
+        return false;
+    }
+    const [latitude, longitude]=coordinates.split(",");
+    return (latitude>-90 && latitude<90 && longitude>-180 && longitude<180);
+}
 
+function isValidCoordinates(latitude,longitude){
+    let validlat=false;
+    let validlong=false;
+    var re1=/^[-]?\d+[\.]?\d*$/;
+    if(re1.test(latitude)){
+        validlat=true;
+    }
+    var re2=/^[-]?\d+[\.]?\d*$/;
+    if(re2.test(longitude)){
+        validlong=true;
+    }
+    
+    return (latitude>-90 && latitude<90 && longitude>-180 && longitude<180 && validlat && validlong);
+}
 
 function validacionCampos(){
    let  respuesta= validacionUsuario();
-   if(respuesta==true){
-    document.getElementById('verificacion').classList.remove('d-none');
+   let estado= document.getElementById("checkbox").checked;
+     if(!estado){
+        document.getElementById("checkbox").classList.add('is-invalid');
+     }else{
+        document.getElementById("checkbox").classList.remove('is-invalid');
+     }
+   if(respuesta&&estado){
+  
+    document.getElementById('estado').style.display="block";
     document.getElementById('panel-administrador').style.display="none";
     document.getElementById('texto3').style.color="#CCCCCC";
     document.getElementById('barra3').style.backgroundColor="#CCCCCC";
     document.getElementById('texto4').style.color="#546991";
     document.getElementById('barra4').style.backgroundColor="#546991";
+    
+ 
+    administrador={
+        "nombre_usuario":document.getElementById("usuario").value,
+        "correo_electronico":document.getElementById("email-usuario").value,
+        "contrasena":document.getElementById("contraseña").value,
+        "accion":"r"
+        
+    } 
+
+    enviarCodigo();
 
    }
 
@@ -296,25 +381,155 @@ function validacionCampos(){
 }
 
 function atrasAdmin(){
-    document.getElementById('formulario').style.display="block";
+  
     document.getElementById('panel-administrador').style.display="none";
-    document.getElementById('barra2').style.backgroundColor="#546991";
+    document.getElementById('texto4').style.color="#CCCCCC";
+    document.getElementById('verificacion').style.display="none"
+    document.getElementById('barra4').style.backgroundColor="#CCCCCC";
+    document.getElementById('formulario').style.display="block";
     document.getElementById('barra3').style.backgroundColor="#CCCCCC";
-    document.getElementById('texto3').style.color="#CCCCCC";
+    document.getElementById('barra2').style.backgroundColor="#546991";
     document.getElementById('texto2').style.color="#546991";
+    document.getElementById('texto3').style.color="#CCCCCC";
+    document.getElementById('texto4').style.color="#CCCCCC";
+    document.getElementById('barra4').style.backgroundColor="#CCCCCC";
+
 
 }
 
+
+function atrasVerific(){
+    document.getElementById('verificacion').style.display="none"
+    document.getElementById('panel-administrador').style.display="block";
+    document.getElementById('texto4').style.color="#CCCCCC";
+    document.getElementById('barra4').style.backgroundColor="#CCCCCC";
+    document.getElementById('formulario').style.display="none";
+    document.getElementById('barra2').style.backgroundColor="#CCCCCC";
+    document.getElementById('barra3').style.backgroundColor="#546991";
+    document.getElementById('texto3').style.color="#546991";
+    document.getElementById('texto2').style.color="#CCCCCC";
+}
+
+
+function registrarEmpresa(){
+    let permiso=validarEmpresa();
+    if(permiso){
+        //guardar la empresa*/
+        empresa={
+                "nombre_empresa": document.getElementById("NombreDeLaEmpresa").value,
+                "correoElectronico":document.getElementById("correoEmpresa").value,
+                "eslogan":document.getElementById("eslogan").value,
+                "descripcion":document.getElementById("descripcion").value,
+                "direccion":document.getElementById("direccion").value,
+                 "pais": document.getElementById("pais").value,
+                 "latitud":  document.getElementById("latitud").value,
+                "longitud":document.getElementById("longitud").value,
+                "facebook":document.getElementById("facebook").value,
+                "instagram":document.getElementById("instagram").value,
+                "twitter":document.getElementById("twiter").value,
+                "numeroTelefono":document.getElementById("telefono").value,
+                "diaReg":moment().format("YYYY-MM-DD"),
+                "mes":n
+        }
+
+     
+          }
+       
+
+
+    }
+
+    var codigo;
+    var horaRecp;
+    function enviarCodigo(){
+        document.getElementById('verificacion').style.display="none";
+        document.getElementById('estado').style.display="block";
+        
+         //Hacer una peticion GET para que el servidor  de administradoresenvie un correo y responda si todo esta bien
+        axios({
+            method:'GET',
+            url:urlAdmin+`?correo=${document.getElementById("email-usuario").value}`,
+            responseType:'json',
+        }).then(res=>{
+            try {
+                codigo=res.data.codigo;
+                console.log(res.data);
+                document.getElementById('verificacion').style.display="block";
+                document.getElementById('estado').style.display="none";
+                document.getElementById('mensaje-error').style.display="none";
+                horaEnvio=moment().format('HH:mm:ss');
+              }
+              catch(error) {
+                document.getElementById('estado').style.display="none";
+                document.getElementById('error').style.display="block";
+              }
+        }).catch(error=>{console.error("El error", error);
+        
+        });  
+    }
+        /*  la informacion se guardara hasta que el codigo de verificacion este bien  */
+
+        
+  
+ var plan;       
 function verificarCodigo(){
-    
-    let cam_vacio_codigo=validarCampoVacio('code'); 
+    /*agregar a la empresa la referencia al plan */
+    let referencia={
+        "indexPlan":indexPlan,
+        "accion":2
+    }
+  let cam_vacio_codigo=validarCampoVacio('code'); 
     if(cam_vacio_codigo){
         document.getElementById('txt-error').classList.remove('d-none');
     }else{
-        window.location="InicioEmpresas.html";
-    }
+        horaRecp=moment().format('HH:mm:ss');
+        console.log(document.getElementById("code").value,codigo)
+        if(document.getElementById("code").value==codigo){
+            axios({
+                method:'POST',
+                url:urlEmp,
+                responseType:'json',
+                data:empresa
+              }).then(res=>{
+                axios({
+                    method:'POST',
+                    url:urlAdmin,
+                    responseType:'json',
+                    data:administrador
+                  }).then(res=>{
+                    axios({
+                        method:'POST',
+                        url:urlEmp,
+                        responseType:'json',
+                        data:referencia
+                      }).then(res=>{
+                        window.location="InicioEmpresas.html";
+                      }).catch(error=>{console.error(error);
+                      }); 
+                  }).catch(error=>{console.error(error);
+                  }); 
+              }).catch(error=>{console.error(error);
+              });  
+              axios({
+                method:'GET',
+                url:urlEmp+`?accion=0`,
+                responseType:'json',
+            }).then(res=>{
+                console.log("indice Recibido",res.data)
+                indexEmpresa=res.data.indexEmpresa;
+                console.log(indexEmpresa);
+            }).catch(error=>{console.error(error);
+            }); 
+         }else{
+            document.getElementById('code-invalid').classList.remove('d-none');
+            document.getElementById('txt-error').classList.add('d-none');
+         }  
 
-
-}
-
+    } 
+}              
+            
+        
+        
+      
+        
 

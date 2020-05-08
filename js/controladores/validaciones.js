@@ -12,12 +12,13 @@ function validarContraseña(id){
 }
 
 function validarContraseñasIguales(password1,password2){
-    let validacion;
+    let validacion=false;
      if(password1==password2){  
          validacion=true;
-         
+         console.log("igulaes");
      }else{
-         validacion=false
+         validacion;
+         console.log("no");
      }
      return validacion;
  }

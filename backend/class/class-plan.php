@@ -125,7 +125,6 @@
         /************FUNCIONES DE GESTION DE INFORMACION********** */
     
      public function guardarPlan(){
-         echo $this->limitePromociones;
         $contenido_archivo= file_get_contents("../data/planes.json");
         $planes=json_decode($contenido_archivo,true);
         $planes[]= array(
@@ -144,6 +143,7 @@
 
          
     }
+
 
         public static function ObtenerPlanes(){
             $contenido_archivo=file_get_contents("../data/planes.json");

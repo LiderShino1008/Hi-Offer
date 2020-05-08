@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/all.css"><!--FontAwesome-->
     <link rel="stylesheet" href="css/Style_Inicio_Empresas.css">
+    
      <!-- Material Design Bootstrap -->
      <link rel="stylesheet" href="css/mdb.min.css">
     <!-- Your custom styles (optional) -->
@@ -22,11 +23,11 @@
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
-        <div class="border-right" id="sidebar-wrapper" style="padding-right: 0;" >
-         
-        <div class="imagen col-5  z-depth-1" id="logo-empresa"  ><span ><i class="fas fa-warehouse"></i></span></div>
-          <label for="logo-empresa" id="nombre_empresa">Nombre de la empresa</label>
-          <div class="list-group list-group-flush col-11 mx-auto"
+        <div class="border-right" id="sidebar-wrapper" style="padding-right: 0; " >
+         <div style="text-align: center;" class="container-fluid" id="cont-img-perfil">
+        <img class="mx-auto avatar rounded-circle foto-perfil2 z-depth-1"  style="height: 100px; width: 100px;" src="img/logoPerfil.png" id="logo-empresa" ></div>    
+        <div style="text-align: center;" id="cont-nombre" class="container-fluid"></div>
+          <div  class="list-group list-group-flush col-11 mx-auto"
           >
            
             <a href="#" onclick="dashboard()" id="item-dashboard"  class="list-group-item list-group-item-action item-sidebar"style="font-size: 13px;"><i style="margin: 7px;" class="fas fa-chart-bar"></i>Dashboard</a>
@@ -47,7 +48,7 @@
    
         <!-- Page Content -->
         <div id="page-content-wrapper" style="background-color: #eeeeee;">
-    
+          
           <nav class="navbar navbar-expand-lg navbar-light border-bottom " style="background-color: #ffffff; ">
             <div id="menu-toggle" style=" padding: 15px;  color: #546991; cursor: pointer;"><i style="color: seashell; font-size:x-large;  color: #546991;" class="fas fa-bars"></i></div>
             
@@ -589,64 +590,32 @@
             <div class="row">
               <div class="col-8">
                 <h5 id="dash">Dashboard</h5>
-              <label style="font-size: 13px; color: #B8BEC2; margin-top: -10px;" for="dash">Plan gratuito</label>
-              <span class="badge badge-warning mb-2 d-none">Premium</span>
+               <div id="cont-name-plan"></div> 
+    
               </div>
               <div class="col-lg-3 col-3" style="color: #ffffff; cursor: pointer; float:left;  font-size: 13px; margin-left: auto;"   data-toggle="modal" data-target="#modal-configuracion"> <p style="float: right;"><i    class="fas fa-cog" style="font-size: 13px; color:#ffffff; margin-right: auto;"></i> Configuración</p></div>
             </div>
-             
-            
             </div>
-
               <!---TARJETAS-->
             <section class="p-4">
             <div class="row " >
               <div class="container-fluid  py-2" style="width: 100%; margin-top: -90px;">
                 <section class="">
-                  <div class="row">
-                    <div class="col-lg-4 col-md-12 mb-4" m>
+                  <div class="row" >
+
+
+                    <div class="col-lg-4 col-md-12 mb-4" id="cont-card-ventas">
                       <!-- CARD VENTAS-->
-                      <div class="card mt-3">
-                        <div class="">
-                          <i class="far fa-money-bill-alt fa-lg  z-depth-2 p-4 ml-3 mt-n3 rounded text-white" style="background-color:#8BD0ED;"></i>
-                          <div class="float-right text-right p-3">
-                            <p class="text-uppercase text-muted mb-1"><small>Ventas</small></p>
-                            <h4 class="font-weight-bold mb-0">00 000$</h4>
-                          </div>
-                        </div>
-                        <div class="card-body pt-0">
-                          <div class="progress md-progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
-                              aria-valuemax="100"></div>
-                          </div>
-                          <p class="card-text">Tus ventas han aumentado un (0%)</p>
-                        </div>
-                      </div>
+                     
+
                     </div>
                     <!-- TERMINACION DE CAR VENTAS -->
                     <!--Aqui termina una columna en ka fila-->
               
                     <!--inicia la segunda columna-->
-                    <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="col-lg-4 col-md-6 mb-4" id="cont-card-seguidores">
                       <!-- CARD CLIENTES -->
-                      <div class="card mt-3">
-              
-                        <div class="">
-                          <i class="fas fa-chart-line fa-lg  z-depth-2 p-4 ml-3 mt-n3 rounded text-white" style="background-color:#8BD0ED;"></i>
-                          <div class="float-right text-right p-3">
-                            <p class="text-uppercase text-muted mb-1"><small>Clientes</small></p>
-                            <h4 class="font-weight-bold mb-0">0</h4>
-                          </div>
-                        </div>
-              
-                        <div class="card-body pt-0">
-                          <div class="progress md-progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
-                              aria-valuemax="100"></div>
-                          </div>
-                          <p class="card-text">Los clientes aumentaron un(0%)</p>
-                        </div>
-                      </div>
+                      
                     </div>
                     <!--TERMINA CARD CLIENTES-->
               
@@ -1590,8 +1559,71 @@
   </div>
 </div>
 
+<!--------  modal de bienvenida----------->
+<!-- Central Modal Small -->
+<div class="modal fade" id="modalInicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" >
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="border-radius: 20rem!important;">
+    <div class="modal-content">
+      <div class="container my-2 p-5 ">
+        <section class="dark-grey-text">
+          <div class="row pr-lg-5">
+            <div class="col-md-6 mb-4">
+              <div class="view">
+                <img src="img/prueba1 (5).png" class="img-fluid" alt="smaple image">
+              </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+              <div>
+                <h3 class="font-weight-bold mb-4">¡Bienvenido a Hi-Offer!</h3>
+      
+                <p>Estamos contentos de que formes  parte de nuestra comunidad,gracias a los servicios que Hi-Offer ofrece podrás tener el control total de tus ventas, se incluye dashboard administrativo en el que podras ver el crecimiento de tu empresa por medio de estadisticas.</p>
+                <p>¿Estas listo para llegar a mas personas?</p>
+                <button type="button" class="btn btn-orange btn-rounded mx-0" style="background-color: #536F97!important;" onclick="mostrarinfoPlan()">Empezar</button>
+      
+              </div>
+            </div>
+          </div>
+      
+        </section>
+        <!--Section: Content-->
+      
+      
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="modal fade" id="modalInicioPlan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" >
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="border-radius: 20rem!important;">
+    <div class="modal-content">
+      <div class="container my-5 py-2 ">
 
+        <section class="px-md-5 mx-md-5 dark-grey-text text-center text-lg-left">
+          <div class="row">
+            <div class="col-lg-7 mb-4 mb-lg-0">
+              <img src="img/logo2.png" class="img-fluid mb-5"
+                alt="" style="width:150px">
+              <div id="info">
+              <h3 class="font-weight-bold">Información</h3>
+              <p class="text-muted">Has adquirido el plan: </p> 
+              <p>Límite de promociones a registrar:</p>
+              <p>Plazos de pago:</p> 
+              <p>Tiempo de prueba gratuita:</p>
+            </div>
+              <a class="btn btn-primary btn-md ml-0" href="#" style="background-color:  #516C92!important;;" role="button">Aceptar<i class="fa fa-magic ml-2"></i></a>
+            </div>
+            <div class="col-lg-5 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
+                <i class="far fa-check-circle fa-10x " style="color: #516C92!important;"></i>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
 
@@ -1655,9 +1687,156 @@
 
 
 
+      <!---Modal de prueba gratuita finalizada-->
+          <div class="modal fade right" id="modalDiscount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" data-backdrop="true">
+            <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger" role="document">
+              <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                  <p class="heading">Prueba gratuita
+                  </p>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-3">
+                      <p></p>
+                      <p class="text-center">
+                        <i class="fas fa-gift fa-4x"></i>
+                      </p>
+                    </div>
+                    <div class="col-9">
+                      <p>El tiempo de prueba gratuita ha finalizado, si quieres continuar usando tu cuenta deberas realizar el pago correspondiente.</p>
+                      <p>Al no realizar tu pago, tu cuenta quedara deshabilitada temporalmente.</p>
+                    </div>
+                  </div>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer flex-center">
+                  <a  onclick="Pagar()" class="btn btn-danger"> Pagar ahora
+                    <i class="far fa-gem ml-1 white-text"></i>
+                  </a>
+                  <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal" style="padding-right: 8px; padding-left: 8px;">Continuar gratis</a>
+                </div>
+              </div>
+              <!--/.Content-->
+            </div>
+          </div>
+          <!--Modal: modalDiscount-->
 
-<!-- Bootstrap core JavaScript -->
-      <!-- /#wrapper -->
+
+
+          <!-------------MODAL PAGO PLAN----->
+          
+
+<!-- Central Modal Small -->
+<div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div class="container mt-2">
+              <section class="dark-grey-text">
+                  <div class="">
+                  <div class="">
+                    <div class="row">
+                      <div class="col-lg-8">
+                        <ul class="nav md-pills nav-justified pills-primary font-weight-bold">
+        
+                          <li class="nav-item">
+                            <a class="nav-link" style="color:#546991!important" data-toggle="tab" href="#tabCheckoutPayment123" role="tab">3. Forma de pago</a>
+                          </li>
+                        </ul>
+                        <!-- Pills panels -->
+                        <div class="tab-content pt-4">
+                          <!--Panel 2-->
+                          <div class="" id="tabCheckoutPayment123" role="">
+            
+                            <div class="d-block my-3 " style="margin-left: 20px;">
+                              <div class="mb-2">
+                                <input name="group2" type="radio" class="form-check-input with-gap" id="radioWithGap4" checked
+                                  required>
+                                <label class="form-check-label" for="radioWithGap4">Tarjeta de débito</label>
+                              </div>
+                              <div class="mb-2">
+                                <input iname="group2" type="radio" class="form-check-input with-gap" id="radioWithGap5"
+                                  required>
+                                <label class="form-check-label" for="radioWithGap5">Tarjeta de crédito</label>
+                              </div>
+                              <div class="mb-2">
+                                <input name="group2" type="radio" class="form-check-input with-gap" id="radioWithGap6" required>
+                                <label class="form-check-label" for="radioWithGap6">Paypal</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label for="cc-name123">Nombre titular</label>
+                                <input type="text" class="form-control" id="cc-name123" placeholder="" required>
+                                <small class="text-muted">Nombre completo</small>
+                                <div class="invalid-feedback">
+                                 Ingrese el nombre de la tarjeta
+                                </div>
+                              </div>
+                              <div class="col-md-6 mb-3">
+                                <label for="cc-number123">Número de tarjeta</label>
+                                <input type="text" class="form-control" id="cc-number123" placeholder="" required>
+                                <div class="invalid-feedback" id="numeroTarjeta">
+                                  Numero de tarjeta invalido
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-3 mb-3">
+                                <label for="cc-expiration123">Vence</label>
+                                <input type="text" class="form-control" id="cc-expiration123" placeholder="" required>
+                                <div class="invalid-feedback">
+                                 Debe ingresar la fecha de vencimiento
+                                </div>
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <label for="cc-cvv123">CVV</label>
+                                <input type="text" class="form-control" id="cc-cvv123" placeholder="" required>
+                                <div class="invalid-feedback">
+                                  debe ingresar el código de seguridad
+                                </div>
+                              </div>
+                            </div>
+                            <hr class="mb-4">
+  
+                            <button class="btn btn-primary btn-lg btn-block" onclick="cardFormValidate()" style="background-color: #546991!important;" type="">Autorizar pago</button>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-lg-4 mb-4">
+                        <div class="card z-depth-0 border border-light rounded-0">
+                          <div class="card-body">
+                            <h4 class="mb-4 mt-1 h5 text-center font-weight-bold">Total</h4>
+                            <hr>
+                            <div id="plan">
+                            </div>
+                            <hr>
+                            <dl class="row">
+                            </dl>
+                          </div>
+            
+                        </div>              
+                      </div>
+
+                    </div>
+            
+                  </div>
+                </div>
+              </section>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+     
       <script type="text/javascript" src="js/librerias/jquery.min.js"></script>
       <!-- Bootstrap tooltips -->
       <script type="text/javascript" src="js/librerias/popper.min.js"></script>
@@ -1665,16 +1844,20 @@
       <script type="text/javascript" src="js/librerias/bootstrap.min.js"></script>
       <!-- MDB core JavaScript -->
       <script type="text/javascript" src="js/librerias/mdb.min.js"></script>
-      <!-- Your custom scripts (optional) -->
-     <script src="js/librerias/bootstrap.bundle.min.js"></script>
-      <script src="js/librerias/bootstrap-datepicker.min.js"></script>
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="js/librerias/axios.min.js"></script>
+      <script type="text/javascript" src="resource/moment-with-locales.js"></script>
+      <script src="js/controladores/estado_empresa.js"></script>
       <script src="js/controladores/validaciones.js"></script>
       <script src="js/controladores/validacionUsuario.js"></script>
       <script src="js/controladores/controlador_inicio_Empresas.js"></script>
+      <!-- Your custom scripts (optional) -->
+     <script src="js/librerias/bootstrap.bundle.min.js"></script>
+     <script src="js/librerias/bootstrap-datepicker.min.js"></script>
+     
+     <script src="js//librerias/jquery.creditCardValidator.js"></script>
      
      
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=generarMapa"></script>
+     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=generarMapa"></script>-->
 
     
       <!-- Menu Toggle Script -->
@@ -1683,6 +1866,8 @@
           e.preventDefault();
           $("#wrapper").toggleClass("toggled");
         });
+
+       
       </script>
 </body>
 </html>
