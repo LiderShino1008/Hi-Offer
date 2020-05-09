@@ -75,6 +75,11 @@
                            "vendidas"=>0,
                            "carrito"=>0 ),
                         "ventas_semana"=>array(
+                            "info"=>array(
+                                "num_semana"=>date("W"),
+                                "dia_semana"=>date("w")-1,
+                                "total_semana"=>0
+                            ),
                             "domingo"=>0,
                             "lunes"=>0,
                             "martes"=>0,
@@ -165,6 +170,7 @@
             echo json_encode($indexEmpresa);
           }
 
+          
 
                                                           //OBTENER UNA EMPRESA
 /*************************************************************************************************************************************** */
@@ -191,6 +197,73 @@
                 fclose($archivo);
                 
                }
+
+               public static function generarTotalPromociones($id)
+               {
+                $contenido_archivo=file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $total=0;
+                echo sizeof($empresas[$id]["promociones"]);
+                if(sizeof($empresas[$id]["promociones"])>0){
+                    for($i=0; $i<sizeof($empresas[$id]["promociones"]); $i++){
+                        $total+=$empresas[$id]["promociones"][$i]["stock"];
+                    }
+                }
+                $empresas[$id]["estado"]["inventario"]["promocion"]=$total;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+                
+               }
+
+               public static function generarTotalProductos($id)
+               {
+                $contenido_archivo=file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $total=0;
+                if(sizeof($empresas[$id]["productos"])>0){
+                    for($i=0; $i<sizeof($empresas[$id]["productos"]); $i++){
+                        $total+=$empresas[$id]["productos"][$i]["stock"];
+                    }
+                }
+                $empresas[$id]["estado"]["inventario"]["registrados"]=$total;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+                
+               }
+
+
+               public static function generarProductosBajaExistencia($id)
+               {
+                $contenido_archivo=file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $total=0;
+                if(sizeof($empresas[$id]["productos"])>0){
+                    for($i=0; $i<sizeof($empresas[$id]["productos"]); $i++){
+                        if($empresas[$id]["productos"][$i]["stock"]<10){
+                            $total++;
+                        }
+
+                       
+                    }
+                }
+                $empresas[$id]["estado"]["inventario"]["exis_baja"]=$total;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+                
+               }
+
+
+
+               public static function obtenerSemana($id)
+                {
+                   $contenido_archivo=file_get_contents("../data/empresas.json");
+                   $empresas=json_decode($contenido_archivo,true);
+                   return $empresas[$id]["estado"]["ventas_semana"]["info"]["num_semana"];
+                }
+
 
                                                           //ACTUALIZAR UNA EMPRESA
 /*************************************************************************************************************************************** */
@@ -253,6 +326,8 @@
                 fclose($archivo);
              }
 
+            
+
              //PUT
             //Este metodo  incrementa la cantidad de seguidores cada vez que se hacer una peticion y verifica con que mes esta trabajando
              public static function incrementarSeguidores($indexEmp){
@@ -278,6 +353,7 @@
              }
 
              //Este metodo  incrementa las visitas cada vez que se hacer una peticion y verifica con que mes esta trabajando
+
              public static function incrementarVisitas($indexEmp){
                 $contenido_archivo2= file_get_contents("../data/plataforma.json");
                 $plataforma=json_decode($contenido_archivo2,true);
@@ -299,7 +375,140 @@
                 fwrite($archivo,json_encode($empresas)); 
                 fclose($archivo);
              }
-          
+             
+             public static function incrementarCarrito($indexEmp){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $temp= $empresas[$indexEmp]["estado"]["estado_promociones"]["carrito"];
+                $empresas[$indexEmp]["estado"]["estado_promociones"]["carrito"]=$temp+1;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+
+             public static function incrementarVendidos($indexEmp){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $temp= $empresas[$indexEmp]["estado"]["estado_promociones"]["carrito"];
+                $empresas[$indexEmp]["estado"]["estado_promociones"]["carrito"]=$temp+1;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+
+             public static function incrementarVentasDomingo($indexEmp,$cantidad){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["domingo"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["domingo"]=$temp+$cantidad;
+                $temp_total=$empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"]=$temp_total+$cantidad;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+
+             public static function incrementarVentasLunes($indexEmp,$cantidad){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["lunes"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["lunes"]=$temp+$cantidad;
+                $temp_total=$empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"]=$temp_total+$cantidad;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+
+             public static function incrementarVentasMartes($indexEmp,$cantidad){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["martes"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["martes"]=$temp+$cantidad;
+                $temp_total=$empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"]=$temp_total+$cantidad;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+
+             public static function incrementarVentasMiercoles($indexEmp,$cantidad){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["miercoles"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["miercoles"]=$temp+$cantidad;
+                $temp_total=$empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"]=$temp_total+$cantidad;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+
+             public static function incrementarVentasJueves($indexEmp,$cantidad){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["jueves"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["jueves"]=$temp+$cantidad;
+                $archivo=fopen("../data/empresas.json","w");
+                $temp_total=$empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"]=$temp_total+$cantidad;
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+
+             public static function incrementarVentasViernes($indexEmp,$cantidad){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["viernes"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["viernes"]=$temp+$cantidad;
+                $temp_total=$empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"]=$temp_total+$cantidad;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+
+             public static function incrementarVentasSabado($indexEmp,$cantidad){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["domingo"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["domingo"]=$temp+$cantidad;
+                $temp_total=$empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"];
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"]=$temp_total+$cantidad;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+
+
+             public static function iniciarSemana($indexEmp){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["total_semana"]=0;
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["domingo"]=0;
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["lunes"]=0;
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["martes"]=0;
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["miercoles"]=0;
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["jueves"]=0;
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["viernes"]=0;
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["sabado"]=0;
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["num_semana"]=date("W");
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+
+             public static function ActualizarDiaSemana($indexEmp,$dia){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $empresas[$indexEmp]["estado"]["ventas_semana"]["info"]["dia_semana"]=$dia;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
+             
+
+            
 
 
                                                           //ELIMINAR UNA EMPRESA
@@ -326,6 +535,16 @@
                 fclose($archivo);
 
             }
+
+            public static function DecrementarCarrito($indexEmp){
+                $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $temp= $empresas[$indexEmp]["estado"]["estado_promociones"]["carrito"];
+                $empresas[$indexEmp]["estado"]["estado_promociones"]["carrito"]=$temp-1;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+             }
             
             
 

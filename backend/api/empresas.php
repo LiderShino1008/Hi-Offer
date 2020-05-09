@@ -90,18 +90,25 @@
                   break;
                   case 4: //actualizar informacion
                     Empresa::generarTotalVentas($_GET['id']);
-                  
+                    Empresa::generarTotalPromociones($_GET['id']);
+                    Empresa::generarTotalProductos($_GET['id']);
+                    Empresa::generarProductosBajaExistencia($_GET['id']);
                   break;
                   case 5:
                   Empresa::incrementarSeguidores($_GET['id']);
                   break;
-
                   case 6;
                   Empresa::incrementarVisitas($_GET['id']);
                   break;
-
-                  
-                  
+                  case 7;
+                  Empresa::incrementarCarrito($_GET['id']);
+                  break;
+                  case 8;
+                  Empresa::incrementarVendidos($_GET['id']);
+                  break;
+                  case 9;
+                  Empresa::DecrementarCarrito($_GET['id']);
+                  break; 
                 }
 
             }else{ //sino, lo que se actualizara es la informacion
@@ -123,7 +130,6 @@
 
         break;
         case 'DELETE':
-        
             Empresa::eliminarEmpresa($_GET['id']); 
         break;
     } 

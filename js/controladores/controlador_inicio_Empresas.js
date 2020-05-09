@@ -358,29 +358,6 @@ function generarMapa1(){
 
 }
 
-// Doughnut
-var ctxD = document.getElementById("doughnutChart").getContext('2d');
-var myLineChart = new Chart(ctxD, {
-  type: 'doughnut',
-  data: {
-    labels: ["Vendidos", "Añadidos al carrito"],
-    datasets: [{
-      data: [100, 50],
-      backgroundColor: ["#8BD0ED", "#546991"],
-      hoverBackgroundColor: ["#8BD0ED", "#54699"]
-    }]
-  },
-  options: {
-    responsive: true,
-    legend: {
-      position: 'right',
-      align: 'center',
-      labels: {
-        padding: 20
-      }
-    }
-  }
-});
 
 
 var ctxD = document.getElementById("porcentaje-descuento").getContext('2d');
@@ -406,46 +383,6 @@ var myLineChart = new Chart(ctxD, {
   }
 });
 
-// Minimalist charts
-
-//bar
-var ctxB = document.getElementById("barChart").getContext('2d');
-var myBarChart = new Chart(ctxB, {
-  type: 'bar',
-  data: {
-    labels: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes","Sábado"],
-    datasets: [{
-      label: '# De ventas',
-      data: [12, 19, 3, 5, 2, 3,50],
-      backgroundColor: [
-        '#8BD0ED',
-        '#B8CCCB',
-        '#536F97',
-        '#AEC1E9',
-        '#918EAB',
-        '#184F78'
-      ],
-      borderColor: [
-        '#8BD0ED',
-        '#B8CCCB',
-        '#536F97',
-        '#AEC1E9',
-        '#918EAB',
-        '#184F78'
-      ],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
-    }
-  }
-});
 
 
 (function ($){
@@ -612,64 +549,227 @@ function sucursales(){
 
 /***************************************GENERANDO DASHBOARD****************************************************** */
 
-function generarDashboard(){
-  
-    total_inventario=cuentaEmpresa.estado.total_ventas;
-    total_vendido=cuentaEmpresa.estado.total_ventas_mes;
-    porcentaje=(total_vendido/total_inventario)*100
-    console.log("porcentaje", porcentaje); 
-    document.getElementById("cont-card-ventas").innerHTML="";
-    document.getElementById("cont-card-ventas").innerHTML+=`
-    <div class="card mt-3">
-    <div class="">
-      <i class="far fa-money-bill-alt fa-lg  z-depth-2 p-4 ml-3 mt-n3 rounded text-white" style="background-color:#8BD0ED;"></i>
-      <div class="float-right text-right p-3">
-        <p class="text-uppercase text-muted mb-1"><small>Ventas</small></p>
-        <h4 class="font-weight-bold mb-0">L ${total_vendido}</h4>
-      </div>
-    </div>
-    <div class="card-body pt-0">
-      <div class="progress md-progress">
-        <div class="progress-bar bg-success" role="progressbar" style="width: ${porcentaje}%;" aria-valuenow="0" aria-valuemin="0"
-          aria-valuemax="100"></div>
-      </div>
-      <p class="card-text">Has alcanzado el ${porcentaje}% de la ventas en este mes</p>
-    </div>
-  </div>`;
+    function generarDashboard(){
+      
+            total_inventario=cuentaEmpresa.estado.total_ventas;
+            total_vendido=cuentaEmpresa.estado.total_ventas_mes;
+            porcentaje=(total_vendido/total_inventario)*100
+            console.log("porcentaje", porcentaje); 
+            document.getElementById("cont-card-ventas").innerHTML="";
+            document.getElementById("cont-card-ventas").innerHTML+=`
+            <div class="card mt-3">
+            <div class="">
+              <i class="far fa-money-bill-alt fa-lg  z-depth-2 p-4 ml-3 mt-n3 rounded text-white" style="background-color:#8BD0ED;"></i>
+              <div class="float-right text-right p-3">
+                <p class="text-uppercase text-muted mb-1"><small>Ventas</small></p>
+                <h4 class="font-weight-bold mb-0">L ${total_vendido}</h4>
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div class="progress md-progress">
+                <div class="progress-bar bg-success" role="progressbar" style="width: ${porcentaje}%;" aria-valuenow="0" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+              <p class="card-text">Has alcanzado el ${porcentaje}% de la ventas en este mes</p>
+            </div>
+          </div>`;
 
-  let porcentaje2
-  total_seguidores_mes_actual=cuentaEmpresa.estado.total_seguidores;
-  total_seguidores_mes_pasado=cuentaEmpresa.estado.total_seguidoresPasado;
-  if( total_seguidores_mes_actual>total_seguidores_mes_pasado){
-    porcentaje2=(total_seguidores_mes_pasado/total_seguidores_mes_actual)*100;
-  }else{
-    porcentaje2=0;
-  }
+          let porcentaje2
+          total_seguidores_mes_actual=cuentaEmpresa.estado.total_seguidores;
+          total_seguidores_mes_pasado=cuentaEmpresa.estado.total_seguidoresPasado;
+          if( total_seguidores_mes_actual>total_seguidores_mes_pasado){
+            porcentaje2=100-((total_seguidores_mes_pasado/total_seguidores_mes_actual)*100);
+          }else{
+            porcentaje2=0;
+          }
 
-  
-  console.log("porcentaje Seguidores",porcentaje2);
+      
+          console.log("porcentaje Seguidores",porcentaje2);
 
-  document.getElementById("cont-card-seguidores").innerHTML="";
-  document.getElementById("cont-card-seguidores").innerHTML+=`<div class="card mt-3">
-  <div class="">
-    <i class="fas fa-chart-line fa-lg  z-depth-2 p-4 ml-3 mt-n3 rounded text-white" style="background-color:#8BD0ED;"></i>
-    <div class="float-right text-right p-3">
-      <p class="text-uppercase text-muted mb-1"><small>Seguidores</small></p>
-      <h4 class="font-weight-bold mb-0">${total_seguidores_mes_actual}</h4>
-    </div>
-  </div>
+          document.getElementById("cont-card-seguidores").innerHTML="";
+          document.getElementById("cont-card-seguidores").innerHTML+=`<div class="card mt-3">
+          <div class="">
+            <i class="fas fa-chart-line fa-lg  z-depth-2 p-4 ml-3 mt-n3 rounded text-white" style="background-color:#8BD0ED;"></i>
+            <div class="float-right text-right p-3">
+              <p class="text-uppercase text-muted mb-1"><small>Seguidores</small></p>
+              <h4 class="font-weight-bold mb-0">${total_seguidores_mes_actual}</h4>
+            </div>
+          </div>
 
-  <div class="card-body pt-0">
-    <div class="progress md-progress">
-      <div class="progress-bar bg-success" role="progressbar" style="width: ${porcentaje2}%;background-color:#B8CCCB" aria-valuenow="0" aria-valuemin="0"
-        aria-valuemax="100"></div>
-    </div>
-    <p class="card-text">Has superado un ${porcentaje2}% los seguidores del mes anterior </p>
-  </div>
-</div>`
-    
+          <div class="card-body pt-0">
+            <div class="progress md-progress">
+              <div class="progress-bar bg-success" role="progressbar" style="width: ${porcentaje2}%;background-color:#B8CCCB" aria-valuenow="0" aria-valuemin="0"
+                aria-valuemax="100"></div>
+            </div>
+            <p class="card-text">Has superado un ${porcentaje2}% los seguidores del mes anterior </p>
+          </div>
+        </div>`
+            
+        let porcentaje3;
+        total_visitas_mes_actual=cuentaEmpresa.estado.visitas;
+        total_visitas_mes_pasado=cuentaEmpresa.estado.visitaspasado;
+          if( total_visitas_mes_actual>total_visitas_mes_pasado){
+            porcentaje3=100-((total_visitas_mes_pasado/total_visitas_mes_actual)*100);
+          }else{
+            porcentaje3=0;
+          }
 
-}
+        document.getElementById("cont-card-visitas").innerHTML="";
+        document.getElementById("cont-card-visitas").innerHTML+=`<div class="card mt-3">
+        <div class="">
+          <i class="fas fa-chart-pie fa-lg  z-depth-2 p-4 ml-3 mt-n3 rounded text-white" style="background-color:#8BD0ED;"></i>
+          <div class="float-right text-right p-3">
+            <p class="text-uppercase text-muted mb-1"><small>Visitas</small></p>
+            <h4 class="font-weight-bold mb-0">${total_visitas_mes_actual}</h4>
+          </div>
+        </div>
+        <div class="card-body pt-0">
+          <div class="progress md-progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: ${porcentaje3}%" aria-valuenow="0" aria-valuemin="0"
+              aria-valuemax="100"></div>
+          </div>
+          <p class="card-text">Las visitas al perfil han aumentado en un  ${porcentaje3} %</p>
+        </div>
+
+      </div>`;
+
+
+
+      /************GENERANDO GRAFICO DE EL ESTADO DE LOS PRODUCTOS******************************* */
+      let promociones_vendidas=cuentaEmpresa.estado.estado_promociones.vendidas;
+      let promociones_carrito=cuentaEmpresa.estado.estado_promociones.carrito;
+      let total_promociones=cuentaEmpresa.estado.inventario.promocion;
+
+      let cantidad_inactivos= total_promociones-promociones_carrito-promociones_vendidas;
+      console.log("inactivos",cantidad_inactivos);
+
+          
+        // generar grafico
+        var ctxD = document.getElementById("doughnutChart").getContext('2d');
+        var myLineChart = new Chart(ctxD, {
+          type: 'doughnut',
+          data: {
+            labels: ["Vendidos", "Añadidos al carrito","Sin actividad"],
+            datasets: [{
+              data: [ promociones_vendidas,promociones_carrito,cantidad_inactivos],
+              backgroundColor: ["#8BD0ED", "#536F97"],
+              hoverBackgroundColor: ["#8BD0ED", "#536F97"]
+            }]
+          },
+          options: {
+            responsive: true,
+            legend: {
+              position: 'right',
+              align: 'center',
+              labels: {
+                padding: 20
+              }
+            }
+          }
+        });
+        
+        //porcentajes
+        let porcentaje_vendidos=(promociones_vendidas/total_promociones)*100;
+        let porcentaje_carrito=(promociones_carrito/total_promociones)*100;
+        let porcentaje_inactivos=(cantidad_inactivos/total_promociones)*100;
+
+        document.getElementById("cont-porcentajes").innerHTML="";
+        document.getElementById("cont-porcentajes").innerHTML+=`<a href="#!" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Vendidos
+        <span class="text-danger" style="color:#8BD0ED!important;font-weight:bold"> ${porcentaje_vendidos}%</span>
+      </a>
+      <a href="#!" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Añadidos al carrito
+        <span class="text-success" style="color:#536F97!important;font-weight:bold">${porcentaje_carrito}%</span>
+      </a>
+      <a href="#!" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Sin actividad
+        <span class="text-success" style="color:#706F6F!important;font-weight:bold">${porcentaje_inactivos}%</span>
+      </a>`;
+        
+        //generar grafico por semana
+
+        var ctxB = document.getElementById("barChart").getContext('2d');
+        var myBarChart = new Chart(ctxB, {
+          type: 'bar',
+          data: {
+            labels: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes","Sábado"],
+            datasets: [{
+              label: '#cantidad vendida',
+              data: [cuentaEmpresa.estado.ventas_semana.domingo, cuentaEmpresa.estado.ventas_semana.lunes,
+                      cuentaEmpresa.estado.ventas_semana.martes, cuentaEmpresa.estado.ventas_semana.miercoles,
+                      cuentaEmpresa.estado.ventas_semana.jueves, cuentaEmpresa.estado.ventas_semana.viernes,cuentaEmpresa.estado.ventas_semana.jueves],
+              backgroundColor: [
+                '#8BD0ED',
+                '#B8CCCB',
+                '#536F97',
+                '#AEC1E9',
+                '#918EAB',
+                '#184F78'
+              ],
+              borderColor: [
+                '#8BD0ED',
+                '#B8CCCB',
+                '#536F97',
+                '#AEC1E9',
+                '#918EAB',
+                '#184F78'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+
+
+          document.getElementById("porcentajes-semana").innerHTML="";
+          document.getElementById("porcentajes-semana").innerHTML+=`<a href="#" style="font-size: 13px; padding: 1px; text-align: center; float: inline-start;" class=" d-flex justify-content-between align-items-center">Esta Semana
+          <span class="">|  Total L. ${cuentaEmpresa.estado.ventas_semana.info.total_semana}</span>
+        </a>
+        <a href="#!" style="font-size: 13px; padding: 1px;  font-weight:bold" class="list-group-item list-group-item-action rounded-0 mb-1 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Domingo
+          <span class=""> ${Math.round((cuentaEmpresa.estado.ventas_semana.domingo/cuentaEmpresa.estado.ventas_semana.info.total_semana)*100)}% | L.${cuentaEmpresa.estado.ventas_semana.domingo}</span>
+        </a>
+        <a href="#" style="font-size: 13px; padding: 1px; font-weight:bold" class="list-group-item list-group-item-action rounded-0 mb-1 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Lunes
+          <span class=""> ${Math.round((cuentaEmpresa.estado.ventas_semana.lunes/cuentaEmpresa.estado.ventas_semana.info.total_semana)*100)}% | L.${cuentaEmpresa.estado.ventas_semana.lunes}</span>
+        </a>
+        <a href="#" style="font-size: 13px; padding: 1px; font-weight:bold" class="list-group-item list-group-item-action rounded-0 mb-1 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Martes
+        <span class=""> ${Math.round((cuentaEmpresa.estado.ventas_semana.martes/cuentaEmpresa.estado.ventas_semana.info.total_semana)*100)}% | L.${cuentaEmpresa.estado.ventas_semana.martes}</span>
+        </a>
+        <a href="#" style="font-size: 13px; padding: 1px; font-weight:bold" class="list-group-item list-group-item-action rounded-0 mb-1 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Miércoles
+        <span class=""> ${Math.round((cuentaEmpresa.estado.ventas_semana.miercoles/cuentaEmpresa.estado.ventas_semana.info.total_semana)*100)}% | L.${cuentaEmpresa.estado.ventas_semana.miercoles}</span>
+        </a>
+        <a href="#" style="font-size: 13px; padding: 1px; font-weight:bold" class="list-group-item list-group-item-action rounded-0 mb-1 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Jueves
+        <span class=""> ${Math.round((cuentaEmpresa.estado.ventas_semana.jueves/cuentaEmpresa.estado.ventas_semana.info.total_semana)*100)}% | L.${cuentaEmpresa.estado.ventas_semana.jueves}</span>
+        </a>
+        <a href="#" style="font-size: 13px; padding: 1px; font-weight:bold" class="list-group-item list-group-item-action rounded-0 mb-1 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Viernes
+        <span class=""> ${Math.round((cuentaEmpresa.estado.ventas_semana.viernes/cuentaEmpresa.estado.ventas_semana.info.total_semana)*100)}% | L.${cuentaEmpresa.estado.ventas_semana.viernes}</span>
+        </a>
+        <a href="#" style="font-size: 13px; padding: 1px; font-weight:bold" class="list-group-item list-group-item-action rounded-0 mb-1 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Sábado
+        <span class=""> ${Math.round((cuentaEmpresa.estado.ventas_semana.sabado/cuentaEmpresa.estado.ventas_semana.info.total_semana)*100)}% | L.${cuentaEmpresa.estado.ventas_semana.sabado}</span>
+        </a>`;
+
+        //generar el resumen de inventario
+        document.getElementById('cont-res-inventario').innerHTML="";
+        document.getElementById('cont-res-inventario').innerHTML+=`
+        <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Productos registrados (Stock)
+                            <span class="badge badge-info badge-pill">${cuentaEmpresa.estado.inventario.registrados}</span>
+                          </a>
+                          <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Productos en promocion (Stock)
+                            <span class="badge badge-success badge-pill">${cuentaEmpresa.estado.inventario.promocion}</span>
+                          </a>
+                          <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">productos con existencia baja
+                            <span class="badge badge-danger badge-pill">${cuentaEmpresa.estado.inventario.exis_baja}</span>
+                          </a>`;        
+    }
+
+
+
+
 
 function generarPlanDash(){
   document.getElementById('cont-name-plan').innerHTML="";
@@ -678,6 +778,8 @@ function generarPlanDash(){
   }else{
     document.getElementById('cont-name-plan').innerHTML=` <span class="badge badge-danger mb-2 ">${plan.nombre}</span>`
   }
+
+
 }
 
 
