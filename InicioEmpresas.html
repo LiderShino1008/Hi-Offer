@@ -56,6 +56,21 @@
     
           </nav>
           
+          <div class="container-fluid" style="height: 100vh;" id="Loading">
+            <div class="text-center">
+              <div class="spinner-border spinner-blue-only" role="status" style="margin-top: 20%; color:#546991;">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="container-fluid d-none" style="height: 100vh;" id="div-error">
+            <div class="text-center" style="margin-top: 20%; color:#546991;">
+              <div >
+               <h5>Error al cargar la información :(</h5>
+              </div>
+            </div>
+          </div>
 
           <!--INICIO DE CONTENEDOR  PRINCIPAL-->
          <div class="container-fluid" style="margin:0; padding: 0px">
@@ -679,7 +694,7 @@
 
             
                   <div class="row container-fluid" >
-                    <div class="row my-0">
+                    <div class="row my-0 mx-auto">
                     <div class="col-lg-4 col-12 my-0 "  >
                       <div class="card col-12 px-1 inventio-res">
                         <h6 class="text-center  font-weight-bold mt-3 mb-0">Resumen de inventario</h6>
@@ -696,35 +711,11 @@
                           <div class="row col-12 col-lg-12" style="margin-left: auto; margin-right: auto;"><!-- INICIO DE COMENTARIOS-->
                             <div class="card col-12 " style="background-color: #ffffff; margin-top: 0px; padding: 0px;">
                              <div style="background-color:#546991; color: #ffffff;  " class="container-fluid"><h5 style="text-align: center; font-size: 17px;" class="mt-2">Nuevos Comentarios</h5></div>
+                              <div id="cont-nuevos-comentarios">
                               
-                              <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-3 pl-3 pt-2">
-                                <img src="img/yo.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px;">
-                                <div class="chat-body white p-2 ml-2 z-depth-1">
-                                  <div class="header">
-                                    <strong class="primary-font">Gabriela Cabrera</strong>
-                                    <small class="pull-right text-muted"><i class="far fa-clock"></i> hace 12 minutos</small>
-                                  </div>
-                                  <hr class="w-100" style="margin-top: -1px;">
-                                  <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                    labore et dolore magna aliqua.
-                                  </p>
-                                </div>
-                              </li>
-                              <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-3 pl-3 pt-2">
-                                <img src="img/icono-user-default.png" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px;">
-                                <div class="chat-body white p-2 ml-2 z-depth-1">
-                                  <div class="header">
-                                    <strong class="primary-font">Usuario 2</strong>
-                                    <small class="pull-right text-muted"><i class="far fa-clock"></i> hace 12 minutos</small>
-                                  </div>
-                                  <hr class="w-100" style="margin-top: -1px;">
-                                  <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                    labore et dolore magna aliqua.
-                                  </p>
-                                </div>
-                              </li>
+  
+
+                            </div>
                             <div class="row pr-5 pl-5 c  mb-10"><a style="margin-left: auto; font-size: 14px;"  data-toggle="modal" data-target="#modal-ver-todos-los-comentaros">ver todos</a></div> 
                             </div>
                           </div>
@@ -743,38 +734,40 @@
            </div> <!--fin dashboard-->
 
 
-
-
-            <div class="perfil-empresarial" style="background-color: #ffffff;">
-            <div id="perfil-empresarial" style="background-color: #ffffff;" class="">
-              <div class="container-fluid portada"> <div class="row col-md-12 " style="margin-left: auto; margin-right: auto;"><!-- #foto de perfil y nombre de la empresa -->
-                
-                <img id="img-perfil" class=" avatar rounded-circle foto-perfil2 z-depth-1"src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" ></img>
-              
-              </div>
-              <div class="row" style="margin-right: auto; margin-left: auto;">
-                <div class="col-12 " style="text-align: center;" ><h6 class="nombre-emp">NOMBRE DE LA EMPRESA</h6>
-                  <p class="col-12" >Eslogan de la empresa.</p></div>
-              </div>
-              <div class="col-3 col-lg-1 editar ml-auto" onclick="editarPerfil()" id="editar" ><label onclick="editarPerfil()" >Editar perfil</label></div>
-              <div class="col-3 col-lg-1  ml-auto guardar" onclick="editarPerfil()" id="guardar" ><label onclick="editarPerfil()" >Guardar</label></div>
           
-              <div class="col-3 col-lg-2 col-10 ml-auto actualizar" id="editar-portada" ><label >Actualizar foto de portada</label><input type="file"  class="producto-img" style=" opacity: 0px;"  ></div>
-              <div class="col-3 col-lg-2 col-10 ml-auto actualizar" id="editar-perfil" ><label >Actualizar foto de perfil</label><input type="file"  class="producto-img" style=" opacity: 0px;"  ></div>
-              <div class="col-3 col-lg-2 col-10 ml-auto actualizar" id="editar-informacion" data-toggle="modal" data-target="#Modal-editar-info-empresas" ><label >Actualizar informacion</label></div>
+
+            <div class="perfil-empresarial" style="background-color: #ffffff;">            
              
+            <div id="perfil-empresarial" class=""  style="background-color: #ffffff; margin-left:0px; margin-right: 0px;" class="">
+              <div class=" portada view overlay zoom " style=" background-color:#eeeeee;" id="visor-banner" > 
+                <button class="btn editar  mr-0" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"><i class="fas fa-camera" onclick=""></i></button>
+                <div class="dropdown-menu" style="padding: 3px!important">
+                <a class="dropdown-item" type="button" onclick=" resetModalBanner()" style="font-size: 13px;" data-toggle="modal" data-target="#modal-banner">Editar Banner </a>
+                <a class="dropdown-item" data-toggle="modal" onclick=" resetModalLogotipo()" data-target="#modal-logotipo" style="font-size: 13px;">Editar Logotipo</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" style="font-size: 13px;"  data-toggle="modal" data-target="Modal-editar-info-empresas">Editar informacion</a>
+                
+
+              </div>
+                
+              <div class="row container-fluid col-md-12 " id="cont-logotipo" style="margin-left: auto; margin-right: auto;"><!-- #foto de perfil y nombre de la empresa -->
+                
+                <img id="img-perfil" class=" avatar rounded-circle foto-perfil2 z-depth-1"src="img/logoPerfil.png" style="width: 200px!important; margin-bottom: 30px; height: 200px; margin-top: 50px!important;" alt="avatar" ></img>
+               
+              </div>
+              <div class="titulo" style="margin-right: 0; margin-left: 0;" id="div-general">
+                
+              </div>
+             
+            <!--- <div class="col-3 col-lg-1  ml-auto guardar" onclick="editarPerfil()" id="guardar" ><label onclick="editarPerfil()" >Guardar</label></div> -->
+                
             </div>
               <!-- #BODY -->
-                <div class="container-fluid" style="background-color: #FFFFFF;">
+                <div class="container-fluid mx-auto" style="background-color: #FFFFFF;">
                   <div class="row pb-3" style="margin-bottom: 30px;">
                     
                     <div class="col-12 col-lg-6">
-                      <!-- #foto de perfil y nombre de la empresa -->
-                      <!--<div class="row">
-                        <div class="col-3 foto-perfil" ></div>
-                        <div class="col-8 info-emp" ><h6 class="nombre-emp">NOMBRE DE LA EMPRESA</h6>
-                        <p class="eslogan-emp" >Eslogan de la empresa.</p></div>
-                      </div> ---->
                       <div class="row" style="margin-top: 20px;">
                         <div class="col-8 mx-auto col-md-7 descripcion">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, officiis beatae corrupti est quisquam nostrum ex eius culpa vel, rem rerum incidunt assumenda iure quasi nisi labore dolor magnam voluptates.</div>
                         <div class="linea" id="linea"></div>
@@ -896,76 +889,13 @@
       </div>
       <div class="modal-body">
         <!--nody-->
-        <div class="row col-12 col-lg-12" style="margin-left: auto; margin-right: auto;"><!-- INICIO DE COMENTARIOS-->
-     
-          
-            <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-1 pl-1 pt-2">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px;">
-              <div class="chat-body white p-2 ml-2 z-depth-1">
-                <div class="header">
-                  <strong class="primary-font">Usuario 1</strong>
-                  <small class="pull-right text-muted"><i class="far fa-clock"></i> hace 12 minutos</small>
-                </div>
-                <hr class="w-100" style="margin-top: -1px;">
-                <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua.
-                </p>
-              </div>
-            </li>
-            <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-1 pl-1 pt-2">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px;">
-              <div class="chat-body white p-2 ml-2 z-depth-1">
-                <div class="header">
-                  <strong class="primary-font">Usuario 1</strong>
-                  <small class="pull-right text-muted"><i class="far fa-clock"></i> hace 12 minutos</small>
-                </div>
-                <hr class="w-100" style="margin-top: -1px;">
-                <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua.
-                </p>
-              </div>
-            </li>
-            <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-1 pl-1 pt-2">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px;">
-              <div class="chat-body white p-2 ml-2 z-depth-1">
-                <div class="header">
-                  <strong class="primary-font">Usuario 1</strong>
-                  <small class="pull-right text-muted"><i class="far fa-clock"></i> hace 12 minutos</small>
-                </div>
-                <hr class="w-100" style="margin-top: -1px;">
-                <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua.
-                </p>
-              </div>
-            </li>
-            <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-1 pl-1 pt-2">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px;">
-              <div class="chat-body white p-2 ml-2 z-depth-1">
-                <div class="header">
-                  <strong class="primary-font">Usuario 2</strong>
-                  <small class="pull-right text-muted"><i class="far fa-clock"></i> hace 12 minutos</small>
-                </div>
-                <hr class="w-100" style="margin-top: -1px;">
-                <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua.
-                </p>
-              </div>
-            </li>
-          
+        <div class="row col-12 col-lg-12" style="margin-left: auto; margin-right: auto;" id="cont-comentarios"><!-- INICIO DE COMENTARIOS-->
+       
         </div>
       </div>
       <div class="modal-footer">
-        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-1 ml-0 z-depth-1 col-1" style="height: 40px;">
-        <div class="white col-8">
-          <div class="form-group basic-textarea">
-            <textarea class="form-control pl-1 my-0" id="exampleFormControlTextarea2" rows="2" placeholder="Agrega un comentario"></textarea>
-          </div>
-        </div>
-        <button type="button" class="btn btn-x btn-rounded btn-sm waves-effect waves-light float-right" style="background-color: #546991;">Enviar</button>
+        
+        <button onclick=" $('#modal-ver-todos-los-comentaros').modal('hide');" type="button" class="btn btn-x btn-rounded btn-sm waves-effect waves-light float-right" style="background-color: #546991;">Cerrar</button>
       </ul>
       </div>
     </div>
@@ -1543,6 +1473,58 @@
 
 
 
+<div class="modal fade bd-example-modal-xl"  id="modal-logotipo" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header" style="background-color: #546991; color: #ffffff;">
+      <h6>Logotipo (vista previa)</h6>
+      <h5 class="modal-title" id="exampleModalLongTitle" style="margin-left: 200px; margin-right: auto; font-size: 15px;"></h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="height: 80%;">
+      <p style="font-size: 13px;">¡Agrega un logotipo que indentifique a tu empresa!, en Hi-Offer creemos en la importancia de llamar la atención de tus clientes con un logotipo que te identifique.</p>
+     
+      <div class="custom-file">
+        <div>
+          <form id="form-logotipo">
+          <input type="file" onchange="return vistaLogotipo()" id="input-Logotipo" name="archivo" class="custom-file-input" id="customFileLang" lang="es">
+          <label class="custom-file-label" for="customFileLang">Seleccionar un logotipo</label>
+          <div class="invalid-feedback" id="img-invalid1" style="font-size:12px">
+            Debe seleccionar un archivo con la extensión jpg o png.
+          </div>
+        </form>
+        </div>
+       
+        <div style="text-align: center;" id="visor-logotipo">
+          <img id="img-perfil" class=" avatar rounded-circle foto-perfil2 z-depth-1"src="img/logotipo-subir.png" style="width: 200px!important; height: 200px; margin-top: 30px!important;" alt="avatar" >
+        </div>
+        <div class="card-body white">
+          <div class="view overlay zoom" id="">
+            
+         </div>
+        </div>  
+      </div>
+    </div>
+    <div class="modal-footer" id="footer-lg">
+      <div class="col-12">
+        <div class="progress md-progress" style="height: 20px!important;">
+          <div id="barra1" style="text-align: center;">
+          <span id="progreso1" style="color: #ffffff; font-size: 13px; margin-top: -5px;"></span></div>
+         
+        </div>
+        <button type="submit" id="btn-guardar" onclick="subirLogotipo();" style="border:0px ; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary ">Guardar</button>
+        <button type="button"  id="btn-guardar-cambios"  onclick="subir_imagen(1);" style=" border:0px; display: none; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary">Guardar cambios</button>
+     
+        <button type="button" id="btn-cancelar" onclick=" agregarPlan()" style="border:0px;background-color: #B8CCCB!important; float: right; font-size: 13px;" class="btn btn-primary ">Cancelar</button>
+        
+         </div>
+  </div>
+</div>
+</div>
+
 
 <!----------------------- FICHA PROMOCIONAL--------------------------->
 
@@ -1648,7 +1630,7 @@
 <!-- Central Modal Small -->
 <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
           <div class="container mt-2">
@@ -1656,88 +1638,121 @@
                   <div class="">
                   <div class="">
                     <div class="row">
-                      <div class="col-lg-8">
+                      <div class="col-lg-12">
                         <ul class="nav md-pills nav-justified pills-primary font-weight-bold">
         
                           <li class="nav-item">
-                            <a class="nav-link" style="color:#546991!important" data-toggle="tab" href="#tabCheckoutPayment123" role="tab">3. Forma de pago</a>
+                            <a class="nav-link" style="color:#546991!important" data-toggle="tab" href="#tabCheckoutPayment123" role="tab"> Forma de pago</a>
                           </li>
                         </ul>
                         <!-- Pills panels -->
-                        <div class="tab-content pt-4">
+                        <div class="tab-content container t-4">
                           <!--Panel 2-->
-                          <div class="" id="tabCheckoutPayment123" role="">
-            
+                          <div class="row">
+                         
+                            
+                              <div class="col-lg-7 col-12">
+                            <div class="invalid-feedback" id="pay-form">
+                              Debe Seleccionar una forma de pago.
+                              </div>
                             <div class="d-block my-3 " style="margin-left: 20px;">
+                              
                               <div class="mb-2">
-                                <input name="group2" type="radio" class="form-check-input with-gap" id="radioWithGap4" checked
-                                  required>
-                                <label class="form-check-label" for="radioWithGap4">Tarjeta de débito</label>
+                                <input name="group2"onclick="select1()"  type="radio" class="form-check-input with-gap" id="radioWithGap4" 
+                                  >
+                                <label class="form-check-label" style="font-size: 14px; " for="radioWithGap4">Tarjeta de débito</label>
                               </div>
                               <div class="mb-2">
-                                <input iname="group2" type="radio" class="form-check-input with-gap" id="radioWithGap5"
-                                  required>
-                                <label class="form-check-label" for="radioWithGap5">Tarjeta de crédito</label>
+                                <input iname="group2" type="radio" onclick="select2()" class="form-check-input with-gap" id="radioWithGap5"
+                                  >
+                                <label class="form-check-label" style="font-size: 14px; " for="radioWithGap5">Tarjeta de crédito</label>
                               </div>
                               <div class="mb-2">
-                                <input name="group2" type="radio" class="form-check-input with-gap" id="radioWithGap6" required>
-                                <label class="form-check-label" for="radioWithGap6">Paypal</label>
+                                <input name="group2" type="radio" onclick="select3()" class="form-check-input with-gap" id="radioWithGap6" >
+                                <label class="form-check-label" style="font-size: 14px; " for="radioWithGap6">Paypal</label>
                               </div>
+                              
                             </div>
+                           
                             <div class="row">
                               <div class="col-md-6 mb-3">
-                                <label for="cc-name123">Nombre titular</label>
-                                <input type="text" class="form-control" id="cc-name123" placeholder="" required>
-                                <small class="text-muted">Nombre completo</small>
-                                <div class="invalid-feedback">
-                                 Ingrese el nombre de la tarjeta
+                                <label for="cc-name123" style="font-size: 14px; font-weight: bold;">Nombre titular</label>
+                                <input type="text" style="font-size: 14px; " class="form-control" id="cc-name123" placeholder="" required>
+    
+                                <div id="camp-nombre-tarjet-vacio" class="invalid-feedback">
+                                 Ingrese el nombre de la tarjeta.
                                 </div>
                               </div>
-                              <div class="col-md-6 mb-3">
-                                <label for="cc-number123">Número de tarjeta</label>
-                                <input type="text" class="form-control" id="cc-number123" placeholder="" required>
+                              <div class="col-md-6 mb-3" >
+                                <label for="cc-number123"style="font-size: 14px; font-weight: bold;" >Número de tarjeta</label>
+                                <input type="text" style="font-size: 14px; " class="form-control" id="cc-number123" placeholder="" required>
                                 <div class="invalid-feedback" id="numeroTarjeta">
-                                  Numero de tarjeta invalido
+                                  Numero de tarjeta invalido.
+                                </div>
+                                <div class="invalid-feedback" id="numeroTarjetaVacio">
+                                  Ingrese el número de tarjeta.
                                 </div>
                               </div>
                             </div>
                             <div class="row">
-                              <div class="col-md-3 mb-3">
-                                <label for="cc-expiration123">Vence</label>
-                                <input type="text" class="form-control" id="cc-expiration123" placeholder="" required>
-                                <div class="invalid-feedback">
-                                 Debe ingresar la fecha de vencimiento
+                              <div class="col-md-4 mb-3">
+                                <label for="cc-expiration123" style="font-size: 14px; font-weight: bold;" >Vence</label>
+                                <input type="text" class="form-control" style="font-size: 14px; "  id="cc-expiration123" placeholder="MM/YY " required>
+                                <div class="invalid-feedback" id="cc-expired-null">
+                                Campo obligatorio.
                                 </div>
+                                <div class="invalid-feedback" id="cc-expired-invalid">
+                                  Fecha de expiracion invalida.
+                                 </div>
                               </div>
-                              <div class="col-md-3 mb-3">
-                                <label for="cc-cvv123">CVV</label>
-                                <input type="text" class="form-control" id="cc-cvv123" placeholder="" required>
-                                <div class="invalid-feedback">
-                                  debe ingresar el código de seguridad
+                              <div class="col-md-4 mb-3">
+                                <label for="cc-cvv123" style="font-size: 14px; font-weight: bold;">CVV</label>
+                                <input type="text" class="form-control" style="font-size: 14px; " id="cc-cvv123" placeholder="" required>
+                                <div class="invalid-feedback" id="cvv-null">
+                                 Obligatorio.
                                 </div>
+                                <div class="invalid-feedback" id="cvv-invalid">
+                                  cvv invalido.
+                                 </div>
                               </div>
                             </div>
+                          </div>
+                          <div class="col-lg-5 col-12">
+                            <div class="col-lg-12 mb-4">
+                              <div class="card z-depth-0 border border-light rounded-0">
+                                <div class="card-body">
+                                  <h4 class="mb-4 mt-1 h5 text-center font-weight-bold">Total</h4>
+                                  <hr>
+                                  <div id="plan">
+                                  </div>
+                                  <hr>
+                                  <dl class="row">
+                                  </dl>
+                                </div>
+                  
+                              </div>              
+                            </div>
+                          </div>
+                         
+                          </div>
                             <hr class="mb-4">
-  
-                            <button class="btn btn-primary btn-lg btn-block" onclick="cardFormValidate()" style="background-color: #546991!important;" type="">Autorizar pago</button>
+                            
+                            <button  id="btn-one" class="btn btn-primary btn-lg btn-block col-4 mx-auto" onclick="cardFormValidate()" style="background-color: #546991!important; padding: 10px!important; font-size: 14px!important; float: right;" type="">Autorizar pago</button>
+                            
+                            <div class="alert alert-success d-none" role="alert" style="margin-top: 10px;" id="pay-exit" >
+                             Su pago se realizó correctamente, ¡ahora puedes seguir disfrutando de nuestros servicios!
+                            </div>
+                            <div class="alert alert-danger d-none" role="alert" style="margin-top: 10px;" id="pay-error" >
+                              ¡Opps! a ocurrido un error, porfavor vuelve a intentarlo.
+                            </div>
+
+                            <button  id="btn-next" class="btn btn-primary btn-lg btn-block col-4 mx-auto d-none" onclick="continuar()" style="background-color: #546991!important; padding: 10px!important; font-size: 14px!important;float: right;" type="">Continuar</button>
+                            
                           </div>
                         </div>
 
                       </div>
-                      <div class="col-lg-4 mb-4">
-                        <div class="card z-depth-0 border border-light rounded-0">
-                          <div class="card-body">
-                            <h4 class="mb-4 mt-1 h5 text-center font-weight-bold">Total</h4>
-                            <hr>
-                            <div id="plan">
-                            </div>
-                            <hr>
-                            <dl class="row">
-                            </dl>
-                          </div>
-            
-                        </div>              
-                      </div>
+                      
 
                     </div>
             
@@ -1750,6 +1765,62 @@
   </div>
 </div>
 
+
+
+
+<div class="modal fade bd-example-modal-xl"  id="modal-banner" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #546991; color: #ffffff;">
+        <h6>Banner (vista previa)</h6>
+        <h5 class="modal-title" id="exampleModalLongTitle" style="margin-left: 200px; margin-right: auto; font-size: 15px;"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height: 80%;">
+        <div class="custom-file">
+          <div>
+            <form id="form-subir">
+            <input type="file" onchange=" return validarBanner()" id="input-Banner" name="archivo" class="custom-file-input" id="customFileLang" lang="es">
+            <label class="custom-file-label" for="customFileLang">Seleccionar un Banner</label>
+            <div class="invalid-feedback" id="img-invalid" style="font-size:12px">
+              Debe seleccionar un archivo con la extensión jpg o png.
+            </div>
+          </form>
+          </div>
+         
+
+          <div class="card-body white">
+            <div class="view overlay zoom" id="visor-img">
+              
+           </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="modal-footer" id="footer">
+        <div class="col-12">
+          <div class="progress md-progress" style="height: 20px!important;">
+            <div id="barra" style="text-align: center;">
+            <span id="progreso" style="color: #ffffff; font-size: 13px; margin-top: -5px;"></span></div>
+           
+          </div>
+          <button type="submit" id="btn-guardar3" onclick="subir_banner(0);" style="border:0px ; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary ">Guardar</button>
+          <button type="button"  id="btn-guardar-cambios3"  onclick="subir_imagen(1);" style=" border:0px; display: none; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary">Guardar cambios</button>
+       
+          <button type="button" id="btn-cancelar" onclick=" agregarPlan()" style="border:0px;background-color: #B8CCCB!important; float: right; font-size: 13px;" class="btn btn-primary ">Cancelar</button>
+          
+           </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+    
 
      
       <script type="text/javascript" src="js/librerias/jquery.min.js"></script>

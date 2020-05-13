@@ -71,6 +71,7 @@
     }
 
     public static  function IncrementoGanancias($ganancias){
+        sleep(10);
         $contenido_archivo=file_get_contents("../data/plataforma.json");
         $plataforma=json_decode($contenido_archivo,true);
         $total= $plataforma[0]["ganancias"]+$ganancias;

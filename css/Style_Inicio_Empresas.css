@@ -66,14 +66,18 @@
 
 
     .editar{
-        margin-top: -200px;
-        padding: 5px;
-        background-color: rgba(0, 0, 0, 0.5);
-        font-size: 13px;
-        color: #EEEEEE;
+        margin-top: 20px!important;
+        padding: 6px!important;
+        background-color:white;
+        font-size: 14px!important;
         text-align: center;
         cursor: pointer;
-        border-radius: 0.2rem;
+        border-radius: 0.2rem!important;
+        font-size: 18px;
+        color: #546991;
+        width: 50px;
+      float: right;
+      position: absolute;
        
     } 
     
@@ -91,7 +95,8 @@
     }   
 
     .actualizar{
-        margin-top: 10px;
+        margin-top: -50px;
+        float: left;
         padding: 5px;
         background-color: rgba(0, 0, 0, 0.5);
         font-size: 12px;
@@ -99,7 +104,7 @@
         text-align: center;
         cursor: pointer;
         border-radius: 0.2rem;
-        display: none;
+        
        
     }    
 
@@ -117,7 +122,7 @@ height: 150px;
 .img-perfil{
     width: 150px;
     text-align: center;
-    margin-top: 50px;
+    margin-top: -100px!important;
     margin-left: 50px;
 }
 .paneles{
@@ -157,9 +162,15 @@ height: 150px;
     margin-right: auto;
     text-align: center;
     margin-bottom: 30px;
+   
     
 }
 
+.titulo{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white!important;
+    padding: 10px;
+}
 .item-sidebar1{
     font-family: 'Manrope', sans-serif;
     font-family: 'Baloo Bhaina 2', cursive;
@@ -236,8 +247,16 @@ height: 150px;
 }
 
 .portada{
-    background-color:#B4B4B4;
-    height: 300px;
+    
+    height: 400px!important;
+    background: no-repeat fixed center;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+  object-position: center;
+   width: 100% ;
+   text-align: center;
     
 }
 
@@ -321,7 +340,7 @@ height: 150px;
 }
 
 .descripcion{
-    margin-left: 50px;
+   
     text-align: justify;
     font-family: 'Lexend Giga', sans-serif;
     font-family: 'Libre Franklin', sans-serif;

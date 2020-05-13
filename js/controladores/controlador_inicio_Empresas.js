@@ -1,15 +1,35 @@
 var  urlEmpresa='../../Hi-Offer/backend/api/empresas.php';
 var urlPlanes='../../Hi-Offer/backend/api/planes.php';
 var urlPlataforma='../../Hi-Offer/backend/api/plataforma.php';
+var urlComentarios='../../Hi-Offer/backend/api/comentarios.php';
 var plan;
 var indexEmpresa;
 var empresa;
+
 
 /*
 console.log("mes",moment().format("YYYY-MM-DD"));
 fecha=moment().add(1, 'months').format("YYYY-MM-DD")
 console.log(fecha)
 */
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+  var form_banner=document.getElementById("form-subir");
+  form_banner.addEventListener("submit",function(event){
+    event.preventDefault();
+    subir_banner(this);
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+  var form_logotipo=document.getElementById("form-logotipo");
+  form_banner.addEventListener("submit",function(event){
+    event.preventDefault();
+    subirLogotipo(this);
+  });
+});
 
 var d = new Date();
 var month = new Array();
@@ -44,12 +64,23 @@ function actualizarPlataforma(){
    
 }actualizarPlataforma();
 
+//actualizar comentarios
+
+axios({
+  method:'GET',
+  url:urlComentarios,
+  responseType:'json',
+}).then(res=>{
+}).catch(error=>{console.error(error);
+}); 
+
+
 /***********************************FUNCIONES INICIALES************************************************ */
 
 
 function iniciar() {
   document.getElementById('item-dashboard').classList.add('seleccionar');
-  document.getElementById('dashboard').classList.remove('d-none');
+  
   document.getElementById('item-perfil').classList.remove('seleccionar');
   document.getElementById('perfil-empresarial').classList.add('d-none');
   document.getElementById('contenido').classList.add('d-none');
@@ -83,14 +114,32 @@ function obtenerInformacionGeneral(){
       url:urlEmpresa+`?id=${indexEmpresa}`,
       responseType:'json',
   }).then(res=>{
+    try {
       console.log(res.data);
       cuentaEmpresa=res.data;
+
+      document.getElementById("Loading").style.display="none";
+      document.getElementById('dashboard').classList.remove('d-none');
      // console.log(cuentaEmpresa);
       obtenerPlan();
       verificarEntrada();
       verificarPrueba();
       generarDashboard();
       llenarSidebar();
+      generarPerfil();
+     
+    }
+    catch(error) {
+      document.getElementById("div-error").classList.remove('d-none');
+      document.getElementById("div-error").classList.add('d-block');
+      document.getElementById('dashboard').classList.remove('d-block');
+      document.getElementById('dashboard').classList.add('d-none');
+
+    }
+
+
+
+
      
   }).catch(error=>{console.error(error);
   }); 
@@ -113,9 +162,11 @@ function actualizarEmpresa(id){
 }//
 /*******************************FUNCION PARA VERIFICAR SI ESTA ENTRANDO A SU CUENTA POR PRIMERA VEZ******************* */
 function verificarEntrada(){
-  if(cuentaEmpresa.estado.entrada==0){
-    $('#modalInicio').modal('show');
-   }
+  
+    if(cuentaEmpresa.estado.entrada==0){
+      $('#modalInicio').modal('show');
+     }
+  
 } 
 
 function  mostrarinfoPlan(){
@@ -158,29 +209,34 @@ function obtenerPlan(){
     plan=res.data;
     precioPlan=res.data.precio;
     diasPrueba=res.data.tiempoPruebaGratuita;
+    verificarPrueba();
     console.log(res.data.tiempoPruebaGratuita);
     llenarModalInfoPlan();
     llenarModalPagoPlan();
     generarPlanDash();
+    generarPerfil();
 }).catch(error=>{console.error(error);
 }); 
 }
 
 function verificarPrueba(){
-var fecha_actual=moment().format("YYYY-MM-DD");
+  if(cuentaEmpresa.estado.pago==0){
+    var fecha_actual=moment().format("YYYY-MM-DD");
 var fechaRegistro=moment(cuentaEmpresa.estado.diaReg);
 var fechaHoy=moment(fecha_actual);
 console.log(RegistroDate,fecha_actual);
 var diferencia=fechaHoy.diff(fechaRegistro, 'days');
 console.log("la diferencia es:", diferencia);
   //diasPrueba
-  if(diferencia>=diasPrueba && !(precioPlan==0)){
+  if(diferencia>=diasPrueba && (precioPlan!=0)){
     $('#modalDiscount').modal({backdrop: 'static', keyboard: false});
     $('#modalDiscount').modal('show');
    
   }else{
     console.log("todavia tiene Tiempo")
   }
+  }
+
 }
 
 
@@ -191,10 +247,10 @@ function llenarModalInfoPlan(){
     document.getElementById("info").innerHTML="";
     document.getElementById("info").innerHTML+=`
     <h3 class="font-weight-bold">Información</h3>
-              <p class="text-muted">Has adquirido el plan:${plan.nombre}</p> 
+              <p class="text-muted">Has adquirido el plan: ${plan.nombre}</p> 
               <p>Límite de promociones a registrar: ${plan.limitePromociones}</p>
-              <p>Plazos de pago:${plan.plazo}</p> 
-              <p>Tiempo de prueba gratuita:${plan.tiempoPruebaGratuita}</p>`
+              <p>Plazos de pago: ${plan.plazo}</p> 
+              <p>Tiempo de prueba gratuita: ${plan.tiempoPruebaGratuita} días</p>`
 }
  
 //Realizar pago del plan
@@ -230,70 +286,175 @@ function llenarSidebar(){
 }
 /* *******************************FUNCIONES DE VALIDACION******************************************* */ 
 
-//validar tarjeta
-function cardFormValidate(){
-  var cardValid = 0;
+function select1(){
+  $("radioWithGap5").removeAttr("checked");
+  $("#radioWithGap5").prop('checked', false);
+  $("#radioWithGap6").prop('checked', false);
+}
 
-  //card number validation
-  $('#cc-number123').validateCreditCard(function(result){
-      if(result.valid){
-          $("#numeroTarjeta").removeClass('d-block');
-          cardValid = 1;
-      }else{
-        $("#numeroTarjeta").addClass('d-block');
-          cardValid = 0;
-      }
-  });
-  
-  /*
-  //card details validation
-  var cardName = $("#name_on_card").val();
-  var expMonth = $("#expiry_month").val();
-  var expYear = $("#expiry_year").val();
-  var cvv = $("#cvv").val();
-  var regName = /^[a-z ,.'-]+$/i;
-  var regMonth = /^01|02|03|04|05|06|07|08|09|10|11|12$/;
-  var regYear = /^2017|2018|2019|2020|2021|2022|2023|2024|2025|2026|2027|2028|2029|2030|2031$/;
-  var regCVV = /^[0-9]{3,3}$/;
-  if (cardValid == 0) {
-      $("#card_number").addClass('required');
-      $("#card_number").focus();
-      return false;
-  }else if (!regMonth.test(expMonth)) {
-      $("#card_number").removeClass('required');
-      $("#expiry_month").addClass('required');
-      $("#expiry_month").focus();
-      return false;
-  }else if (!regYear.test(expYear)) {
-      $("#card_number").removeClass('required');
-      $("#expiry_month").removeClass('required');
-      $("#expiry_year").addClass('required');
-      $("#expiry_year").focus();
-      return false;
-  }else if (!regCVV.test(cvv)) {
-      $("#card_number").removeClass('required');
-      $("#expiry_month").removeClass('required');
-      $("#expiry_year").removeClass('required');
-      $("#cvv").addClass('required');
-      $("#cvv").focus();
-      return false;
-  }else if (!regName.test(cardName)) {
-      $("#card_number").removeClass('required');
-      $("#expiry_month").removeClass('required');
-      $("#expiry_year").removeClass('required');
-      $("#cvv").removeClass('required');
-      $("#name_on_card").addClass('required');
-      $("#name_on_card").focus();
-      return false;
+function select2(){
+  $("#radioWithGap6").prop('checked', false);
+  $("#radioWithGap4").prop('checked', false);
+}
+
+function select3(){
+  $("#radioWithGap4").prop('checked', false);
+  $("#radioWithGap5").prop('checked', false);
+}
+
+/*
+$('#btn-one').click(function() {
+  $('#btn-one').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Autorizando...').addClass('disabled');
+}); */
+//validar tarjeta
+
+function cardFormValidate(){
+  var estado=false;
+  console.log( $("#radioWithGap4").is(":checked"));
+ 
+  if($("#radioWithGap4").is(":checked") || $("#radioWithGap5").is(":checked") ||  $("#radioWithGap6").is(":checked") ){
+    estado=true;
+    $("#pay-form").removeClass('d-block');
+    $("#pay-form").addClass('d-none');
   }else{
-      $("#card_number").removeClass('required');
-      $("#expiry_month").removeClass('required');
-      $("#expiry_year").removeClass('required');
-      $("#cvv").removeClass('required');
-      $("#name_on_card").removeClass('required');
-      return true;
-  } */
+    $("#pay-form").addClass('d-block');
+    estado=false;
+  }
+
+  if($("#cc-name123").val()==""){
+    estado=false;
+    $("#camp-nombre-tarjet-vacio").addClass('d-block');
+  }else{
+    $("#camp-nombre-tarjet-vacio").removeClass('d-block');
+    $("#camp-nombre-tarjet-vacio").addClass('d-none');
+    estado=true;
+  }
+
+  console.log("number", $("#cc-number123").val())
+  if($("#cc-number123").val()==""){
+    $("#numeroTarjetaVacio").addClass('d-block');
+    $("#numeroTarjeta").removeClass('d-block');
+    $("#numeroTarjeta").addClass('d-none');
+    estado=false;
+  }else{
+    var re=/^4\d{3}-?\d{4}-?\d{4}-?\d{4}$/;
+    if(!(re.test($("#cc-number123").val()))){
+      $("#numeroTarjeta").removeClass('d-none');
+      $("#numeroTarjeta").addClass('d-block');
+      $("#numeroTarjetaVacio").removeClass('d-block');
+      $("#numeroTarjetaVacio").addClass('d-none');
+      estado=false;
+    }else{
+      $("#numeroTarjeta").removeClass('d-block');
+      $("#numeroTarjeta").addClass('d-none');
+      $("#numeroTarjetaVacio").removeClass('d-block');
+      $("#numeroTarjetaVacio").addClass('d-none');
+      estado=true;
+      console.log("numero exitoso")
+    }
+  
 } 
+
+
+  if($("#cc-expiration123").val()==""){
+    $("#cc-expired-null").removeClass('d-none');
+    $("#cc-expired-null").addClass('d-block');
+    $("#cc-expired-invalid").removeClass('d-block');
+    $("#cc-expired-invalid").addClass('d-none');
+    estado=false;
+  }else{
+    var re1=/^\d{2}\/\d{2}$/;
+    if(!(re1.test($("#cc-expiration123").val()))){
+      $("#cc-expired-null").removeClass('d-block');
+      $("#cc-expired-null").addClass('d-none');
+      $("#cc-expired-invalid").removeClass('d-none');
+      $("#cc-expired-invalid").addClass('d-block');
+      estado=false;
+    }else{
+      $("#cc-expired-null").removeClass('d-block');
+      $("#cc-expired-null").addClass('d-none');
+      $("#cc-expired-invalid").removeClass('d-block');
+      $("#cc-expired-invalid").addClass('d-none');
+      estado=true;
+    }
+  }
+
+  if($("#cc-cvv123").val()==""){
+    $("#cvv-null").removeClass('d-none');
+    $("#cvv-null").addClass('d-block');
+    estado=false;
+  }else{
+    var re2=/^[0-9]{3,4}$/;
+    if(!(re2.test($("#cc-cvv123").val()))){
+      $("#cvv-null").removeClass('d-block');
+      $("#cvv-null").addClass('d-none');
+      $("#cvv-invalid").removeClass('d-none');
+      $("#cvv-invalid").addClass('d-block');
+      estado=false;
+  }else{
+    $("#cvv-null").removeClass('d-block');
+    $("#cvv-null").addClass('d-none');
+    $("#cvv-invalid").removeClass('d-block');
+      $("#cvv-invalid").addClass('d-none');
+    estado=true;
+  }
+  }
+
+  if(estado){
+    $('#btn-one').click(function() {
+      $('#btn-one').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Autorizando...').addClass('disabled');
+    });
+
+    axios({
+      method:'PUT',
+      url:urlPlataforma+`?id=${2}`,
+      responseType:'json',
+      data:{
+        "ganancias":plan.precio
+      }
+  }).then(res=>{
+    $('#btn-one').addClass('d-none');
+    $('#pay-exit').removeClass('d-none');
+    $('#pay-exit').addClass('d-block');
+    $('#btn-next').removeClass('d-none');
+    $('#btn-next').addClass('d-block');
+    //PETICION PARA ACTUALIZAR PAGO EN LA EMPRESA
+    axios({
+      method:'PUT',
+      url:urlEmpresa+`?id=${indexEmpresa}`,
+      responseType:'json',
+      data:{
+        "accion":10,
+        "estado":1
+
+      }
+  }).then(res=>{
+   
+  }).catch(error=>{console.error(error);
+    console.log("entrada no actualizada")
+  }); 
+
+  }).catch(error=>{console.error(error);
+    $('#btn-one').addClass('d-none');
+    $('#pay-error').removeClass('d-none');
+    $('#pay-error').addClass('d-block');
+    setTimeout(console.log.bind(null, 'Two second later'), 8000);
+    $('#centralModalSm').modal('hide');
+    $('#modalDiscount').modal({backdrop: 'static', keyboard: false});
+    $('#modalDiscount').modal('show');
+  }); 
+
+  }
+ 
+    
+} 
+
+
+function continuar(){
+  $('#centralModalSm').modal('hide');
+}
+
+
 
 $(document).ready(function() {
   //card validation on input fields
@@ -327,14 +488,6 @@ function mostrarformulario(){
 
 }
 
-function editarPerfil(){
-  console.log("entre");
-  document.getElementById('editar').style.display="none";
-  document.getElementById('guardar').style.display="block";
-  document.getElementById('editar-portada').style.display="block";
-  document.getElementById('editar-perfil').style.display="block";
-  document.getElementById('editar-informacion').style.display="block";
-}
 
 function generarMapa(){
   document.getElementById('map-container-google-1').classList.remove('d-none');
@@ -764,7 +917,58 @@ function sucursales(){
                           </a>
                           <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">productos con existencia baja
                             <span class="badge badge-danger badge-pill">${cuentaEmpresa.estado.inventario.exis_baja}</span>
-                          </a>`;        
+                          </a>`;   
+                          
+                          
+
+       //generar seccion de nuevos comentarios
+       document.getElementById('cont-nuevos-comentarios').innerHTML="";
+       var comentarios=cuentaEmpresa.comentarios;
+       console.log(comentarios);
+       var reversed = comentarios.reverse();
+       for(let i=0; i<2; i++){
+        document.getElementById("cont-nuevos-comentarios").innerHTML+=`
+        <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-3 pl-3 pt-2">
+        <img src="${reversed[i].perfil}" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px; width:55px!important" >
+        <div class="chat-body white p-2 ml-2 z-depth-1 " style="width:100%">
+          <div class="header">
+            <strong class="primary-font" style="font-size:14px; font-weight:bold">${reversed[i].nombre_usuario}</strong>
+            <small class="pull-right text-muted"><i class="far fa-clock"></i> ${reversed[i].estado}</small>
+          </div>
+          <hr class="w-100" style="margin-top: -1px;">
+          <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
+          ${reversed[i].comentario}
+          </p>
+        </div>
+      </li>`
+
+     // const reversed = comentarios.reverse();
+     
+
+       }
+
+       var comentarios2=cuentaEmpresa.comentarios;
+        comentarios2=comentarios2.reverse();
+       document.getElementById('cont-comentarios').innerHTML="";
+       for(let j=0; j<cuentaEmpresa.comentarios.length; j++){
+         document.getElementById('cont-comentarios').innerHTML+=`
+         <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-1 pl-1 pt-2" style="width:100%">
+               <img src="${comentarios2[j].perfil}" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px; width:55px!important">
+               <div class="chat-body white p-2 ml-2 z-depth-1" style="width:100%">
+                 <div class="header">
+                   <strong class="primary-font" style="font-size:14px; font-weight:bold">${comentarios2[j].nombre_usuario}</strong>
+                   <small class="pull-right text-muted"><i class="far fa-clock"></i> ${comentarios2[j].estado}</small>
+                 </div>
+                 <hr class="w-100" style="margin-top: -1px;">
+                 <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
+                 ${comentarios2[j].comentario}
+                 </p>
+               </div>
+             </li>
+         `;
+       }
+ 
+       
     }
 
 
@@ -784,9 +988,268 @@ function generarPlanDash(){
 
 
 
+/**********************************FUNCIONES PARA ACTUALIZAR PERFIL****************************************************** */
+
+function test(){
+  console.log("esta es una prueba");
+}
+
+
+function validarBanner(){
+  console.log("validando imagen");
+  var archivoBanner=document.getElementById('input-Banner');
+  var rutaBanner=archivoBanner.value;
+  var exPermitidas=/(.PNG|.JPG)$/i;
+  console.log(archivoBanner.files[0].name);
+  if(!exPermitidas.exec(rutaBanner)){
+    document.getElementById('img-invalid').style.display="block";
+    archivoInput.value="";
+    return false; 
+  }else{
+      if(archivoBanner.files && archivoBanner.files[0]){
+        var portada=new FileReader();
+        portada.onload=function(e){
+          document.getElementById('visor-img').innerHTML=
+          '<img src="'+e.target.result+'" class="img-fluid " alt="zoom">'
+           return true;
+        }
+        portada.readAsDataURL(archivoBanner.files[0]);
+        document.getElementById('img-invalid').style.display="none";
+        document.getElementById("footer").style.display="block";
+       banner_guardar= archivoBanner.files[0].name;
+      }
+  }
+}
 
 
 
+function resetModalBanner(){
+  console.log("entre");
+   var archivoBanner=document.getElementById('input-Banner');
+   var clone=archivoBanner.cloneNode();
+   clone.value="";
+   archivoBanner.parentNode.replaceChild(clone, archivoBanner);
+   document.getElementById('img-invalid').style.display="none";
+   console.log("sali");
+   document.getElementById('visor-img').innerHTML=
+  '<img src="img/banner-default.png" class="img-fluid " alt="zoom">'
+  document.getElementById("footer").style.display="none";
+  document.getElementById('barra').style.width="0%";
+  document.getElementById("btn-guardar-cambios3").style.display="none";
+  document.getElementById("btn-guardar3").style.display="block";
+  
+}
+
+function resetModalLogotipo(){
+  console.log("entre");
+   var archivoBanner=document.getElementById('input-Banner');
+   var clone=archivoBanner.cloneNode();
+   clone.value="";
+   archivoBanner.parentNode.replaceChild(clone, archivoBanner);
+   document.getElementById('img-invalid').style.display="none";
+   console.log("sali");
+   document.getElementById('visor-img').innerHTML=
+  '<img src="img/logotipo-subir.png" class="img-fluid " alt="zoom">'
+  document.getElementById("footer-lg").style.display="none";
+  document.getElementById('barra1').style.width="0%";
+  document.getElementById("btn-guardar-cambios").style.display="none";
+  document.getElementById("btn-guardar").style.display="block";
+  
+}
 
 
 
+//subir banner al servidor
+
+function subir_banner(accion){
+  document.getElementById('barra').style.width="0%";
+  document.getElementById('barra').style.backgroundColor="white";
+  //peticion
+  let peticion=new XMLHttpRequest();
+  
+  //progreso
+  peticion.upload.addEventListener("progress",(event)=>{
+    /*para obtener el porcentaje de suida*/
+    /*total de bytes cargados entre el total*/
+    var porcentaje =Math.round((event.loaded/event.total)*100);
+    console.log(porcentaje);
+    document.getElementById('barra').style.width=porcentaje+"%";
+    document.getElementById('barra').style.backgroundColor="#546991";
+    document.getElementById('progreso').innerHTML=porcentaje+"%";
+  
+  });
+  
+    peticion.addEventListener("load",()=>{
+      /* cuando termine*/
+      document.getElementById('progreso').innerHTML="Proceso completado";
+      document.getElementById('input-Banner').value="";
+      if(accion==0){
+        guardar_banner();
+      }else{
+       // editarBanner();
+      }
+      
+    })
+    //enviar datos
+    peticion.open('post',`../../Hi-Offer/backend/GestionArchivos/directory_controllerEmp.php?id=${indexEmpresa}`);
+    peticion.send(new FormData(document.getElementById("form-subir")));
+  
+    // cancelar
+    document.getElementById('btn-cancelar').addEventListener("click",()=>{
+      peticion.abort();
+    })
+  } 
+
+
+
+function guardar_banner(){
+     axios({
+      method:'PUT',
+      url:urlEmpresa+`?id=${indexEmpresa}`,
+      responseType:'json',
+      data:{
+        "accion":1,
+        "Banner":banner_guardar
+      }
+    }).then(res=>{
+      obtenerEmpActualizada();
+     // generarPerfil();
+    }).catch(error=>{console.error(error);
+    }); 
+}
+
+
+function obtenerEmpActualizada(){
+   axios({
+    method:'GET',
+    url:urlEmpresa+`?id=${indexEmpresa}`,
+    responseType:'json',
+}).then(res=>{
+  try {
+    console.log(res.data);
+    cuentaEmpresa=res.data;
+    generarPerfil();
+    llenarSidebar();
+  }
+  catch(error) {
+    document.getElementById("div-error").classList.remove('d-none');
+    document.getElementById("div-error").classList.add('d-block');
+    document.getElementById('dashboard').classList.remove('d-block');
+    document.getElementById('dashboard').classList.add('d-none');
+
+  }
+  
+}).catch(error=>{console.error(error);
+});
+
+}
+
+
+  function generarPerfil(){
+    if(cuentaEmpresa.Banner!=0){
+      //var urString=
+      document.getElementById("visor-banner").style.backgroundImage=`url(${cuentaEmpresa.Banner})`;
+      
+    }if(!(cuentaEmpresa.logotipo==0)){
+      document.getElementById('cont-logotipo').innerHTML=`<img id="img-perfil" class=" avatar rounded-circle foto-perfil2 z-depth-1"src="${cuentaEmpresa.logotipo}" style="width: 200px!important; margin-bottom: 30px; height: 200px; margin-top: 50px!important;" alt="avatar" ></img>
+      `
+    }
+
+    document.getElementById('div-general').innerHTML=`<div class="col-12 " style="text-align: center; color: white!important;" ><h6 class="nombre-emp " style=" color: white!important;" >${cuentaEmpresa.nombre_empresa}</h6>
+    <p class="col-12" style="margin-bottom:10px" >"${cuentaEmpresa.eslogan}"</p></div>`
+
+    
+  }
+
+
+  
+
+
+  function vistaLogotipo(){
+    var archivoLog=document.getElementById("input-Logotipo");
+    var ruta=archivoLog.value;
+    let respuesta=validarImagen("input-Logotipo" );
+    if(!respuesta){
+      document.getElementById('img-invalid1').style.display="block";
+    }else{
+      var visor=new FileReader();
+      visor.onload=function(e){
+        document.getElementById('visor-logotipo').innerHTML=` <img id="img-perfil" class=" avatar rounded-circle foto-perfil2 z-depth-1"src="${e.target.result}" style="width: 200px!important; height: 200px; margin-top: 30px!important;" alt="avatar" >
+        `   
+      }
+      visor.readAsDataURL(archivoLog.files[0]);
+      document.getElementById('img-invalid1').style.display="none";
+      document.getElementById("footer-lg").style.display="block";
+      
+      
+    }
+  }
+
+
+  function subirLogotipo(){
+      document.getElementById('barra1').style.width="0%";
+      document.getElementById('barra1').style.backgroundColor="white";
+      //peticion
+      let peticion=new XMLHttpRequest();
+      //progreso
+      peticion.upload.addEventListener("progress",(event)=>{
+        /*para obtener el porcentaje de suida*/
+        /*total de bytes cargados entre el total*/
+        var porcentaje =Math.round((event.loaded/event.total)*100);
+        document.getElementById('barra1').style.width=porcentaje+"%";
+        document.getElementById('barra1').style.backgroundColor="#546991";
+        document.getElementById('progreso1').innerHTML=porcentaje+"%";
+      
+      });
+        peticion.addEventListener("load",()=>{
+          /* cuando termine*/
+          document.getElementById('progreso1').innerHTML="Proceso completado";
+          document.getElementById('input-Logotipo').value="";
+         
+          
+        })
+        //enviar datos
+        peticion.open('post',`../../Hi-Offer/backend/GestionArchivos/directory_controllerEmp.php?id=${indexEmpresa}`);
+        peticion.send(new FormData(document.getElementById("form-logotipo")));
+        
+        //peticion axios para guardar la referencia a la imagen en la infromacion de la empresa
+        axios({
+          method:'PUT',
+          url:urlEmpresa+`?id=${indexEmpresa}`,
+          responseType:'json',
+          data:{
+            "accion":0,
+            "logotipo":document.getElementById("input-Logotipo").files[0].name
+          }
+        }).then(res=>{
+          obtenerEmpActualizada();
+         // generarPerfil();
+        }).catch(error=>{console.error(error);
+        }); 
+
+        // cancelar
+        document.getElementById('btn-cancelar').addEventListener("click",()=>{
+          peticion.abort();
+        })
+  } 
+
+  
+
+
+
+//los parametros que recibe(id-input,)
+function validarImagen(idInput){
+  var archivo=document.getElementById(idInput);
+  var ruta=archivo.value;
+  var exPermitidas=/(.PNG|.JPG)$/i;
+  if(!exPermitidas.exec(ruta)){
+    archivo.value="";
+    return false; 
+  }else{
+      if(archivo.files && archivo.files[0]){
+           return  true;
+
+        //banner_guardar= archivoBanner.files[0].name;
+      }
+  }
+}

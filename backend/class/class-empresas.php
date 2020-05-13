@@ -70,6 +70,7 @@
                        "total_seguidoresPasado"=>0,
                        "total_seguidores"=>0,
                        "visitas"=>0,
+                       "pago"=>0,
                        "visitaspasado"=>0,
                        "estado_promociones"=>array(
                            "vendidas"=>0,
@@ -95,7 +96,7 @@
                         )
                     ),
                     "comentarios"=>[],
-                    "logotipo"=> 0,
+                    "logotipo"=> "img/logoPerfil.png",
                     "Banner"=>0,
                     "sucursales"=>[],
                     "productos"=>[],
@@ -113,7 +114,8 @@
                 $archivo=fopen("../data/plataforma.json","w");
                 fwrite($archivo,json_encode($plataforma)); 
                 fclose($archivo);
-            
+                mkdir("../archivos-subidos/empresas/empresa".$indexEmp, 0700);
+               
 
                 
            } 
@@ -176,11 +178,54 @@
 /*************************************************************************************************************************************** */
 
             public static function obtenerUnaEmpresa($id){
+             //Empresa::actualizarComentarios();
              $contenido_archivo=file_get_contents("../data/empresas.json");
              $empresas=json_decode($contenido_archivo,true);
              echo json_encode($empresas[$id]);
              }
 
+
+             
+
+             public static function actualizarComentarios(){
+
+               $contenido_archivo= file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                
+
+                for($i=0; $i<sizeof($empresas); $i++){
+                    //echo sizeof($empresas);
+                    for($j=0; $j<sizeof($empresas[$i]["comentarios"]);$j++){
+                        $fecha_post=$empresas[$i]["comentarios"][$j]["fecha_entrada"];
+                        $fecha_actual=date("d")."-".date("m")."-".date("Y");
+                        //Convierto ambas fechas en un objeto DateTime.
+                        $fecha_post=date_create($fecha_post);
+                        $fecha_actual=date_create($fecha_actual);
+                        //Comparo la diferencia que hay entre ambas fechas
+                        $resultado=$fecha_actual->diff($fecha_post);
+                        $resultado=$resultado->d;
+                       
+                        if(($resultado-1)<=1){
+                            switch($resultado-1){
+                                case 0:
+                                $empresas[$i]["comentarios"][$j]["estado"]=" hoy ";
+                                break;
+                                case 1:
+                                $empresas[$i]["comentarios"][$j]["estado"]=" Ayer ";
+                            }
+                        }else{
+                            $empresas[$i]["comentarios"][$j]["estado"]="hace ".($resultado-1)." dias";
+                        }
+                        
+                        $resultado=0;
+                    }
+                }
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+
+             }
+            
                //GET (cada vez que se obtiene la empresa se actualiza el total de las ventas de los productos que tiene)
                public static function generarTotalVentas($id)
                {
@@ -285,22 +330,26 @@
                 $archivo=fopen("../data/empresas.json","w");
                 fwrite($archivo,json_encode($empresas)); 
                 fclose($archivo);
-
+               
             }
 
             public static function actualizarLogotipo($id,$logotipo){
                 $contenido_archivo=file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
-                $empresas[$id]["logotipo"]= $logotipo;
+                $temp=$empresas[$id]["logotipo"];
+                $empresas[$id]["logotipo"]='backend/archivos-subidos/empresas/empresa'.$id.'/'.$logotipo;
                 $archivo=fopen("../data/empresas.json","w");
                 fwrite($archivo,json_encode($empresas)); 
                 fclose($archivo);
+                //eliminar archivo anterior
+                
+                unlink("../archivos-subidos/empresas/empresa".$id.'/'.$temp);
             }
 
             public static function actualizarBanner($id,$Banner){
                 $contenido_archivo=file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
-                $empresas[$id]["Banner"]= $Banner;
+                $empresas[$id]["Banner"]='backend/archivos-subidos/'.$Banner;
                 $archivo=fopen("../data/empresas.json","w");
                 fwrite($archivo,json_encode($empresas)); 
                 fclose($archivo);
@@ -310,6 +359,16 @@
                 $contenido_archivo=file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
                 $empresas[$id]["estado"]["entrada"]= $entrada;
+                $archivo=fopen("../data/empresas.json","w");
+                fwrite($archivo,json_encode($empresas)); 
+                fclose($archivo);
+            }
+
+            public static function actualizarPago($id,$entrada){
+                sleep(10);
+                $contenido_archivo=file_get_contents("../data/empresas.json");
+                $empresas=json_decode($contenido_archivo,true);
+                $empresas[$id]["estado"]["pago"]= $entrada;
                 $archivo=fopen("../data/empresas.json","w");
                 fwrite($archivo,json_encode($empresas)); 
                 fclose($archivo);

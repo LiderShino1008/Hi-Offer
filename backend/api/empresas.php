@@ -1,9 +1,13 @@
 
+
+
+
 <?php
     
     include_once('../class/class-empresas.php');
+    include('../class/class-comentario.php');
     header('Content-Type: application/json'); //main-type es el contenido de un archivo flujo
-
+    
     switch($_SERVER['REQUEST_METHOD']){
         case 'POST':   //Guardar 
             $_POST=json_decode(file_get_contents('php://input'),true);
@@ -49,7 +53,7 @@
         break;
         case 'GET':
             //obtener un plan
-           // 
+           //Comentario::actualizarEstadoComentariosEmp();      
             if(isset($_GET['accion'])){
                 switch(($_GET['accion'])){
                  case 0: //obtener un indice
@@ -59,6 +63,7 @@
             }else{
                 if(isset($_GET['id'])){
                     //Empresa::generarTotalVentas($_GET['id']);
+                    
                     Empresa::obtenerUnaEmpresa($_GET['id']); 
                 }else{
                     Empresa::ObtenerEmpresas(); 
@@ -77,6 +82,7 @@
                 
                 switch($_PUT['accion']){
                   case 0:
+                   
                     Empresa::actualizarLogotipo($_GET['id'],$_PUT['logotipo']);
                   break;
                   case 1:
@@ -93,6 +99,7 @@
                     Empresa::generarTotalPromociones($_GET['id']);
                     Empresa::generarTotalProductos($_GET['id']);
                     Empresa::generarProductosBajaExistencia($_GET['id']);
+                    Comentario::actualizarEstadoComentariosEmp();
                   break;
                   case 5:
                   Empresa::incrementarSeguidores($_GET['id']);
@@ -108,7 +115,9 @@
                   break;
                   case 9;
                   Empresa::DecrementarCarrito($_GET['id']);
-                  break; 
+                  break;
+                  case 10:
+                  Empresa::actualizarPago($_GET['id'],$_PUT['estado']); 
                 }
 
             }else{ //sino, lo que se actualizara es la informacion
