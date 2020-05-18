@@ -160,12 +160,14 @@
 
 
            public static function ObtenerEmpresas(){
+            actualizarComentarios();
             $contenido_archivo=file_get_contents("../data/empresas.json");
             echo $contenido_archivo;
         
           }
 
           public static function ObtenerIndice(){
+            actualizarComentarios();
             $contenido_archivo= file_get_contents("../data/empresas.json");
             $empresas=json_decode($contenido_archivo,true);
             $indexEmpresa=Array("indexEmpresa"=>sizeof($empresas)-1);
@@ -188,11 +190,8 @@
              
 
              public static function actualizarComentarios(){
-
                $contenido_archivo= file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
-                
-
                 for($i=0; $i<sizeof($empresas); $i++){
                     //echo sizeof($empresas);
                     for($j=0; $j<sizeof($empresas[$i]["comentarios"]);$j++){
@@ -349,7 +348,7 @@
             public static function actualizarBanner($id,$Banner){
                 $contenido_archivo=file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
-                $empresas[$id]["Banner"]='backend/archivos-subidos/'.$Banner;
+                $empresas[$id]["Banner"]='backend/archivos-subidos/empresas/empresa'.$id.'/'.$Banner;
                 $archivo=fopen("../data/empresas.json","w");
                 fwrite($archivo,json_encode($empresas)); 
                 fclose($archivo);

@@ -1,3 +1,4 @@
+
 <?php
     class Plan{ //Nombre en camelc $nombre;
       /*Atributos*/

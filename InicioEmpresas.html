@@ -14,7 +14,9 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
      <link href="css/simple-sidebar.css" rel="stylesheet">
      <link href="css/date-picket/bootstrap-datepicker.min.css" rel="stylesheet">
-     
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+     crossorigin=""/>
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
      <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet">
      <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Manrope:wght@200&display=swap" rel="stylesheet">
@@ -41,10 +43,10 @@
             <a href="#" data-toggle="modal" data-target="#modal-seguridad" class="list-group-item list-group-item-action item-sidebar "style="font-size: 13px;"><i style="margin: 7px;"  class="fas fa-user-shield"style="font-size: 13px;"></i>Seguridad</a>
             <a href="#" class="list-group-item list-group-item-action item-sidebar "style="font-size: 13px;"><i style="margin: 7px;"  class="fas fa-cog"style="font-size: 13px;"></i>Eliminar cuenta</a>
             <a href="#" class="list-group-item list-group-item-action item-sidebar "style="font-size: 13px;"><i style="margin: 7px;"  class="fas fa-user"style="font-size: 13px;"></i>Cerrar Sesión</a>
-            
+         
           </div>
         </div>
-        <!-- /#sidebar-wrapper -->
+        <!-- /#sidebar-wrapperg -->
    
         <!-- Page Content -->
         <div id="page-content-wrapper" style="background-color: #eeeeee;">
@@ -81,468 +83,108 @@
            <div id="sucursales" class="d-none m-5">
              <div class="row">
               <h5 class="font-weight-bold mt-5 mb-1  col-6 col-md-10" style="color: #6B767A;">Sucursales</h5>
-              <div class="col-6 col-lg-2   align-text-bottom container-fluid mt-auto " style="margin-top: 50px;">
-                <label class="align-text-bottom" for="barra-nueva" id="hover-text" onclick="mostrarFormSucursal()" style="font-size: small;">Nueva sucursal</label>
+              <div class="col-6 col-lg-2  align-text-bottom container-fluid mt-auto " style="margin-top: 50px;">
+                <label class="align-text-bottom" for="barra-nueva" id="hover-text" onclick="resetModalSurcursal()" data-toggle="modal" data-target="#form-sucursales" style="font-size: small;">Nueva sucursal</label>
                 <div id="barra-nueva" class="cambiar-color align-text-bottom col-12" style=" width: 105px; height: 3px; background-color:#6B767A; ;"></div>
                </div>
               </div>
               <hr>
-              <section class=" card container-fluid col-lg-10 col-12 mx-auto   wow slideInRight d-none" id="form-sucursal" style="padding-top: 15px;">
-               <div class="row">
-                    <div class="col-md-6">
-                    <div class="col-12 mb-20" > 
-                      <div class="md-form mb-0">
-                         <input type="text" id="form-nombre-producto" class="form-control ">
-                         <label for="form-nombre-producto" class="">Nombre de la sucursal</label>
-                     </div>
-                      <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-                           Este campo no puede estar vacio.
-                      </div>
-                    <div class="row" style="margin-bottom: 50px;">
-                    <div class="md-form mb-0 col-12 col-md-6">
-                      <div class="md-form mb-0">
-                        <input type="text" id="form-nombre-producto" class="form-control ">
-                        <label for="form-nombre-producto" class="">Latitud</label>
-                    </div>
-                     <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-                          Obligatorio
-                     </div> 
-                    </div>
-                    <div class="md-form mb-0 col-12 col-md-6">
-                      <div class="md-form mb-0">
-                        <input type="text" id="form-nombre-producto" class="form-control ">
-                        <label for="form-nombre-producto" class="">Longitud</label>
-                    </div>
-                     <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-                          Obligatorio
-                     </div> 
-                    </div></div>
-                    <div class="row">
-                      <button onclick="generarMapa()" class="btn col-lg-4 col-12" style="background-color: #536F97; color: #ffffff; padding: 12px; font-size: 12px;"><i class="fas fa-chart-pie mr-2"></i>Generar mapa</button>
-                      <button class="btn col-lg-3 col-12" style="background-color: #536F97; color: #ffffff; padding: 12px; font-size: 12px;"><i class="fas fa-chart-pie mr-2"></i>Guardar</button>
-                    </div>
-                  </div>
-                  
-                 
-                </div>
-                <div class="col-12 col-lg-6 container-fluid " id="mapa">
-                  <div class="row">
-                    
-                    <div id="map-container-google-1" class=" d-none z-depth-1-half mx-auto col-md-8 col-8 map-container" style="height: 300px; display: none;"><iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                      style="border:0 ;margin-top: 1px;" allowfullscreen></iframe>
-                  </div>
-                 
-                </div>
-                </div><!--fin de la fila-->
-                <hr>
-              </section> <!---fin de la seccion-->
-
-
               <!---Secccion de sucursales-->
-              <section>
-                <div class="card col-12 col-md-6 pr-0 pl-0 mt-10" style="margin-top: 30px; margin-bottom: 5px;">
-                  <div class="col-12 head-car">
-                    <i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
-                    aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer;"  ></i>
-                    <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px ;" id="hola">
-                      <a class="dropdown-item" href="#">Editar</a>
-                      <a class="dropdown-item" href="#">Eliminar</a>
-                    </div>
-                  </div>
-                  <hr>
-                      
-                      <div class="card-body">
-                        <div class="header container-fluid">
-                          <div class="row">
-                          <strong class="primary-font col-6">Sucursal 1</strong>
-                          <small class="pull-right col-6 text-muted"><i class="far fa-clock"></i> Ciudad</small></div>
-                          <hr>
-                          <div id="map-container-google-1 col-12 row " class="z-depth-1-half col-md-12 col-12 map-container" style="height: 300px;"><iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                            style="border:0" allowfullscreen></iframe>
-                        </div>
-                        </div>
-                    </div>
-                      </div>
+              <section  style="display: inline;" id="content-sucursales">
+                
+                    </section>
               </div>
-              </section>
-           </div>
+              
 
             <!------------------------PRODUCTOS-------------------->
 
             <div id="productos"  class="d-none container-fluid " >
-              <div class="row">
+              <div class="row" id="cont-inventario-horizontal">
                   <!-----Inventario horizontal-->
-                  <div class="card chart-card col-11 mx-auto mt-20 mb-10" style="margin-top: 20px; display: none;" id="inventario" >
-                    <div class="card-body pb-0">
-                    <h5 class="card-title font-weight-bold" >Inventario</h5>
-                    <p class="card-text mb-4">Fecha y hora</p>
-                    <div class="col-md-4 col-lg-4 mb-4 text-center" style="float: left;">
-                     <h4 class="h1 font-weight-normal mb-3">
-                       <i class="fas fa-file-alt " style="color: #6A7998;"></i>
-                       <span class="d-inline-block count-up" data-from="0" data-to="25" data-time="2000">25</span>
-                     </h4>
-                     <p class="font-weight-normal text-muted">Registrados</p>
-                   </div>
-             
-                   <div class="col-md-4 col-lg-4 mb-4 text-center" style="float: left;">
-                     <h4 class="h1 font-weight-normal mb-3">
-                       <i class="fas fa-cart-arrow-down " style="color: #6A7998;"></i>
-                       <span class="d-inline-block count1" data-from="0" data-to="2" data-time="2000">2</span>
-                     </h4>
-                     <p class="font-weight-normal text-muted">Promociones</p>
-                   </div>
-             
-                   <div class="col-md-4 col-lg-4 mb-4 text-center" style="float: left;">
-                     <h4 class="h1 font-weight-normal mb-3">
-                       <i class="fas fa-exclamation-triangle" style="color: #6A7998;"></i>
-                       <span class="d-inline-block count2" data-from="0" data-to="8" data-time="2000">8</span>
-                     </h4>
-                     <p class="font-weight-normal text-muted">Productos con existencia baja</p>
-                   </div>
-                   <div class=" col-12">
-                    <button type="button" class="btn mt-0 mb-30 mx-auto col-12 col-lg-2" data-toggle="modal" data-target="#modal-producto" style="margin-left: 200px; text-align: center; background-color: #536F97; color: #ffffff;">
-                      <i class="far fa-file-alt pr-2" aria-hidden="true" ></i>Nuevo</button>
+              </div>
+              <div class="row" >
+                <div class="container my-3 col-12 col-lg-8 m-5 ml-0"  style="width: 100%;" id="tabla" >
+                  <!-----tabla de productos-->
+                <div class="container z-depth-1 p-1 my-0 col-12" style="background-color: #ffffff;">
+                  <!-- Section: Block Content -->
+                  <section  style="background-color: #ffffff;">
+                    <!-- Shopping Cart table -->
+                    <div class="table-responsive" style=" height: 600px; overflow:scroll;">
+                      <table class="table product-table table-cart-v-1">
+                        <thead style="background-color: #E9ECEF;">
+                          <tr>
+                            <th>Imagen</th>
+                            <th class="font-weight-bold">
+                              <strong>Producto</strong>
+                            </th>
+                            <th class="font-weight-bold">
+                              <strong>ID</strong>
+                            </th>
+                            <th></th>
+                            <th class="font-weight-bold">
+                              <strong>Stock</strong>
+                            </th>
+                            <th class="font-weight-bold">
+                              <strong>Precio</strong>
+                            </th>
+                            <th class="font-weight-bold">
+                              <strong>Accion</strong>
+                            </th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <!-- Table head -->
+                        <!-- Table body -->
+                        <tbody id="content-table"> 
+                          <!-- First row -->
+                        </tbody>
+                      </table>
                     </div>
-                   </div>
-                   
-               </div>
+                  </section>
+                </div>
+              </div> 
+              <div id="cont-productos" class="col-3"></div>
+
               </div>
-              <div class="row">
-              <div class="container my-3 col-12 col-lg-7 m-5 ml-0"  style="width: 100%;" id="tabla" >
-  
-                <!-----tabla de productos-->
-              <div class="container z-depth-1 p-1 my-0 col-12" style="background-color: #ffffff;">
-                <!-- Section: Block Content -->
-                <section  style="background-color: #ffffff;">
-                  <!-- Shopping Cart table -->
-                  <div class="table-responsive" style=" height: 600px; overflow:scroll;">
-                    <table class="table product-table table-cart-v-1">
-                      <thead style="background-color: #E9ECEF;">
-                        <tr>
-                          <th>Imagen</th>
-                          <th class="font-weight-bold">
-                            <strong>Producto</strong>
-                          </th>
-                          <th class="font-weight-bold">
-                            <strong>ID</strong>
-                          </th>
-                          <th></th>
-                          <th class="font-weight-bold">
-                            <strong>Stock</strong>
-                          </th>
-                          <th class="font-weight-bold">
-                            <strong>Precio</strong>
-                          </th>
-                          <th class="font-weight-bold">
-                            <strong>Accion</strong>
-                          </th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <!-- Table head -->
-                      <!-- Table body -->
-                      <tbody>
-                        <!-- First row -->
-                        <tr>
-                          <th scope="row" style="padding-bottom: 0; margin-bottom: 0px;">
-                              <img src="img/img.jpg" alt=""
-                                class="img-fluid z-depth-0">
-                          </th>
-                          <td>
-                            <h5 class="mt-3">
-                              <strong>iPhone</strong>
-                            </h5>
-                            <p class="text-muted">Apple</p>
-                          </td>
-                          <td>123456</td>
-                          <td></td>
-                          <td>25</td>
-                          <td class="font-weight-bold">
-                            <strong>$800</strong>
-                          </td>
-                          <td>
-                            <div class="row">  <i class="fas fa-edit mr-3 ml-3 "></i>
-                              <i class="fas fa-trash-alt "></i></div>
-                           
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row" style="padding-bottom: 0; margin-bottom: 0px;">
-                              <img src="img/img.jpg" alt=""
-                                class="img-fluid z-depth-0">
-                          </th>
-                          <td>
-                            <h5 class="mt-3">
-                              <strong>iPhone</strong>
-                            </h5>
-                            <p class="text-muted">Apple</p>
-                          </td>
-                          <td>123456</td>
-                          <td></td>
-                          <td>25</td>
-                          <td class="font-weight-bold">
-                            <strong>$800</strong>
-                          </td>
-                          <td>
-                            <div class="row">  <i class="fas fa-edit mr-3 ml-3 "></i>
-                              <i class="fas fa-trash-alt "></i></div>
-                           
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row" style="padding-bottom: 0; margin-bottom: 0px;">
-                              <img src="img/img.jpg" alt=""
-                                class="img-fluid z-depth-0">
-                          </th>
-                          <td>
-                            <h5 class="mt-3">
-                              <strong>iPhone</strong>
-                            </h5>
-                            <p class="text-muted">Apple</p>
-                          </td>
-                          <td>123456</td>
-                          <td></td>
-                          <td>25</td>
-                          <td class="font-weight-bold">
-                            <strong>$800</strong>
-                          </td>
-                          <td>
-                            <div class="row">  <i class="fas fa-edit mr-3 ml-3 "></i>
-                              <i class="fas fa-trash-alt "></i></div>
-                           
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row" style="padding-bottom: 0; margin-bottom: 0px;">
-                              <img src="img/img.jpg" alt=""
-                                class="img-fluid z-depth-0">
-                          </th>
-                          <td>
-                            <h5 class="mt-3">
-                              <strong>iPhone</strong>
-                            </h5>
-                            <p class="text-muted">Apple</p>
-                          </td>
-                          <td>123456</td>
-                          <td></td>
-                          <td>25</td>
-                          <td class="font-weight-bold">
-                            <strong>$800</strong>
-                          </td>
-                          <td>
-                            <div class="row">  <i class="fas fa-edit mr-3 ml-3 "></i>
-                              <i class="fas fa-trash-alt "></i></div>
-                           
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row" style="padding-bottom: 0; margin-bottom: 0px;">
-                              <img src="img/img.jpg" alt=""
-                                class="img-fluid z-depth-0">
-                          </th>
-                          <td>
-                            <h5 class="mt-3">
-                              <strong>iPhone</strong>
-                            </h5>
-                            <p class="text-muted">Apple</p>
-                          </td>
-                          <td>123456</td>
-                          <td></td>
-                          <td>25</td>
-                          <td class="font-weight-bold">
-                            <strong>$800</strong>
-                          </td>
-                          <td>
-                            <div class="row">  <i class="fas fa-edit mr-3 ml-3 "></i>
-                              <i class="fas fa-trash-alt "></i></div>
-                           
-                          </td>
-                        </tr>
-                        <!-- Firs row -->
-                        <!-- Second row -->
-                        <tr>
-                          <th scope="row" style="padding-bottom: 0; margin-bottom: 0px;">
-                              <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg" alt=""
-                                class="img-fluid z-depth-0">
-                          </th>
-                          <td>
-                            <h5 class="mt-3">
-                              <strong>iPhone</strong>
-                            </h5>
-                            <p class="text-muted">Apple</p>
-                          </td>
-                          <td>123456</td>
-                          <td></td>
-                          <td>25</td>
-                          <td class="font-weight-bold">
-                            <strong>$800</strong>
-                          </td>
-                          <td>
-                            <div class="row">  <i class="fas fa-edit mr-3 ml-3 "></i>
-                              <i class="fas fa-trash-alt "></i></div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </section>
-              </div>
-            </div> 
-            <!--Aqui-->
-                    <!-- Card -->
-                    <div class="card chart-card col-12 col-lg-3" id="inventario-vertical" style="margin-right: 10px; margin-top: 50px; height: 600px;">
-                      <div class="card-body pb-0">
-                      <h5 class="card-title font-weight-bold">Inventario</h5>
-                      <p class="card-text mb-4">Fecha y hora</p>
-                      <div class="col-md-12 col-lg-12 mb-4 text-center">
-                       <h4 class="h1 font-weight-normal mb-3">
-                         <i class="fas fa-file-alt " style="color: #6A7998;"></i>
-                         <span class="d-inline-block count-up" data-from="0" data-to="25" data-time="2000">25</span>
-                       </h4>
-                       <p class="font-weight-normal text-muted">Registrados</p>
-                     </div>
-               
-                     <div class="col-md-12 col-lg-12 mb-4 text-center">
-                       <h4 class="h1 font-weight-normal mb-3">
-                         <i class="fas fa-cart-arrow-down " style="color: #6A7998;"></i>
-                         <span class="d-inline-block count1" data-from="0" data-to="2" data-time="2000">2</span>
-                       </h4>
-                       <p class="font-weight-normal text-muted">Promociones</p>
-                     </div>
-               
-                     <div class="col-md-12 col-lg-12 mb-4 text-center">
-                       <h4 class="h1 font-weight-normal mb-3">
-                         <i class="fas fa-exclamation-triangle" style="color: #6A7998;"></i>
-                         <span class="d-inline-block count2" data-from="0" data-to="8" data-time="2000">8</span>
-                       </h4>
-                       <p class="font-weight-normal text-muted">Productos con existencia baja</p>
-                     </div>
-                     <button type="button" class="btn mt-0 mb-0 " data-toggle="modal" data-target="#modal-producto" style="background-color: #536F97; color: #ffffff; margin-left:60px">
-                       <i class="far fa-file-alt pr-2" aria-hidden="true" ></i>Nuevo</button>
-                     </div>
-                 </div>
-          
-                 
               </div>
 
-              <!---Formulario de regustro producto-->
-            
+              <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered ">
+                  <div class="modal-content">
+                    <div class="modal-header" style="background-color: #546991; color: #ffffff;" style="height: 20px!important; padding: 5px!important;">
+                      <h5 class="modal-title" id="exampleModalLongTitle" style="margin-left: 10px; margin-right: auto; font-size: 13px;">Mensaje</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <br>
+                     <p style="font-size: 13px;">¿Esta seguro que desea eliminar el producto?</p> 
+                    </div>
+                    <div class="modal-footer">
+                   <button type="button" class="btn btn-primary " onclick="eliminarProducto()" style="background-color:#546991!important ;padding: 10px!important;">Aceptar</button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              
+  <!---++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->          
               
            
-
 
 
             <div id="promociones" class="d-none container-fluid mx-auto" style="padding-left: 50px; padding-right: 50px;">
               <!-- Section heading -->
               <div class="row">
-                <h5 class="font-weight-bold mt-5 mb-1  col-8 col-lg-10 style="color: #6B767A;">Promociones</h5>
+                <h5 class="font-weight-bold mt-5 mb-1  col-8 col-lg-10" style="color: #6B767A;">Promociones</h5>
                 <div class="col-4 col-lg-2" >
-                  <label  for="barra-nueva" id="hover-text" onclick="mostrarFormDescuento()" style="font-size: small; margin-top: 50px;">Nueva Promoción</label>
+                  <label  for="barra-nueva" id="hover-text"  data-toggle="modal" onclick="resetModalPromo()" data-target="#centralModalSmPromo" onclick="mostrarFormDescuento()" style="font-size: small; margin-top: 50px;">Nueva Promoción</label>
                   <div id="barra-nueva" class="cambiar-color" style="width: 105px; height: 3px; background-color:#6B767A; margin-top: -1px ;"></div>
                  </div>
               </div>
-              
-               
              <hr>
              
-             <section class="card col-12 col-lg-10 p-30 mt-20 container-fluid  wow slideInRight d-none" id="form-descuento" style="padding: 20px; margin-top: 20px;">
-
-              <div class="row">
-
-
-                <div class="col-md-6">
-                  <div class="col-12">
-                  <div class="md-form mb-0">
-                   <!--Select-->
-                   <select class="mdb-select md-form form-control">
-                    <option value="" disabled selected>Seleccione el articulo</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                  </div>
-                  <div class="" id="camp-vacio-categoria" style="font-size: smaller; color: red;">
-                    Este campo no puede estar vacio.
-                  </div>
-                </div>
-                <div class="col-12" style="margin-bottom: 0px;">
-                  <div class="md-form mb-0">
-                    <input type="number" id="form-id-producto" class="form-control">
-                    <label for="form-nombre-producto" class="">Precio de descuento</label>
-                  </div>
-                  <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-                    Obligatorio.
-                  </div>
-                </div>
-                <div class="col-12" >
-                  <p  class="mt-2 mb-0" style="font-size:14px; margin-bottom: 0 ; color: #6B767A;"> Seleccione las surcursales en las que estara disponible</p>
-                  <div class="md-form mb-2 ml-3" style="margin-top: 0px;">
-                   <div class="md-form mb-0 mt-0">
-                   <div class="custom-control custom-checkbox" style="margin-left: 10px;">
-                    <input  type="checkbox" class="custom-control-input" id="sucursal1 " >
-                    <label class="custom-control-label" for="sucursal1" style="font-size: 14px;">Sucursal 1</label>
-                  </div>
-                  <div class="custom-control custom-checkbox" style="margin-left: 10px;">
-                    <input  type="checkbox" class="custom-control-input" id="sucursal2">
-                    <label class="custom-control-label" for="sucursal2" style="font-size: 14px;">Sucursal 2</label>
-                  </div>
-                  <div class="custom-control custom-checkbox"style="margin-left: 10px;">
-                    <input  type="checkbox" class="custom-control-input" id="sucursal3"  >
-                    <label class="custom-control-label" style="font-size: 14px;" for="sucursal3">Sucursal 3</label>
-                  </div>
-                   
-                  </div>
-                  
-                </div>
-                <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-                  Obligatorio.
-                </div>
-                </div>
-                <div class="row ml-20" style="margin-left: 10px;">
-                  
-                  <div class="md-form col-5">
-                    <input placeholder="dd/mm/yy" type="text" id="date-picker-example" class="form-control datepicker">
-                    <label for="date-picker-example">Fecha inicial</label>
-                  </div>
-                  <div class="md-form col-5">
-                    <input placeholder="dd/mm/yy" type="text" id="date-picker-example" class="form-control datepicker">
-                    <label for="date-picker-example">Fecha final</label>
-                  </div>
-                  
-                </div>
-                <div class="row" style="margin-left: 10px;">
-                  <button onclick="generarGrafico()" class="btn col-5" style="background-color: #536F97; color: #ffffff; padding: 12px; font-size: 12px;"><i class="fas fa-chart-pie mr-2"></i>Generar descuento</button>
-                  <button class="btn col-3" style="background-color: #536F97; color: #ffffff; padding: 12px; font-size: 12px;"><i class="fas fa-chart-pie mr-2"></i>Guardar</button>
-                </div>
-              </div>
-              <div class="col-12 col-md-6 container-fluid " id="grafico">
-               
-                <div class="row">
-                  <div class="card-body px-0 pb-0">
-                    <h7 class="text-left col-6  font-weight-bold mb-4 mx-auto" style="margin-left: 20px;">Porcentaje de descuento</h7>
-                    <hr>
-                    <div class="row mt-1 pt-3">
-                      <div class="col-lg-10 col-12 mb-4 mb-md-0  px-5 py-1">
-                        <canvas id="porcentaje-descuento"></canvas>
-                      </div>
-                      
-                    </div>
-                    <!--Grid row-->
-                  </div>
-                </div>
-                <p class="my-2" style="color: #80767A; font-size: 12px;">Se ha generado un descuento del 25%</p>
-              </div>
-              </div><!--fin de la fila-->
-              <hr>
-            </section> <!---fin de la seccion-->
-
-            <!-- Basic dropdown -->
-
-
-            <!---Aqui se visualizaran los productos -->
-            <section>
+            <section id="content-promociones">
                 <div class="card col-12  col-lg-2 col-md-4 pr-0 pl-0 mt-10" style="margin-top: 30px; margin-bottom: 5px;">
                     <div class="col-12 head-car">
                       <i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
@@ -564,16 +206,20 @@
                             <strong><a href="" class="dark-grey-text">Vestido</a>
                             </strong>
                           </h5>
-                          <span class="badge badge-danger mb-2">Promoción</span>
+                        
                           <!-- Rating -->
                           <ul class="rating text-left form-inline">
-                            <i class="fas fa-star blue-text "></i>
-                            <i class="fas fa-star blue-text"></i>
-                            <i class="fas fa-star blue-text"></i>
-                            <i class="fas fa-star blue-text"></i>
-                            <i class="fas fa-star blue-text"></i>
+                            <i class="fas fa-star" onclick="" style="color:#FFC107;"></i>
+                            <i class="fas fa-star" style="color:#FFC107;"></i>
+                            <i class="fas fa-star" style="color:#FFC107;"></i>
+                            <i class="fas fa-star" style="color:#FFC107;"></i>
+                            <i class="fas fa-star" style="color:#FFC107;"></i>
                           </ul>
                           <!-- Card footer -->
+                          <span class="badge badge-danger mb-2">Promoción</span>
+                          
+                          <!-- rating.js file -->
+                          
                           <div class="card-footer pb-0">
                         <div class="row mb-0">
                           <h5 class="mb-0 pb-0 mt-1 font-weight-bold">
@@ -597,8 +243,8 @@
                 </div>
             </section>
             </div>
-
-
+         
+<!--------------------------------------------------------------------------------------------------------------------------------------->
                 <!---Dashboard-->
            <div id="dashboard" class="" >
             <div class="container-fluid" style="background-color:#536F97; height: 150px; width: 100%; padding: 30px;">
@@ -620,10 +266,8 @@
 
                     <div class="col-lg-4 col-md-12 mb-4" id="cont-card-ventas">
                       <!-- CARD VENTAS-->
-                     
                     </div>
                     <!-- TERMINACION DE CAR VENTAS -->
-                    <!--Aqui termina una columna en ka fila-->
               
                     <!--inicia la segunda columna-->
                     <div class="col-lg-4 col-md-6 mb-4" id="cont-card-seguidores">
@@ -669,7 +313,6 @@
                       </section>
                 </div>  
                      
-
                 <div class="container my-0 py-0 col-12 col-lg-8 col-12  " style="margin-right: auto;">
                   <!--Section: Block Content-->
                   <section>
@@ -693,10 +336,10 @@
                 </div>
 
             
-                  <div class="row container-fluid" >
+                  <div class="" >
                     <div class="row my-0 mx-auto">
                     <div class="col-lg-4 col-12 my-0 "  >
-                      <div class="card col-12 px-1 inventio-res">
+                      <div class="card col-12 px-1 inventio-res" style="width: 100%;">
                         <h6 class="text-center  font-weight-bold mt-3 mb-0">Resumen de inventario</h6>
                               <hr>
                         <div class="card-body mr-md-1"id="cont-res-inventario" >                          
@@ -712,9 +355,6 @@
                             <div class="card col-12 " style="background-color: #ffffff; margin-top: 0px; padding: 0px;">
                              <div style="background-color:#546991; color: #ffffff;  " class="container-fluid"><h5 style="text-align: center; font-size: 17px;" class="mt-2">Nuevos Comentarios</h5></div>
                               <div id="cont-nuevos-comentarios">
-                              
-  
-
                             </div>
                             <div class="row pr-5 pl-5 c  mb-10"><a style="margin-left: auto; font-size: 14px;"  data-toggle="modal" data-target="#modal-ver-todos-los-comentaros">ver todos</a></div> 
                             </div>
@@ -733,7 +373,7 @@
                     
            </div> <!--fin dashboard-->
 
-
+<!--------------------------------------------------------------------------------------------------------------------------------------->
           
 
             <div class="perfil-empresarial" style="background-color: #ffffff;">            
@@ -746,75 +386,32 @@
                 <a class="dropdown-item" type="button" onclick=" resetModalBanner()" style="font-size: 13px;" data-toggle="modal" data-target="#modal-banner">Editar Banner </a>
                 <a class="dropdown-item" data-toggle="modal" onclick=" resetModalLogotipo()" data-target="#modal-logotipo" style="font-size: 13px;">Editar Logotipo</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" style="font-size: 13px;"  data-toggle="modal" data-target="Modal-editar-info-empresas">Editar informacion</a>
-                
-
-              </div>
-                
-              <div class="row container-fluid col-md-12 " id="cont-logotipo" style="margin-left: auto; margin-right: auto;"><!-- #foto de perfil y nombre de la empresa -->
-                
-                <img id="img-perfil" class=" avatar rounded-circle foto-perfil2 z-depth-1"src="img/logoPerfil.png" style="width: 200px!important; margin-bottom: 30px; height: 200px; margin-top: 50px!important;" alt="avatar" ></img>
-               
+                <a class="dropdown-item" style="font-size: 13px;" onclick="mostrarInfo()"  data-toggle="modal" data-target="#Modal-editar-info-empresas">Editar informacion</a>
+              </div>    
+              <div class="row container-fluid col-md-12 " id="cont-logotipo" style="margin-left: auto; margin-right: auto;"><!-- #foto de perfil y nombre de la empresa --> 
+                <img id="img-perfil" class=" avatar rounded-circle foto-perfil2 z-depth-1"src="img/logoPerfil.png" style="width: 200px!important; margin-bottom: 30px; height: 200px; margin-top: 50px!important;" alt="avatar" >
               </div>
               <div class="titulo" style="margin-right: 0; margin-left: 0;" id="div-general">
-                
               </div>
-             
-            <!--- <div class="col-3 col-lg-1  ml-auto guardar" onclick="editarPerfil()" id="guardar" ><label onclick="editarPerfil()" >Guardar</label></div> -->
-                
+            <!--- <div class="col-3 col-lg-1  ml-auto guardar" onclick="editarPerfil()" id="guardar" ><label onclick="editarPerfil()" >Guardar</label></div> --> 
             </div>
               <!-- #BODY -->
                 <div class="container-fluid mx-auto" style="background-color: #FFFFFF;">
                   <div class="row pb-3" style="margin-bottom: 30px;">
-                    
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-7">
                       <div class="row" style="margin-top: 20px;">
-                        <div class="col-8 mx-auto col-md-7 descripcion">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, officiis beatae corrupti est quisquam nostrum ex eius culpa vel, rem rerum incidunt assumenda iure quasi nisi labore dolor magnam voluptates.</div>
+                        <div class="col-8 mx-auto col-md-7 descripcion" id="descripcion-empresa"></div>
                         <div class="linea" id="linea"></div>
-                        <ul class="list-group col-6 mx-auto col-md-4">
-                          <li class="list-group-item"><i class="fas fa-envelope mr-2"></i>empresa@email.org</li>
-                          <li class="list-group-item"><i class="fas fa-phone-alt mr-2"></i>numero de telefono</li>
-                          <li class="list-group-item"><i class="fas fa-map-marker-alt mr-2"></i> Direccion</li>
-                          <li class="list-group-item"><i class="fab fa-instagram mr-2"></i>Instagram</li>
-                          <li class="list-group-item"><i class="fab fa-facebook-f mr-2"></i>Facebook</li>
-                          <li class="list-group-item"><i class="fab fa-twitter mr-2"></i>Twitter</li>
-
+                        <ul class="list-group col-8 mx-auto col-md-4" id="info-contacto">
+                         <!---Informacion geerada de contacto----->
                         </ul>
                       </div>
-
                     </div> <!--fin del info de la empresa-->
                     <div class="row col-12 col-lg-5" style="margin-left: auto; margin-right: auto; "><!-- INICIO DE COMENTARIOS-->
                       <div class="card col-12 " style="background-color: #ffffff; margin-top: 15px; padding: 0px;">
-                       <div style="background-color:#546991; color: #ffffff;  " class="container-fluid"><h5 style="text-align: center; font-size: 17px;" class="mt-2">Comentarios</h5></div>
-                        
-                        <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-3 pl-3 pt-2">
-                          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px;">
-                          <div class="chat-body white p-2 ml-2 z-depth-1">
-                            <div class="header">
-                              <strong class="primary-font">Usuario 1</strong>
-                              <small class="pull-right text-muted"><i class="far fa-clock"></i> hace 12 minutos</small>
-                            </div>
-                            <hr class="w-100" style="margin-top: -1px;">
-                            <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                              labore et dolore magna aliqua.
-                            </p>
-                          </div>
-                        </li>
-                        <li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-3 pl-3 pt-2">
-                          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px;">
-                          <div class="chat-body white p-2 ml-2 z-depth-1">
-                            <div class="header">
-                              <strong class="primary-font">Usuario 2</strong>
-                              <small class="pull-right text-muted"><i class="far fa-clock"></i> hace 12 minutos</small>
-                            </div>
-                            <hr class="w-100" style="margin-top: -1px;">
-                            <p class="mb-0" style="margin-top: -5px; font-size: 13px;">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                              labore et dolore magna aliqua.
-                            </p>
-                          </div>
-                        </li>
+                       <div style="background-color:#546991; color: #ffffff;  " class="container-fluid"><h5 style="text-align: center; font-size: 15px;" class="mt-2">Comentarios</h5></div>
+                        <div  id="cont-newC" >
+                        </div>
                       <div class="row pr-5 pl-5 c"><a style="margin-left: auto;"  data-toggle="modal" data-target="#modal-ver-todos-los-comentaros">ver mas</a></div> 
                       </div>
                     </div>
@@ -833,35 +430,28 @@
 
             <div  container-fluid" style="background-color: #ffffff;">
               <div class="row">
-
          <!--Google map-->
-                <div id="map-container-google-1" class="z-depth-1-half col-md-7 col-8 map-container mx-auto" style="height: 300px;"><iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                  style="border:0" allowfullscreen></iframe>
+                <div id="map-tienda-principall" class="z-depth-1 col-md-10 col-10 map-container mx-auto" style="height: 400px; width: 100%!important; padding: 0px;">
               </div>
 
+            
             </div>
 
             </div>
             <div class="container-fluid" >
               
             </div>
-            
-             
                 
               <div class="row" id="productos"></div>
-              <h6 class="font-weight-bold mb-md-0 mb-4 mt-2 pt-1 " style="color: #546991!important;"> <i class="fas fa-street-view mr-3 ml-5"></i>Nuestros Productos</h6>
+              <h6 class="font-weight-bold mb-md-0 mb-4 mt-2 pt-1 " style="color: #546991!important;"> <i class="fas fa-street-view mr-3 ml-5"></i>Nuestras Promociones</h6>
               </div>
             </div>
 
+           
 
+<!--------------------------------------------------------------------------------------------------------------------------->
 
-
-            
-
-
-
-
-           </div> <!--del perfil-->
+            </div> 
            
 
           </div><!---fin del contenefor principal sii-->
@@ -890,7 +480,6 @@
       <div class="modal-body">
         <!--nody-->
         <div class="row col-12 col-lg-12" style="margin-left: auto; margin-right: auto;" id="cont-comentarios"><!-- INICIO DE COMENTARIOS-->
-       
         </div>
       </div>
       <div class="modal-footer">
@@ -901,7 +490,7 @@
     </div>
   </div>
 </div>
-
+<!--------------------------------------------------------------------------------------------------------------------------------------->
 
 
 
@@ -972,47 +561,55 @@
    <div class="modal-content">
      <div class="modal-header" style="background-color: #536F97; color: #ffffff; font-size: 10px;">
        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 14px;">Nuevo producto</h5>
+       <h5 class="modal-title d-none" id="titulo-editar" style="font-size: 14px;">Editar producto</h5>
        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
          <span aria-hidden="true">&times;</span>
        </button>
      </div>
      <div class="modal-body">
        <div class="row " style="padding: 10px;">
-         <div class="mb-0 col-12"><h6>Detalles</h6></div>
+         
          <div class="mb-0 col-12">
+          <p class="mb-0 col-12 text-muted mb-5" id="anuncio" style="font-size: 13px; "><strong style="font-weight: bold;">¡Vamos a registrar un nuevo producto!</strong><br> Asegurate de ingresar los datos correctamente.
+            Este es un inventario interno, no hay limite de productos a registrar pero estos no serán mostrados a los usuarios, solamente las promociones que registres.</p>
+          <div class="mb-0 col-12 text-muted"><h6>Detalles</h6></div>
            <div class="col-md-12">
              <div class="md-form mb-0">
-               <input type="text" id="form-nombre-producto" class="form-control ">
+               <input type="text" id="form-nombre-producto-p" class="form-control ">
                <label for="form-nombre-producto" class="">Nombre del Producto</label>
              </div>
-             <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+             <div class="d-none" id="camp-vacio-nombre-producto" style="font-size: smaller; color: red;">
                Este campo no puede estar vacio.
              </div>
            </div>
          </div>
          <div class="mb-2 col-12">
-           <div class="col-md-12">
+           <div class="row col-12">
+           <div class="col-md-6">
              <div class="md-form mb-0">
-               <input type="text" id="form-id-producto" class="form-control">
-               <label for="form-nombre-producto" class="">ID</label>
+               <input type="text" id="form-codigo-producto" class="form-control">
+               <label for="form-codigo-producto" class="">Código</label>
              </div>
-             <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+             <div class="d-none" id="camp-vacio-codigo" style="font-size: smaller; color: red;">
                Este campo no puede estar vacio.
              </div>
            </div>
+           <div class="col-md-6">
+            <div class="md-form mb-0">
+              <button type="button" onclick="generarCodigo()" class="btn btn-success btn-sm btn-rounded" style="padding: 10px!important;"><i class="fab fa-codepen  pr-2 pt-1"
+                aria-hidden="true"></i>generar código</button></div>
+          </div>
+        </div>
          </div>
          <div class="mb-2 col-12">
            <div class="col-md-12">
              <div class="md-form mb-0">
               <!--Select-->
-              <select class="mdb-select md-form form-control">
-               <option value="" disabled selected>Seleccione una categoria</option>
-               <option value="1">Option 1</option>
-               <option value="2">Option 2</option>
-               <option value="3">Option 3</option>
+              <select class="mdb-select md-form form-control" id="categoria">
+    
              </select>
              </div>
-             <div class="" id="camp-vacio-categoria" style="font-size: smaller; color: red;">
+             <div class="d-none" id="camp-vacio-categoria-1" style="font-size: smaller; color: red;">
                Este campo no puede estar vacio.
              </div>
            </div>
@@ -1020,10 +617,10 @@
          <div class="mb-2 col-12">
            <div class="col-md-12">
              <div class="md-form mb-0">
-               <textarea id="form-descripcion" class="form-control md-textarea" rows="1"></textarea>
-               <label for="form-descripcion">Descripcion del producto</label>
+               <textarea id="form-descripcion-producto" class="form-control md-textarea" rows="1"></textarea>
+               <label for="form-descripcion-producto">Descripción del producto</label>
              </div>
-             <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+             <div class="d-none" id="camp-vacio-descripcion-producto" style="font-size: smaller; color: red;">
                Este campo no puede estar vacio.
              </div>
            </div>
@@ -1032,10 +629,10 @@
                <div class="input-group mb-3 col-6">
                  <div class="col-md-12">
                    <div class="md-form mb-0">
-                     <input type="text" id="form-id-producto" class="form-control">
-                     <label for="form-nombre-producto" class="">Precio</label>
+                     <input type="number" id="form-precio-producto" class="form-control">
+                     <label for="form-precio-producto" class="">Precio en lempiras</label>
                    </div>
-                   <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+                   <div class="d-none" id="camp-vacio-precio" style="font-size: smaller; color: red;">
                      Obligatorio.
                    </div>
                  </div>
@@ -1044,23 +641,43 @@
                   <div class="input-group mb-3 col-6">
                    <div class="col-md-12">
                      <div class="md-form mb-0">
-                       <input type="number" id="form-id-producto" class="form-control">
-                       <label for="form-nombre-producto" class="">Stock</label>
+                       <input type="number" id="form-stock-producto" class="form-control">
+                       <label for="form-stock-producto" class="">Stock</label>
                      </div>
-                     <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+                     <div class="d-none" id="camp-vacio-stock" style="font-size: smaller; color: red;">
                        Obligatorio.
                      </div>
                    </div>
                     </div>
+
+                    <div class="input-group mb-3 col-12">
+                      <div class="col-md-12">
+                        <div class="md-form mb-0 row">
+                          <div class="btn " id="btn-imagen" style="background-color: #B8BEC2;"><p id="texto"><i class="far fa-images"></i></p><form id="form-imagen-producto1"><input type="file" id="img-producto" name="archivo" onchange="vistaProducto()"  class="producto-img" style=" opacity: 0px;"></form></div>
+                           <div class="mb-2 col-6 mt-3"><p class="text-muted" style="font-size: 14px;">Selecciona una imagen</p></div>
+                          </div>
+                          <div class="" style=" margin-left: auto; margin-right: auto;"><div id="visor-img-producto" style=" width: auto;"><img src="img/logotipo-subir.png" alt="thumbnail" class="img-thumbnail col-12"
+                            style=" height:250px; object-fit: cover;
+                            object-position: center center; "></div> 
+                            
+                        <div class="d-none" id="img-producto-invalid" style="font-size: smaller; color: red;">
+                          Debe seleccionar un archivo con formato png o jpg.
+                        </div>
+                        <div class="d-none" id="img-producto-vacia" style="font-size: smaller; color: red;">
+                         Seleccione una imagen.
+                        </div>
+                            </div>
+                        
+                      </div>
+                       </div>
                </div>
            
-           <div class="btn " id="btn-imagen" style="background-color: #B8BEC2;"><p id="texto"><i class="far fa-images"></i></p><input type="file"  class="producto-img" style=" opacity: 0px;"  ></div>
-           <div class="mb-2 col-6 mt-3"><h6 style="font-size: 14px;">Selecciona una imagen</h6></div>
-         <div class="col-6" style="background-color: red; height: 200px; margin-left: auto; margin-right: auto;"></div>
+           
        </div>
      </div>
      <div class="modal-footer">
-       <button type="button" class="btn " style="background-color: #546991; color: #EEEEEE;" data-dismiss="modal">Guardar</button>
+       <button type="button" id="btn-guardar-producto" class="btn " onclick="guardarProducto()" style="background-color: #546991; color: #EEEEEE;" >Guardar</button>
+       <button type="button" id="btn-guardar-cambios-producto" class="btn d-none " onclick="editarProducto()" style="background-color: #546991; color: #EEEEEE;" >Guardar Cambios</button>
       
      </div>
    </div>
@@ -1068,10 +685,6 @@
    </div>
  </div>
 <!-- Modal -->
-
-
-
-
 
 
 
@@ -1097,7 +710,7 @@
       </div>
       <div class="modal-body">
         <div class="alert alert-success" role="alert" style="font-size: 13px;">
-          Actualmente cuentas con el plan basico.
+          Actualmente cuentas con el plan bAsico.
         </div>
       </div>
       <div class="modal-footer">
@@ -1229,11 +842,92 @@
      
 
 
+<!--------------------------------------------------MODAL FORMULARIO SUCURSAL------------------------------------------------------------------------>
+
+<div class="modal fade" id="form-sucursales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h6 class="modal-title w-100" id="myModalLabel">Sucursal</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class="container-fluid  col-12 mx-auto" id="form-sucursal" style="padding-top: 5px;">
+          <div class="row">
+               <div class="col-md-6">
+               <div class="col-12 mb-20" > 
+                 <div class="md-form mb-0">
+                    <input type="text" id="form-nombre-sucursal" class="form-control">
+                    <label for="form-nombre-sucursal" class="">Nombre de la sucursal</label>
+                </div>
+                 <div class="d-none" id="camp-vacio-nombreSucursal" style="font-size: smaller; color: red;">
+                      Este campo no puede estar vacio.
+                 </div>
+                
+                 <div class="md-form mb-0">
+                    <input type="text" id="form-ciudad-sucursal" class="form-control ">
+                    <label for="form-ciudad-sucursal" class="">Ciudad</label>
+                </div>
+                 <div class="d-none" id="camp-vacio-ciudad" style="font-size: smaller; color: red;">
+                      Este campo no puede estar vacio.
+                 </div>
+               <div class="row" style="margin-bottom: 50px;">
+               <div class="md-form mb-0 col-12 col-md-6">
+                 <div class="md-form mb-0">
+                   <input type="text" id="form-latitud-sucursal" class="form-control ">
+                   <label for="form-latitud-sucursal" class="">Latitud</label>
+               </div>
+                <div class="d-none" id="camp-vacio-latitud-sucursal" style="font-size: smaller; color: red;">
+                     Obligatorio
+                </div> 
+               </div>
+               <div class="md-form mb-0 col-12 col-md-6">
+                 <div class="md-form mb-0">
+                   <input type="text" id="form-longitud-sucursal" class="form-control ">
+                   <label for="form-longitud-sucursal" class="">Longitud</label>
+               </div>
+                <div class="d-none" id="camp-vacio-longitud-sucursal" style="font-size: smaller; color: red;">
+                     Obligatorio
+                </div>
+                
+               </div></div>
+               <div class="d-none" id="cord-invalid" style="font-size: smaller; color: red;">
+               Asegúrate que ambas coordenadas sean válidas.
+                  </div> 
+               <div class="row">
+                 </div>
+             </div>
+            
+           </div>
+           <div class="col-12 col-lg-6 container-fluid " id="mapa">
+             <div class="row">
+               <div class="col-12" ">
+                <button onclick="vistaPrevia()" class="btn col-lg-4 col-12 mx-auto" style="background-color: #536F97; color: #ffffff; padding: 12px; font-size: 12px;">Vista Previa</button>
+    
+                <div id="map-container-google--" class="z-depth-1-half mx-auto col-md-12 col-12 my-3" style="height: 300px; text-align: center;background-color: #eeeeee; padding:0!important;">
+                 <img src="img/icon-map.png" class="img-fluid mx-auto" style="height: 200px; margin-top: 50px;">
+              </div>
+               </div>
+           </div>
+           </div><!--fin de la fila-->
+           <hr>
+         </section> <!---fin de la seccion-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-guardar-sucursal" class="btn btn-primary btn-sm" onclick="guardarSucursal()" style="background-color: #536F97!important">guardar</button>
+        <button type="button" id="btn-editar-sucursal" class="btn btn-primary btn-sm d-none" onclick="ActualizarSucursal()" style="background-color: #536F97!important">guardar cambios</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+  <!--------------------------------------------------------------------------------------------------------------------------------------->
 
 <!-----------------------------------MODAL EDITAR INFO EMPRESA---------------------------------------->
 
-
-<!-- Modal -->
 <div class="modal fade " id="Modal-editar-info-empresas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -1246,101 +940,107 @@
       </div>
       <div class="modal-body">
        <!---body-->
+ 
        <div class="col-md-12">
         <div class="md-form mb-0">
-          <input type="text" id="form-nombre-producto" class="form-control ">
-          <label for="form-nombre-producto" class="">Nombre de la empresa</label>
+          <input type="text" id="NombreDeLaEmpresa" class="form-control "  autofocus>
+          <label for="NombreDeLaEmpresa" class="">Nombre de la empresa</label>
         </div>
-        <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+        <div class="d-none" id="camp-vacio-nombreEmpresa"  style="font-size: smaller; color: red;">
           Este campo no puede estar vacio.
         </div>
       </div>
 
       <div class="col-md-12">
         <div class="md-form mb-0">
-          <input type="text" id="form-nombre-producto" class="form-control ">
-          <label for="form-nombre-producto" class="">correo electrónico</label>
+          <input type="text" id="correoEmpresa" class="form-control " autofocus>
+          <label for="correoEmpresa" class="">correo electrónico</label>
         </div>
-        <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+        <div class="d-none" id="camp-vacio-correo" style="font-size: smaller; color: red;">
           Este campo no puede estar vacio.
         </div>
-        <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+        <div class="d-none" id="invalid-correo" style="font-size: smaller; color: red;">
           Dirección de correo electrónico invalida
         </div>
       </div>
 
       <div class="col-md-12">
         <div class="md-form mb-0">
-          <input type="text" id="form-nombre-producto" class="form-control ">
-          <label for="form-nombre-producto" class="" >Eslogan</label>
+          <input type="text"  id="eslogan" class="form-control ">
+          <label for="eslogan" class="" >Eslogan</label>
         </div>
-        <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
+        <div class=" d-none" id="camp-vacio-eslogan" style="font-size: smaller; color: red;">
           Este campo no puede estar vacio.
         </div>
       </div>
 
-      <div class="col-md-12">
+
+      <div class="col-md-12 mb-15">
+        <div class="md-form">
+          <textarea id="direccion" class="md-textarea form-control" rows="1" active></textarea>
+          <label for="form7">Dirección</label>
+        </div>
+        <div class="d-none" id="camp-vacio-direccion" style="font-size: smaller; color: red;">
+          Este campo no puede estar vacio.
+        </div>
+      </div>
+
+      <div class="col-md-12" style="margin-top: 50px;">
         <div class="md-form mb-0">
-          <textarea type="text" id="form-nombre-producto" class="form-control " placeholder="Descripción"></textarea>
-          
-        </div>
-        <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-          Este campo no puede estar vacio.
-        </div>
+          <div class="md-form mb-4  active-pink-textarea-2">
+            <i class="fas fa-angle-double-right prefix"></i>
+            <textarea id="descripcion" class="md-textarea form-control" rows="1"></textarea>
+            <label for="descripcion">Escribe la descripción de tu empresa.</label>
+            <div class="md-textarea d-none"  id="camp-vacio-descripcion" style="font-size: smaller; color: red; margin-left: 40px;">
+              Este campo no puede estar vacio.
+            </div>
+          </div>
+       
       </div>
+      
 
-      <div class="col-md-12">
-        <div class="md-form mb-0">
-          <textarea type="text" id="form-nombre-producto" class="form-control " placeholder="Dirección"></textarea>
-          
+      <div class="col-md-12 col-12 mb-3" style="margin-top: 50px;">
+        <select class="form-control" style="font-size: 14px" class="col-12" id="pais">
+            <option style="font-size: smaller;">Pais</option>
+            <option style="font-size: smaller;">Belice</option>
+            <option style="font-size: smaller;" >Costa Rica</option>
+            <option  style="font-size: smaller;">El Salvador</option>
+            <option  style="font-size: smaller;">Guatemala</option>
+            <option  style="font-size: smaller;">Honduras</option>
+            <option  style="font-size: smaller;">Nicaragua</option>
+            <option  style="font-size: smaller;">Panamá</option>
+          </select>
+          <div class="d-none"  id="camp-vacio-pais" style="font-size: smaller; color: red;">
+            Seleccione un pais.
+          </div>
+        <!-- formm-latitud -->
         </div>
-        <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-          Este campo no puede estar vacio.
-        </div>
-      </div>
-
-      <div class="col-md-12">
-        <div class="md-form mb-0">
-          <input type="text" id="form-nombre-producto" class="form-control ">
-          <label for="form-nombre-producto" class="" >Eslogan</label>
-        </div>
-        <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-          Este campo no puede estar vacio.
-        </div>
-      </div>
-
-
-      <div class="col-md-12">
-        <select class="md-form form-control mb-0" style="font-size: smaller;" class="col-4" id="pais">
-          <option style="font-size: smaller;">Pais</option>
-          <option style="font-size: smaller;">Costa Rica</option>
-          <option style="font-size: smaller;" >EE.UU</option>
-          <option  style="font-size: smaller;">Panamá</option>
-        </select>
-        <div class="d-none"  id="camp-vacio-pais" style="font-size: smaller; color: red;">
-          Seleccione un pais.
-        </div>
-      </div>
 
 
       <div class="row col-md-12">
         <div class="col-md-6">
           <div class="md-form mb-0">
-            <input type="text" id="form-nombre-producto" class="form-control ">
-            <label for="form-nombre-producto" class="" >Latitud</label>
+            <input type="text"  id="latitud"  class="form-control ">
+            <label for="latitud" class="" >Latitud</label>
           </div>
-          <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-            Este campo no puede estar vacio.
+          <div class="d-none" id="camp-vacio-latitud" style="font-size: smaller; color: red;">
+            Campo obligatorio.
+          </div>
+          <div class="d-none" id="latitud-invalida" style="font-size: smaller; color: red;">
+            verifique que ambas coordenadas sean válidas.
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="md-form mb-0">
-            <input type="text" id="form-nombre-producto" class="form-control ">
-            <label for="form-nombre-producto" class="" >Longitud</label>
+            <input type="text" id="longitud"  class="form-control ">
+            <label for="longitud" class="" >Longitud</label>
           </div>
-          <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-            Este campo no puede estar vacio.
+          <div class="d-none" id="camp-vacio-longitud" style="font-size: smaller; color: red;">
+            campo obligatorio.
+          </div>
+          <div class="d-none" id="longitud-invalida" style="font-size: smaller; color: red;">
+            verifique que ambas coordenadas sean válidas.
           </div>
         </div>
 
@@ -1348,16 +1048,16 @@
       
       <div class="col-md-12">
         <div class="md-form mb-0">
-          <input type="text" id="form-nombre-producto" class="form-control ">
-          <label for="form-nombre-producto" class="" >Número telefónico</label>
+          <input type="text" id="telefono" class="form-control ">
+          <label for="telefono" class="" >Número telefónico</label>
         </div>
-        <div class="" id="camp-vacio-nombreEmpresa" style="font-size: smaller; color: red;">
-          Este campo no puede estar vacio.
+        <div class="d-none col-12"  id="camp-vacio-telefono" style="font-size: smaller; color: red;">
+          Este campo es obligatorio.
         </div>
       </div>
 
       <div class="row col-md-12">
-        <h6 class="col-12 " style="margin-top: 20px; font-weight: bold; color: #777777; font-size: 14px;">Redes Sociales</h6>
+        <h6 class="col-12 " style="margin-top: 20px; font-weight: bold; color: #777777; font-size: 14px;">Redes Sociales (opcional)</h6>
       </div>
 
       <div class="row col-md-12">
@@ -1387,22 +1087,23 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><i class="fab fa-twitter"></i></span>
           </div>
-          <input type="text"  id="twiter" class="form-control" placeholder="Twiter" aria-label="Username" aria-describedby="basic-addon1">
+          <input type="text"  id="twiter" class="form-control" placeholder="Twitter" aria-label="Username" aria-describedby="basic-addon1">
           <div class="d-none" id="camp-vacio-twiter" style="font-size: smaller; color: red;">
            *Obligatorio.
          </div>
         </div>
       </div> 
    
-
-
       </div>
-      <div class="modal-footer">
-        <button type="button" style="background-color: #546991!important;" class="btn btn-primary">Guardar cambios</button>
-      </div>
+      
+    </div>
+    <div class="modal-footer">
+      <button type="button" style="background-color: #546991!important;" onclick="ActualizarInfo()" class="btn btn-primary">Guardar cambios</button>
     </div>
   </div>
 </div>
+<!--------------------------------------------------------------------------------------------------------------------------------------->
+
 
 <!--------  modal de bienvenida----------->
 <!-- Central Modal Small -->
@@ -1472,60 +1173,6 @@
 
 
 
-
-<div class="modal fade bd-example-modal-xl"  id="modal-logotipo" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-  <div class="modal-content">
-    <div class="modal-header" style="background-color: #546991; color: #ffffff;">
-      <h6>Logotipo (vista previa)</h6>
-      <h5 class="modal-title" id="exampleModalLongTitle" style="margin-left: 200px; margin-right: auto; font-size: 15px;"></h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body" style="height: 80%;">
-      <p style="font-size: 13px;">¡Agrega un logotipo que indentifique a tu empresa!, en Hi-Offer creemos en la importancia de llamar la atención de tus clientes con un logotipo que te identifique.</p>
-     
-      <div class="custom-file">
-        <div>
-          <form id="form-logotipo">
-          <input type="file" onchange="return vistaLogotipo()" id="input-Logotipo" name="archivo" class="custom-file-input" id="customFileLang" lang="es">
-          <label class="custom-file-label" for="customFileLang">Seleccionar un logotipo</label>
-          <div class="invalid-feedback" id="img-invalid1" style="font-size:12px">
-            Debe seleccionar un archivo con la extensión jpg o png.
-          </div>
-        </form>
-        </div>
-       
-        <div style="text-align: center;" id="visor-logotipo">
-          <img id="img-perfil" class=" avatar rounded-circle foto-perfil2 z-depth-1"src="img/logotipo-subir.png" style="width: 200px!important; height: 200px; margin-top: 30px!important;" alt="avatar" >
-        </div>
-        <div class="card-body white">
-          <div class="view overlay zoom" id="">
-            
-         </div>
-        </div>  
-      </div>
-    </div>
-    <div class="modal-footer" id="footer-lg">
-      <div class="col-12">
-        <div class="progress md-progress" style="height: 20px!important;">
-          <div id="barra1" style="text-align: center;">
-          <span id="progreso1" style="color: #ffffff; font-size: 13px; margin-top: -5px;"></span></div>
-         
-        </div>
-        <button type="submit" id="btn-guardar" onclick="subirLogotipo();" style="border:0px ; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary ">Guardar</button>
-        <button type="button"  id="btn-guardar-cambios"  onclick="subir_imagen(1);" style=" border:0px; display: none; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary">Guardar cambios</button>
-     
-        <button type="button" id="btn-cancelar" onclick=" agregarPlan()" style="border:0px;background-color: #B8CCCB!important; float: right; font-size: 13px;" class="btn btn-primary ">Cancelar</button>
-        
-         </div>
-  </div>
-</div>
-</div>
-
-
 <!----------------------- FICHA PROMOCIONAL--------------------------->
 
 <!-- Modal -->
@@ -1581,9 +1228,6 @@ aria-hidden="true">
 
 
 
-
-
-
       <!---Modal de prueba gratuita finalizada-->
           <div class="modal fade right" id="modalDiscount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true" data-backdrop="true">
@@ -1621,7 +1265,6 @@ aria-hidden="true">
             </div>
           </div>
           <!--Modal: modalDiscount-->
-
 
 
           <!-------------MODAL PAGO PLAN----->
@@ -1767,6 +1410,169 @@ aria-hidden="true">
 
 
 
+<!--------------------------------------------------------------------------------------------------------------------------------------->
+                                          <!---MODAL PARA EDITAR UN LOGOTIPO-->
+<!------------------------------------------------------------------------------------------------------------------------------------->
+<div class="modal fade bd-example-modal-xl"  id="modal-logotipo" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header" style="background-color: #546991; color: #ffffff;">
+      <h6>Logotipo (vista previa)</h6>
+      <h5 class="modal-title" id="exampleModalLongTitle" style="margin-left: 200px; margin-right: auto; font-size: 15px;"></h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="height: 80%;">
+      <p style="font-size: 13px;">¡Agrega un logotipo que indentifique a tu empresa!, en Hi-Offer creemos en la importancia de llamar la atención de tus clientes con un logotipo que te identifique.</p>
+     
+      <div class="custom-file">
+        <div>
+          <form id="form-logotipo">
+          <input type="file" onchange="return vistaLogotipo()" id="input-Logotipo" name="archivo" class="custom-file-input" id="customFileLang" lang="es">
+          <label class="custom-file-label" for="customFileLang">Seleccionar un nuevo logotipo</label>
+          <div class="invalid-feedback" id="img-invalid1" style="font-size:12px">
+            Debe seleccionar un archivo con la extensión jpg o png.
+          </div>
+        </form>
+        </div>
+       
+        <div style="text-align: center;" id="visor-logotipo">
+          <img id="img-perfil" class=" avatar rounded-circle foto-perfil2 z-depth-1"src="img/logotipo-subir.png" style="width: 200px!important; height: 200px; margin-top: 30px!important;" alt="avatar" >
+        </div>
+        <div class="card-body white">
+          <div class="view overlay zoom" id="">
+            
+         </div>
+        </div>  
+      </div>
+    </div>
+    <div class="modal-footer" id="footer-lg">
+      <div class="col-12">
+        <div class="progress md-progress" style="height: 20px!important;">
+          <div id="barra1" style="text-align: center;">
+          <span id="progreso1" style="color: #ffffff; font-size: 13px; margin-top: -5px;"></span></div>
+         
+        </div>
+        <button type="submit" id="btn-guardar" onclick="subirLogotipo();" style="border:0px ; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary ">Guardar cambios</button>
+        <button type="button"  id="btn-guardar-cambios"  onclick="subir_imagen(1);" style=" border:0px; display: none; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary">Guardar cambios</button>
+     
+        <button type="button" id="btn-cancelar" onclick=" agregarPlan()" style="border:0px;background-color: #B8CCCB!important; float: right; font-size: 13px;" class="btn btn-primary ">Cancelar</button>
+        
+         </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+<!--------------------------------------------MODAL ARA EL REGISTRO DE PROMOCIONES----------------------------------------------------------------------->
+
+<div class="modal fade" id="centralModalSmPromo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title w-100" id="myModalLabel">Servicio de promociones</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class=" col-12  p-0 mt-20 container-fluid " id="form-descuento1" style="padding: 0px; margin-top: 5px;">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-12">
+              <div class="md-form mb-0">
+               <select class="mdb-select md-form form-control" id="slect-producto" ></select>
+              </div>
+              <div class="d-none" id="camp-vacio-select" style="font-size: smaller; color: red;">
+                Este campo no puede estar vacio.
+              </div>
+            </div>
+            <div class="col-12" style="margin-bottom: 0px;">
+              <div class="md-form mb-0">
+                <input type="number" onkeyup="generarPorcentaje()" onchange="generarPorcentaje()" id="precio-descuento" class="form-control">
+                <label for="precio-descuento" class="">Precio de descuento</label>
+              </div>
+              <div class="d-none" id="camp-vacio-precio-descuento" style="font-size: smaller; color: red;">
+                Obligatorio.
+              </div>
+              <div class="d-none" id="descuento-invalid" style="font-size: smaller; color: red;">
+                El precio de descuento es mayor a precio real.
+              </div>
+            </div>
+            <div class="col-12" >
+              <p  class="mt-2 mb-0" style="font-size:14px; margin-bottom: 0 ; color: #6B767A;"> Seleccione las surcursales en las que estara disponible</p>
+              <div class="md-form mb-2 ml-3" style="margin-top: 0px;">
+               <div class="md-form mb-5 mt-0" id="checkbox-sucursales" style="margin-bottom:10px!important">
+               
+              </div>
+              
+            </div>
+            <div class="d-none" id="sucursal-vacio" style="font-size: smaller; color: red;">
+              Debe seleccionar al menos una sucursal
+            </div>
+            </div>
+            <div class="row ml-20" style="margin-left: 10px;">
+              
+              <div class="md-form col-5">
+                <input placeholder="DD-MM-YY" type="text" id="fecha-inicial" class="form-control datepicker">
+                <label for="fecha-inicial">Fecha inicial</label>
+                <div class="d-none" id="fecha-inicial-vacia" style="font-size: smaller; color: red;">
+                 Obligatorio
+                </div>
+              </div>
+              <div class="md-form col-5">
+                <input placeholder="DD-MM-YY" type="text" id="fecha-final" class="form-control datepicker">
+                <label for="fecha-final">Fecha final</label>
+                <div class="d-none" id="fecha-final-vacia" style="font-size: smaller; color: red;">
+                  Obligatorio
+                 </div>
+                 <div class="d-none" id="fecha-final-invalida" style="font-size: smaller; color: red;">
+                  La fecha debe ser igual o posterior a la fecha actual.
+                 </div>
+              </div>
+
+            
+            </div>
+          
+          </div>
+          <div class="col-12 col-md-6 container-fluid " id="grafico">
+           
+            <div class="row">
+              <div class="card-body px-0 pb-0">
+                <h7 class="text-left col-6  font-weight-bold mb-4 mx-auto" style="margin-left: 20px;">Porcentaje de descuento</h7>
+                <hr>
+                <div class="row mt-1 pt-3">
+                  <div class="col-lg-10 col-12 mb-4 mb-md-0  px-5 py-1">
+                    <canvas id="porcentaje-descuento"></canvas>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <div id="texto-descuento"></div>
+          
+          </div>
+          </div><!--fin de la fila-->
+        </section> <!---fin de la seccion-->
+      </div>
+      <div class="modal-footer">
+        <button class="btn col-3"  onclick="guardarPromocion()" style="background-color: #536F97; color: #ffffff; padding: 12px; font-size: 12px;"><i class="fas fa-chart-pie mr-2"></i>Guardar</button>
+           
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Central Modal Small -->
+
+
+                                          <!---MODAL PARA EDITAR UN BANNER-->
+<!------------------------------------------------------------------------------------------------------------------------------------->
+
 
 <div class="modal fade bd-example-modal-xl"  id="modal-banner" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
   aria-hidden="true">
@@ -1784,7 +1590,7 @@ aria-hidden="true">
           <div>
             <form id="form-subir">
             <input type="file" onchange=" return validarBanner()" id="input-Banner" name="archivo" class="custom-file-input" id="customFileLang" lang="es">
-            <label class="custom-file-label" for="customFileLang">Seleccionar un Banner</label>
+            <label class="custom-file-label" for="customFileLang">Seleccionar un nuevo Banner</label>
             <div class="invalid-feedback" id="img-invalid" style="font-size:12px">
               Debe seleccionar un archivo con la extensión jpg o png.
             </div>
@@ -1807,7 +1613,7 @@ aria-hidden="true">
             <span id="progreso" style="color: #ffffff; font-size: 13px; margin-top: -5px;"></span></div>
            
           </div>
-          <button type="submit" id="btn-guardar3" onclick="subir_banner(0);" style="border:0px ; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary ">Guardar</button>
+          <button type="submit" id="btn-guardar3" onclick="subir_banner(0);" style="border:0px ; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary ">Guardar cambios</button>
           <button type="button"  id="btn-guardar-cambios3"  onclick="subir_imagen(1);" style=" border:0px; display: none; background-color: #546991!important; float: right; font-size: 13px;" class="btn btn-primary">Guardar cambios</button>
        
           <button type="button" id="btn-cancelar" onclick=" agregarPlan()" style="border:0px;background-color: #B8CCCB!important; float: right; font-size: 13px;" class="btn btn-primary ">Cancelar</button>
@@ -1818,10 +1624,11 @@ aria-hidden="true">
 </div>
 
 
-
-
+      
     
-
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
      
       <script type="text/javascript" src="js/librerias/jquery.min.js"></script>
       <!-- Bootstrap tooltips -->
@@ -1832,20 +1639,20 @@ aria-hidden="true">
       <script type="text/javascript" src="js/librerias/mdb.min.js"></script>
       <script src="js/librerias/axios.min.js"></script>
       <script type="text/javascript" src="resource/moment-with-locales.js"></script>
-      <script src="js/controladores/estado_empresa.js"></script>
+      <script src="js/addons/rating.min.js"></script>
       <script src="js/controladores/validaciones.js"></script>
       <script src="js/controladores/validacionUsuario.js"></script>
+      <script src="js/controladores/generar_mapas_sucursales.js"></script>
       <script src="js/controladores/controlador_inicio_Empresas.js"></script>
+     
       <!-- Your custom scripts (optional) -->
      <script src="js/librerias/bootstrap.bundle.min.js"></script>
      <script src="js/librerias/bootstrap-datepicker.min.js"></script>
      
      <script src="js//librerias/jquery.creditCardValidator.js"></script>
      
-     
-     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=generarMapa"></script>-->
-
-    
+   
+   
       <!-- Menu Toggle Script -->
       <script>
         $("#menu-toggle").click(function(e) {
@@ -1857,3 +1664,5 @@ aria-hidden="true">
       </script>
 </body>
 </html>
+
+
