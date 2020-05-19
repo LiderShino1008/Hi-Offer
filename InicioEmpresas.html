@@ -11,6 +11,7 @@
      <!-- Material Design Bootstrap -->
      <link rel="stylesheet" href="css/mdb.min.css">
     <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="css/starrr.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
      <link href="css/simple-sidebar.css" rel="stylesheet">
      <link href="css/date-picket/bootstrap-datepicker.min.css" rel="stylesheet">
@@ -43,7 +44,7 @@
             <a href="#" data-toggle="modal" data-target="#modal-seguridad" class="list-group-item list-group-item-action item-sidebar "style="font-size: 13px;"><i style="margin: 7px;"  class="fas fa-user-shield"style="font-size: 13px;"></i>Seguridad</a>
             <a href="#" class="list-group-item list-group-item-action item-sidebar "style="font-size: 13px;"><i style="margin: 7px;"  class="fas fa-cog"style="font-size: 13px;"></i>Eliminar cuenta</a>
             <a href="#" class="list-group-item list-group-item-action item-sidebar "style="font-size: 13px;"><i style="margin: 7px;"  class="fas fa-user"style="font-size: 13px;"></i>Cerrar Sesión</a>
-         
+            <div id="elem"></div>
           </div>
         </div>
         <!-- /#sidebar-wrapperg -->
@@ -184,63 +185,8 @@
               </div>
              <hr>
              
-            <section id="content-promociones">
-                <div class="card col-12  col-lg-2 col-md-4 pr-0 pl-0 mt-10" style="margin-top: 30px; margin-bottom: 5px;">
-                    <div class="col-12 head-car">
-                      <i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
-                      aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer;"  ></i>
-                      <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px ;" id="hola">
-                        <a class="dropdown-item" data-toggle="modal" data-target="#ficha-promocional" >Generar ficha</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Editar</a>
-                        <a class="dropdown-item" href="#">Eliminar</a>
-                      </div>
-                    </div>
-                    <hr>
-                        <div class="view overlay">
-                          <img src="img/img.jpg" class="img-fluid"alt="">
-                          <a><div class="mask rgba-white-slight"></div></a>
-                        </div>
-                        <div class="card-body">
-                          <h5 class="card-title mb-1">
-                            <strong><a href="" class="dark-grey-text">Vestido</a>
-                            </strong>
-                          </h5>
-                        
-                          <!-- Rating -->
-                          <ul class="rating text-left form-inline">
-                            <i class="fas fa-star" onclick="" style="color:#FFC107;"></i>
-                            <i class="fas fa-star" style="color:#FFC107;"></i>
-                            <i class="fas fa-star" style="color:#FFC107;"></i>
-                            <i class="fas fa-star" style="color:#FFC107;"></i>
-                            <i class="fas fa-star" style="color:#FFC107;"></i>
-                          </ul>
-                          <!-- Card footer -->
-                          <span class="badge badge-danger mb-2">Promoción</span>
-                          
-                          <!-- rating.js file -->
-                          
-                          <div class="card-footer pb-0">
-                        <div class="row mb-0">
-                          <h5 class="mb-0 pb-0 mt-1 font-weight-bold">
-                            <span class="red-text">
-                              <strong style="font-size:20px">$200</strong>
-                            </span>
-                            <span class="grey-text">
-                              <small>
-                                <s style="font-size:15px">$300</s>
-                              </small>
-                            </span>
-                          </h5>
-                          <span class="float-right">
-                            <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
-                              <i class="fas fa-shopping-cart ml-3"></i>
-                            </a>
-                          </span>
-                        </div>
-                      </div>
-                        </div>
-                </div>
+            <section id="content-promociones" class="container-fluid">
+                <div class="row"></div>
             </section>
             </div>
          
@@ -1173,59 +1119,6 @@
 
 
 
-<!----------------------- FICHA PROMOCIONAL--------------------------->
-
-<!-- Modal -->
-<div class="modal fade" id="ficha-promocional" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h6 class="modal-title"  id="exampleModalLabel">Ficha promocional</h6>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class=" card container-fluid" style="padding-top: 20px; padding-bottom: 20px;">
-          <div class="row">
-            <div class="col-lg-6 col-12">
-              <div class="col-12 p-0">
-                <img class="img-fluid" src="img/por.jpg">
-              </div>
-            </div>
-            <div class="col-12 col-lg-6 pt-3"> 
-              <h6>Nombre del producto</h6>
-              <span class="red-text">
-                <strong style="font-size:40px">15%</strong>
-                <strong style="font-size:15px"> de descuento</strong>
-                <span class="grey-text">
-                  <small>
-                    <s style="font-size:15px">$300</s>
-                  </small>
-                </span>
-                <span class="">
-                  <strong style="font-size:20px; font-weight: bold; color: black;">$200</strong>
-                </span>
-                
-              </span>
-              <h6>Fecha final de la promocion<h6>
-  
-            </div>
-          </div>
-        
-          <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: -70px;" viewBox="0 0 1440 320"><path fill="#546991" fill-opacity="1" d="M0,224L120,240C240,256,480,288,720,272C960,256,1200,192,1320,160L1440,128L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
-        </div>
-      </div>
-      <div class="modal-footer">
-        
-        <button type="button" class="btn btn-primary " style="background-color:#546991!important ;">imprimir</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 
       <!---Modal de prueba gratuita finalizada-->
@@ -1409,7 +1302,38 @@
 </div>
 
 
-
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#centralModalSmh">
+  Launch demo modal
+</button>
+<div class="modal fade" id="centralModalSmh" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel" style="font-size: 14px;">Sucursales</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="list-group col-12 mx-auto" id="list-sucursales">
+          <span  class="list-group-item  list-group-item-action "  style="background-color: white; ">
+            <strong style="font-weight: bold;">Nombre sucursal</strong><span><i class="fas fa-plus-square mr-auto " data-toggle="modal"  data-target="#modal-categorias" style="color: #536F97; font-size: 20px;float: right; cursor: pointer;"  ></i>
+           </span>
+          </span>
+          <br>
+          <div id="list"> 
+            <span class="list-group-item list-group-item-action">k<span><i class="far fa-trash-alt mr-auto " data-toggle="dropdown" onclick=""
+              aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer; "  ></i>
+             </span></span>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
 <!--------------------------------------------------------------------------------------------------------------------------------------->
                                           <!---MODAL PARA EDITAR UN LOGOTIPO-->
 <!------------------------------------------------------------------------------------------------------------------------------------->
@@ -1467,6 +1391,128 @@ aria-hidden="true">
 </div>
 
 
+
+
+<!----------------------- FICHA PROMOCIONAL--------------------------->
+
+<!-- Modal -->
+<div class="modal fade" id="ficha-promocional-" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title"  id="exampleModalLabel">Ficha promocional</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class=" card container-fluid" style="padding-top: 20px; padding-bottom: 20px;">
+          <div class="row">
+            <div class="col-lg-6 col-12">
+              <div class="col-12 p-0">
+                <img class="img-fluid" src="img/por.jpg">
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 pt-3"> 
+              <h6>Nombre del producto</h6>
+              <span class="red-text">
+                <strong style="font-size:40px">15%</strong>
+                <strong style="font-size:15px"> de descuento</strong>
+                <span class="grey-text">
+                  <small>
+                    <s style="font-size:15px">$300</s>
+                  </small>
+                </span>
+                <span class="">
+                  <strong style="font-size:20px; font-weight: bold; color: black;">$200</strong>
+                </span>
+                
+              </span>
+              <h6>Fecha final de la promocion<h6>
+  
+            </div>
+          </div>
+        
+          <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: -70px;" viewBox="0 0 1440 320"><path fill="#546991" fill-opacity="1" d="M0,224L120,240C240,256,480,288,720,272C960,256,1200,192,1320,160L1440,128L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
+        </div>
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-primary " style="background-color:#546991!important ;">imprimir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#centralModalSml">
+  Launch demo modal
+</button>
+
+<!-- Central Modal Small -->
+<div class="modal fade" id="centralModalSml" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title w-100" id="myModalLabel">Configuración</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+              aria-controls="pills-home" aria-selected="true">Planes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+              aria-controls="pills-profile" aria-selected="false">Seguridad</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+              aria-controls="pills-contact" aria-selected="false">Mi cuenta</a>
+          </li>
+        </ul>
+        <div class="tab-content pt-2 pl-1" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Consequat
+            occaecat ullamco amet non eiusmod nostrud dolore irure incididunt est duis anim sunt officia. Fugiat
+            velit proident aliquip nisi incididunt nostrud exercitation proident est nisi. Irure magna elit commodo
+            anim ex veniam culpa eiusmod id nostrud sit cupidatat in veniam ad. Eiusmod consequat eu adipisicing
+            minim anim aliquip cupidatat culpa excepteur quis. Occaecat sit eu exercitation irure Lorem incididunt
+            nostrud.</div>
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">Ad
+            pariatur nostrud pariatur exercitation ipsum ipsum culpa mollit commodo mollit ex. Aute sunt incididunt
+            amet commodo est sint nisi deserunt pariatur do. Aliquip ex eiusmod voluptate exercitation cillum id
+            incididunt elit sunt. Qui minim sit magna Lorem id et dolore velit Lorem amet exercitation duis
+            deserunt. Anim id labore elit adipisicing ut in id occaecat pariatur ut ullamco ea tempor duis.</div>
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">Est
+            quis nulla laborum officia ad nisi ex nostrud culpa Lorem excepteur aliquip dolor aliqua irure ex.
+            Nulla ut duis ipsum nisi elit fugiat commodo sunt reprehenderit laborum veniam eu veniam. Eiusmod minim
+            exercitation fugiat irure ex labore incididunt do fugiat commodo aliquip sit id deserunt reprehenderit
+            aliquip nostrud. Amet ex cupidatat excepteur aute veniam incididunt mollit cupidatat esse irure officia
+            elit do ipsum ullamco Lorem. Ullamco ut ad minim do mollit labore ipsum laboris ipsum commodo sunt
+            tempor enim incididunt. Commodo quis sunt dolore aliquip aute tempor irure magna enim minim
+            reprehenderit. Ullamco consectetur culpa veniam sint cillum aliqua incididunt velit ullamco sunt
+            ullamco quis quis commodo voluptate. Mollit nulla nostrud adipisicing aliqua cupidatat aliqua pariatur
+            mollit voluptate voluptate consequat non.</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--------------------------------------------MODAL ARA EL REGISTRO DE PROMOCIONES----------------------------------------------------------------------->
 
 <div class="modal fade" id="centralModalSmPromo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -1492,6 +1538,7 @@ aria-hidden="true">
                 Este campo no puede estar vacio.
               </div>
             </div>
+
             <div class="col-12" style="margin-bottom: 0px;">
               <div class="md-form mb-0">
                 <input type="number" onkeyup="generarPorcentaje()" onchange="generarPorcentaje()" id="precio-descuento" class="form-control">
@@ -1504,17 +1551,28 @@ aria-hidden="true">
                 El precio de descuento es mayor a precio real.
               </div>
             </div>
+            
             <div class="col-12" >
-              <p  class="mt-2 mb-0" style="font-size:14px; margin-bottom: 0 ; color: #6B767A;"> Seleccione las surcursales en las que estara disponible</p>
-              <div class="md-form mb-2 ml-3" style="margin-top: 0px;">
-               <div class="md-form mb-5 mt-0" id="checkbox-sucursales" style="margin-bottom:10px!important">
-               
-              </div>
-              
+              <p class="mt-2 mb-0" style="font-size:14px; margin-bottom: 0 ; color: #6B767A; margin-top: 20px!important;"> Seleccione las surcursales en las que estara disponible</p>
+              <div class="md-form mb-2 ml-0" >
+             <!--<div class="md-form mb-5 mt-0" id="checkbox-sucursales" >
+                </div>--->   
+                <div class="list-group col-12 mx-auto">
+                  <span  class="list-group-item  list-group-item-action "  style="background-color: #536F97; color: white;">
+                    Sucursales<span><i class="fas fa-plus-square mr-auto " onclick="abrirModalSuc()" data-toggle="modal" data-target="" style=" font-size: 20px;float: right; cursor: pointer;"  ></i>
+                   </span>
+                  </span>
+                  <div id="list"> 
+                   
+                  </div>
+                    
+                
+                </div>
             </div>
             <div class="d-none" id="sucursal-vacio" style="font-size: smaller; color: red;">
               Debe seleccionar al menos una sucursal
             </div>
+         
             </div>
             <div class="row ml-20" style="margin-left: 10px;">
               
@@ -1535,8 +1593,7 @@ aria-hidden="true">
                   La fecha debe ser igual o posterior a la fecha actual.
                  </div>
               </div>
-
-            
+              
             </div>
           
           </div>
@@ -1561,13 +1618,16 @@ aria-hidden="true">
         </section> <!---fin de la seccion-->
       </div>
       <div class="modal-footer">
-        <button class="btn col-3"  onclick="guardarPromocion()" style="background-color: #536F97; color: #ffffff; padding: 12px; font-size: 12px;"><i class="fas fa-chart-pie mr-2"></i>Guardar</button>
+        <button class="btn col-3" id="btn-guardar-promo" onclick="guardarPromocion()" style="background-color: #536F97; color: #ffffff; padding: 12px; font-size: 12px;"><i class="fas fa-chart-pie mr-2"></i>Publicar</button>
+        <button class="btn col-3 d-none" id="btn-editar-promo"  onclick="editarPromocion()" style="background-color: #536F97; color: #ffffff; padding: 12px; font-size: 12px;"><i class="fas fa-chart-pie mr-2"></i>Guardar cambios</button>
            
       </div>
     </div>
   </div>
 </div>
 <!-- Central Modal Small -->
+
+
 
 
                                           <!---MODAL PARA EDITAR UN BANNER-->
@@ -1624,6 +1684,7 @@ aria-hidden="true">
 </div>
 
 
+<!-- Central Modal Small -->
       
     
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
@@ -1639,6 +1700,7 @@ aria-hidden="true">
       <script type="text/javascript" src="js/librerias/mdb.min.js"></script>
       <script src="js/librerias/axios.min.js"></script>
       <script type="text/javascript" src="resource/moment-with-locales.js"></script>
+      <script src="js/librerias/starrr.js"></script>
       <script src="js/addons/rating.min.js"></script>
       <script src="js/controladores/validaciones.js"></script>
       <script src="js/controladores/validacionUsuario.js"></script>

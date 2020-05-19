@@ -1,0 +1,17 @@
+.starrr {
+  display: inline-block; }
+
+  .starrr a{
+    font-size: 16px;
+    padding: 0 1px;
+    cursor: pointer;
+    color:#ffff;
+    -webkit-text-stroke: 1px #646464;
+    text-decoration: none; }
+
+    a:active{
+      font-size: 16px;
+      padding: 0 1px;
+      cursor: pointer;
+      color:#FFC107;
+      text-decoration: none; }

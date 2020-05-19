@@ -11,22 +11,20 @@
             $promocion->guardarPromocion($_POST["idEmp"]);
         break;
         case 'GET':
-            //obtener un plan
-            if(isset($_GET['id'])){
-                Plan::obtenerUnPlan($_GET['id']); 
-            }else{
-                Plan::obtenerPlanes(); 
-            }
+            
         break;
         case 'PUT':
              $_PUT =json_decode(file_get_contents('php://input'),true);
-             $plan=new Plan($_PUT["nombre"],$_PUT["precio"],$_PUT["limitePromociones"],$_PUT["descripcion"],$_PUT["plazo"],$_PUT["tiempoPruebaGratuita"],$_PUT["diseno"]);
-             $plan->actualizarUnPlan($_GET['id']);
-             
+             if(isset($_PUT['accion'])){
+                 Promocion::eliminarPromocion($_PUT["idEmp"],$_GET['id']);
+             }else{
+                $promocion=new Promocion($_PUT["idProducto"],$_PUT["precio_descuento"],$_PUT["sucursales"],$_PUT["fecha_inicial"],$_PUT["fecha_final"],$_PUT["porcentaje_descuento"]);
+               $promocion->guardarPromocion($_GET["id"],$_PUT["idEmp"]);
+             }
+        
         break;
         case 'DELETE':
-            /*eliminar un plan*/
-            Plan::eliminarPlan($_GET['id']); 
+         
         break;
     } 
 ?>

@@ -12,7 +12,17 @@ var indexEmpresa;
 var empresa;
 var categorias=[];
 var catSelecc;
+var arraySucursales=[];
 
+$( '.micheckbox' ).on( 'click', function() {
+  if( $(this).is(':checked') ){
+      // Hacer algo si el checkbox ha sido seleccionado
+      alert("El checkbox con valor " + $(this).val() + " ha sido seleccionado");
+  } else {
+      // Hacer algo si el checkbox ha sido deseleccionado
+      alert("El checkbox con valor " + $(this).val() + " ha sido deseleccionado");
+  }
+});
 /*
 console.log("mes",moment().format("YYYY-MM-DD"));
 fecha=moment().add(1, 'months').format("YYYY-MM-DD")
@@ -30,6 +40,28 @@ document.addEventListener("DOMContentLoaded",()=>{
 */
 
 
+/*
+$('.starrr').starrr({
+  rating: 5,
+  change: function(e, value){
+    if (value) {
+      
+    } else {
+      
+    }
+  }
+});
+
+/*
+
+$('.starrr').starrr({
+  rating: 5
+})
+$('.starrr').on('starrr:change', function(e, value){
+  alert('new rating is ' + value)
+})
+
+*/
 document.addEventListener("DOMContentLoaded",()=>{
   var form_logotipo=document.getElementById("form-logotipo");
   form_banner.addEventListener("submit",function(event){
@@ -138,6 +170,8 @@ function obtenerInformacionGeneral(){
       generarSeccionProductos();
       generarSucursales();
       llenarSelectProductos();
+      generarPromociones();
+      llenarModalListSucursales();
     }
     catch(error) {
       document.getElementById("div-error").classList.remove('d-none');
@@ -940,7 +974,8 @@ function obtenerEmpActualizada(){
     llenarSidebar();
     generarSeccionProductos();
     generarSucursales();
-    
+    generarPromociones();
+    llenarModalListSucursales();
   }
   catch(error) {
     document.getElementById("div-error").classList.remove('d-none');
@@ -2288,14 +2323,9 @@ function llenarSelectProductos(){
     document.getElementById('slect-producto').innerHTML+=`
     <option value="${i}">${cuentaEmpresa.productos[i].nombre}</option>`
   }
+ 
 }
 
-function resetModalPromo(){
-  llenarSelectProductos();
-  llenarSucursales();
-  $('#fecha-inicial').val(moment().format('DD-MM-YYYY'));
-  console.log(moment().format('DD-mm-YYYY'));
-}
 
 
 function validarPromocion(){
@@ -2341,15 +2371,12 @@ function validarPromocion(){
     permiso=true;
   }
     let seleccionado=false
-    for(let i=0; i<cuentaEmpresa.sucursales.length;i++){
-      console.log(document.getElementsByName(`sucursal-${i}`))
-      if(document.getElementsByName(`sucursal-${i}`)[0].checked){
-        permiso=true;
-        seleccionado=true;
-        break;
-      }
+    if(arraySucursales.length==0){
+      seleccionado=false
+    }else{
+      seleccionado=true
     }
-    console.log(seleccionado);
+    
     if(!seleccionado){
       $('#sucursal-vacio').removeClass('d-none');
       $('#sucursal-vacio').addClass('d-block');
@@ -2390,12 +2417,27 @@ function validarPromocion(){
       permiso=true;
       }
 
-
+      if($('sucursal-0').is(':checked')){
+        console.log("mjum");
+      }
+      
+  
       
     } 
     
   return permiso;
 }
+
+$( '#sucursal-0' ).on( 'click', function() {
+  if( $(this).is(':checked') ){
+      // Hacer algo si el checkbox ha sido seleccionado
+      alert("El checkbox con valor " + $(this).val() + " ha sido seleccionado");
+  } else {
+      // Hacer algo si el checkbox ha sido deseleccionado
+      alert("El checkbox con valor " + $(this).val() + " ha sido deseleccionado");
+  }
+});
+
 
 var porcentaje;
 
@@ -2408,8 +2450,7 @@ function guardarPromocion(){
     let limite=parseInt(plan.limitePromociones);
     let promo=cuentaEmpresa.promociones.length;
     if(promo<limite){
-      let sucursales=cuentaEmpresa.sucursales
-     
+      
     axios({
       method:'POST',
       url:urlPromociones,
@@ -2417,7 +2458,7 @@ function guardarPromocion(){
       data:{
         "idProducto":$('#slect-producto').val(),
         "precio_descuento":parseFloat($('#precio-descuento').val()).toFixed(2),
-        "sucursales":sucursales,
+        "sucursales":arraySucursales,
         "fecha_inicial":$('#fecha-inicial').val(),
         "fecha_final":$('#fecha-final').val(),
         "porcentaje_descuento":porcentaje,
@@ -2507,32 +2548,223 @@ function generarPorcentaje(){
   }
 
 
-
-  function llenarSucursales(){
-    document.getElementById('checkbox-sucursales').innerHTML="";
-    for(let i=0; i<cuentaEmpresa.sucursales.length;i++){
-      document.getElementById('checkbox-sucursales').innerHTML+=`<div style="margin-left:20px; " class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="sucursal-${i}">
-      <label class="custom-control-label" for="defaultUnchecked">${cuentaEmpresa.sucursales[i].nombre}</label>
-    </div>
-    `
+  function generarPromociones(){
+    document.getElementById('content-promociones').innerHTML="";
+    console.log()
+    for( let j=0; j<cuentaEmpresa.promociones.length;j++){
+      var id=parseInt(cuentaEmpresa.promociones[j].idProducto) ;
    
+      document.getElementById('content-promociones').innerHTML+=`<div class="card col-12  col-lg-2 col-md-4 pr-0 pl-0 mt-10 mx-2" style="margin-top: 30px; margin-bottom: 5px; float:left">
+      <div class="col-12 head-car">
+        <i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
+        aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer;"  ></i>
+        <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px ;" id="hola">
+          <a class="dropdown-item" data-toggle="modal" data-target="#ficha-promocional-" >Generar ficha</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" data-toggle="modal" onclick="editarModalPromoVista(${j})" data-target="#centralModalSmPromo" href="#">Editar</a>
+          <a class="dropdown-item" onclick="eliminarPromo(${j})">Eliminar</a>
+        </div>
+      </div>
+      <hr>
+          <div class="view overlay">
+            <img src="${cuentaEmpresa.productos[id].imagen}" class="img-fluid"alt="" style="margin-top:0">
+            <a><div class="mask rgba-white-slight"></div></a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title mb-1">
+              <strong><a href="" class="dark-grey-text">${cuentaEmpresa.productos[id].nombre}</a>
+              </strong>
+            </h5>
+            <span class="badge badge-danger mb-2">Promoción</span><br>
+            <div class='starrr' id='star1' style="color:blue!important"></div>
+            
+            <div class="card-footer pb-0">
+          <div class="row mb-0">
+            <h5 class="mb-0 pb-0 mt-1 font-weight-bold">
+              <span class="red-text">
+                <strong style="font-size:20px">L.${cuentaEmpresa.promociones[j].precio_descuento}</strong>
+              </span>
+              <span class="grey-text">
+                <small>
+                  <s style="font-size:15px">L.${cuentaEmpresa.productos[id].precio}</s>
+                </small>
+              </span>
+            </h5>
+            <span class="float-right">
+              <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                <i class="fas fa-shopping-cart ml-3"></i>
+              </a>
+            </span>
+          </div>
+        </div>
+          </div>
+  </div>`
     }
-   
+    
+$('.starrr').starrr({
+  rating: 5,
+  readOnly: true
+})
+  }
+
+
+  var promo_slec;
+  function editarModalPromoVista(id){
+    promo_slec=id;
+    console.log("id",id)
+    document.getElementById('slect-producto').innerHTML="";
+    document.getElementById('slect-producto').innerHTML=`<option value="-" disabled selected>Seleccione un producto</option>`
+    for(let i=0;i<cuentaEmpresa.productos.length;i++){
+      document.getElementById('slect-producto').innerHTML+=`
+      <option value="${i}">${cuentaEmpresa.productos[i].nombre}</option>`
+    }
+    document.getElementById("slect-producto").value = cuentaEmpresa.promociones[id].idProducto;
+    $('#precio-descuento').val(cuentaEmpresa.promociones[id].precio_descuento);
+    arraySucursales=cuentaEmpresa.promociones[id].sucursales;
+    llenarListSucursalesAdd();
+    $('#fecha-inicial').val(cuentaEmpresa.promociones[id].fecha_inicial);
+    $('#fecha-final').val(cuentaEmpresa.promociones[id].fecha_final);
+    generarPorcentaje();
+    $('#btn-guardar-promo').addClass('d-none');
+    $('#btn-editar-promo').removeClass('d-none');
+    $('#btn-editar-promo').addClass('d-block');
+    $('#fecha-inicial').val(moment().format('DD-MM-YYYY'));
+  }
+
+
+  function editarPromocion(){
+    let permiso=validarPromocion();
+    if(permiso){
+      console.log("limite",parseInt(plan.limitePromociones));
+      console.log("promo",cuentaEmpresa.promociones.length);
+      let limite=parseInt(plan.limitePromociones);
+      let promo=cuentaEmpresa.promociones.length;
+      if(promo<limite){
+        console.log("editar",promo_slec)
+        console.log("el pro",$('#slect-producto').val());
+      axios({
+        method:'PUT',
+        url:urlPromociones+`?id=${promo_slec}`,
+        responseType:'json',
+        data:{
+          "idProducto":$('#slect-producto').val(),
+          "precio_descuento":parseFloat($('#precio-descuento').val()).toFixed(2),
+          "sucursales":arraySucursales,
+          "fecha_inicial":$('#fecha-inicial').val(),
+          "fecha_final":$('#fecha-final').val(),
+          "porcentaje_descuento":porcentaje,
+          "idEmp":indexEmpresa
+        }
+      }).then(res=>{
+        obtenerEmpActualizada();
+        $('#centralModalSmPromo').modal('hide');
+      }).catch(error=>{console.error(error);
+      });  
+      }else{
+        console.log("ya cumplio el limite de promociones")
+      }
+      
+    }
+  }
+
+
+  $(document).ready(function () {
+    $('.stepper').mdbStepper();
+    })
+    
+    function someFunction21() {
+    setTimeout(function () {
+    $('#horizontal-stepper').nextStep();
+    }, 2000);
+    }
+
+  
+  function llenarModalListSucursales(){
+    document.getElementById("list-sucursales").innerHTML="";
+    for(let i=0;i<cuentaEmpresa.sucursales.length;i++){
+      document.getElementById("list-sucursales").innerHTML+=`<span  class="list-group-item  list-group-item-action "  style="background-color: white; ">
+      <strong style="font-weight: bold;">${cuentaEmpresa.sucursales[i].nombre}</strong><span onclick="agregarSucursalArray(${i})" class="z-depth-5"><i class=" z-depth-5 fas fa-plus-square mr-auto example hoverable " style="color: #536F97; font-size: 20px;float: right; cursor: pointer;"  ></i>
+     </span>
+    </span>
+    <br>`
+    }
+  }
+
+
+  function abrirModalSuc(){
+    $('#centralModalSmPromo').modal("hide");
+    $('#centralModalSmh').modal("show");
+
+  }
+
+  function agregarSucursalArray(id){
+    let tempName=cuentaEmpresa.sucursales[id].nombre;
+    console.log("array longitud",arraySucursales.length)
+      if(arraySucursales.length>=1){
+        let variable;
+        for(let i=0;i<arraySucursales.length;i++){
+          if(arraySucursales[i].nombre==tempName){
+            variable=true;
+            break;
+          }
+           
+        }
+        if(variable){
+          console.log("ya existe");
+        }else{
+          arraySucursales.push(cuentaEmpresa.sucursales[id])
+        }
+      }else{
+        arraySucursales.push(cuentaEmpresa.sucursales[id])
+      }
+    console.log("sucursales",arraySucursales);
+    $('#centralModalSmh').modal("hide");
+    $('#centralModalSmPromo').modal("show");
+    llenarListSucursalesAdd();
+ 
+  }
+
+
+  function llenarListSucursalesAdd(){
+    document.getElementById('list').innerHTML="";
+    for(let i=0;i<arraySucursales.length;i++){
+      document.getElementById('list').innerHTML+=` <span class="list-group-item list-group-item-action">${arraySucursales[i].nombre}<span><i class="far fa-trash-alt mr-auto " 
+      aria-haspopup="true" aria-expanded="false" onclick="elmiminarListSuc(${i})" style="float: right; cursor: pointer;"  ></i>
+     </span></span>`
+    }
+  }
+
+  function elmiminarListSuc(id){
+    arraySucursales.splice(id,1);
+    llenarListSucursalesAdd();
+  }
+
+  function eliminarPromo(id){
+    axios({
+      method:'PUT',
+      url:urlPromociones+`?id=${id}`,
+      responseType:'json',
+      data:{
+        "accion":1,
+        "idEmp":indexEmpresa
+      }
+    }).then(res=>{
+      obtenerEmpActualizada();
+     
+    }).catch(error=>{console.error(error);
+    }); 
+  }
+
+
+  function resetModalPromo(){
+    arraySucursales=[];
+    llenarSelectProductos();
+    $('#fecha-inicial').val(moment().format('DD-MM-YYYY'));
+    console.log(moment().format('DD-mm-YYYY'));
+    llenarListSucursalesAdd();
+    $('#fecha-final').val("");
+    $('#precio-descuento').val("")
+    generarPorcentaje();
     
   }
   
-  
-
-
-  function generarPromociones(){
-    document.getElementById('content-promociones').innerHTML="";
-    for( let i=0; i<cuentaEmpresa.promociones.length;i++){
-
-    }
-  }
-
-  // Rating Initialization
-$(document).ready(function() {
-  $('#rateMe1').mdbRate();
-});

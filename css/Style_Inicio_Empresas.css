@@ -314,13 +314,24 @@ input[type="color"]:focus,
   outline: 0 none;
 }
 
-fa-star:hover{
-    color: ;
+
+.nav-pills .show>.nav-link {
+    color: #fff;
+    background-color:#546991!important;
 }
 
+a {
+    color: #546991!important;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
 
-
-
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff!important;
+    background-color: #546991!important;
+}
 .nombre-emp{
     color:  #546991;
     font-weight: bold;

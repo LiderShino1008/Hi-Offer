@@ -66,48 +66,60 @@
     }
 
 
-        public static function ObtenerPlanes(){
-            $contenido_archivo=file_get_contents("../data/planes.json");
-            echo $contenido_archivo;
-
-        }
-        
-        public static function obtenerUnPlan($id){
-            $contenido_archivo=file_get_contents("../data/planes.json");
-            $planes=json_decode($contenido_archivo,true);
-            echo json_encode($planes[$id]) ;
-        }
-
-
-        public  function actualizarUnPlan($id){
-            $contenido_archivo=file_get_contents("../data/planes.json");
-            $planes=json_decode($contenido_archivo,true);
-            $planes[$id]= array(
-                "nombre"=>$this->nombre,
-                "precio"=>$this->precio,
-                "limitePromociones"=>$this->limitePromociones,
-                "descripcion"=>$this->descripcion,
-                "plazo"=>$this->plazo,
-                "tiempoPruebaGratuita"=>$this->tiempoPruebaGratuita,
-                "diseno"=>$this->diseno
+        public  function actualizarPromocion($idEmp,$idPromocion){
+            $contenido_archivo= file_get_contents("../data/empresas.json");
+            $empresas=json_decode($contenido_archivo,true);
+            $tempComentarios=$empresas[$idEmp]["promociones"][$idPromocion]["comentarios"];
+            $empresas[$idEmp]["promociones"][$idPromocion]=array(
+                "idProducto"=>$this->idProducto,
+                "precio_descuento"=>$this->precioDescuento,
+                "sucursales"=>$this->sucursales,
+                "fecha_inicial"=>$this->fecha_final,
+                "fecha_final"=>$this->fecha_final,
+                "porcentaje_descuento"=>$this->porcentaje_descuento,
              );
-             $archivo=fopen("../data/planes.json","w");
-             fwrite($archivo,json_encode($planes)); 
-             fclose($archivo);
-    
-
+             $empresas[$idEmp]["promociones"][$idPromocion]["comentarios"]=$tempComentarios;
+             //editar en las categorias
+             $contenido_archivo= file_get_contents("../data/categorias.json");
+             $categorias=json_decode($contenido_archivo,true);
+             $idCategoria=$empresas[$idEmp]["productos"][$this->idProducto]["idCategoria"];
+             $tempComentarios2=$categorias[$idCategoria]["promociones"][$idPromocion]["comentarios"];
+             $categorias[$idCategoria]["promociones"][]=array(
+                 "nombre"=>$empresas[$idEmp]["productos"][$this->idProducto]["nombre"],
+                 "precio_descuento"=>$this->precioDescuento,
+                 "precio_real"=>$empresas[$idEmp]["productos"][$this->idProducto]["precio"],
+                 "calificacion"=>0,
+                 "descripcion"=>$empresas[$idEmp]["productos"][$this->idProducto]["descripcion"],
+                 "stock"=>$empresas[$idEmp]["productos"][$this->idProducto]["stock"],
+                 "categoria"=>$categorias[ $idCategoria]["nombre_categoria"],
+                 "Distribuidor"=>$empresas[$idEmp]["nombre_empresa"],
+                 "comentarios"=>$tempComentarios2
+             );
+             $archivo1=fopen("../data/empresas.json","w");
+             fwrite($archivo1,json_encode($empresas)); 
+             fclose($archivo1);
+             $archivo2=fopen("../data/categorias.json","w");
+             fwrite($archivo2,json_encode($categorias)); 
+             fclose($archivo2);
         }
 
-        public static function eliminarPlan($id)
+        public static function eliminarPromocion($idEmp,$idPromocion)
         {
-            $contenido_archivo=file_get_contents("../data/planes.json");
-            $planes=json_decode($contenido_archivo,true); 
-            array_splice($planes,$id,1);
- 
-           $archivo=fopen("../data/planes.json","w");
-          fwrite($archivo,json_encode($planes)); 
-          fclose($archivo);
- 
+           //eliminar de la categoria
+            $contenido_archivo= file_get_contents("../data/empresas.json");
+            $empresas=json_decode($contenido_archivo,true);
+            $idPro=$empresas[$idEmp]["promociones"][$idPromocion]["idProducto"];
+            $idCategoria=$empresas[$idEmp]["productos"][$idPro]["idCategoria"];
+            $contenido_archivo= file_get_contents("../data/categorias.json");
+            $categorias=json_decode($contenido_archivo,true);
+            array_splice($categorias[$idCategoria]["promociones"],$idPromocion,1);
+            array_splice($empresas[$idEmp]["promociones"],$idPromocion,1);
+            $archivo1=fopen("../data/empresas.json","w");
+            fwrite($archivo1,json_encode($empresas)); 
+            fclose($archivo1);
+            $archivo2=fopen("../data/categorias.json","w");
+            fwrite($archivo2,json_encode($categorias)); 
+            fclose($archivo2);
         } 
        
         
