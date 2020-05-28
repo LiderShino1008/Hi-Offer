@@ -10,11 +10,11 @@
       private $precio;
       private $stock;
       private $imagen;
-      private $empresa;
+      private $idEmpresa;
    
     
       /*contructor*/
-      public function __construct($nombre,$codigo,$idCategoria,$descripcion,$precio,$stock,$imagen,$empresa){
+      public function __construct($nombre,$codigo,$idCategoria,$descripcion,$precio,$stock,$imagen,$idEmpresa){
               $this->nombre=$nombre;
               $this->codigo=$codigo;
               $this->idCategoria=$idCategoria;
@@ -22,7 +22,7 @@
               $this->precio=$precio;
               $this->stock=$stock;
               $this->imagen=$imagen;
-              $this->empresa=$empresa;
+              $this->idEmpresa=$idEmpresa;
               
       }
 
@@ -32,6 +32,7 @@
      public function guardarProducto($idEmpresa){
         $contenido_archivo= file_get_contents("../data/empresas.json");
         $empresas=json_decode($contenido_archivo,true);
+        $nombreEmpresa=$empresas[$idEmpresa]["nombre_empresa"];
         $empresas[$idEmpresa]["productos"][]=array(
             "nombre"=>$this->nombre,
             "codigo"=>$this->codigo,
@@ -40,7 +41,8 @@
             "precio"=>$this->precio,
             "stock"=>$this->stock,
             "imagen"=>'backend/archivos-subidos/empresas/empresa'.$idEmpresa.'/'.$this->imagen,
-            "empresa"=>$this->empresa
+            "idEmpresa"=>$idEmpresa,
+            "empresa"=>$nombreEmpresa
         );
 
          $archivo=fopen("../data/empresas.json","w");
@@ -55,6 +57,7 @@
         public  function actualizarProducto($idEmp,$idProducto){
             $contenido_archivo= file_get_contents("../data/empresas.json");
             $empresas=json_decode($contenido_archivo,true);
+            $nombreEmpresa=$empresas[$idEmp]["nombre_empresa"];
             if($this->imagen==""){
                   $temp= $empresas[$idEmp]["productos"][$idProducto]["imagen"];
                   $empresas[$idEmp]["productos"][$idProducto]=array(
@@ -65,7 +68,8 @@
                         "precio"=>$this->precio,
                         "stock"=>$this->stock,
                         "imagen"=>$temp,
-                        "empresa"=>$this->empresa);
+                        "idEmpresa"=>$idEmp,
+                        "empresa"=>$nombreEmpresa);
             }else{
                   $empresas[$idEmp]["productos"][$idProducto]=array(
                         "nombre"=>$this->nombre,
@@ -75,7 +79,8 @@
                         "precio"=>$this->precio,
                         "stock"=>$this->stock,
                         "imagen"=>'backend/archivos-subidos/empresas/empresa'.$idEmp.'/'.$this->imagen,
-                        "empresa"=>$this->empresa);
+                        "idEmpresa"=>$this->idEmpresa,
+                        "empresa"=>$nombreEmpresa);
             }
 
 

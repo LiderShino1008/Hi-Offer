@@ -2,6 +2,7 @@ var indexPlan;
 var planes1=[];
 var urlEmp='../../Hi-Offer/backend/api/empresas.php';
 var urlAdmin='../../Hi-Offer/backend/api/administradores.php';
+var urlSucursales='../../Hi-Offer/backend/api/sucursales.php';
 var empresa;
 var administrador;
 var indexEmp;
@@ -503,26 +504,19 @@ function verificarCodigo(){
                         responseType:'json',
                         data:referencia
                       }).then(res=>{
-                        window.location="InicioEmpresas.html";
+                        
                       }).catch(error=>{console.error(error);
                       }); 
                   }).catch(error=>{console.error(error);
                   }); 
               }).catch(error=>{console.error(error);
               });  
-              axios({
-                method:'GET',
-                url:urlEmp+`?accion=0`,
-                responseType:'json',
-            }).then(res=>{
-                console.log("indice Recibido",res.data)
-                indexEmpresa=res.data.indexEmpresa;
-                console.log(indexEmpresa);
-            }).catch(error=>{console.error(error);
-            }); 
+             
+
+           
+           
          }else{
-            document.getElementById('code-invalid').classList.remove('d-none');
-            document.getElementById('txt-error').classList.add('d-none');
+            
          }  
 
     } 

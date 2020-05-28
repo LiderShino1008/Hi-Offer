@@ -43,7 +43,7 @@
                 </div>
             <div class=" form-inline div-login">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle item-nav " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">REGISTRATE</a>
+                <a class="nav-link dropdown-toggle item-nav " onclick="resetFormulario()" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">REGISTRATE</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                 <a class="dropdown-item"  data-toggle="modal" data-target=".modal-usuarios" >Usuario</a>
                 <a class="dropdown-item" href="RegistroEmpresas.html">Empresa</a>
@@ -240,11 +240,11 @@
      
   <div class="modal fade modal-usuarios" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-usuario-s" >
+    <div class="modal-dialog modal-lg modal-usuario-s " >
       <div class="modal-content" >
         <div class="container" > 
             <div class="row">
-              <div class="col-md-6" style="background-color:#E8FAFE; height:auto ;">
+              <div class="col-12 col-lg-6 " style="background-color:#E8FAFE; height:auto ;">
                 <!--carrusel-->
                 <div id="carouselExampleCaptions" class="carousel slide col-12" data-ride="carousel" style="margin-top: 130px;">
                  
@@ -274,14 +274,22 @@
                 </ol>     
               </div>
 
+              <div class="col-md-6 col-12 container-fluid d-none" id="esperando" style="padding: 100px; margin-bottom: 150px;">
+                <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
 
+                 
+
+             
+              </div>
 
 
               <!---->
-              <div class="col-md-6 col-12 container-fluid d-none" id="div-verificacion" style="padding: 30px; margin-bottom: 150px;">
+              <div class="col-md-6 col-12 container-fluid d-none " id="div-verificacion" style="padding: 30px; ">
                 <h5 style="color: #6C87A3;">VERIFICACIÓN</h5>
 
-                <p class="text-muted mb-4 pb-2" style="font-size: 13px; margin-top: 50px;">Hemos enviado un código de verificación a tu dirección de correo electrónico , porfavor ingresa el código para activar tu cuenta.</p>
+                <p class="text-muted mb-4 pb-2" style="font-size: 13px; margin-top: 50px;">Hemos enviado un código de verificación a tu dirección de correo electrónico , porfavor ingresa el código para activar tu cuenta,Si el codigo no se envió, es posible que hayas ingresado una dirección de correo invalida.</p>
              
                       <div class="input-group">
                         <input type="" class="form-control" placeholder="" id="code" aria-label="Enter your email address"
@@ -293,11 +301,17 @@
                       </div>
                       <small class="form-text black-text d-none" id="txt-error" style="color:red"><strong style="color:red">*ingresa el código de verificación.</strong></small>
                       
-                
+                      
+                      <div class="row" style="margin-top: 100px;" >
+                        <div class="col-12" >
+                          <div style="margin-top:40px; float: right; color:#546991;float: right;" class="col-12"><a class="col-6" style=" height: 50px;" onclick="verFormulario()"><i class="fas fa-angle-left"></i><strong>Atrás</strong></a>
+                        </div>
+                      </div>
+                      </div>
               </div>
               <!--Segunda parte del login-->
-    
-              <div class="col-md-6  modal-usuario"  id="form-registro" style=" padding-left:30px; padding-bottom: 30px; padding-top: 5px;"> 
+              
+              <div class="col-12 col-lg-6  modal-usuario"  id="form-registro" style=" padding-left:30px; padding-bottom: 30px; padding-top: 5px;"> 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -307,15 +321,16 @@
                 <div>
                   <!--Inicio del formulario-->
                   <form >
-                  <!--boton nombre de usuario-->
+      
+
                   <div class="input-group flex-nowrap " style="margin-bottom: 10px; " >
                     <div class="input-group-prepend">
                       <span style="background-color: #FFFFFF;" class="input-group-text" id="addon-wrapping"><i class="fas fa-user fa-color"></i></span>
                     </div>
                     <input id="usuario" style="font-size: smaller;" type="text" class="form-control" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="addon-wrapping">
-                    
                 </div>
-                <p id="camp-vacio-us" class="campo-vacio">Este campo no puede estar vacio</p>
+                <div><p id="camp-vacio-us" class="campo-vacio ">Este campo no puede estar vacio</p></div> 
+               
                
                   <!--boton correo electronico-->
                   <div class="input-group flex-nowrap" class="form1" style="margin-bottom: 10px;">
@@ -346,9 +361,10 @@
               </div>
               <p id="contra-no" class="campo-vacio">*Las contraseñas no coinciden, intentelo nuevamente</p>
               <p id="camp-vacio-contra2" class="campo-vacio">Este campo no puede estar vacio</p>
-                  <button id="button-reg" href="" type="button" id="btn-login-us" onclick="AgregarUsuario();" style=" background-color:#546991!important; border-color: #546991; margin-right: auto; margin-left: auto; width: 285px;"  class="btn btn-primary">Registrarse</button>
+                  <button id="button-reg" href="" type="button" id="btn-login-us" onclick="Registrarse()" style=" background-color:#546991!important; border-color: #546991; margin-right: auto; margin-left: auto; width: 100%;"  class="btn btn-primary">Registrarse</button>
+                  
                   <br><br> 
-                  <p style=" font-size: smaller; text-align: center" > ¿Ya tienes una cuenta? <a><Strong>Iniciar sesión</Strong></a></p>
+                  <p style=" font-size: smaller; text-align: center" > ¿Ya tienes una cuenta? <a href="MiCuenta.html">Iniciar sesión</a></p>
                 </form>
                 </div>
                 </div>
@@ -370,7 +386,7 @@
  
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/librerias/mdb.min.js"></script>
-
+ 
   <!-- Your custom scripts (optional) -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="js/librerias/axios.min.js"></script>

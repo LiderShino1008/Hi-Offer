@@ -88,34 +88,114 @@
         </section>
 
         <section id="empresas">
-          <h2 class="mb-4">Empresas</h2>
-        </section>
-
-
-        <section id="Banners" >
-          <div class="container-fluid  row"> <h2 class="mb-4 col-lg-10 col-7 col-md-8">Banners</h2><button  onclick="resetModalBanner()"  data-toggle="modal" data-target=".bd-example-modal-xl"  class="col-lg-1 col-md-4  col-3 btn btn-primary px-2" style="background-color: #546991!important; padding:2px!important; margin-left: auto;">Nuevo</button> </div>
-          <p>En esta sección podras agregar anuncios y nuevas actualizaciones sobre la plataforma y promociones ¡Agrega un nuevo Banner!</p>
-          <section id="cont-banners">
-                
-          </section>
-        </section>
-
-
-        <section  id="categorias">
-          <h2 class="mb-4">Categorías</h2>
-          <div class="list-group col-10 mx-auto">
-            <span  class="list-group-item  list-group-item-action "  style="background-color: #546991; color: white;">
-              Nombre de la categoría<span><i class="fas fa-plus-square mr-auto " data-toggle="modal" data-target="#modal-categorias" style=" font-size: 20px;float: right; cursor: pointer;"  ></i>
-             </span>
-            </span>
-            <div id="list"> 
-
-            </div>
-              
+        <!--<h2 class="mb-4">Empresas</h2>-->  
+          <div class="container my-5">
+            <section>
+              <style>
+                .md-pills .nav-link.active {
+                  color: #fff;
+                  background-color: #616161;
+                }
+                button.close {
+                  position: absolute;
+                  right: 0;
+                  z-index: 2;
+                  padding-right: 1rem;
+                  padding-top: .6rem;
+                }
+              </style>
+              <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="padding: 0;">
+                  <div class="modal-content">
+                    <div class="modal-body p-0" id="content-empresa">
+        
+                  </div>
+                </div>
+              </div>
+              </div>
+              <h6 class="font-weight-bold text-center grey-text text-uppercase small mb-4">Registro</h6>
+              <h3 class="font-weight-bold text-center dark-grey-text pb-2">Empresas</h3>
+              <hr class="w-header my-4">
+              <p class="lead text-center text-muted pt-2 mb-5">¡Aqui estan las empresas registradas!</p>
+              <div class="row">
+                <div class="col-12">
+                  <ul class="nav md-pills flex-center flex-wrap mx-0" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active font-weight-bold text-uppercase" data-toggle="tab" href="#panel31" role="tab">1</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link font-weight-bold text-uppercase" data-toggle="tab" href="#panel32" role="tab">2</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link font-weight-bold text-uppercase" data-toggle="tab" href="#panel33" role="tab">3</a>
+                    </li>
+                  </ul>
           
-          </div>
-        </section>
+                </div>
+              </div>
+              <div class="tab-content mb-5">
 
+                <div class="tab-pane fade show in active container-fluid row" id="panel31" role="tabpanel" style="padding-top:50px;">
+               
+                  <div class="row" id="empresas1">
+
+                  </div>
+          
+                  </div>
+                  <!-- Grid row -->
+                  
+                  <div class="tab-pane fade" id="panel32" role="tabpanel" style="padding-top:50px;">
+                    <div class="row">
+                      
+      
+                    </div>
+                  </div>
+
+                  
+                  <div class="tab-pane fade" id="panel33" role="tabpanel" style="padding-top:50px;">
+                    <div class="row">
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--Tab panels-->
+          
+            </section>
+            <!-- Section -->
+          </section>
+
+
+          <section id="Banners" >
+            <div class="container-fluid  row"> <h2 class="mb-4 col-lg-10 col-7 col-md-8">Banners</h2><button  onclick="resetModalBanner()"  data-toggle="modal" data-target=".bd-example-modal-xl"  class="col-lg-1 col-md-4  col-3 btn btn-primary px-2" style="background-color: #546991!important; padding:2px!important; margin-left: auto;">Nuevo</button> </div>
+            <p>En esta sección podras agregar anuncios y nuevas actualizaciones sobre la plataforma y promociones ¡Agrega un nuevo Banner!</p>
+            <section id="cont-banners">
+                  
+            </section>
+          </section>
+
+
+
+          <section  id="categorias">
+            <h2 class="mb-4">Categorías</h2>
+            <div class="list-group col-10 mx-auto">
+              <span  class="list-group-item  list-group-item-action "  style="background-color: #546991; color: white;">
+                Nombre de la categoría<span><i class="fas fa-plus-square mr-auto " data-toggle="modal" data-target="#modal-categorias" style=" font-size: 20px;float: right; cursor: pointer;"  ></i>
+               </span>
+              </span>
+              <div id="list"> 
+  
+              </div>
+                
+            
+            </div>
+          </section>
+          </div>
+       
+
+
+        
+		</div>
           <!-- Modal -->
     <div class="modal fade" id="modal-categorias" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
@@ -214,7 +294,7 @@ aria-hidden="true">
                <div class="col-md-6">
                  <div class="md-form mb-0">
                    <input type="number" id="limite-productos" class="form-control" >
-                   <label for="limite-productos" style="font-size: 14px;" class="" >Limite de productos</label>
+                   <label for="limite-productos" style="font-size: 14px;" class="" >Limite de promociones</label>
                  </div>
                  <div class="invalid-feedback" id="camp-vacio-limite" style="font-size:12px">
                   Este campo es obligatorio.

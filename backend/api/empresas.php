@@ -6,6 +6,7 @@
     
     include_once('../class/class-empresas.php');
     include('../class/class-comentario.php');
+    include('../class/class-promocion.php');
     header('Content-Type: application/json'); //main-type es el contenido de un archivo flujo
     
     switch($_SERVER['REQUEST_METHOD']){
@@ -63,9 +64,10 @@
             }else{
                 if(isset($_GET['id'])){
                     //Empresa::generarTotalVentas($_GET['id']);
-                    
+                    Comentario::actualizarEstadoComentariosEmp();
                     Empresa::obtenerUnaEmpresa($_GET['id']); 
                 }else{
+                    Comentario::actualizarEstadoComentariosEmp();
                     Empresa::ObtenerEmpresas(); 
                 }
             }
@@ -100,6 +102,7 @@
                     Empresa::generarTotalProductos($_GET['id']);
                     Empresa::generarProductosBajaExistencia($_GET['id']);
                     Comentario::actualizarEstadoComentariosEmp();
+                    Promocion::eliminarPromocionesVencidas();
                   break;
                   case 5:
                   Empresa::incrementarSeguidores($_GET['id']);
@@ -118,6 +121,13 @@
                   break;
                   case 10:
                   Empresa::actualizarPago($_GET['id'],$_PUT['estado']); 
+                  break;
+                  case 11:
+                  Empresa::cambiarPlan($_GET["id"],$_PUT['idPlan']);
+                  break;
+                  case 12:
+                  Empresa::cambiarDiaReg($_GET["id"],$_PUT['diaReg']);
+                  break;
                 }
 
             }else{ //sino, lo que se actualizara es la informacion

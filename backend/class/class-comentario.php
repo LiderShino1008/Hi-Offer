@@ -54,7 +54,7 @@
                 //Comparo la diferencia que hay entre ambas fechas
                 $resultado=$fecha_actual->diff($fecha_post);
                 $resultado=$resultado->d;
-               
+                
                
                 if(($resultado-1)<=1){
                     switch($resultado-1){
@@ -67,7 +67,7 @@
                     }
                 }else{
                     $empresas[$i]["comentarios"][$j]["estado"]="hace ".($resultado-1)." dias";
-                  
+                    
                 }
                 
                 $resultado=0;

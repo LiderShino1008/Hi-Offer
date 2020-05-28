@@ -8,7 +8,7 @@
         case 'POST':   //Guardar 
             $_POST=json_decode(file_get_contents('php://input'),true);
             
-            $producto=new Producto($_POST["nombre"],$_POST["codigo"],$_POST["idCategoria"],$_POST["descripcion"],$_POST["precio"],$_POST["stock"],$_POST["imagen"],$_POST["empresa"]);
+            $producto=new Producto($_POST["nombre"],$_POST["codigo"],$_POST["idCategoria"],$_POST["descripcion"],$_POST["precio"],$_POST["stock"],$_POST["imagen"],$_POST["idEmpresa"]);
             $producto->guardarProducto($_POST["idEmpresa"]);
             $resultado["mensaje"] ="Guardar producto,informacion:". json_encode($_POST);
             echo json_encode($resultado);
@@ -21,7 +21,7 @@
             if(isset($_PUT['accion'])){
                 Producto::eliminarProducto($_PUT['idEmp'],$_PUT['idPro']); 
             }else{
-               
+               // echo $_PUT["idCategoria"];
                 $producto=new Producto($_PUT["nombre"],$_PUT["codigo"],$_PUT["idCategoria"],$_PUT["descripcion"],$_PUT["precio"],$_PUT["stock"],$_PUT["imagen"],$_PUT["empresa"]);
                 $producto->actualizarProducto($_PUT["idEmpresa"], $_GET['id']);
             }

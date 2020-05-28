@@ -1,13 +1,10 @@
-//Funcion para Agregar un usuario
+var urlPlataforma='../../Hi-Offer/backend/api/plataforma.php';
+var urlUsuarios='../../Hi-Offer/backend/api/usuarios.php';
 
-var  usuarios=[{
-        NombreDeUsuario:'Maria',
-        correo:'mariag@gmail.com',
-        contraseña:'msj213'
-    }];
- 
 
-function AgregarUsuario(){
+
+
+function validarUsuario(){
     let usuario=document.getElementById('usuario').value;
     let email=document.getElementById('email').value;
     let password=document.getElementById('contraseña').value;
@@ -87,52 +84,13 @@ function AgregarUsuario(){
           
      if((EstadoVacioUsuario==false)&&(EstadoVacioEmail==false)&&(EstadoVacioPass==false)&&(validarCorreo==true)&&(validarPassIg==true)&&(validarPass==true)){
         //Agregar usuario
-        document.getElementById('div-verificacion').classList.remove('d-none');
-        document.getElementById('div-verificacion').classList.add('d-block');
-        document.getElementById('form-registro').classList.add('d-none');
-
+        return true;
         
+     }else{
+         return false;
      }
 }
 
-
- function verificarCodigo(){
-
-    let user={
-        NombreDeUsuario:document.getElementById('usuario').value,
-        correo:document.getElementById('email').value,
-        contraseña:document.getElementById('contraseña').value,
-        foto_de_perfil:"imagen.jpg",
-        promociones_favoritas:[],
-        empresas_favoritas:[],
-        carrito:[],
-    };
-
-    usuarios.push(user);
-    console.log('Exito');
-    location.hash='InicioUsuarios.html';
-    window.location="InicioUsuarios.html";
-}
-
-
-
-/*
-si el codigo de verificacion esta bueno
-let user={
-            NombreDeUsuario:document.getElementById('usuario').value,
-            correo:document.getElementById('email').value,
-            contraseña:document.getElementById('contraseña').value,
-            foto_de_perfil:"imagen.jpg",
-            promociones_favoritas:[],
-            empresas_favoritas:[],
-            carrito:[],
-        };
-
-        usuarios.push(user);
-        console.log('Exito');
-        location.hash='InicioUsuarios.html';
-        window.location="InicioUsuarios.html";
-*/
 
 
 
@@ -191,3 +149,80 @@ function validarContraseña(id){
     return validacion;
 }
 
+
+var usuario;
+/*******************************FUNCIONES PARA REGISTRAR UN USUARIO***************************************************** */
+function Registrarse(){
+    let permiso=validarUsuario();
+    if(permiso){
+        usuario={
+            nombre_usuario:document.getElementById('usuario').value,
+            correo_electronico:document.getElementById('email').value,
+            contrasena:document.getElementById('contraseña').value,
+        };
+      enviarCorreo();
+    }
+}
+
+var codigo;
+function enviarCorreo(){
+    $('#button-reg').html('<span id="esperando" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Verificando..').addClass('disabled');
+    axios({
+        method:'GET',
+        url:urlUsuarios+`?correo=${document.getElementById("email").value}`,
+        responseType:'json',
+    }).then(res=>{
+        try {
+            codigo=res.data.codigo;
+            console.log(res.data);
+            document.getElementById('div-verificacion').classList.remove('d-none');
+            document.getElementById('div-verificacion').classList.add('d-block');
+            document.getElementById('form-registro').classList.remove('d-block');
+            document.getElementById('form-registro').classList.add('d-none');
+            //horaEnvio=moment().format('HH:mm:ss');*/
+            $('#button-reg').html('REGISTRARSE')
+            $('#button-reg').removeClass('disabled');
+          }
+          catch(error) {
+           /* document.getElementById('estado').style.display="none";
+            document.getElementById('error').style.display="block";*/
+          }
+    }).catch(error=>{console.error("El error", error);
+    
+    });  
+}
+
+function verFormulario(){
+    document.getElementById('div-verificacion').classList.remove('d-block');
+    document.getElementById('div-verificacion').classList.add('d-none');
+    document.getElementById('form-registro').classList.remove('d-none');
+    document.getElementById('form-registro').classList.add('d-block');
+    $('#button-reg').html('REGISTRARSE')
+    $('#button-reg').removeClass('disabled');
+}
+
+function resetFormulario(){
+    $('#usuario').val("");
+    $('#email').val("");
+    $('#contrasena').val("");
+    $('#contrasena2').val("");
+    verFormulario();
+    $('#button-reg').html('REGISTRARSE')
+    $('#button-reg').removeClass('disabled');
+
+}
+
+
+function verificarCodigo(){
+    if($('#code').val()==codigo){
+        axios({
+            method:'POST',
+            url:urlUsuarios,
+            responseType:'json',
+            data:usuario
+        }).then(res=>{
+            window.location="home.php";
+        }).catch(error=>{console.error("El error", error);
+        }); 
+    }
+}

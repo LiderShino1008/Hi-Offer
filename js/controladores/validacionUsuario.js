@@ -27,7 +27,7 @@ function validacionUsuario(){
             document.getElementById('camp-vacio-correo-us').classList.add('d-block');
         }else{
             if(validar_correo_==false){
-                document.getElementById('email-usuario').classList.add('is-invalid');
+              document.getElementById('email-usuario').classList.add('is-invalid');
                document.getElementById('correo-invalido-us').classList.add('d-block');
               document.getElementById('camp-vacio-correo-us').classList.remove('d-block');
             }else{

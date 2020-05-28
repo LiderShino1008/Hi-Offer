@@ -3,6 +3,7 @@ let urlPlanes='../../Hi-Offer/backend/api/planes.php';
 let urlCategorias='../../Hi-Offer/backend/api/categorias.php';
 let urlImagenes='../../Hi-Offer/backend/api/img_inicio.php';
 let urlPlataforma='../../Hi-Offer/backend/api/plataforma.php';
+let urlEmpresas='../../Hi-Offer/backend/api/empresas.php';
 var planes=[];
 var categ=[];
 var banners=[];
@@ -917,3 +918,73 @@ function  eliminarUnBanner(index){
 }
 
 
+/*****************************************SECCION DE EMPRESAS********************************************************************* */
+var empresas=[];
+function obtenerEmpresas(){
+  axios({
+      method:'GET',
+      url:urlEmpresas,
+      responseType:'json',
+  }).then(res=>{
+     empresas=res.data; 
+      console.log("empresas",res.data) 
+      generarEmpresas();
+  }).catch(error=>{console.error(error);
+  });
+}obtenerEmpresas();
+
+
+
+function generarEmpresas(){
+  document.getElementById('empresas1').innerHTML="";
+  for(let i=0; i<empresas.length;i++){
+    document.getElementById('empresas1').innerHTML+=`<div class="col-md-12  col-lg-3">
+    <img class="mx-auto hoverable avatar rounded-circle  mb-4 foto-perfil2 z-depth-1" onclick="modalDatosEmpresa(${i})" data-toggle="modal" data-target="#basicExampleModal"  style="height: 200px; width: 200px; cursor: pointer;"  src="${empresas[i].logotipo}" id="logo-empresa" >
+  </div>`
+  }
+  
+}
+
+function modalDatosEmpresa(id){
+  document.getElementById('empresas1').innerHTML="";
+  document.getElementById('content-empresa').innerHTML+=`
+ 
+
+<div class="row view overlay zoom portada " style="height: 300px; width: 100%; margin-left:0px!important;margin-right:0px!important;margin-top:10px!important">
+  <div class="col-12">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;margin-right:10px">
+  <span aria-hidden="true" style="color:white">&times;</span></button>
+    <div class="view rounded-right portada ">
+      <img class="img-fluid" src="${empresas[id].Banner}" alt="Sample image" style="width: 100%;">
+    </div>
+    
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 py-5 pl-5">
+    <h5 class="font-weight-normal mb-3">${empresas[id].nombre_empresa}</h5>
+    <p style="font-weight:bold">"${empresas[id].eslogan}"</p>
+    <p class="text-muted">${empresas[id].descripcion}.</p>
+    
+  </div>
+  <div class="col-6">
+    <ul class="list-unstyled font-small mt-5">
+      <li>
+        <p class="text-uppercase mb-2"><strong>Dirección</strong></p>
+        <p class="text-muted mb-4">${empresas[id].direccion}</p>
+      </li>
+
+      <li>
+        <p class="text-uppercase mb-2"><strong>Correo electrónico</strong></p>
+        <p class="text-muted mb-4">${empresas[id].correoElectronico}</p>
+      </li>
+
+      <li>
+        <p class="text-uppercase mb-2"><strong>Teléfono</strong></p>
+        <p class="text-muted mb-4">${empresas[id].numeroTelefono}</p>
+      </li>
+    </ul>
+  </div>
+
+</div>`;
+}

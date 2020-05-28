@@ -1,6 +1,7 @@
 *{
     margin: 0px;
     padding: 0px;
+    
 }
 
 @media (max-width: 1155px) {
@@ -329,16 +330,20 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: #fff!important;
-    background-color: #546991!important;
+    color: #546991!important;
+    background-color: #ffffff!important;
+    font-weight: bold;
 }
 .nombre-emp{
     color:  #546991;
     font-weight: bold;
   
+  
     
-   
-    
+}
+
+a{
+    color: #535353!important;
 }
 
 .eslogan-emp{

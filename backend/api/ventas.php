@@ -15,21 +15,18 @@
         case 'POST':   //Guardar 
         break;
         case 'GET': 
-            
-
-
-            
         break;
         case 'PUT':
             $_PUT =json_decode(file_get_contents('php://input'),true);
-
                 $dia_semana=date("w")-1;
                 $numero_semana_actual=date("W");
                 $semana_empresa=Empresa::obtenerSemana($_GET['id']);
+                Empresa::incrementarVentas($_GET['id'],$_PUT['cantidad']);
                 if($numero_semana_actual==($semana_empresa+1)){ //si es igual, es porque ya empezo una nueva semana
                     Empresa::iniciarSemana($_GET['id']);
                 }
                 switch($dia_semana){
+                    
                     case 0: //domingo
                         Empresa::incrementarVentasDomingo($_GET['id'],$_PUT['cantidad']);
                     break;

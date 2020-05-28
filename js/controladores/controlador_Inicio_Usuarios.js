@@ -1,3 +1,9 @@
+/********************************VARIABLES GLOBALES************************************* */
+
+var cat;
+var imagenes;
+
+
 /************************************FUNCIONES PARA ANIMACION***************** */
 
 
@@ -5,25 +11,107 @@ $('.collapse').collapse()
 /****************************************************************************** */
 
 
+//peticiones al servidor php
+
+axios({
+  method:'GET',
+  url:'../../Hi-Offer/backend/api/img_inicio.php',
+  responseType:'json',
+}).then(res=>{
+  imagenes=res.data;
+  console.log(imagenes)
+  generarCarrucel()
+}).catch(error=>{console.error(error);
+}); 
+
+////obtener promociones
+axios({
+  method:'GET',
+  url:urlCategorias,
+  responseType:'json',
+}).then(res=>{
+  cat=res.data;
+  console.log("categorias" ,cat)
+  generar_inicio();
+}).catch(error=>{console.error(error);
+}); 
+
+
+
+
+
+//funciones para generar elementos 
+
+function generarCarrucel(){
+  document.getElementById('indicadores').innerHTML="";
+  if(imagenes.length>0){
+    for(let i=0; i<imagenes.length;i++){
+      if(i==0){
+        document.getElementById('indicadores').innerHTML+=`<li data-target="#carousel-example-2" data-slide-to="${i}" class="active"></li>`
+        document.getElementById('carrucel-inicio').innerHTML+=`<div class="carousel-item active">
+        <div class="view">
+          <img class="d-block w-100" src="${imagenes[i].ruta}"
+            alt="First slide">
+          <div class="mask rgba-black-light"></div>
+        </div>
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">Te damos la Bienvenida</h3>
+          <p>Encuentra los precios nunca antes vistos!</p>
+        </div>
+      </div>`
+      }else{
+        document.getElementById('indicadores').innerHTML+=` <li data-target="#carousel-example-2" data-slide-to="${i}"></li>`
+        document.getElementById('carrucel-inicio').innerHTML+=`<div class="carousel-item ">
+        <div class="view">
+          <img class="d-block w-100" src="${imagenes[i].ruta}"
+            alt="Third slide">
+          <div class="mask rgba-black-light"></div>
+        </div>
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">Te damos la Bienvenida</h3>
+          <p>Encuentra los precios nunca antes vistos!</p>
+        </div>
+      </div>`
+      }
+
+     
+      
+    }
+
+    //
+
+  }
+  
+}
+
+
+
 function generar_inicio(){
+  let cantidad=0
     document.getElementById('inicio').innerHTML="";
-    for(let i=0; i<categorias.length;i++){
-        document.getElementById('inicio').innerHTML+=`<div class="row filas wow slideInLeft" id="">
-        <h3 class="col-11 category-name" style="margin-top: 10px">${categorias[i].nombreCategoria}</h3>
+   console.log(cat[3].promociones[0].imagen)
+    for(let i=0; i<cat.length;i++){
+        document.getElementById('inicio').innerHTML+=`<div class="row filas wow slideInLeft" id="" style="margin-botton:50px!important">
+        <h3 class="col-11 category-name" style="margin-top: 10px">${cat[i].nombre_categoria}</h3>
         <a class="ver-mas col-1" onclick="verCategoria(${i});">ver mas <i class="fas fa-arrow-right"></i></a>
-        </div><div id="${i}"  class="row fila-p wow slideInLeft"></div>`;
-        console.log(categorias[i].productosEnPromocion.length);
-        for(let j=0; j<6;j++){
+        </div><div id="${i}"  class="row fila-p wow slideInLeft" style="margin-bottom:50px!important" ></div>`;
+        if(cat[i].promociones.length>0){
+          if(cat[i].promociones.length>6){
+            cantidad=6
+          }else{
+            cantidad=cat[i].promociones.length
+          }
+        for(let j=0; j<cantidad;j++){
             document.getElementById(i).innerHTML+=` 
-            <div class="col-lg-2 col-md-6 mb-1" onclick="verProducto(${i},${j})">
-              <div class="card card-ecommerce">
+            <div class="col-lg-2 col-md-6 mb-1" onclick="verProducto(${i},${j})" style="height:100px!imortant">
+              <div class="card card-ecommerce" style="">
                 <div class="view overlay">
-                  <img src="${categorias[i].productosEnPromocion[j].imagenes[0]}" class="img-fluid"alt="">
+                  <img src="${cat[i].promociones[j].imagen}" class="img-fluid"alt="">
                   <a><div class="mask rgba-white-slight"></div></a>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title mb-1">
-                    <strong><a href="" class="dark-grey-text">${categorias[i].productosEnPromocion[j].nombreProducto}</a>
+                    <strong><a href="" class="dark-grey-text">${cat[i].promociones[j].nombre}</a>
                     </strong>
                   </h5>
                   <span class="badge badge-danger mb-2">Promoción</span>
@@ -40,11 +128,11 @@ function generar_inicio(){
                 <div class="row mb-0">
                   <h5 class="mb-0 pb-0 mt-1 font-weight-bold">
                     <span class="red-text">
-                      <strong style="font-size:20px">$${categorias[i].productosEnPromocion[j].preciopromocion}</strong>
+                      <strong style="font-size:20px">L.${cat[i].promociones[j].precio_descuento}</strong>
                     </span>
                     <span class="grey-text">
                       <small>
-                        <s style="font-size:15px">$${categorias[i].productosEnPromocion[j].precionormal}</s>
+                        <s style="font-size:15px">L.${cat[i].promociones[j].precio_real}</s>
                       </small>
                     </span>
                   </h5>
@@ -59,151 +147,9 @@ function generar_inicio(){
               </div>
             </div>`;
         }
+      }
     
     }
     
 }
-generar_inicio();
 
-
-
-
-
-
-
-
-/*
- function verProducto(categoria,producto){
-  document.getElementById('empresas-favoritas').style.display="none";
-  document.getElementById('carousel-example-2').style.display="none";
-  document.getElementById('inicio-cat').style.display="none";
-  document.getElementById('div-perfil').style.display="none";
-  document.getElementById('div-mostrarProductos').style.display="none";
-  document.getElementById('promociones-guardadas').style.display="none";
-  document.getElementById('ver-un-producto').style.display="block";
-  document.getElementById('ver-un-producto').innerHTML="";
-    document.getElementById('ver-un-producto').innerHTML+=`<div class="container my-5 py-5 z-depth-1"  style="background-color:#ffffff">
-    <!--Section: Content-->
-    <section class="text-center ">
-      <h3 class="font-weight-bold mb-5">Detalles del producto</h3>
-      <div class="row">
-        <div class="col-lg-6">
-          <div id="carousel-thumb1" class="carousel slide carousel-fade carousel-thumbnails mb-5 pb-4" data-ride="carousel">
-            <!--Slides-->
-            <div class="carousel-inner text-center text-md-left form-inline" role="listbox">
-              <div class="carousel-item active">
-                <img src="${categorias[categoria].productosEnPromocion[producto].imagenes[0]}" alt="First slide" class="img-fluid">
-              </div>
-              <div class="carousel-item">
-                <img src="${categorias[categoria].productosEnPromocion[producto].imagenes[1]}"
-                  alt="Second slide" class="img-fluid">
-              </div>
-              <div class="carousel-item">
-                <img src="${categorias[categoria].productosEnPromocion[producto].imagenes[2]}"
-                  alt="Third slide" class="img-fluid">
-              </div>
-            </div>
-            <!--/.Slides-->
-            <!--Thumbnails-->
-            <a class="carousel-control-prev" href="#carousel-thumb1" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carousel-thumb1" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-            <!--/.Thumbnails-->
-  
-          </div>
-          <!--/.Carousel Wrapper-->
-          
-          <div class="row mb-4">
-            <div class="col-md-12">
-              <div id="mdb-lightbox-ui"></div>
-              <div class="mdb-lightbox no-margin form-inline">
-                <figure class="col-md-4">
-                  <a href="${categorias[categoria].productosEnPromocion[producto].imagenes[0]}"
-                    data-size="1600x1067">
-                    <img src="${categorias[categoria].productosEnPromocion[producto].imagenes[0]}"
-                      class="img-fluid">
-                  </a>
-                </figure>
-                <figure class="col-md-4">
-                  <a href="${categorias[categoria].productosEnPromocion[producto].imagenes[1]}"
-                    data-size="1600x1067">
-                    <img src="${categorias[categoria].productosEnPromocion[producto].imagenes[1]}"
-                      class="img-fluid">
-                  </a>
-                </figure>
-                <figure class="col-md-4">
-                  <a href="${categorias[categoria].productosEnPromocion[producto].imagenes[2]}"
-                    data-size="1600x1067">
-                    <img src="${categorias[categoria].productosEnPromocion[producto].imagenes[2]}"
-                      class="img-fluid">
-                  </a>
-                </figure>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-  
-        <div class="col-lg-5 text-center text-md-left">
-          <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">${categorias[categoria].productosEnPromocion[producto].nombreProducto}</h2>
-          <span class="badge badge-danger product mb-4 ml-xl-0 ml-4">Promoción</span>
-          <h3 class="h3-responsive text-center text-md-left mb-2 ml-xl-0 ml-4">
-            <span class="red-text font-weight-bold">
-              <strong>$${categorias[categoria].productosEnPromocion[producto].preciopromocion}</strong>
-            </span>
-            <span class="grey-text">
-              <small>
-                <s>$${categorias[categoria].productosEnPromocion[producto].preciopromocion}</s>
-              </small>
-            </span>
-          
-          </h3>
-          <div class="font-weight-normal">
-          <p class="ml-xl-0 ml-4">
-          <ul class="rating text-left form-inline">
-          <i class="fas fa-star" style="color:yellow" ></i>
-          <i class="fas fa-star" style="color:yellow" ></i>
-          <i class="fas fa-star" style="color:yellow" ></i>
-          <i class="fas fa-star" style="color:yellow "></i>
-          <i class="fas fa-star" style="color:yellow" ></i>
-        </ul></p>
-            <p class="ml-xl-0 ml-4">${categorias[categoria].productosEnPromocion[producto].descripcion}</p>
-            <p class="ml-xl-0 ml-4">
-              <strong>ID: </strong>${categorias[categoria].productosEnPromocion[producto].id}</p>
-            <p class="ml-xl-0 ml-4">
-              <strong>Stock: </strong>${categorias[categoria].productosEnPromocion[producto].stock}</p>
-            <p class="ml-xl-0 ml-4">
-              <strong>Distribuidor: </strong>${categorias[categoria].productosEnPromocion[producto].empresa}</p>
-              <h3><strong><i class="fas fa-share-alt" style="margin-right:20px"></i></strong><strong><i class="far fa-heart"></i></strong></h3>
-          <span></span>
-            </span>
-              <div class="row mt-3 mb-4">
-                <div class="col-md-12 text-center text-md-left text-md-right">
-                  <button class="btn btn-primary btn-rounded">
-                    <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i>Añadir al carrito</button>
-                    <button class="btn btn-success btn-rounded">comprar ahora</button>
-                </div>
-              </div>
-            </div>
-  
-          </div>
-  
-        </div>
-      </div>
-  
-    </section>
-    <!--Section: Content-->
-  
-  
-  </div>`
-  
-
-  
- }*/
-
- 

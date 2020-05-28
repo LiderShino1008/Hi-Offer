@@ -25,14 +25,12 @@
             } 
         break;
         case 'PUT':
-            /*
-            //necesitamos que venga el id del usuario y los nuevos datos
-            //recibimos el id por GET pero enviamos la informacion po JSON
+            
              $_PUT =json_decode(file_get_contents('php://input'),true);
-             $usuario =new Usuario($_PUT['nombre'],$_PUT['apellido'],$_PUT['fechaNacimiento'],$_PUT['pais']);
-             $usuario->actualizarUsuario($_GET['id']);
+             $admin=new Administrador($_PUT["nombre_usuario"],$_PUT["correo_electronico"],$_PUT["contrasena"]);
+             $admin->ActualizarAdmin($_GET['id']);
              $resultado["mensaje"]="Actualizar un usuario con el id:".$_GET['id']."Informacion a actualizar: ".json_encode($_PUT);
-             echo json_encode($resultado); */
+             echo json_encode($resultado); 
         break;
         case 'DELETE':
             /*

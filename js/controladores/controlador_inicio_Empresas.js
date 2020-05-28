@@ -1,4 +1,4 @@
-console.log('"21" -> '+parseFloat("21"));
+
 var  urlEmpresa='../../Hi-Offer/backend/api/empresas.php';
 var urlPlanes='../../Hi-Offer/backend/api/planes.php';
 var urlPlataforma='../../Hi-Offer/backend/api/plataforma.php';
@@ -7,6 +7,7 @@ var urlCategorias='../../Hi-Offer/backend/api/categorias.php';
 var urlProductos='../../Hi-Offer/backend/api/productos.php';
 var urlSucursales='../../Hi-Offer/backend/api/sucursales.php';
 var urlPromociones='../../Hi-Offer/backend/api/promociones.php';
+var urlAdministrador='../../Hi-Offer/backend/api/administradores.php';
 var plan;
 var indexEmpresa;
 var empresa;
@@ -51,8 +52,8 @@ $('.starrr').starrr({
     }
   }
 });
+*/
 
-/*
 
 $('.starrr').starrr({
   rating: 5
@@ -61,14 +62,8 @@ $('.starrr').on('starrr:change', function(e, value){
   alert('new rating is ' + value)
 })
 
-*/
-document.addEventListener("DOMContentLoaded",()=>{
-  var form_logotipo=document.getElementById("form-logotipo");
-  form_banner.addEventListener("submit",function(event){
-    event.preventDefault();
-    subirLogotipo(this);
-  });
-});
+
+
 
 var d = new Date();
 var month = new Array();
@@ -172,6 +167,14 @@ function obtenerInformacionGeneral(){
       llenarSelectProductos();
       generarPromociones();
       llenarModalListSucursales();
+      obtenerPlanes1();
+      generarNombreAdmin();
+      generarInfoAdmin();
+      llenarInfoEmpModal();
+      llenarModalperfilSucursales();
+      if(cuentaEmpresa.promociones.length>0){
+        generarPromoPerfil();
+      }
     }
     catch(error) {
       document.getElementById("div-error").classList.remove('d-none');
@@ -206,14 +209,29 @@ function actualizarEmpresa(id){
 }//
 /*******************************FUNCION PARA VERIFICAR SI ESTA ENTRANDO A SU CUENTA POR PRIMERA VEZ******************* */
 function verificarEntrada(){
-  
     if(cuentaEmpresa.estado.entrada==0){
       $('#modalInicio').modal('show');
+      axios({
+        method:'POST',
+        url:urlSucursales,
+        responseType:'json',
+        data:{
+          "nombre":"Principal",
+          "latitud": cuentaEmpresa.latitud,
+          "longitud":cuentaEmpresa.longitud,
+          "ciudad": cuentaEmpresa.pais,
+          "idEmpresa":indexEmpresa
+        }
+      }).then(res=>{
+       
+      }).catch(error=>{console.error(error);
+      });  
+
      }
   
 } 
 
-function  mostrarinfoPlan(){
+function mostrarinfoPlan(){
     $('#modalInicio').modal('hide');
     $('#modalInicioPlan').modal('show');
     actualizarEntrada();
@@ -260,7 +278,7 @@ function obtenerPlan(){
     generarPlanDash();
     generarPerfil();
     generarSeccionProductos();
-
+    generarConfigPlanes();
     
 
 }).catch(error=>{console.error(error);
@@ -320,8 +338,8 @@ function llenarModalPagoPlan(){
 
 function Pagar(){
   $('#modalDiscount').modal('hide');
-  $('#centralModalSm').modal({backdrop: 'static', keyboard: false});
-  $('#centralModalSm').modal('show');
+  $('#modal-pago-plan').modal({backdrop: 'static', keyboard: false});
+  $('#modal-pago-plan').modal('show');
 }
 
 
@@ -482,7 +500,7 @@ function cardFormValidate(){
   }).then(res=>{
    
   }).catch(error=>{console.error(error);
-    console.log("entrada no actualizada")
+    
   }); 
 
   }).catch(error=>{console.error(error);
@@ -527,16 +545,9 @@ function validacionCampos(){
 
 /***********************FUNCIONES DE GRAFICOS Y FUNCIONES DE ANIMACION****************************** */
 function generarGrafico(){
-  console.log("entre");
   document.getElementById('grafico').classList.remove('d-none');
   document.getElementById('grafico').classList.add('d-block');
-  console.log("sali");
-}
-
-function mostrarformulario(){
-  document.getElementById('form-admin').classList.remove('d-none');
-  document.getElementById('form-admin').classList.add('d-block');
-
+ 
 }
 
 
@@ -770,7 +781,8 @@ function generarPerfil(){
   console.log("hola", nuevosComentarios.length-1);
   
  //for(let i=(nuevosComentarios.length-1);i>=(nuevosComentarios.length-1); i--){
-  document.getElementById('cont-newC').innerHTML="";
+   if(nuevosComentarios.length>1){
+    document.getElementById('cont-newC').innerHTML="";
   document.getElementById('cont-newC').innerHTML+=`<li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-3 pl-3 pt-2">
   <img src="${nuevosComentarios[nuevosComentarios.length-1].perfil}" alt="avatar" class="avatar rounded-circle mr-2 ml-0 z-depth-1" style="height: 55px; width:55px">
   <div class="chat-body white p-2 ml-2 z-depth-1" style=" width: 100%;">
@@ -798,6 +810,8 @@ document.getElementById('cont-newC').innerHTML+=`<li class="d-flex justify-conte
   </div>
 </li>`
 
+  }
+  
 
   generarMapa('map-tienda-principall',cuentaEmpresa.latitud,cuentaEmpresa.longitud);
 // }
@@ -814,6 +828,40 @@ function generarPlanDash(){
   }
 
 
+}
+
+
+
+
+function llenarInfoEmpModal(){
+  document.getElementById("informacion-empresa").innerHTML+=`
+  <div class="col-4">
+  <div style=" text-align: center; " class="container-fluid" id="cont-img-perfil2">
+    <img class="mx-auto avatar rounded-circle foto-perfil2 z-depth-1"  style="height: 100px; width: 100px;" src="${cuentaEmpresa.logotipo}" id="logo-empresa" ></div>    
+    <div style=" text-align: center; " id="cont-nombre2" class="container-fluid">${cuentaEmpresa.nombre_empresa}</div>
+</div>
+<div class="col-6 mr-auto" style="float:left!important" >
+  <table style="margin-left:20px;">
+    <tr><td ><span style="font-weight:strong;">"${cuentaEmpresa.eslogan}"</span></td></tr>
+    <tr><td >${cuentaEmpresa.descripcion}</td></tr>
+    <tr><td >${cuentaEmpresa.direccion}</td></tr>
+  </table>
+  <div id="info-contacto-2"></div>
+  `
+
+  if(cuentaEmpresa.correoElectronico)
+  document.getElementById('info-contacto-2').innerHTML+=` <li class="list-group-item"><i class="fas fa-envelope mr-2"></i>${cuentaEmpresa.correoElectronico}</li>`
+  if(cuentaEmpresa.numeroTelefono)
+  document.getElementById('info-contacto-2').innerHTML+=` <li class="list-group-item"><i class="fas fa-phone-alt mr-2"></i>${cuentaEmpresa.numeroTelefono}</li>`
+  if(cuentaEmpresa.direccion)
+  document.getElementById('info-contacto-2').innerHTML+=` <li class="list-group-item"><i class="fas fa-map-marker-alt mr-2"></i>${cuentaEmpresa.direccion}</li>`
+  if(cuentaEmpresa.instagram)
+  document.getElementById('info-contacto-2').innerHTML+=`<li class="list-group-item"><i class="fab fa-instagram mr-2"></i>${cuentaEmpresa.instagram}</li>`
+  if(cuentaEmpresa.facebook)
+  document.getElementById('info-contacto-2').innerHTML+=` <li class="list-group-item"><i class="fab fa-facebook-f mr-2"></i>${cuentaEmpresa.facebook}</li>`
+  if(cuentaEmpresa.twitter)
+  document.getElementById('info-contacto-2').innerHTML+=` <li class="list-group-item"><i class="fab fa-twitter mr-2"></i>${cuentaEmpresa.twitter}</li>`
+  
 }
 
 /****************************************************FUNCIONES PARA GENERAR RECURSOS******************************************************* */
@@ -976,7 +1024,17 @@ function obtenerEmpActualizada(){
     generarSucursales();
     generarPromociones();
     llenarModalListSucursales();
-  }
+    generarConfigPlanes();
+    obtenerPlanes1();
+    generarNombreAdmin();
+    generarInfoAdmin();
+    llenarInfoEmpModal();
+    llenarModalperfilSucursales();
+    if(cuentaEmpresa.promociones.length>0){
+      generarPromoPerfil();
+    }
+    }
+   
   catch(error) {
     document.getElementById("div-error").classList.remove('d-none');
     document.getElementById("div-error").classList.add('d-block');
@@ -1091,8 +1149,13 @@ function validarImagen(idInput){
                 
             total_inventario=cuentaEmpresa.estado.total_ventas;
             total_vendido=cuentaEmpresa.estado.total_ventas_mes;
-            porcentaje=Math.round((total_vendido/total_inventario)*100)
-            console.log("porcentaje", porcentaje); 
+            if(total_vendido==0 && total_inventario==0){
+              porcentaje=0
+            }else{
+              porcentaje=Math.round((total_vendido/total_inventario)*100)
+             console.log("porcentaje", porcentaje); 
+            }
+            
             document.getElementById("cont-card-ventas").innerHTML="";
             document.getElementById("cont-card-ventas").innerHTML+=`
             <div class="card mt-3">
@@ -1115,12 +1178,18 @@ function validarImagen(idInput){
           let porcentaje2
           total_seguidores_mes_actual=cuentaEmpresa.estado.total_seguidores;
           total_seguidores_mes_pasado=cuentaEmpresa.estado.total_seguidoresPasado;
-          if( total_seguidores_mes_actual>total_seguidores_mes_pasado){
-            porcentaje2=100-((total_seguidores_mes_pasado/total_seguidores_mes_actual)*100);
-          }else{
-            porcentaje2=0;
-          }
 
+          if( total_seguidores_mes_actual==0 && total_seguidores_mes_pasado==0){
+            porcentaje2=0;
+          }else{
+            if( total_seguidores_mes_actual>total_seguidores_mes_pasado){
+              porcentaje2=100-((total_seguidores_mes_pasado/total_seguidores_mes_actual)*100);
+            }else{
+              porcentaje2=0;
+            }
+  
+          }
+        
 
           console.log("porcentaje Seguidores",porcentaje2);
 
@@ -1146,11 +1215,18 @@ function validarImagen(idInput){
           let porcentaje3;
           total_visitas_mes_actual=cuentaEmpresa.estado.visitas;
           total_visitas_mes_pasado=cuentaEmpresa.estado.visitaspasado;
-          if( total_visitas_mes_actual>total_visitas_mes_pasado){
-            porcentaje3=100-((total_visitas_mes_pasado/total_visitas_mes_actual)*100);
-          }else{
+
+          if(total_visitas_mes_actual==0 && total_visitas_mes_pasado==0){
             porcentaje3=0;
+          }else{
+            if( total_visitas_mes_actual>total_visitas_mes_pasado){
+              porcentaje3=100-((total_visitas_mes_pasado/total_visitas_mes_actual)*100);
+            }else{
+              porcentaje3=0;
+            }
           }
+         
+         
 
           document.getElementById("cont-card-visitas").innerHTML="";
           document.getElementById("cont-card-visitas").innerHTML+=`<div class="card mt-3">
@@ -1205,11 +1281,21 @@ function validarImagen(idInput){
             }
           }
           });
-
+          let porcentaje_vendidos
+          let porcentaje_carrito
+          let porcentaje_inactivos
           //porcentajes
-          let porcentaje_vendidos=(promociones_vendidas/total_promociones)*100;
-          let porcentaje_carrito=(promociones_carrito/total_promociones)*100;
-          let porcentaje_inactivos=(cantidad_inactivos/total_promociones)*100;
+          if(promociones_vendidas==0 && promociones_carrito==0 && cantidad_inactivos==0){
+             porcentaje_vendidos=0;
+             porcentaje_carrito=0;
+             porcentaje_inactivos=0;
+          }else{
+            porcentaje_vendidos=(promociones_vendidas/total_promociones)*100;
+            porcentaje_carrito=(promociones_carrito/total_promociones)*100;
+            porcentaje_inactivos=(cantidad_inactivos/total_promociones)*100;
+          }
+
+           
 
           document.getElementById("cont-porcentajes").innerHTML="";
           document.getElementById("cont-porcentajes").innerHTML+=`<a href="#!" class="list-group-item list-group-item-action rounded-0 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Vendidos
@@ -1264,8 +1350,8 @@ function validarImagen(idInput){
           }
           });
 
-
-          document.getElementById("porcentajes-semana").innerHTML="";
+          if(cuentaEmpresa.estado.ventas_semana.info.total_semana!=0){
+            document.getElementById("porcentajes-semana").innerHTML="";
           document.getElementById("porcentajes-semana").innerHTML+=`<a href="#" style="font-size: 13px; padding: 1px; text-align: center; float: inline-start;" class=" d-flex justify-content-between align-items-center">Esta Semana
           <span class="">|  Total L. ${cuentaEmpresa.estado.ventas_semana.info.total_semana}</span>
           </a>
@@ -1290,6 +1376,8 @@ function validarImagen(idInput){
           <a href="#" style="font-size: 13px; padding: 1px; font-weight:bold" class="list-group-item list-group-item-action rounded-0 mb-1 border-left-0 border-right-0 d-flex justify-content-between align-items-center">Sábado
           <span class=""> ${Math.round((cuentaEmpresa.estado.ventas_semana.sabado/cuentaEmpresa.estado.ventas_semana.info.total_semana)*100)}% | L.${cuentaEmpresa.estado.ventas_semana.sabado}</span>
           </a>`;
+          }
+          
 
           //generar el resumen de inventario
           document.getElementById('cont-res-inventario').innerHTML="";
@@ -1305,7 +1393,7 @@ function validarImagen(idInput){
                           </a>`;   
                           
                           
-
+          /*
           //generar seccion de nuevos comentarios
           document.getElementById('cont-nuevos-comentarios').innerHTML="";
           var comentarios=cuentaEmpresa.comentarios;
@@ -1350,7 +1438,7 @@ function validarImagen(idInput){
           `;
          
 
-          }
+          }*/
 
 
           }
@@ -1811,10 +1899,10 @@ function ActualizarInfo(){
             data:{
               "nombre": $('#form-nombre-producto-p').val(),
               "codigo":$('#form-codigo-producto').val(),
-              "idCategoria":$('#categoria').val(),
+              "idCategoria":parseInt($('#categoria').val()),
               "descripcion":$('#form-descripcion-producto').val(),
-              "precio":$('#form-precio-producto').val(),
-              "stock":$('#form-stock-producto').val(),
+              "precio":parseFloat($('#form-precio-producto').val()),
+              "stock":parseInt($('#form-stock-producto').val()),
               "imagen":document.getElementById("img-producto").files[0].name,
               "empresa":cuentaEmpresa.nombre_empresa,
               "idEmpresa":indexEmpresa
@@ -1849,6 +1937,7 @@ function ActualizarInfo(){
 
 
     function generarCategorias(){
+      document.getElementById('categoria').innerHTML=""
     axios({
       method:'GET',
       url:urlCategorias,
@@ -1934,6 +2023,7 @@ function ActualizarInfo(){
     var producto_seleccionado;
 
     function editarProductoVista(id){
+      generarCategorias()
       producto_seleccionado=id;
       console.log("producto seleccionado",producto_seleccionado)
       $('#modal-producto').modal('show');
@@ -1964,8 +2054,12 @@ function ActualizarInfo(){
       $('#titulo-editar').removeClass('d-none');
       $('#titulo-editar').addClass('d-block');
     }
+    function categoriaEditar(){
+      console.log(parseInt($('#categoria').val()))
+    }
 
     function editarProducto(){ //ARREGLAR CODIGO
+      $('#categoria').val();
       let acceso=validarProducto();
       var img_editar;
       if(acceso){
@@ -1973,15 +2067,15 @@ function ActualizarInfo(){
         if(($('#img-producto').val()=="")){
           axios({
             method:'PUT',
-            url:urlProductos+`?id=${producto_seleccionado} `,
+            url:urlProductos+`?id=${producto_seleccionado}`,
             responseType:'json',
             data:{
               "nombre": $('#form-nombre-producto-p').val(),
               "codigo":$('#form-codigo-producto').val(),
-              "idCategoria":$('#categoria').val(),
+              "idCategoria":parseInt($('#categoria').val()),
               "descripcion":$('#form-descripcion-producto').val(),
-              "precio":$('#form-precio-producto').val(),
-              "stock":$('#form-stock-producto').val(),
+              "precio":parseFloat($('#form-precio-producto').val()),
+              "stock":parseInt($('#form-stock-producto').val()),
               "imagen":"",
               "empresa":cuentaEmpresa.nombre_empresa,
               "idEmpresa":indexEmpresa
@@ -1989,6 +2083,7 @@ function ActualizarInfo(){
           }).then(res=>{
             $('#modal-producto').modal('hide');
             obtenerEmpActualizada();
+           
           }).catch(error=>{console.error(error);
           });  
     
@@ -2006,8 +2101,8 @@ function ActualizarInfo(){
               "codigo":$('#form-codigo-producto').val(),
               "idCategoria":$('#categoria').val(),
               "descripcion":$('#form-descripcion-producto').val(),
-              "precio":$('#form-precio-producto').val(),
-              "stock":$('#form-stock-producto').val(),
+              "precio":parseFloat($('#form-precio-producto').val()),
+              "stock":parseInt($('#form-stock-producto').val()),
               "imagen":document.getElementById("img-producto").files[0].name,
               "empresa":cuentaEmpresa.nombre_empresa,
               "idEmpresa":indexEmpresa
@@ -2168,7 +2263,7 @@ function guardarSucursal(){
     
     document.getElementById(idCont).innerHTML = `<div id='${idNw}' style='width: 100%; height: 100%;'allowfullscreen></div>`;
     const tilesProvider='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  let myMap=L.map(idNw).setView([latitud,-longitud],8);
+  let myMap=L.map(idNw).setView([latitud,-longitud],15);
   L.tileLayer(tilesProvider,{
       maxZoom:20
   }).addTo(myMap);
@@ -2456,8 +2551,8 @@ function guardarPromocion(){
       url:urlPromociones,
       responseType:'json',
       data:{
-        "idProducto":$('#slect-producto').val(),
-        "precio_descuento":parseFloat($('#precio-descuento').val()).toFixed(2),
+        "idProducto":parseInt($('#slect-producto').val()),
+        "precio_descuento":parseFloat($('#precio-descuento').val()),
         "sucursales":arraySucursales,
         "fecha_inicial":$('#fecha-inicial').val(),
         "fecha_final":$('#fecha-final').val(),
@@ -2470,7 +2565,9 @@ function guardarPromocion(){
     }).catch(error=>{console.error(error);
     });  
     }else{
-      console.log("ya cumplio el limite de promociones")
+      $('#centralModalSmPromo').modal('hide');
+      console.log("ya cumplio el limite de promociones");
+      $('#modal-limite-promo').modal('show');
     }
     
   }
@@ -2554,12 +2651,12 @@ function generarPorcentaje(){
     for( let j=0; j<cuentaEmpresa.promociones.length;j++){
       var id=parseInt(cuentaEmpresa.promociones[j].idProducto) ;
    
-      document.getElementById('content-promociones').innerHTML+=`<div class="card col-12  col-lg-2 col-md-4 pr-0 pl-0 mt-10 mx-2" style="margin-top: 30px; margin-bottom: 5px; float:left">
+      document.getElementById('content-promociones').innerHTML+=`<div class="card col-12  col-lg-2 col-md-4 pr-0 pl-0 mt-10 mx-2" style="margin-top: 30px; margin-bottom: 5px; float:left; ">
       <div class="col-12 head-car">
         <i class="fas fa-ellipsis-v mr-auto " data-toggle="dropdown" onclick=""
         aria-haspopup="true" aria-expanded="false" style="float: right; cursor: pointer;"  ></i>
         <div class="dropdown-menu  dropdown-primary dropdown-menu-right" style="font-size:13px ;" id="hola">
-          <a class="dropdown-item" data-toggle="modal" data-target="#ficha-promocional-" >Generar ficha</a>
+          <a class="dropdown-item" data-toggle="modal" data-target="#ficha-promocional-" onclick="generarQR(${j})">Generar ficha</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" data-toggle="modal" onclick="editarModalPromoVista(${j})" data-target="#centralModalSmPromo" href="#">Editar</a>
           <a class="dropdown-item" onclick="eliminarPromo(${j})">Eliminar</a>
@@ -2576,10 +2673,10 @@ function generarPorcentaje(){
               </strong>
             </h5>
             <span class="badge badge-danger mb-2">Promoción</span><br>
-            <div class='starrr' id='star1' style="color:blue!important"></div>
+            <div class='starrr'  style="color:blue!important"></div>
             
             <div class="card-footer pb-0">
-          <div class="row mb-0">
+          <div class="row mb-0" height:200px!important>
             <h5 class="mb-0 pb-0 mt-1 font-weight-bold">
               <span class="red-text">
                 <strong style="font-size:20px">L.${cuentaEmpresa.promociones[j].precio_descuento}</strong>
@@ -2603,7 +2700,7 @@ function generarPorcentaje(){
     
 $('.starrr').starrr({
   rating: 5,
-  readOnly: true
+ // readOnly: true
 })
   }
 
@@ -2625,6 +2722,7 @@ $('.starrr').starrr({
     $('#fecha-inicial').val(cuentaEmpresa.promociones[id].fecha_inicial);
     $('#fecha-final').val(cuentaEmpresa.promociones[id].fecha_final);
     generarPorcentaje();
+    $('#btn-guardar-promo').removeClass('d-block');
     $('#btn-guardar-promo').addClass('d-none');
     $('#btn-editar-promo').removeClass('d-none');
     $('#btn-editar-promo').addClass('d-block');
@@ -2635,19 +2733,12 @@ $('.starrr').starrr({
   function editarPromocion(){
     let permiso=validarPromocion();
     if(permiso){
-      console.log("limite",parseInt(plan.limitePromociones));
-      console.log("promo",cuentaEmpresa.promociones.length);
-      let limite=parseInt(plan.limitePromociones);
-      let promo=cuentaEmpresa.promociones.length;
-      if(promo<limite){
-        console.log("editar",promo_slec)
-        console.log("el pro",$('#slect-producto').val());
       axios({
         method:'PUT',
-        url:urlPromociones+`?id=${promo_slec}`,
+        url:urlPromociones+`?id=${promo_slec}`+`&idEmp=${indexEmpresa}`,
         responseType:'json',
         data:{
-          "idProducto":$('#slect-producto').val(),
+          "idProducto":parseInt($('#slect-producto').val()),
           "precio_descuento":parseFloat($('#precio-descuento').val()).toFixed(2),
           "sucursales":arraySucursales,
           "fecha_inicial":$('#fecha-inicial').val(),
@@ -2660,9 +2751,6 @@ $('.starrr').starrr({
         $('#centralModalSmPromo').modal('hide');
       }).catch(error=>{console.error(error);
       });  
-      }else{
-        console.log("ya cumplio el limite de promociones")
-      }
       
     }
   }
@@ -2765,6 +2853,423 @@ $('.starrr').starrr({
     $('#fecha-final').val("");
     $('#precio-descuento').val("")
     generarPorcentaje();
+    $('#btn-editar-promo').removeClass('d-block');
+    $('#btn-editar-promo').addClass('d-none');
+    $('#btn-guardar-promo').removeClass('d-none');
+    $('#btn-guardar-promo').addClass('d-block');
     
   }
   
+
+  //////////////////////////////////////////////////FUNCIONES PARA LA CONFIGURACION//////////////////////////////////////////////////////
+  function generarConfigPlanes(){
+    document.getElementById('info-plan').innerHTML="";
+    document.getElementById('info-plan').innerHTML+=`Actualmente cuentas con el plan ${plan.nombre}.`
+
+  }
+
+
+  var planes1=[];
+  function obtenerPlanes1(){
+    axios({
+      method:'GET',
+      url:'../../Hi-Offer/backend/api/planes.php',
+      responseType:'json',
+      
+  }).then(res=>{
+      this.planes1=res.data;
+      generarPlanes1();
+  }).catch(error=>{console.error(error);
+  });  
+  };
+
+
+  function generarPlanes1(){
+    document.getElementById('planes-cambiar').innerHTML="";
+    for (let i=0; i<planes1.length; i++){
+      if(planes1[i].diseno=="Básico"){
+
+        document.getElementById('planes-cambiar').innerHTML+=` <div class="col-md-5 col-xl-3  col-lg-3 col-8 col-xl-3   mx-auto mb-4 p-2">
+        <div class="card text-center">
+          <div class="card-header white" style="padding: 2px ;">
+            <h4 class="h4 my-2" style="color: #546991; ">${planes1[i].nombre}</h4>
+          </div>
+          <div>
+            <h1 class="card-title  pricing-card-title" style="margin-top: 30px; font-size:30px!important;">L ${planes1[i].precio} <small class="text-muted">/ ${planes1[i].plazo}</small></h1>
+          </div>
+          <div class="card-body">
+            <p class="card-text "><h5 style="font-size: 14px; font-weight: bold; color: #546991;">Podras registrar ${planes1[i].limitePromociones} promociones</h5>
+            ${planes1[i].descripcion}
+            </p>
+            <p> ${planes1[i].tiempoPruebaGratuita} días de prueba gratuita</p>
+
+          </div>
+          <div class="card-footer white">
+              <a  onclick="cammbiarPlan(${i})"  class="btn btn-outline-indigo btn-md" href="#" role="button">Cambiar</a>
+          </div>
+        </div>
+      </div>`
+      }else{
+        document.getElementById('planes-cambiar').innerHTML+=`
+        
+        <div class="col-md-5 col-xl-3  col-lg-3 col-8 mx-auto mb-4 p-2" >
+        <div class="card text-center" style="background-color: #546991; border:0">
+          <div class="card-header " style="padding: 2px ;">
+            <h4 class="h4 white-text my-2">${planes1[i].nombre}</h4>
+          </div>
+          <div class="white">
+            <h1 class="card-title  pricing-card-title" style="margin-top: 30px;  font-size:30px!important;">L ${planes1[i].precio} <small class="">/ ${planes1[i].plazo}</small></h1>
+          </div>
+          <div class="card-body white">
+            <p class="card-text "><h5 style="font-size: 14px; font-weight: bold; color: #546991;">Podras registrar ${planes1[i].limitePromociones} promociones</h5>
+            ${planes1[i].descripcion}
+            </p>
+            <p>${planes1[i].tiempoPruebaGratuita} días de prueba gratuita</p>
+
+          </div>
+          <div class="card-footer white">
+              <a class="btn btn-md" onclick="cammbiarPlan(${i})" style="background-color: #51668C!important; color: white!important;" href="#" role="button">CAMBIAR</a>
+          </div>
+        </div>
+      </div>`
+      }
+    }
+  }
+
+  function cammbiarPlan(id){
+    console.log("cambiando plan")
+    axios({
+      method:'PUT',
+      url:urlEmpresa+`?id=${indexEmpresa}`,
+      responseType:'json',
+      data:{
+        "accion":11,
+        "idPlan":id
+      }
+    }).then(res=>{
+      axios({
+        method:'PUT',
+        url:urlEmpresa+`?id=${indexEmpresa}`,
+        responseType:'json',
+        data:{
+          "accion":10,
+          "estado":0
+        }
+    }).then(res=>{
+      axios({
+        method:'PUT',
+        url:urlEmpresa+`?id=${indexEmpresa}`,
+        responseType:'json',
+        data:{
+          "accion":12,
+          "diaReg":moment().format("YYYY-MM-DD")
+        }
+        
+    }).then(res=>{
+      
+    }).catch(error=>{console.error(error);
+    });
+
+    }).catch(error=>{console.error(error);
+    }); 
+    }).catch(error=>{console.error(error);
+    }); 
+
+
+    $('#centralModalSml').modal('hide');
+    obtenerInformacionGeneral();
+    $('#modalInicioPlan').modal('show');
+   
+  }
+
+
+  function cerrarModalInfo(){
+    $('#modalInicioPlan').modal('hide');
+  }
+
+  /*
+  obtenerEmpActualizada();
+      $('#centralModalSml').modal('hide')
+  */
+
+
+
+  /**********************FUNCIOBES PARA LA GESTION DE LA INFO DEL ADMINISTRADOR DE LA EMPRESA******************************** */
+  function generarNombreAdmin(){
+    document.getElementById('nombre-admin').innerHTML="";
+    document.getElementById('nombre-admin').innerHTML+=`Admin. ${cuentaEmpresa.administradores[0].nombre_usuario}`;
+    
+  }
+
+  function generarInfoAdmin(){
+    document.getElementById('admin').innerHTML=cuentaEmpresa.administradores[0].nombre_usuario;
+    document.getElementById('correo_admin').innerHTML=cuentaEmpresa.administradores[0].correo_Electronico;
+  }
+
+
+  function mostrarformulario(){
+    document.getElementById('form-admin').classList.remove('d-none');
+    document.getElementById('form-admin').classList.add('d-block');
+    //asignar los valores
+    $('#usuario').val(cuentaEmpresa.administradores[0].nombre_usuario);
+    $('#email-usuario').val(cuentaEmpresa.administradores[0].correo_Electronico);
+    $('#contraseña').val("");
+    $('#contraseña2').val("");
+    
+  }
+
+  function editarAdmin(){
+    let permiso=validarAdmin();
+    if(permiso){
+      axios({
+        method:'PUT',
+        url:urlAdministrador+`?id=${indexEmpresa}`,
+        responseType:'json',
+        data:{
+          "nombre_usuario":document.getElementById("usuario").value,
+           "correo_electronico":document.getElementById("email-usuario").value,
+           "contrasena":document.getElementById("contraseña2").value
+        }
+      }).then(res=>{
+        document.getElementById('form-admin').classList.remove('d-block');
+        document.getElementById('form-admin').classList.add('d-none');
+        obtenerEmpActualizada();
+      }).catch(error=>{console.error(error);
+      }); 
+  }
+}
+
+
+
+  function validarAdmin(){
+    let permiso=false;
+    if( $("#usuario").val()==""){
+      document.getElementById('usuario').classList.add('is-invalid');
+      document.getElementById('camp-vacio-us').style.marginTop="px";
+      document.getElementById('camp-vacio-us').classList.add('d-block');
+      permiso=false;
+    }else{
+      document.getElementById('usuario').classList.remove('is-invalid');
+      document.getElementById('camp-vacio-us').classList.remove('d-block');
+      permiso=true;
+    }
+
+    if($('#email-usuario').val()==""){
+      document.getElementById('email-usuario').classList.add('is-invalid');
+      document.getElementById('camp-vacio-correo-us').classList.add('d-block');
+      permiso=false;
+      let validar_email=validarEmail(document.getElementById('email-usuario'));
+      if(!(validar_email)){
+        document.getElementById('email-usuario').classList.add('is-invalid');
+        document.getElementById('correo-invalido-us').classList.add('d-block');
+        document.getElementById('camp-vacio-correo-us').classList.remove('d-block');
+        permiso=false;
+      }else{
+        document.getElementById('email-usuario').classList.remove('is-invalid');
+        document.getElementById('camp-vacio-correo-us').classList.remove('d-block');
+        document.getElementById('correo-invalido-us').classList.remove('d-block');
+        permiso=true;
+      }
+     
+    }
+
+    if($('#contraseña').val()==""){
+      document.getElementById('contraseña').classList.add('is-invalid');
+      document.getElementById('camp-vacio-contra-us').classList.add('d-block');
+      permiso=false;
+    }else{
+      if($('#contraseña').val()!=cuentaEmpresa.administradores[0].contrasena){
+        document.getElementById('contraseña').classList.add('is-invalid');
+        document.getElementById('camp-vacio-contra-us').classList.remove('d-block');
+        document.getElementById('contraseña-incorrecta').classList.add('d-block');
+        permiso=false;
+    }else{
+      document.getElementById('contraseña-incorrecta').classList.remove('d-block');
+      document.getElementById('contraseña').classList.remove('is-invalid');
+      document.getElementById('camp-vacio-contra-us').classList.remove('d-block');
+      permiso=true;
+      }
+    }
+
+    
+    if($('#contraseña2').val()==""){
+      document.getElementById('contraseña2').classList.add('is-invalid');
+      document.getElementById('campo-obligatorio').classList.add('d-block');
+      permiso=false;
+  }else{
+    let validar_contrasena=validarContraseña('contraseña2');
+      if(!validar_contrasena){
+          document.getElementById('contraseña2').classList.add('is-invalid');
+          document.getElementById('campo-obligatorio').classList.remove('d-block');
+          document.getElementById('contra-invalida').classList.add('d-block');
+          permiso=false
+      }else{
+          document.getElementById('contra-invalida').classList.remove('d-block');
+          document.getElementById('contraseña2').classList.remove('is-invalid');
+           document.getElementById('campo-obligatorio').classList.remove('d-block');
+           permiso=true;
+      }
+      
+  }
+    return permiso;
+   
+  }
+
+
+
+  function llenarModalperfilSucursales(){
+    document.getElementById("content-sucursales-perfil").innerHTML="";
+      for(let i=0; i<cuentaEmpresa.sucursales.length;i++){
+        document.getElementById("content-sucursales-perfil").innerHTML+=`<li class="d-flex justify-content-between mb-1 mt-0 pb-2 pr-1 pl-1 pt-2 col-12">
+        <div class="header container-fluid">
+          <div class="row">
+          <strong class="primary-font col-6">${cuentaEmpresa.sucursales[i].nombre}</strong>
+          <small class="pull-right col-6 text-muted"><i class="fas fa-city"></i> ${cuentaEmpresa.sucursales[i].ciudad}</small></div>
+          <hr>
+          <div id="sucursal-modal-${i}" col-12 row " class="z-depth-1-half col-md-12 col-12 map-container" style="height: 300px; padding:0px!important ">
+        </div>
+    </li>`         
+    }
+    generarMapasModal();
+  }
+
+
+  function generarMapasModal(){
+    var idNw;
+    var lat;
+    var long;
+    var titulo;
+    var body;
+    var contador=0;
+    for(let j=0; j<cuentaEmpresa.sucursales.length;j++){
+      contador++;
+      idGen=`sucursal-modal-${j}`;
+      idNw=`map-suc-${j}`
+      lat=cuentaEmpresa.sucursales[j].latitud;
+      long=cuentaEmpresa.sucursales[j].longitud;
+      titulo=cuentaEmpresa.sucursales[j].nombre;
+      body=cuentaEmpresa.sucursales[j].ciudad;
+      console.log(idGen,idNw,lat,long,titulo,body)
+      generarMapa2(idGen,idNw,lat,long,titulo,body);
+   }
+  }
+  
+  function cerrarModalAdvertencia(){
+    $('#modal-limite-promo').modal('hide');
+  }
+
+
+  function generarQR(idPromocion){
+    let rutaQR
+    axios({
+      method:'GET',
+      url:urlPromociones+`?idPromo=${idPromocion}&idEmp=${indexEmpresa}`,
+      responseType:'json',
+    }).then(res=>{
+      rutaQR=res.data.ruta
+      console.log(res.data.ruta);
+      generarFicha(idPromocion,rutaQR)
+    }).catch(error=>{console.error(error);
+    }); 
+
+
+    //generar ficha promocional
+  }
+
+
+function generarFicha(idPromocion,rutaQR){
+  document.getElementById('content-ficha').innerHTML="";
+  var idP=parseInt(cuentaEmpresa.promociones[idPromocion].idProducto)
+  document.getElementById('content-ficha').innerHTML+=`<div class="col-lg-6 col-12">
+    <div class="col-12 p-0">
+      <img class="img-fluid" src="${rutaQR}">
+    </div>
+  </div>
+  <div class="col-12 col-lg-6 pt-3"> 
+    <h6>${cuentaEmpresa.productos[idP].nombre}</h6>
+    <span class="red-text">
+      <strong style="font-size:40px">${cuentaEmpresa.promociones[idPromocion].porcentaje_descuento}%</strong>
+      <strong style="font-size:15px"> de descuento</strong>
+      <span class="grey-text">
+        <small>
+          <s style="font-size:15px">L.${cuentaEmpresa.productos[idP].precio}</s>
+        </small>
+      </span>
+      <span class="">
+        <strong style="font-size:20px; font-weight: bold; color: black;">L.${cuentaEmpresa.promociones[idPromocion].precio_descuento}</strong>
+      </span>
+      
+    </span>
+    <h6 style="font-size:13px">Promoción vence: ${cuentaEmpresa.promociones[idPromocion].fecha_final}<h6>
+
+  </div>`
+}
+
+
+
+function imprim1(){
+  var printContents = document.getElementById("content-ficha").innerHTML;
+          w = window.open();
+          w.document.write(printContents);
+          w.document.close(); // necessary for IE >= 10
+          w.focus(); // necessary for IE >= 10
+      w.print();
+      w.close();
+       return true;}
+
+
+
+///metodo para generar promociones en el perfil
+
+function generarPromoPerfil(){
+  document.getElementById('cont-promo-perfil').innerHTML="";
+      document.getElementById('cont-promo-perfil').innerHTML+=`<div class="row filas wow slideInLeft" >
+      <h6 class="font-weight-bold mb-md-0 mb-4 mt-2 pt-1 col-lg-11 col-md-8 " style="color: #546991!important;"> <i class="fas fa-street-view mr-3 ml-5"></i>Lo más nuevo</h6>
+      <a class="ver-mas col-lg-1 col-md-" onclick="verCategoria();">ver mas <i class="fas fa-arrow-right"></i></a>
+      </div><div id="fila"  class="row fila-p wow slideInLeft"></div>`;
+     
+      for(let j=0; j<cuentaEmpresa.promociones.length;j++){
+        var id=parseInt(cuentaEmpresa.promociones[j].idProducto) ;
+          document.getElementById('fila').innerHTML+=` 
+          <div class="card col-12  col-lg-2 col-md-4 pr-0 pl-0 mt-10 mx-2" style="margin-top: 30px; margin-bottom: 5px; float:left">
+          <div class="view overlay">
+            <img src="${cuentaEmpresa.productos[id].imagen}" class="img-fluid"alt="" style="margin-top:0">
+            <a><div class="mask rgba-white-slight"></div></a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title mb-1">
+              <strong><a href="" class="dark-grey-text">${cuentaEmpresa.productos[id].nombre}</a>
+              </strong>
+            </h5>
+            <span class="badge badge-danger mb-2">Promoción</span><br>
+            <div class='starrr'  style="color:blue!important"></div>
+            
+            <div class="card-footer pb-0">
+          <div class="row mb-0">
+            <h5 class="mb-0 pb-0 mt-1 font-weight-bold">
+              <span class="red-text">
+                <strong style="font-size:20px">L.${cuentaEmpresa.promociones[j].precio_descuento}</strong>
+              </span>
+              <span class="grey-text">
+                <small>
+                  <s style="font-size:15px">L.${cuentaEmpresa.productos[id].precio}</s>
+                </small>
+              </span>
+            </h5>
+            <span class="float-right">
+              <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                <i class="fas fa-shopping-cart ml-3"></i>
+              </a>
+            </span>
+          </div>
+        </div>
+          </div>
+  </div>`;
+      }
+  
+      $('.starrr').starrr({
+        rating: 5,
+        readOnly: true
+      })
+  
+}
