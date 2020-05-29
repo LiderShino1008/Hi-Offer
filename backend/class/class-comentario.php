@@ -7,6 +7,7 @@
       private $estado;
       private $comentario;
       private $indexUs; //el indice del usuario que hizo el comentario
+      private $calificacion;
 
       /*contructor*/
       public function __construct($nombre_usuario,$perfil,$fecha_entrada,$comentario,$indexUs){

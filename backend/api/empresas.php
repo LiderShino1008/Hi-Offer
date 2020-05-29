@@ -1,7 +1,6 @@
 
 
 
-
 <?php
     
     include_once('../class/class-empresas.php');
@@ -114,7 +113,7 @@
                   Empresa::incrementarCarrito($_GET['id']);
                   break;
                   case 8;
-                  Empresa::incrementarVendidos($_GET['id']);
+                  Empresa::incrementarVendidos($_GET['idEmp'],$_GET['stock'],$_GET['idProducto'],$_GET['idCat'],$_GET['idPromo']);
                   break;
                   case 9;
                   Empresa::DecrementarCarrito($_GET['id']);

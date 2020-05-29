@@ -12,7 +12,7 @@
   
   
     <!-- Footer -->
-  <footer class="page-footer font-small  darken-3" style="background-color: #184F78; margin:0px!important;margin-left:-15px!important;margin-right:-15px!important">
+  <footer class="page-footer font-small  darken-3" style="background-color: #184F78; margin:0px!important;">
   <div class="container-fluid">
     <!-- Grid row-->
     <div class="row">

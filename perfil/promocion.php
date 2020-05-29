@@ -26,7 +26,7 @@
     ?>
 
 <div class="container-fluid" id="verProducto" style=" ">
-    <div class="container my-3 mb-10 py-5  col-lg-9 col-12 px-2" id="producto" style="background-color: white; margin-bottom: 50px; padding-right: 10px; padding-left: 10px;">
+    <div class="container my-3 mb-10 py-5  col-lg-10 col-12 px-2" id="producto" style="background-color: white; margin-bottom: 50px; padding-right: 10px; padding-left: 10px;">
         <section class="text-center">
           <h4 class="font-weight-bold mb-5 px-20" >Detalles del producto
           <div id="estado-guardado"><a class="col-lg-3" onclick="guardarPromocion()" style="font-size:15px; float: right;">Guardar<i style="font-size: 20px;"  class=" ml-2 far fa-bookmark"></i></a></div></h4>
@@ -64,12 +64,14 @@
                 <div class="my-rating-4" ></div>
                 </ul></p>
               <div id="info-4"></div>
-              <input type="number" id="input-cant" value="2" aria-label="Search" class="form-control" style="width: 100px">
+              <input type="number" id="input-cant" value="0" aria-label="Search" onchange="verificarCantidad()" class="form-control" style="width: 100px">
+              <div class="invalid-feedback" id="cant-dis">
+               cantidad no disponible.
+              </div
               <div class="font-weight-normal" >
                 <div class="mt-5">
                   <div class="row mt-3 mb-4">
                     <div class="col-md-12 container text-center text-md-left text-md-right" id="botones">
-                      
                     </div>
                     
                   </div>
@@ -83,23 +85,25 @@
         </section>
         <hr>
 
-        <div class="row">
-                <div class="col-12">
+        <div class="row ">
+                <div class="col-6">
                   <ul class="nav md-pills flex-center flex-wrap mx-0 float-left" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link  font-weight-bold text-uppercase" style="" data-toggle="tab" href="#panelComentarios" role="tab">Comentarios</a>
+                      <a class="nav-link  font-weight-bold text-uppercase" onclick="seleccionarComentarios()" id="link-comentarios" style="" data-toggle="tab" href="#panelComentarios" role="tab">Comentarios</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link font-weight-bold text-uppercase" data-toggle="tab" href="#panelSucursales" role="tab">Sucursales</a>
+                      <a class=" font-weight-bold text-uppercase" id="link-sucursales" onclick="seleccionarSucursales()" data-toggle="tab" href="#panelSucursales" role="tab">Sucursales</a>
                     </li>
                   </ul>
                 </div>
               </div>
               <div class="tab-content mb-5">
-              <div class="tab-pane fade show in active container-fluid row" id="panelComentarios" role="tabpanel" style="padding-top:50px;">
+              <div class="tab-pane fade show in active container-fluid row col-12 mx-auto" id="panelComentarios" role="tabpanel" style="padding-top:50px;">
                         <!---------------------------COMENTARIOS---------------------------------------->
-                        <section class="dark-grey-text mb-5 col-10 mx-auto">
+                        <section class="dark-grey-text mb-5 col-8 mx-auto " >
+                  
                           <h5 class="font-weight-bold text-center mb-5">Comentarios</h5>
+                          <div id="comentarios" style=" height:500px; overflow: scroll; padding-left:50px;padding-right:50px">
                           <div class="media mb-3">
                             <img class="card-img-100 rounded-circle z-depth-1-half d-flex mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/img (8).jpg" alt="Generic placeholder image">
                             <div class="media-body">
@@ -180,7 +184,9 @@
                                 nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
                             </div>
                           </div>
-                          <a style="float: right;">ver mas</a>
+                          </div>
+                          
+                    
                           <p class="comment-date font-small grey-text">
                             ¡Cuentanos tu experiencia!</p>
                           

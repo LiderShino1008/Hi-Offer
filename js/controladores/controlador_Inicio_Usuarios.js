@@ -87,9 +87,9 @@ function generarCarrucel(){
 
 
 function generar_inicio(){
+  console.log("genando")
   let cantidad=0
     document.getElementById('inicio').innerHTML="";
-   console.log(cat[3].promociones[0].imagen)
     for(let i=0; i<cat.length;i++){
         document.getElementById('inicio').innerHTML+=`<div class="row filas wow slideInLeft" id="" style="margin-botton:50px!important">
         <h3 class="col-11 category-name" style="margin-top: 10px">${cat[i].nombre_categoria}</h3>

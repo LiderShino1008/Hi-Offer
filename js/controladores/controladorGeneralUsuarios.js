@@ -17,7 +17,7 @@ axios({
 }).then(res=>{
   console.log(res.data[0].usuarioActual)
   indexUsuario=res.data[0].usuarioActual;
-  obtenerGuardados();
+ // obtenerGuardados();
   obtenerUsuario();
 }).catch(error=>{console.error(error);
 }); 
@@ -41,7 +41,7 @@ function obtenerUsuario(){
   }).then(res=>{
      usuario=res.data;
      console.log(usuario)
-     generarCarrito(usuario);
+    // generarCarrito(usuario);
   }).catch(error=>{console.error(error);
   }); 
 }

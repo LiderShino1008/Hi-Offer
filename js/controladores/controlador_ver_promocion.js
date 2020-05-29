@@ -6,6 +6,7 @@ var urlPrmociones='../../Hi-Offer/backend/api/promociones.php';
 var urlCarrito='../../Hi-Offer/backend/api/carrito.php';
 var urlventas='../../Hi-Offer/backend/api/ventas.php';
 var urlpedidos='../../Hi-Offer/backend/api/pedidos.php';
+var urlEmpresas='../../Hi-Offer/backend/api/empresas.php';
 ////////////////////////SECCION DE VARIABLES GLOBALES////////////////////////////////////////
 var listcategorias;
 var indexUsuario;
@@ -200,7 +201,7 @@ function generarPromocion(){
     if(promocion.stock>0){
         document.getElementById('info-2').innerHTML+=` <span class="badge badge-success product mb-4 ml-2">disponible</span>`
     }else{
-        document.getElementById('info-2').innerHTML+=` <span class="badge badge-danger product mb-4 ml-2">disponible</span>`
+        document.getElementById('info-2').innerHTML+=` <span class="badge badge-danger product mb-4 ml-2">Agotado</span>`
     }
     document.getElementById('info-3').innerHTML+=` <span class="red-text font-weight-bold">
         <strong>L.${promocion.precio_descuento}</strong>
@@ -586,6 +587,7 @@ function cardFormValidate(){
     //PRIMERO: agregar pago a las ventas de la empresa
     let indexEmpresa=listcategorias[indexcat].promociones[indexPromo].idEmpresa;
     let cantidad=parseInt(listcategorias[indexcat].promociones[indexPromo].precio_descuento)
+    estado=verificarCantidad()
     if(estado){
       $('#btn-one').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Autorizando...').addClass('disabled');
       axios({
@@ -605,9 +607,18 @@ function cardFormValidate(){
           responseType:'json',
           data:informacionPedido
         }).then(res=>{
-          console.log(res.data)
-          console.log("histo")
-
+          //peticion para actualizar ventas y stock
+          let parametros=`?idEmp=${indexEmpresa}&stock=${($('#input-cant').val())}&idProducto=${listcategorias[indexcat].promociones[indexPromo].idproducto}&idCat=${indexcat}&idPromo=${indexPromo}`;
+          console.log(urlEmpresas+parametros)
+          axios({
+            method:'PUT',
+            url:urlEmpresas+parametros,
+            responseType:'json',
+            data:{"accion":8}
+          }).then(res=>{
+            console.log("hola")
+          }).catch(error=>{console.error(error)
+          }); 
         }).catch(error=>{console.error(error)
         });  
       }).catch(error=>{console.error(error);
@@ -664,3 +675,32 @@ function select1(){
      
   }
   
+
+
+  function verificarCantidad(){
+    let valido=false
+    if($('#input-cant').val()>parseInt(listcategorias[indexcat].promociones[indexPromo].stock)){
+      $('#cant-dis').removeClass('d-none');
+       $('#cant-dis').addClass('d-block');
+      valido=false;
+    }else{
+       valido=true;
+      $('#cant-dis').removeClass('d-block');
+      $('#cant-dis').addClass('d-none');
+      
+    }
+     return valido;
+  }
+
+
+
+
+  function seleccionarSucursales(){
+    document.getElementById('link-sucursales').style.color="#184F78";
+    document.getElementById('link-comentarios').style.color="#949398";
+  }
+
+  function seleccionarComentarios(){
+    document.getElementById('link-sucursales').style.color="#949398";
+    document.getElementById('link-comentarios').style.color="#184F78";
+  } seleccionarComentarios()

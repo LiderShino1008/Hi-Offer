@@ -307,6 +307,11 @@ k
 
 }
 
+.addScroll {
+    overflow-y: auto;
+    max-height: 150px;
+  }
+
 .ver-mas{
     margin-top: 15px;
     color: #546991;

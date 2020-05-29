@@ -449,18 +449,33 @@
                 fclose($archivo);
              }
 
-             public static function incrementarVendidos($indexEmp,$stock){
+             public static function incrementarVendidos($indexEmp,$stock,$idProducto,$idCategoria,$idPromocion){
                 $contenido_archivo= file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
-                $temp= $empresas[$indexEmp]["estado"]["estado_promociones"]["carrito"];
-                $empresas[$indexEmp]["estado"]["estado_promociones"]["carrito"]=$temp+$stock;
+                //primero agregar promociones vendidas a la empresa
+                $temp= $empresas[$indexEmp]["estado"]["estado_promociones"]["vendidas"];
+                $empresas[$indexEmp]["estado"]["estado_promociones"]["vendidas"]=$temp+$stock;
+                //editar el stock de el producto vendido de la empresa
+                $temp2=$empresas[$indexEmp]["productos"][$idProducto]["stock"];
+                $empresas[$indexEmp]["productos"][$idProducto]["stock"]=$temp2-$stock;
                 $archivo=fopen("../data/empresas.json","w");
                 fwrite($archivo,json_encode($empresas)); 
                 fclose($archivo);
+        
+                //decrementar el stock en las categorias
+                $contenido_archivo= file_get_contents("../data/categorias.json");
+                $categorias=json_decode($contenido_archivo,true);
+                //editar el stock de el producto vendido de la categoria
+                $temp3=$categorias[$idCategoria]["promociones"][$idPromocion]["stock"];
+                $categorias[$idCategoria]["promociones"][$idPromocion]["stock"]=$temp3-$stock;
+                $archivo=fopen("../data/categorias.json","w");
+                fwrite($archivo,json_encode($categorias)); 
+                fclose($archivo);
+
              }
 
              public static function incrementarVentasDomingo($indexEmp,$cantidad){
-                sleep(10);
+                sleep(5);
                 $contenido_archivo= file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
                 $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["domingo"];
@@ -473,7 +488,7 @@
              }
 
              public static function incrementarVentasLunes($indexEmp,$cantidad){
-                sleep(10);
+                sleep(5);
                 $contenido_archivo= file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
                 $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["lunes"];
@@ -486,7 +501,7 @@
              }
 
              public static function incrementarVentasMartes($indexEmp,$cantidad){
-                sleep(10);
+                sleep(5);
                 $contenido_archivo= file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
                 $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["martes"];
@@ -499,7 +514,7 @@
              }
 
              public static function incrementarVentasMiercoles($indexEmp,$cantidad){
-                sleep(10);
+                sleep(5);
                 $contenido_archivo= file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
                 $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["miercoles"];
@@ -512,7 +527,7 @@
              }
 
              public static function incrementarVentasJueves($indexEmp,$cantidad){
-                sleep(10);
+                sleep(5);
                 $contenido_archivo= file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
                 $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["jueves"];
@@ -525,7 +540,7 @@
              }
 
              public static function incrementarVentasViernes($indexEmp,$cantidad){
-                sleep(10);
+                sleep(5);
                 $contenido_archivo= file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
                 $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["viernes"];
@@ -538,7 +553,7 @@
              }
 
              public static function incrementarVentasSabado($indexEmp,$cantidad){
-                sleep(10);
+                sleep(5);
                 $contenido_archivo= file_get_contents("../data/empresas.json");
                 $empresas=json_decode($contenido_archivo,true);
                 $temp= $empresas[$indexEmp]["estado"]["ventas_semana"]["domingo"];
