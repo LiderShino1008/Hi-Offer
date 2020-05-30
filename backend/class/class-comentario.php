@@ -1,8 +1,6 @@
 <?php
     class Comentario{ //Nombre en camelc $nombre;
       /*Atributos*/
-      private $nombre_usuario;
-      private $perfil;
       private $fecha_entrada;
       private $estado;
       private $comentario;
@@ -10,24 +8,21 @@
       private $calificacion;
 
       /*contructor*/
-      public function __construct($nombre_usuario,$perfil,$fecha_entrada,$comentario,$indexUs){
-              $this->nombre_usuario=$nombre_usuario;
-              $this->perfil=$perfil;
+      public function __construct($fecha_entrada,$comentario,$indexUs){
               $this->fecha_entrada=$fecha_entrada;
               $this->comentario=$comentario;
               $this->indexUs=$indexUs;
       }
-
-
-     
         /************FUNCIONES DE GESTION DE INFORMACION********** */
     
      public function agregarComentarioEmpresa($indexEmp){
         $contenido_archivo= file_get_contents("../data/empresas.json");
         $empresas=json_decode($contenido_archivo,true);
+        $contenido_archivo= file_get_contents("../data/usuarios.json");
+        $usuarios=json_decode($contenido_archivo,true);
         $empresas[$indexEmp]["comentarios"][]=Array(
-            "nombre_usuario"=>$this->nombre_usuario,
-            "perfil"=>$this->perfil,
+            "nombre_usuario"=>$usuarios[$this->indexUs]["nombre"],
+            "perfil"=>$usuarios[$this->indexUs]["imagen_perfil"],
             "fecha_entrada"=>$this->fecha_entrada,
             "estado"=>"hoy",
             "comentario"=>$this->comentario,
@@ -44,7 +39,6 @@
         $contenido_archivo= file_get_contents("../data/empresas.json");
         $empresas=json_decode($contenido_archivo,true);
         
-
         for($i=0; $i<sizeof($empresas); $i++){
             for($j=0; $j<sizeof($empresas[$i]["comentarios"]);$j++){
                 $fecha_post=$empresas[$i]["comentarios"][$j]["fecha_entrada"];
@@ -82,52 +76,48 @@
 
     }
 
-/*
-        public static function ObtenerComentariosEmp(){
-            $contenido_archivo=file_get_contents("../data/empresas.json");
-            echo $contenido_archivo;
 
-        }
-        
-        public static function obtenerUnPlan($id){
-            $contenido_archivo=file_get_contents("../data/planes.json");
-            $planes=json_decode($contenido_archivo,true);
-            echo json_encode($planes[$id]) ;
-        }
+    public function agregarComentarioPromocion($calificacion,$idCategoria,$idPromocion){
+        $contenido_archivo= file_get_contents("../data/categorias.json");
+        $categorias=json_decode($contenido_archivo,true);
+        $contenido_archivo= file_get_contents("../data/usuarios.json");
+        $usuarios=json_decode($contenido_archivo,true);
+        echo (int)$this->indexUs;
+        $categorias[$idCategoria]["promociones"][$idPromocion]["comentarios"][]=Array(
+            "nombre_usuario"=>$usuarios[$this->indexUs]["nombre_usuario"],
+            "perfil"=>$usuarios[$this->indexUs]["imagen_perfil"],
+            "fecha_entrada"=>$this->fecha_entrada,
+            "comentario"=>$this->comentario,
+            "indexUs"=>$this->indexUs,
+            "calificacion"=>$calificacion
+        );
+         $archivo=fopen("../data/categorias.json","w");
+         fwrite($archivo,json_encode($categorias)); 
+         fclose($archivo);
+    }
 
-
-        public  function actualizarUnPlan($id){
-            $contenido_archivo=file_get_contents("../data/planes.json");
-            $planes=json_decode($contenido_archivo,true);
-            $planes[$id]= array(
-                "nombre"=>$this->nombre,
-                "precio"=>$this->precio,
-                "limitePromociones"=>$this->limitePromociones,
-                "descripcion"=>$this->descripcion,
-                "plazo"=>$this->plazo,
-                "tiempoPruebaGratuita"=>$this->tiempoPruebaGratuita,
-                "diseno"=>$this->diseno
-             );
-             $archivo=fopen("../data/planes.json","w");
-             fwrite($archivo,json_encode($planes)); 
-             fclose($archivo);
     
 
-        }
+    public static function actualizarComentarioPromocion(){
+        $contenido_archivo= file_get_contents("../data/categorias.json");
+        $categorias=json_decode($contenido_archivo,true);
+        $contenido_archivo= file_get_contents("../data/usuarios.json");
+        $usuarios=json_decode($contenido_archivo,true);
+        for($i=0; $i<sizeof($categorias);$i++){
+            for($k=0; $i<sizeof($categorias[$i]["promociones"]);$k++){
+                for($j=0; $j<sizeof($categorias[$i]["promociones"][$k]["comentarios"]);$j++){
+                    $indexUs=$categorias[$i]["promociones"][$k]["comentarios"][$j]["indexUS"];
+                    $categorias[$i]["promociones"][$k]["comentarios"][$j]["imagen_perfil"]=$usuarios[$indexUs]["imagen_perfil"];;
+                    $categorias[$i]["comentarios"]["nombre_usuario"]=$usuarios[$indexUs]["nombre_usuario"];
+                  }
+            }
 
-        public static function eliminarPlan($id)
-        {
-            $contenido_archivo=file_get_contents("../data/planes.json");
-            $planes=json_decode($contenido_archivo,true); 
-            array_splice($planes,$id,1);
- 
-           $archivo=fopen("../data/planes.json","w");
-          fwrite($archivo,json_encode($planes)); 
-          fclose($archivo);
- 
-        } 
-       
-    */
+            
+        }
+         $archivo=fopen("../data/categorias.json","w");
+         fwrite($archivo,json_encode($categorias)); 
+         fclose($archivo);
+    }
 
       /**
        * Get the value of nombre_usuario

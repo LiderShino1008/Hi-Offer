@@ -1,6 +1,6 @@
 
 <?php
-
+include('class-comentario.php');
 require '../lib/phpqrcode/qrlib.php';
     class Promocion{ //Nombre en camelc $nombre;
       /*Atributos*/
@@ -211,6 +211,7 @@ require '../lib/phpqrcode/qrlib.php';
         public static function obtenerPromocion($idCat,$idPromo){
                 $contenido_archivo=file_get_contents("../data/categorias.json");
                 $categorias=json_decode($contenido_archivo,true);
+                //Comentario::actualizarComentarioPromocion();
                 echo json_encode($categorias[$idCat]["promociones"][$idPromo]) ;
         }
 

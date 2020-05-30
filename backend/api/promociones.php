@@ -1,6 +1,6 @@
 
 <?php
-    
+   // include('../class/class-comentario.php');
     include('../class/class-promocion.php');
     header('Content-Type: application/json'); //main-type es el contenido de un archivo flujo
 
@@ -13,6 +13,7 @@
         break;
         case 'GET':
             //Promocion::eliminarPromocionesVencidas();
+           // Comentario::actualizarComentarioPromocion();
             if(isset($_GET['idCat']) && isset($_GET['idPromo'])){
                 Promocion::obtenerPromocion($_GET['idCat'],$_GET['idPromo']);
             }else{
@@ -21,7 +22,7 @@
                 }
             }
             
-           
+            
             
         break;
         case 'PUT':

@@ -97,115 +97,35 @@
                   </ul>
                 </div>
               </div>
-              <div class="tab-content mb-5">
-              <div class="tab-pane fade show in active container-fluid row col-12 mx-auto" id="panelComentarios" role="tabpanel" style="padding-top:50px;">
+              <div class="tab-content mb-0">
+              <div  class="tab-pane fade show in active container-fluid row col-12 mx-auto" id="panelComentarios" role="tabpanel" style="padding:50px; background-color:#eeee">
                         <!---------------------------COMENTARIOS---------------------------------------->
-                        <section class="dark-grey-text mb-5 col-8 mx-auto " >
+                        <section class="dark-grey-text mb-5 col-8 mx-auto white z-depth-1" style="margin-bottom:100px" >
                   
-                          <h5 class="font-weight-bold text-center mb-5">Comentarios</h5>
-                          <div id="comentarios" style=" height:500px; overflow: scroll; padding-left:50px;padding-right:50px">
-                          <div class="media mb-3">
-                            <img class="card-img-100 rounded-circle z-depth-1-half d-flex mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/img (8).jpg" alt="Generic placeholder image">
-                            <div class="media-body">
-                              <a>
-                                <h6 class="user-name font-weight-bold">John Doe</h6>
-                              </a>
-                              <!-- Rating -->
-                              <ul class="rating  form-inline" style="font-size: 14px;">
-                              <i class="fas fa-star  " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                            </ul>
-                              <div class="card-data">
-                                <ul class="list-unstyled mb-1">
-                                  <li class="comment-date font-small grey-text">
-                                    <i class="far fa-clock"></i> 05/10/2015</li>
-                                </ul>
-                              </div>
-                              <p class="dark-grey-text article " style="font-size: 14px;">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-                            </div>
-                          </div>
-                          
-                          <div class="media mb-3">
-                            <img class="card-img-100 rounded-circle z-depth-1-half d-flex mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/img (8).jpg" alt="Generic placeholder image">
-                            <div class="media-body">
-                              <a>
-                                <h6 class="user-name font-weight-bold">John Doe</h6>
-                              </a>
-                              <!-- Rating -->
-                              <ul class="rating  form-inline" style="font-size: 14px;">
-                              <i class="fas fa-star  " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                            </ul>
-                              <div class="card-data">
-                                <ul class="list-unstyled mb-1">
-                                  <li class="comment-date font-small grey-text">
-                                    <i class="far fa-clock"></i> 05/10/2015</li>
-                                </ul>
-                              </div>
-                              <p class="dark-grey-text article " style="font-size: 14px;">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-                            </div>
-                          </div>
-                          
-                          <div class="media mb-3">
-                            <img class="card-img-100 rounded-circle z-depth-1-half d-flex mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/img (8).jpg" alt="Generic placeholder image">
-                            <div class="media-body">
-                              <a>
-                                <h6 class="user-name font-weight-bold">John Doe</h6>
-                              </a>
-                              <!-- Rating -->
-                              <ul class="rating  form-inline" style="font-size: 14px;">
-                              <i class="fas fa-star  " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                              <i class="fas fa-star " style="color:#F8C501"></i>
-                            </ul>
-                              <div class="card-data">
-                                <ul class="list-unstyled mb-1">
-                                  <li class="comment-date font-small grey-text">
-                                    <i class="far fa-clock"></i> 05/10/2015</li>
-                                </ul>
-                              </div>
-                              <p class="dark-grey-text article " style="font-size: 14px;">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-                            </div>
-                          </div>
+                          <p id="cantidad-comentarios"></p>
+                          <br>
+                          <div style="margin-bottom:50px!important; "></div>
+
+                          <div id="comentarios" style=" height:500px; overflow: scroll; padding-left:50px;padding-right:50px; padding-top:50px!important">
+                          <!---Comentarios-->
+                      
                           </div>
                           
                     
-                          <p class="comment-date font-small grey-text">
+                          <p class="comment-date font-small grey-text" style="padding-top:50px">
                             ¡Cuentanos tu experiencia!</p>
-                          
-                            <h6 class="user-name font-weight-bold">Calificar:</h6> <ul class="rating  form-inline" style="font-size: 14px;">
-                                <i class="fas fa-star  " style="color:#F8C501"></i>
-                                <i class="fas fa-star " style="color:#F8C501"></i>
-                                <i class="fas fa-star " style="color:#F8C501"></i>
-                                <i class="fas fa-star " style="color:#F8C501"></i>
-                                <i class="fas fa-star " style="color:#F8C501"></i>
-                              </ul>
+                            <h6 class="font-weight-bold">Calificar:</h6>
+                            <span class="my-rating-9"></span>
+                            <span class="live-rating"></span>
                           </a>
                           <div class="modal-footer">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-1 ml-0 z-depth-1 col-1" style="height: 40px;">
-                            <div class="white col-8">
+                          <div id="icon-us"></div>
+                           <div class="white col-8">
                               <div class="form-group basic-textarea">
-                                <textarea class="form-control pl-1 my-0" id="exampleFormControlTextarea2" rows="2" placeholder="Agrega un comentario"></textarea>
+                                <textarea class="form-control pl-1 my-0" id="txt-comentario" rows="2" placeholder="Agrega un comentario"></textarea>
                               </div>
                             </div>
-                            <button type="button" class="btn btn-primary btn-x btn-rounded btn-sm waves-effect waves-light float-right" style="background-color: #546991!important;">Enviar</button>
+                            <button id="btn-enviar" onclick="agregarComentario()" type="button" class="btn btn-primary btn-x btn-rounded btn-sm waves-effect waves-light float-right" style="background-color: #546991!important;">Enviar</button>
                           </ul>
                           </div>
                           </section>

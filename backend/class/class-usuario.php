@@ -22,7 +22,7 @@
             "nombre_usuario"=>$this->nombre_usuario,
             "correo_electronico"=>$this->correo_electronico,
             "contrasena"=>sha1($this->contrasena),
-            "imagen_perfil"=>0,
+            "imagen_perfil"=>"img/icono-user-default.png",
             "imagen_portada"=>0,
             "pedidos"=>[],
             "carrito"=>[],

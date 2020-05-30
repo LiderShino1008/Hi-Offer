@@ -7,6 +7,7 @@ var urlCarrito='../../Hi-Offer/backend/api/carrito.php';
 var urlventas='../../Hi-Offer/backend/api/ventas.php';
 var urlpedidos='../../Hi-Offer/backend/api/pedidos.php';
 var urlEmpresas='../../Hi-Offer/backend/api/empresas.php';
+var urlComentarios='../../Hi-Offer/backend/api/comentarios.php';
 ////////////////////////SECCION DE VARIABLES GLOBALES////////////////////////////////////////
 var listcategorias;
 var indexUsuario;
@@ -40,6 +41,7 @@ function obtenerUsuario(){
      usuario=res.data;
      console.log(usuario)
      obtenerCategorias();
+     generarImgComentar();
   }).catch(error=>{console.error(error);
   }); 
 }
@@ -55,6 +57,7 @@ function obtenerCategorias(){
          generarInfoCat();
          //generarCarrito();
          generarCarrito(usuario);
+         
       }).catch(error=>{console.error(error);
       }); 
 }
@@ -160,8 +163,10 @@ function obtenerPromocion(){
          console.log(promocion);
          obtenerGuardados()
          generarPromocion()
+         generarComentariosPromocion();
          generarCalificacion()
          obtenerCategorias();
+         generarCalificacionesComentario();
       }).catch(error=>{console.error(error);
       }); 
 }obtenerPromocion();
@@ -693,8 +698,6 @@ function select1(){
   }
 
 
-
-
   function seleccionarSucursales(){
     document.getElementById('link-sucursales').style.color="#184F78";
     document.getElementById('link-comentarios').style.color="#949398";
@@ -704,3 +707,105 @@ function select1(){
     document.getElementById('link-sucursales').style.color="#949398";
     document.getElementById('link-comentarios').style.color="#184F78";
   } seleccionarComentarios()
+
+ 
+  function generarComentariosPromocion(){
+    document.getElementById('cantidad-comentarios').innerHTML="";
+     document.getElementById('cantidad-comentarios').innerHTML=
+     `<h6 class="font-weight-bold float-left mb-10 col-12" style="color:#546991;margin-top:20px!important">
+      ${promocion.comentarios.length} comentarios</h6>`
+      if(promocion.comentarios.length>0){
+        for(let i=0 ; i<promocion.comentarios.length; i++){
+        document.getElementById('comentarios').innerHTML+=`
+        <div class="media mb-3">
+        <img style="height:70px; width:70px" class="card-img-100 rounded-circle z-depth-1-half d-flex mr-3" src="${promocion.comentarios[i].perfil}" alt="Generic placeholder image">
+        <div class="media-body">
+          <a>
+            <h6 class="user-name font-weight-bold">${promocion.comentarios[i].nombre_usuario}</h6>
+          </a>
+          <div id="comentario-${i}" class="my-rating"></div>
+        </ul>
+          <div class="card-data">
+            <ul class="list-unstyled mb-1">
+              <li class="comment-date font-small grey-text">
+                <i class="far fa-clock"></i> ${promocion.comentarios[i].fecha_entrada}</li>
+            </ul>
+          </div>
+          <p class="dark-grey-text article " style="font-size: 14px;"> ${promocion.comentarios[i].comentario}.</p>
+        </div>
+      </div><hr>
+      `
+      
+      }
+    }
+     
+  }
+
+
+  function generarCalificacionesComentario(){
+    for(let i=0 ; i<promocion.comentarios.length; i++){
+      $(`#comentario-${i}`).starRating({
+        initialRating: promocion.comentarios[i].calificacion,
+        strokeColor: '#FFA500',
+        strokeWidth: 10,
+        starSize: 20,
+        useGradient: false,
+        readOnly: true,
+      });
+    }
+    
+  }
+
+function  generarImgComentar(){
+  document.getElementById('icon-us').innerHTML=` <img style="height:70px; width:70px; margin-top:0px" class="card-img-100 rounded-circle z-depth-1-half d-flex mr-0" src="../${usuario.imagen_perfil}" alt="Generic placeholder image">
+    `
+}
+
+var calificacion;
+
+function agregarComentario(){
+  axios({
+    method:'POST',
+    url:urlComentarios,
+    responseType:'json',
+    data:{
+      "comentario":$('#txt-comentario').val(),
+      "indexUs":indexUsuario,
+       "calificacion":calificacion,
+       "idCategoria":indexcat,
+        "idPromocion":indexPromo
+    }
+  }).then(res=>{
+    generarComentariosPromocion();
+    generarCalificacionesComentario();
+  }).catch(error=>{console.error(error);
+  }); 
+}
+
+
+$(".my-rating-9").starRating({
+  initialRating: 0,
+  disableAfterRate: false,
+  strokeColor: '#FFA500',
+  starSize: 22,
+  onHover: function(currentIndex, currentRating, $el){
+    $('.live-rating').text(currentIndex);
+  },
+  onLeave: function(currentIndex, currentRating, $el){
+    console.log(currentRating)
+    calificacion=currentRating;
+    $('.live-rating').text(currentRating);
+  }
+});
+
+
+function verificarCalificacion(){
+  if(calificacion=0 && $('#txt-comentario').val()==""){
+    $('#btn-enviar').attr('disabled','disabled');
+  }else{
+    $('#btn-enviar').removeAttr('disabled');
+  }
+}verificarCalificacion();
+
+
+
